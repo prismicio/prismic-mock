@@ -1,10 +1,12 @@
 import * as prismicT from "@prismicio/types";
-import * as faker from "faker";
+import * as faker from "faker/locale/en_US";
 import * as changeCase from "change-case";
 
+import { generateFieldId } from "../lib/generateFieldId";
 import { buildRandomGroupFieldMap } from "../buildRandomGroupFieldMap";
 
 import { uid } from "./uid";
+import { sliceZone } from "./sliceZone";
 
 type CustomTypeArgs = {
 	tabsCount?: number;
@@ -27,11 +29,17 @@ export const customType = (
 		const tabFields = buildRandomGroupFieldMap() as prismicT.CustomTypeModelTab;
 
 		if (i === 0 && args.withUID) {
-			const fieldId = changeCase.snakeCase(
-				faker.lorem.words(faker.datatype.number({ min: 1, max: 3 })),
-			);
+			const fieldId = generateFieldId();
 
 			tabFields[fieldId] = uid();
+		}
+
+		if (args.withSliceZones) {
+			const sliceZoneId = generateFieldId();
+
+			tabFields[sliceZoneId] = sliceZone({
+				withSharedSlices: args.withSharedSlices,
+			});
 		}
 
 		json[tabName] = tabFields;

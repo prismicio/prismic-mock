@@ -1,8 +1,17 @@
 import * as prismicT from "@prismicio/types";
-import * as faker from "faker";
 import * as changeCase from "change-case";
 
-export const linkToMedia = (): prismicT.CustomTypeModelLinkToMediaField => {
+import { createFaker } from "../lib/createFaker";
+
+import { MockModelConfig } from "../types";
+
+export type MockLinkTomediaModelConfig = MockModelConfig;
+
+export const linkToMedia = (
+	config: MockLinkTomediaModelConfig = {},
+): prismicT.CustomTypeModelLinkToMediaField => {
+	const faker = createFaker(config.seed);
+
 	return {
 		type: prismicT.CustomTypeModelFieldType.Link,
 		config: {

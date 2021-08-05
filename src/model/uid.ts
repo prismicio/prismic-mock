@@ -1,8 +1,17 @@
 import * as prismicT from "@prismicio/types";
-import * as faker from "faker";
 import * as changeCase from "change-case";
 
-export const uid = (): prismicT.CustomTypeModelUIDField => {
+import { createFaker } from "../lib/createFaker";
+
+import { MockModelConfig } from "../types";
+
+export type MockUIDModelConfig = MockModelConfig;
+
+export const uid = (
+	config: MockUIDModelConfig = {},
+): prismicT.CustomTypeModelUIDField => {
+	const faker = createFaker(config.seed);
+
 	return {
 		type: prismicT.CustomTypeModelFieldType.UID,
 		config: {

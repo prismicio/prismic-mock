@@ -1,8 +1,17 @@
 import * as prismicT from "@prismicio/types";
-import * as faker from "faker";
 import * as changeCase from "change-case";
 
-export const number = (): prismicT.CustomTypeModelNumberField => {
+import { createFaker } from "../lib/createFaker";
+
+import { MockModelConfig } from "../types";
+
+export type MockNumberModelConfig = MockModelConfig;
+
+export const number = (
+	config: MockNumberModelConfig = {},
+): prismicT.CustomTypeModelNumberField => {
+	const faker = createFaker(config.seed);
+
 	return {
 		type: prismicT.CustomTypeModelFieldType.Number,
 		config: {

@@ -1,8 +1,17 @@
 import * as prismicT from "@prismicio/types";
-import * as faker from "faker";
 import * as changeCase from "change-case";
 
-export const color = (): prismicT.CustomTypeModelColorField => {
+import { createFaker } from "../lib/createFaker";
+
+import { MockModelConfig } from "../types";
+
+export type MockColorModelConfig = MockModelConfig;
+
+export const color = (
+	config: MockColorModelConfig = {},
+): prismicT.CustomTypeModelColorField => {
+	const faker = createFaker(config.seed);
+
 	return {
 		type: prismicT.CustomTypeModelFieldType.Color,
 		config: {

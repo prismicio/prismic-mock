@@ -1,8 +1,17 @@
 import * as prismicT from "@prismicio/types";
-import * as faker from "faker";
 import * as changeCase from "change-case";
 
-export const boolean = (): prismicT.CustomTypeModelBooleanField => {
+import { createFaker } from "../lib/createFaker";
+
+import { MockModelConfig } from "../types";
+
+export type MockBooleanModelConfig = MockModelConfig;
+
+export const boolean = (
+	config: MockBooleanModelConfig = {},
+): prismicT.CustomTypeModelBooleanField => {
+	const faker = createFaker(config.seed);
+
 	return {
 		type: prismicT.CustomTypeModelFieldType.Boolean,
 		config: {

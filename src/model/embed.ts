@@ -1,8 +1,17 @@
 import * as prismicT from "@prismicio/types";
-import * as faker from "faker";
 import * as changeCase from "change-case";
 
-export const embed = (): prismicT.CustomTypeModelEmbedField => {
+import { createFaker } from "../lib/createFaker";
+
+import { MockModelConfig } from "../types";
+
+export type MockEmbedModelConfig = MockModelConfig;
+
+export const embed = (
+	config: MockEmbedModelConfig = {},
+): prismicT.CustomTypeModelEmbedField => {
+	const faker = createFaker(config.seed);
+
 	return {
 		type: prismicT.CustomTypeModelFieldType.Embed,
 		config: {

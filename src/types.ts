@@ -1,5 +1,9 @@
 import * as prismicT from "@prismicio/types";
 
+export type MockModelConfig = {
+	seed?: number;
+};
+
 export type CustomTypeModelFieldValueMap<
 	T extends Record<string, prismicT.CustomTypeModelField>,
 > = {

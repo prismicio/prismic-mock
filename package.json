@@ -21,6 +21,10 @@
 			"require": "./dist/index.cjs",
 			"import": "./dist/index.mjs"
 		},
+		"./model": {
+			"require": "./dist/model/index.cjs",
+			"import": "./dist/model/index.mjs"
+		},
 		"./package.json": "./package.json"
 	},
 	"main": "dist/index.cjs",
@@ -43,6 +47,12 @@
 		"unit": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava",
 		"test": "npm run lint && npm run unit"
 	},
+	"dependencies": {
+		"@prismicio/types": "^0.1.5",
+		"change-case": "^4.1.2",
+		"faker": "^5.5.3",
+		"node-fetch": "^2.6.1"
+	},
 	"devDependencies": {
 		"@types/faker": "^5.5.7",
 		"@typescript-eslint/eslint-plugin": "^4.28.5",
@@ -63,11 +73,5 @@
 	},
 	"publishConfig": {
 		"access": "public"
-	},
-	"dependencies": {
-		"@prismicio/types": "^0.1.5",
-		"change-case": "^4.1.2",
-		"faker": "^5.5.3",
-		"node-fetch": "^2.6.1"
 	}
 }
