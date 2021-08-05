@@ -9,7 +9,7 @@
 
 <!-- TODO: Replacing link to Prismic with [Prismic][prismic] is useful here -->
 
-Generate mock [Prismic][prismic] documents, fields, Slices, and models for development and testing environments.
+Generate mock [Prismic][prismic] data for development and testing environments.
 
 - 🏭 Generate mock Custom Type and Shared Slice models
 - 🧸 Generate mock documents and individual field values from a model
