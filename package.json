@@ -50,8 +50,7 @@
 	"dependencies": {
 		"@prismicio/types": "^0.1.5",
 		"change-case": "^4.1.2",
-		"faker": "^5.5.3",
-		"node-fetch": "^2.6.1"
+		"faker": "^5.5.3"
 	},
 	"devDependencies": {
 		"@types/faker": "^5.5.7",
