@@ -7,7 +7,7 @@
 [![Conventional Commits][conventional-commits-src]][conventional-commits-href]
 [![License][license-src]][license-href]
 
-<!-- TODO: Replacing link to Prismic with [Prismic][prismic] is useful here -->
+> ⚠ This project is in an experimental state and therefore primarily meant to be used by Prismic kits. Use it at your own risks or stay tuned for the official release!
 
 Generate mock [Prismic][prismic] data for development and testing environments.
 
