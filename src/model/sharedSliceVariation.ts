@@ -1,23 +1,24 @@
 import * as prismicT from "@prismicio/types";
-import * as faker from "faker/locale/en_US";
 import * as changeCase from "change-case";
 
+import { createFaker } from "../lib/createFaker";
 import {
-	buildRandomGroupFieldMap,
-	BuildRandomGroupFieldMapFieldArgs,
-	BuildRandomGroupFieldMapFieldCounts,
-} from "../buildRandomGroupFieldMap";
+	buildMockGroupFieldMap,
+	BuildMockGroupFieldMapConfig,
+} from "../lib/buildMockGroupFieldMap";
 
-type SharedSliceVariationArgs = {
-	primaryFieldCounts?: BuildRandomGroupFieldMapFieldCounts;
-	primaryFieldArgs?: BuildRandomGroupFieldMapFieldArgs;
-	itemsFieldCounts?: BuildRandomGroupFieldMapFieldCounts;
-	itemsFieldArgs?: BuildRandomGroupFieldMapFieldArgs;
-};
+import { MockModelConfig } from "../types";
+
+export type MockSharedSliceVariationModelConfig = {
+	primaryFieldConfig?: BuildMockGroupFieldMapConfig;
+	itemsFieldConfig?: BuildMockGroupFieldMapConfig;
+} & MockModelConfig;
 
 export const sharedSliceVariation = (
-	args: SharedSliceVariationArgs = {},
+	config: MockSharedSliceVariationModelConfig = {},
 ): prismicT.SharedSliceModelVariation => {
+	const faker = createFaker(config.seed);
+
 	const name = changeCase.capitalCase(faker.company.bsNoun());
 
 	return {
@@ -26,13 +27,13 @@ export const sharedSliceVariation = (
 		description: faker.lorem.sentence(),
 		docURL: faker.internet.url(),
 		version: faker.git.shortSha(),
-		primary: buildRandomGroupFieldMap({
-			fieldCounts: args.itemsFieldCounts,
-			fieldArgs: args.itemsFieldArgs,
+		primary: buildMockGroupFieldMap({
+			seed: config.seed ?? config.primaryFieldConfig?.seed,
+			configs: config.primaryFieldConfig?.configs,
 		}),
-		items: buildRandomGroupFieldMap({
-			fieldCounts: args.primaryFieldCounts,
-			fieldArgs: args.primaryFieldArgs,
+		items: buildMockGroupFieldMap({
+			seed: config.seed ?? config.itemsFieldConfig?.seed,
+			configs: config.itemsFieldConfig?.configs,
 		}),
 	};
 };

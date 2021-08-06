@@ -1,19 +1,24 @@
 import * as prismicT from "@prismicio/types";
-import * as faker from "faker/locale/en_US";
 import * as changeCase from "change-case";
-import {
-	buildRandomGroupFieldMap,
-	BuildRandomGroupFieldMapArgs,
-} from "../buildRandomGroupFieldMap";
 
-type GroupArgs = BuildRandomGroupFieldMapArgs;
+import {
+	buildMockGroupFieldMap,
+	BuildMockGroupFieldMapConfig,
+} from "../lib/buildMockGroupFieldMap";
+import { createFaker } from "../lib/createFaker";
+
+import { MockModelConfig } from "../types";
+
+type MockGroupModelConfig = BuildMockGroupFieldMapConfig & MockModelConfig;
 
 export const group = (
-	args: GroupArgs = {},
+	config: MockGroupModelConfig = {},
 ): prismicT.CustomTypeModelGroupField => {
-	const fields = buildRandomGroupFieldMap({
-		fieldArgs: args.fieldArgs,
-		fieldCounts: args.fieldCounts,
+	const faker = createFaker(config.seed);
+
+	const fields = buildMockGroupFieldMap({
+		seed: config.seed,
+		configs: config.configs,
 	});
 
 	return {

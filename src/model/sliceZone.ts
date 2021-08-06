@@ -1,36 +1,40 @@
 import * as prismicT from "@prismicio/types";
-import * as faker from "faker/locale/en_US";
 import * as changeCase from "change-case";
 
-import { sharedSliceChoice } from "./sharedSliceChoice";
-import { sliceChoice } from "./sliceChoice";
+import { createFaker } from "../lib/createFaker";
+import { generateFieldId } from "../lib/generateFieldId";
 
-type SliceZoneArgs = {
+import { MockModelConfig } from "../types";
+
+import { sharedSliceChoice } from "./sharedSliceChoice";
+import { slice } from "./slice";
+
+type MockSliceZoneModelConfig = {
 	choicesCount?: number;
 	withSharedSlices?: boolean;
-};
+} & MockModelConfig;
 
 export const sliceZone = (
-	args: SliceZoneArgs = {},
+	config: MockSliceZoneModelConfig = {},
 ): prismicT.CustomTypeModelSliceZoneField => {
+	const faker = createFaker(config.seed);
+
 	const choicesCount =
-		args.choicesCount ?? faker.datatype.number({ min: 2, max: 6 });
+		config.choicesCount ?? faker.datatype.number({ min: 2, max: 6 });
 
 	const choices: Record<
 		string,
 		prismicT.CustomTypeModelSlice | prismicT.CustomTypeModelSharedSlice
 	> = {};
 	for (let i = 0; i < choicesCount; i++) {
-		const choiceId = changeCase.snakeCase(
-			faker.lorem.words(faker.datatype.number({ min: 1, max: 3 })),
-		);
+		const choiceId = generateFieldId({ seed: config.seed });
 
-		choices[choiceId] = args.withSharedSlices
+		choices[choiceId] = config.withSharedSlices
 			? sharedSliceChoice()
-			: sliceChoice();
+			: slice({ seed: config.seed });
 	}
 
-	const labels = {} as Record<string, prismicT.CustomTypeModelSliceLabel[]>;
+	const labels: Record<string, prismicT.CustomTypeModelSliceLabel[]> = {};
 	for (const choiceId in choices) {
 		const labelsCount = faker.datatype.number({ min: 0, max: 3 });
 
