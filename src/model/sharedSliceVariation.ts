@@ -28,11 +28,11 @@ export const sharedSliceVariation = (
 		docURL: faker.internet.url(),
 		version: faker.git.shortSha(),
 		primary: buildMockGroupFieldMap({
-			seed: config.seed ?? config.primaryFieldConfig?.seed,
+			seed: config.primaryFieldConfig?.seed ?? config.seed,
 			configs: config.primaryFieldConfig?.configs,
 		}),
 		items: buildMockGroupFieldMap({
-			seed: config.seed ?? config.itemsFieldConfig?.seed,
+			seed: config.itemsFieldConfig?.seed ?? config.seed,
 			configs: config.itemsFieldConfig?.configs,
 		}),
 	};

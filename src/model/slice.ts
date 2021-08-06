@@ -28,11 +28,11 @@ export const slice = (
 		fieldset: changeCase.capitalCase(faker.lorem.words()),
 		description: faker.lorem.sentence(),
 		repeat: buildMockGroupFieldMap({
-			seed: config.seed ?? config.repeatFieldConfig?.seed,
+			seed: config.repeatFieldConfig?.seed ?? config.seed,
 			configs: config.repeatFieldConfig?.configs,
 		}),
 		"non-repeat": buildMockGroupFieldMap({
-			seed: config.seed ?? config.nonRepeatFieldConfig?.seed,
+			seed: config.nonRepeatFieldConfig?.seed ?? config.seed,
 			configs: config.nonRepeatFieldConfig?.configs,
 		}),
 	};
