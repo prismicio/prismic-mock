@@ -4,12 +4,24 @@ export type MockModelConfig = {
 	seed?: number;
 };
 
+// TODO: Add to @prismicio/types
+type PrismicModel =
+	| prismicT.CustomTypeModel
+	| prismicT.SharedSliceModel
+	| prismicT.CustomTypeModelField;
+
+export type MockValueConfig<Model extends PrismicModel = PrismicModel> = {
+	seed?: number;
+	model?: Model;
+};
+
 export type CustomTypeModelFieldValueMap<
 	T extends Record<string, prismicT.CustomTypeModelField>,
 > = {
 	[P in keyof T]: CustomTypeModelFieldValue<T[P]>;
 };
 
+// TODO: Add to @prismicio/types
 export type CustomTypeModelFieldValue<T extends prismicT.CustomTypeModelField> =
 	T extends prismicT.CustomTypeModelBooleanField
 		? prismicT.BooleanField

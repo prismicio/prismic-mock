@@ -147,6 +147,8 @@ test(
 						label: "Synergies",
 						placeholder: "Nam et dolorum",
 						select: "document",
+						customtypes: undefined,
+						tags: undefined,
 					},
 				},
 				veritatis_qui_ex: { type: "GeoPoint", config: { label: "E Markets" } },

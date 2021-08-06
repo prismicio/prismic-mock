@@ -23,6 +23,8 @@ test(
 							label: "Convergence",
 							placeholder: "Autem consequuntur nostrum",
 							select: "document",
+							customtypes: undefined,
+							tags: undefined,
 						},
 					},
 					repellat_modi_saepe: {
@@ -46,6 +48,8 @@ test(
 							label: "Niches",
 							placeholder: "Amet ex consequuntur",
 							select: "document",
+							customtypes: undefined,
+							tags: undefined,
 						},
 					},
 					et_corporis: {
@@ -149,6 +153,8 @@ test(
 							label: "Initiatives",
 							placeholder: "Quibusdam sed qui",
 							select: "document",
+							customtypes: undefined,
+							tags: undefined,
 						},
 					},
 					itaque_aspernatur_voluptatem: {

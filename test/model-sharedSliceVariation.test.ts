@@ -192,6 +192,8 @@ test(
 						label: "Functionalities",
 						placeholder: "Ut eos ducimus",
 						select: "document",
+						customtypes: undefined,
+						tags: undefined,
 					},
 				},
 				vel_in_ut: {

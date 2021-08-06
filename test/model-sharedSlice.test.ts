@@ -67,6 +67,8 @@ test(
 								label: "Interfaces",
 								placeholder: "Consequatur doloremque minus",
 								select: "document",
+								customtypes: undefined,
+								tags: undefined,
 							},
 						},
 						veritatis: {
@@ -126,6 +128,8 @@ test(
 								label: "Architectures",
 								placeholder: "Libero repudiandae esse",
 								select: "document",
+								customtypes: undefined,
+								tags: undefined,
 							},
 						},
 						omnis: {

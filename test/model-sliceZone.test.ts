@@ -83,6 +83,8 @@ test(
 									label: "Markets",
 									placeholder: "Temporibus culpa error",
 									select: "document",
+									customtypes: undefined,
+									tags: undefined,
 								},
 							},
 							possimus_ex: {
@@ -106,6 +108,8 @@ test(
 									label: "Interfaces",
 									placeholder: "Dicta officiis tenetur",
 									select: "document",
+									customtypes: undefined,
+									tags: undefined,
 								},
 							},
 							exercitationem_molestiae_nostrum: {
@@ -353,6 +357,8 @@ test(
 									label: "Initiatives",
 									placeholder: "Blanditiis totam provident",
 									select: "document",
+									customtypes: undefined,
+									tags: undefined,
 								},
 							},
 							ad_sed_dicta: {
@@ -461,6 +467,8 @@ test(
 									label: "Deliverables",
 									placeholder: "Fuga doloribus distinctio",
 									select: "document",
+									customtypes: undefined,
+									tags: undefined,
 								},
 							},
 							aut: {
@@ -501,6 +509,8 @@ test(
 									label: "Functionalities",
 									placeholder: "Ut eos ducimus",
 									select: "document",
+									customtypes: undefined,
+									tags: undefined,
 								},
 							},
 							vel_in_ut: {
@@ -678,6 +688,8 @@ test(
 									label: "Experiences",
 									placeholder: "Reprehenderit exercitationem corrupti",
 									select: "document",
+									customtypes: undefined,
+									tags: undefined,
 								},
 							},
 							sint_consequatur_qui: {
@@ -782,6 +794,8 @@ test(
 									label: "Web Services",
 									placeholder: "Et dolor nam",
 									select: "document",
+									customtypes: undefined,
+									tags: undefined,
 								},
 							},
 							non_eos: {

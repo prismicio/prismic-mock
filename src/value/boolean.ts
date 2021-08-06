@@ -1,0 +1,15 @@
+import * as prismicT from "@prismicio/types";
+
+import { createFaker } from "../lib/createFaker";
+
+import { MockValueConfig } from "../types";
+
+type MockBooleanValueConfig = MockValueConfig;
+
+export const boolean = (
+	config: MockBooleanValueConfig = {},
+): prismicT.BooleanField => {
+	const faker = createFaker(config.seed);
+
+	return faker.datatype.boolean();
+};

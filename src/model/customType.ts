@@ -1,9 +1,10 @@
 import * as prismicT from "@prismicio/types";
 import * as changeCase from "change-case";
 
-import { generateFieldId } from "../lib/generateFieldId";
 import { buildMockGroupFieldMap } from "../lib/buildMockGroupFieldMap";
 import { createFaker } from "../lib/createFaker";
+import { generateCustomTypeId } from "../lib/generateCustomTypeId";
+import { generateFieldId } from "../lib/generateFieldId";
 
 import { MockModelConfig } from "../types";
 
@@ -54,11 +55,11 @@ export const customType = (
 		json[tabName] = tabFields;
 	}
 
-	const label = changeCase.capitalCase(faker.company.bsNoun());
+	const id = generateCustomTypeId({ seed: config.seed });
 
 	return {
-		id: changeCase.snakeCase(label),
-		label,
+		id,
+		label: changeCase.capitalCase(id),
 		status: faker.datatype.boolean(),
 		repeatable: faker.datatype.boolean(),
 		json,

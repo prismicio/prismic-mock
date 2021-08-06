@@ -14,6 +14,8 @@ test(
 				label: "Synergies",
 				placeholder: "Sed ullam voluptate",
 				select: "document",
+				customtypes: undefined,
+				tags: undefined,
 			},
 			type: "Link",
 		},
@@ -22,6 +24,8 @@ test(
 				label: "Paradigms",
 				placeholder: "Illum atque voluptatibus",
 				select: "document",
+				customtypes: undefined,
+				tags: undefined,
 			},
 			type: "Link",
 		},
@@ -38,6 +42,8 @@ test(
 				label: "Technologies",
 				placeholder: "Repellat quisquam recusandae",
 				select: "document",
+				customtypes: undefined,
+				tags: undefined,
 			},
 			type: "Link",
 		},
@@ -46,8 +52,26 @@ test(
 				label: "Synergies",
 				placeholder: "Consequuntur corporis repellat",
 				select: "document",
+				customtypes: undefined,
+				tags: undefined,
 			},
 			type: "Link",
 		},
 	],
 );
+
+test("can be configured to constrain by custom type", (t) => {
+	const actual = model.contentRelationship({ constrainCustomTypes: true });
+
+	t.deepEqual(actual.config.customtypes, ["blockchains"]);
+});
+
+test("can be configured to constrain by tags", (t) => {
+	const actual = model.contentRelationship({ constrainTags: true });
+
+	t.deepEqual(actual.config.tags, [
+		"Ab",
+		"Dolores Ratione Distinctio",
+		"Placeat",
+	]);
+});
