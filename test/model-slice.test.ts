@@ -193,96 +193,54 @@ test(
 	],
 );
 
-test(
-	"can be configured with specific repeat and non-repeat field configuration",
-	executeTwiceMacro,
-	() =>
-		model.slice({
-			repeatFieldConfig: {
-				configs: {
-					boolean: { count: 1 },
-					color: { count: 0 },
-					contentRelationship: { count: 0 },
-					date: { count: 0 },
-					embed: { count: 0 },
-					geoPoint: { count: 0 },
-					image: { count: 0 },
-					keyText: { count: 0 },
-					link: { count: 0 },
-					linkToMedia: { count: 0 },
-					number: { count: 0 },
-					richText: { count: 0 },
-					select: { count: 0 },
-					timestamp: { count: 0 },
-					title: { count: 0 },
-				},
+test("can be configured with specific repeat and non-repeat field configuration", (t) => {
+	const actual = model.slice({
+		repeatFieldConfig: {
+			configs: {
+				boolean: { count: 1 },
+				color: { count: 0 },
+				contentRelationship: { count: 0 },
+				date: { count: 0 },
+				embed: { count: 0 },
+				geoPoint: { count: 0 },
+				image: { count: 0 },
+				keyText: { count: 0 },
+				link: { count: 0 },
+				linkToMedia: { count: 0 },
+				number: { count: 0 },
+				richText: { count: 0 },
+				select: { count: 0 },
+				timestamp: { count: 0 },
+				title: { count: 0 },
 			},
-			nonRepeatFieldConfig: {
-				configs: {
-					boolean: { count: 1 },
-					color: { count: 0 },
-					contentRelationship: { count: 0 },
-					date: { count: 0 },
-					embed: { count: 0 },
-					geoPoint: { count: 0 },
-					image: { count: 0 },
-					keyText: { count: 0 },
-					link: { count: 0 },
-					linkToMedia: { count: 0 },
-					number: { count: 0 },
-					richText: { count: 0 },
-					select: { count: 0 },
-					timestamp: { count: 0 },
-					title: { count: 0 },
-				},
-			},
-		}),
-	[
-		{
-			description: "Aperiam molestiae nisi nobis.",
-			display: "list",
-			fieldset: "Et Commodi Aut",
-			icon: "e_tailers",
-			"non-repeat": {
-				consequatur: {
-					config: {
-						label: "Paradigms",
-					},
-					type: "Boolean",
-				},
-			},
-			repeat: {
-				ad: {
-					config: {
-						label: "Relationships",
-					},
-					type: "Boolean",
-				},
-			},
-			type: "Slice",
 		},
-		{
-			description: "Repellat ex nostrum veniam fuga nam eaque.",
-			display: "list",
-			fieldset: "Nam Deserunt Aliquam",
-			icon: "systems",
-			"non-repeat": {
-				inventore_ea_iure: {
-					config: {
-						label: "Web Services",
-					},
-					type: "Boolean",
-				},
+		nonRepeatFieldConfig: {
+			configs: {
+				boolean: { count: 1 },
+				color: { count: 0 },
+				contentRelationship: { count: 0 },
+				date: { count: 0 },
+				embed: { count: 0 },
+				geoPoint: { count: 0 },
+				image: { count: 0 },
+				keyText: { count: 0 },
+				link: { count: 0 },
+				linkToMedia: { count: 0 },
+				number: { count: 0 },
+				richText: { count: 0 },
+				select: { count: 0 },
+				timestamp: { count: 0 },
+				title: { count: 0 },
 			},
-			repeat: {
-				non_et: {
-					config: {
-						label: "Vortals",
-					},
-					type: "Boolean",
-				},
-			},
-			type: "Slice",
 		},
-	],
-);
+	});
+
+	const repeatFieldIds = Object.keys(actual.repeat);
+	const nonRepeatFieldIds = Object.keys(actual["non-repeat"]);
+
+	t.is(repeatFieldIds.length, 1);
+	t.is(actual.repeat[repeatFieldIds[0]].type, "Boolean");
+
+	t.is(nonRepeatFieldIds.length, 1);
+	t.is(actual["non-repeat"][nonRepeatFieldIds[0]].type, "Boolean");
+});

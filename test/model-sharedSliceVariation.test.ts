@@ -258,86 +258,54 @@ test(
 	],
 );
 
-test(
-	"can be configured with specific primary and items field configuration",
-	executeTwiceMacro,
-	() =>
-		model.sharedSliceVariation({
-			itemsFieldConfig: {
-				configs: {
-					boolean: { count: 1 },
-					color: { count: 0 },
-					contentRelationship: { count: 0 },
-					date: { count: 0 },
-					embed: { count: 0 },
-					geoPoint: { count: 0 },
-					image: { count: 0 },
-					keyText: { count: 0 },
-					link: { count: 0 },
-					linkToMedia: { count: 0 },
-					number: { count: 0 },
-					richText: { count: 0 },
-					select: { count: 0 },
-					timestamp: { count: 0 },
-					title: { count: 0 },
-				},
-			},
-			primaryFieldConfig: {
-				configs: {
-					boolean: { count: 1 },
-					color: { count: 0 },
-					contentRelationship: { count: 0 },
-					date: { count: 0 },
-					embed: { count: 0 },
-					geoPoint: { count: 0 },
-					image: { count: 0 },
-					keyText: { count: 0 },
-					link: { count: 0 },
-					linkToMedia: { count: 0 },
-					number: { count: 0 },
-					richText: { count: 0 },
-					select: { count: 0 },
-					timestamp: { count: 0 },
-					title: { count: 0 },
-				},
-			},
-		}),
-	[
-		{
-			id: "systems",
-			name: "Systems",
-			description: "Nam deserunt aliquam.",
-			docURL: "https://zelma.info",
-			version: "44aa08e",
-			primary: {
-				ducimus_molestiae_inventore: {
-					type: "Boolean",
-					config: { label: "Portals" },
-				},
-			},
-			items: {
-				hic_dignissimos: {
-					type: "Boolean",
-					config: { label: "Relationships" },
-				},
+test("can be configured with specific repeat and non-repeat field configuration", (t) => {
+	const actual = model.sharedSliceVariation({
+		itemsFieldConfig: {
+			configs: {
+				boolean: { count: 1 },
+				color: { count: 0 },
+				contentRelationship: { count: 0 },
+				date: { count: 0 },
+				embed: { count: 0 },
+				geoPoint: { count: 0 },
+				image: { count: 0 },
+				keyText: { count: 0 },
+				link: { count: 0 },
+				linkToMedia: { count: 0 },
+				number: { count: 0 },
+				richText: { count: 0 },
+				select: { count: 0 },
+				timestamp: { count: 0 },
+				title: { count: 0 },
 			},
 		},
-		{
-			id: "initiatives",
-			name: "Initiatives",
-			description:
-				"Harum omnis deleniti animi ab quas sint quasi perferendis aut.",
-			docURL: "http://jennings.org",
-			version: "20ab48d",
-			primary: {
-				ratione_animi: { type: "Boolean", config: { label: "E Commerce" } },
-			},
-			items: {
-				similique_saepe_deleniti: {
-					type: "Boolean",
-					config: { label: "Systems" },
-				},
+		primaryFieldConfig: {
+			configs: {
+				boolean: { count: 1 },
+				color: { count: 0 },
+				contentRelationship: { count: 0 },
+				date: { count: 0 },
+				embed: { count: 0 },
+				geoPoint: { count: 0 },
+				image: { count: 0 },
+				keyText: { count: 0 },
+				link: { count: 0 },
+				linkToMedia: { count: 0 },
+				number: { count: 0 },
+				richText: { count: 0 },
+				select: { count: 0 },
+				timestamp: { count: 0 },
+				title: { count: 0 },
 			},
 		},
-	],
-);
+	});
+
+	const itemsFieldIds = Object.keys(actual.items);
+	const primaryFieldIds = Object.keys(actual.primary);
+
+	t.is(itemsFieldIds.length, 1);
+	t.is(actual.items[itemsFieldIds[0]].type, "Boolean");
+
+	t.is(primaryFieldIds.length, 1);
+	t.is(actual.primary[primaryFieldIds[0]].type, "Boolean");
+});

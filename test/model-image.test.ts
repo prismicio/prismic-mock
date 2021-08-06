@@ -1,7 +1,6 @@
 import test from "ava";
 
 import { executeTwiceMacro } from "./__testutils__/executeTwiceMacro";
-import { executeOnceMacro } from "./__testutils__/executeOnceMacro";
 
 import * as model from "../src/model";
 
@@ -72,62 +71,15 @@ test(
 	],
 );
 
-test(
-	"can be configured to include constraints",
-	executeOnceMacro,
-	() => model.image({ withConstraint: true }),
-	[
-		{
-			config: {
-				label: "Solutions",
-				constraint: {
-					width: 1266,
-					height: 1692,
-				},
-				thumbnails: [
-					{
-						name: "Infrastructures",
-						width: 938,
-						height: 1997,
-					},
-					{
-						name: "Deliverables",
-						width: 1999,
-						height: 832,
-					},
-					{
-						name: "Functionalities",
-						width: 1575,
-						height: 892,
-					},
-				],
-			},
-			type: "Image",
-		},
-	],
-);
+test("can be configured to include constraints", (t) => {
+	const actual = model.image({ withConstraint: true });
 
-test(
-	"can be configured for a specific number of thumbnails",
-	executeOnceMacro,
-	() => model.image({ thumbnailsCount: 1 }),
-	[
-		{
-			config: {
-				label: "Paradigms",
-				constraint: {
-					width: null,
-					height: null,
-				},
-				thumbnails: [
-					{
-						name: "Mindshare",
-						width: 1243,
-						height: 719,
-					},
-				],
-			},
-			type: "Image",
-		},
-	],
-);
+	t.is(typeof actual.config.constraint.width, "number");
+	t.is(typeof actual.config.constraint.height, "number");
+});
+
+test("can be configured for a specific number of thumbnails", (t) => {
+	const actual = model.image({ thumbnailsCount: 1 });
+
+	t.is(actual.config.thumbnails.length, 1);
+});

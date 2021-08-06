@@ -332,317 +332,63 @@ test(
 	],
 );
 
-test(
-	"can be configured with a specific number of variations",
-	executeTwiceMacro,
-	() => model.sharedSlice({ variationsCount: 1 }),
-	[
-		{
-			type: "SharedSlice",
-			id: "web_services",
-			name: "Web Services",
-			description: "Quia est est.",
-			variations: [
-				{
-					id: "content",
-					name: "Content",
-					description: "Nesciunt tenetur harum omnis deleniti animi ab.",
-					docURL: "https://telly.com",
-					version: "0c57e20",
-					primary: {
-						ratione_animi: {
-							type: "Embed",
-							config: {
-								label: "E Commerce",
-								placeholder: "Tenetur similique saepe",
-							},
-						},
-						minima_qui: {
-							type: "Link",
-							config: {
-								label: "Initiatives",
-								placeholder: "Quibusdam sed qui",
-								select: null,
-								allowTargetBlank: undefined,
-							},
-						},
-						itaque_aspernatur_voluptatem: {
-							type: "Select",
-							config: {
-								label: "Schemas",
-								placeholder: "Hic velit molestiae",
-								options: ["Expedite", "Engage", "Transition"],
-								default_value: undefined,
-							},
-						},
-						harum_a: {
-							type: "Timestamp",
-							config: { label: "Roi", placeholder: "Quae aut est" },
-						},
-					},
-					items: {
-						rerum_et_voluptatum: {
-							type: "Color",
-							config: { label: "Architectures", placeholder: "Et aut qui" },
-						},
-						inventore: {
-							type: "Embed",
-							config: { label: "Paradigms", placeholder: "Ut ipsum eos" },
-						},
-						voluptates: { type: "GeoPoint", config: { label: "Paradigms" } },
-						rerum: {
-							type: "Link",
-							config: {
-								label: "Communities",
-								placeholder: "At velit ut",
-								select: null,
-								allowTargetBlank: true,
-							},
-						},
-						sapiente_occaecati_est: {
-							type: "Link",
-							config: {
-								label: "Roi",
-								placeholder: "Provident corporis libero",
-								select: "media",
-							},
-						},
-						commodi_temporibus: {
-							type: "StructuredText",
-							config: {
-								label: "Niches",
-								placeholder: "Esse fuga sed",
-								allowTargetBlank: undefined,
-								multi: "em,preformatted,heading3",
-							},
-						},
-						qui: {
-							type: "Timestamp",
-							config: {
-								label: "E Services",
-								placeholder: "Voluptatem qui voluptatem",
-							},
-						},
-					},
-				},
-			],
-		},
-		{
-			type: "SharedSlice",
-			id: "communities",
-			name: "Communities",
-			description: "Numquam molestias consectetur sit.",
-			variations: [
-				{
-					id: "architectures",
-					name: "Architectures",
-					description:
-						"Ipsa veniam iusto explicabo dolores qui facere consequatur aut.",
-					docURL: "http://ken.name",
-					version: "eaad4cb",
-					primary: {
-						aliquid_maxime: {
-							type: "Color",
-							config: {
-								label: "Blockchains",
-								placeholder: "Soluta molestias quasi",
-							},
-						},
-						et_perspiciatis: {
-							type: "Link",
-							config: {
-								label: "Initiatives",
-								placeholder: "Delectus nam a",
-								select: "document",
-							},
-						},
-						reiciendis_incidunt: {
-							type: "Embed",
-							config: {
-								label: "E Services",
-								placeholder: "Ut dolorum eveniet",
-							},
-						},
-						aut: {
-							type: "Image",
-							config: {
-								label: "Models",
-								constraint: { width: null, height: null },
-								thumbnails: [
-									{ name: "E Business", width: 902, height: 613 },
-									{ name: "Functionalities", width: 1323, height: 1425 },
-								],
-							},
-						},
-						velit: {
-							type: "Number",
-							config: {
-								label: "Initiatives",
-								placeholder: "Praesentium ullam molestias",
-							},
-						},
-					},
-					items: {
-						excepturi_ut_debitis: {
-							type: "Color",
-							config: {
-								label: "Networks",
-								placeholder: "Aperiam soluta animi",
-							},
-						},
-						alias_mollitia_iure: {
-							type: "GeoPoint",
-							config: { label: "Markets" },
-						},
-						dolor_ratione_a: {
-							type: "Number",
-							config: {
-								label: "Synergies",
-								placeholder: "Nobis laboriosam illum",
-							},
-						},
-					},
-				},
-			],
-		},
-	],
-);
+test("can be configured with a specific number of variations", (t) => {
+	const actual = model.sharedSlice({ variationsCount: 10 });
 
-test(
-	"can be configured with specific primary and items field configuration",
-	executeTwiceMacro,
-	() =>
-		model.sharedSlice({
-			itemsFieldConfig: {
-				configs: {
-					boolean: { count: 1 },
-					color: { count: 0 },
-					contentRelationship: { count: 0 },
-					date: { count: 0 },
-					embed: { count: 0 },
-					geoPoint: { count: 0 },
-					image: { count: 0 },
-					keyText: { count: 0 },
-					link: { count: 0 },
-					linkToMedia: { count: 0 },
-					number: { count: 0 },
-					richText: { count: 0 },
-					select: { count: 0 },
-					timestamp: { count: 0 },
-					title: { count: 0 },
-				},
+	t.is(actual.variations.length, 10);
+});
+
+test("can be configured with specific repeat and non-repeat field configuration", (t) => {
+	const actual = model.sharedSlice({
+		variationsCount: 1,
+		itemsFieldConfig: {
+			configs: {
+				boolean: { count: 1 },
+				color: { count: 0 },
+				contentRelationship: { count: 0 },
+				date: { count: 0 },
+				embed: { count: 0 },
+				geoPoint: { count: 0 },
+				image: { count: 0 },
+				keyText: { count: 0 },
+				link: { count: 0 },
+				linkToMedia: { count: 0 },
+				number: { count: 0 },
+				richText: { count: 0 },
+				select: { count: 0 },
+				timestamp: { count: 0 },
+				title: { count: 0 },
 			},
-			primaryFieldConfig: {
-				configs: {
-					boolean: { count: 1 },
-					color: { count: 0 },
-					contentRelationship: { count: 0 },
-					date: { count: 0 },
-					embed: { count: 0 },
-					geoPoint: { count: 0 },
-					image: { count: 0 },
-					keyText: { count: 0 },
-					link: { count: 0 },
-					linkToMedia: { count: 0 },
-					number: { count: 0 },
-					richText: { count: 0 },
-					select: { count: 0 },
-					timestamp: { count: 0 },
-					title: { count: 0 },
-				},
+		},
+		primaryFieldConfig: {
+			configs: {
+				boolean: { count: 1 },
+				color: { count: 0 },
+				contentRelationship: { count: 0 },
+				date: { count: 0 },
+				embed: { count: 0 },
+				geoPoint: { count: 0 },
+				image: { count: 0 },
+				keyText: { count: 0 },
+				link: { count: 0 },
+				linkToMedia: { count: 0 },
+				number: { count: 0 },
+				richText: { count: 0 },
+				select: { count: 0 },
+				timestamp: { count: 0 },
+				title: { count: 0 },
 			},
-		}),
-	[
-		{
-			type: "SharedSlice",
-			id: "markets",
-			name: "Markets",
-			description:
-				"Repellendus quo et eaque omnis voluptatem facere in iure quam.",
-			variations: [
-				{
-					id: "web_readiness",
-					name: "Web Readiness",
-					description: "Aut et deleniti earum omnis.",
-					docURL: "http://whitney.org",
-					version: "d0bf8d5",
-					primary: {
-						et: { type: "Boolean", config: { label: "Supply Chains" } },
-					},
-					items: {
-						vero_eaque_error: { type: "Boolean", config: { label: "Schemas" } },
-					},
-				},
-				{
-					id: "models",
-					name: "Models",
-					description: "Assumenda impedit debitis quo.",
-					docURL: "http://amie.biz",
-					version: "e10789f",
-					primary: { sequi: { type: "Boolean", config: { label: "Users" } } },
-					items: {
-						in_sapiente: { type: "Boolean", config: { label: "Eyeballs" } },
-					},
-				},
-			],
 		},
-		{
-			type: "SharedSlice",
-			id: "applications",
-			name: "Applications",
-			description:
-				"Voluptatibus accusantium non beatae excepturi sapiente eveniet ut dolorum nesciunt.",
-			variations: [
-				{
-					id: "synergies",
-					name: "Synergies",
-					description:
-						"Aspernatur tenetur accusantium distinctio delectus suscipit quis.",
-					docURL: "http://cassandre.info",
-					version: "7834025",
-					primary: {
-						impedit_ad_sed: { type: "Boolean", config: { label: "Markets" } },
-					},
-					items: {
-						odio_iure_reiciendis: {
-							type: "Boolean",
-							config: { label: "Methodologies" },
-						},
-					},
-				},
-				{
-					id: "functionalities",
-					name: "Functionalities",
-					description: "Omnis ratione at rerum.",
-					docURL: "https://mckenna.com",
-					version: "be5a137",
-					primary: {
-						id_et_quos: { type: "Boolean", config: { label: "Bandwidth" } },
-					},
-					items: {
-						rem_hic_quia: {
-							type: "Boolean",
-							config: { label: "Partnerships" },
-						},
-					},
-				},
-				{
-					id: "e_services",
-					name: "E Services",
-					description: "Eum quisquam architecto laborum fugiat tempora.",
-					docURL: "http://reanna.biz",
-					version: "03cd183",
-					primary: {
-						ab_veniam_sit: {
-							type: "Boolean",
-							config: { label: "Relationships" },
-						},
-					},
-					items: {
-						labore_vitae: { type: "Boolean", config: { label: "Metrics" } },
-					},
-				},
-			],
-		},
-	],
-);
+	});
+
+	const variation = actual.variations[0];
+
+	const itemsFieldIds = Object.keys(variation.items);
+	const primaryFieldIds = Object.keys(variation.primary);
+
+	t.is(itemsFieldIds.length, 1);
+	t.is(variation.items[itemsFieldIds[0]].type, "Boolean");
+
+	t.is(primaryFieldIds.length, 1);
+	t.is(variation.primary[primaryFieldIds[0]].type, "Boolean");
+});

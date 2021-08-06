@@ -138,128 +138,71 @@ test(
 	],
 );
 
-test(
-	"can be configured for specific number of field types",
-	executeTwiceMacro,
-	() =>
-		model.group({
-			configs: {
-				boolean: { count: 1 },
-				color: { count: 0 },
-				contentRelationship: { count: 0 },
-				date: { count: 0 },
-				embed: { count: 0 },
-				geoPoint: { count: 0 },
-				image: { count: 0 },
-				keyText: { count: 0 },
-				link: { count: 0 },
-				linkToMedia: { count: 0 },
-				number: { count: 0 },
-				richText: { count: 0 },
-				select: { count: 0 },
-				timestamp: { count: 0 },
-				title: { count: 0 },
-			},
-		}),
-	[
-		{
-			type: "Group",
-			config: {
-				label: "E Tailers",
-				fields: {
-					repudiandae_laboriosam: {
-						type: "Boolean",
-						config: {
-							label: "Functionalities",
-						},
-					},
-				},
-			},
+test("can be configured for specific number of field types", (t) => {
+	const actual = model.group({
+		configs: {
+			boolean: { count: 1 },
+			color: { count: 0 },
+			contentRelationship: { count: 0 },
+			date: { count: 0 },
+			embed: { count: 0 },
+			geoPoint: { count: 0 },
+			image: { count: 0 },
+			keyText: { count: 0 },
+			link: { count: 0 },
+			linkToMedia: { count: 0 },
+			number: { count: 0 },
+			richText: { count: 0 },
+			select: { count: 0 },
+			timestamp: { count: 0 },
+			title: { count: 0 },
 		},
-		{
-			type: "Group",
-			config: {
-				label: "Partnerships",
-				fields: {
-					beatae_architecto: {
-						type: "Boolean",
-						config: {
-							label: "Synergies",
-						},
-					},
-				},
-			},
-		},
-	],
-);
+	});
 
-test(
-	"can be configured for specific field type configurations",
-	executeTwiceMacro,
-	() =>
-		model.group({
-			configs: {
-				boolean: { count: 0 },
-				color: { count: 0 },
-				contentRelationship: { count: 0 },
-				date: { count: 0 },
-				embed: { count: 0 },
-				geoPoint: { count: 0 },
-				image: {
-					count: 1,
-					config: {
-						withConstraint: true,
-						thumbnailsCount: 0,
-					},
-				},
-				keyText: { count: 0 },
-				link: { count: 0 },
-				linkToMedia: { count: 0 },
-				number: { count: 0 },
-				richText: { count: 0 },
-				select: { count: 0 },
-				timestamp: { count: 0 },
-				title: { count: 0 },
-			},
-		}),
-	[
-		{
-			type: "Group",
-			config: {
-				label: "Users",
-				fields: {
-					et: {
-						type: "Image",
-						config: {
-							label: "Roi",
-							constraint: {
-								width: 568,
-								height: 759,
-							},
-							thumbnails: [],
-						},
-					},
+	const fieldIds = Object.keys(actual.config.fields);
+
+	t.is(fieldIds.length, 1);
+	t.is(actual.config.fields[fieldIds[0]].type, "Boolean");
+});
+
+test("can be configured for specific field type configurations", (t) => {
+	const actual = model.group({
+		configs: {
+			boolean: { count: 0 },
+			color: { count: 0 },
+			contentRelationship: { count: 0 },
+			date: { count: 0 },
+			embed: { count: 0 },
+			geoPoint: { count: 0 },
+			image: {
+				count: 1,
+				config: {
+					withConstraint: true,
+					thumbnailsCount: 0,
 				},
 			},
+			keyText: { count: 0 },
+			link: { count: 0 },
+			linkToMedia: { count: 0 },
+			number: { count: 0 },
+			richText: { count: 0 },
+			select: { count: 0 },
+			timestamp: { count: 0 },
+			title: { count: 0 },
 		},
-		{
-			type: "Group",
-			config: {
-				label: "Vortals",
-				fields: {
-					sint_consectetur_aut: {
-						type: "Image",
-						config: {
-							label: "Solutions",
-							constraint: {
-								width: 1267,
-								height: 1187,
-							},
-							thumbnails: [],
-						},
-					},
-				},
-			},
+	});
+
+	const fieldIds = Object.keys(actual.config.fields);
+
+	t.is(fieldIds.length, 1);
+	t.is(actual.config.fields[fieldIds[0]].type, "Image");
+
+	t.deepEqual(actual.config.fields[fieldIds[0]].config, {
+		constraint: {
+			height: 629,
+			width: 665,
 		},
-	],
-);
+		label: "Synergies",
+		thumbnails: [],
+	});
+});
