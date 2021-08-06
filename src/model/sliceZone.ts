@@ -35,17 +35,19 @@ export const sliceZone = (
 	}
 
 	const labels: Record<string, prismicT.CustomTypeModelSliceLabel[]> = {};
-	for (const choiceId in choices) {
-		const labelsCount = faker.datatype.number({ min: 0, max: 3 });
+	if (!config.withSharedSlices) {
+		for (const choiceId in choices) {
+			const labelsCount = faker.datatype.number({ min: 0, max: 3 });
 
-		labels[choiceId] = Array(labelsCount)
-			.fill(undefined)
-			.map(() => ({
-				name: changeCase.capitalCase(faker.company.bsNoun()),
-				display: faker.datatype.boolean()
-					? prismicT.CustomTypeModelSliceDisplay.Grid
-					: prismicT.CustomTypeModelSliceDisplay.List,
-			}));
+			labels[choiceId] = Array(labelsCount)
+				.fill(undefined)
+				.map(() => ({
+					name: changeCase.capitalCase(faker.company.bsNoun()),
+					display: faker.datatype.boolean()
+						? prismicT.CustomTypeModelSliceDisplay.Grid
+						: prismicT.CustomTypeModelSliceDisplay.List,
+				}));
+		}
 	}
 
 	return {
