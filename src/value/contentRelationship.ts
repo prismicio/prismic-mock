@@ -10,34 +10,44 @@ import { MockValueConfig } from "../types";
 import * as modelGen from "../model";
 
 type MockContentRelationshipValueConfig<
-	IsFilled extends boolean = boolean,
+	IsFilled extends boolean = true,
 	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
 > = {
 	isFilled?: IsFilled;
 } & MockValueConfig<Model>;
 
-type MockContentRelationshipValueReturnType<
-	IsFilled extends boolean = boolean,
-> = IsFilled extends true
-	? prismicT.FilledLinkToDocumentField
-	: prismicT.EmptyLinkField<prismicT.LinkType.Document>;
+type MockContentRelationshipValue<IsFilled extends boolean = true> =
+	IsFilled extends true
+		? prismicT.FilledLinkToDocumentField
+		: prismicT.EmptyLinkField<prismicT.LinkType.Document>;
 
-export const contentRelationship = <IsFilled extends boolean = boolean>(
-	config: MockContentRelationshipValueConfig<IsFilled> = {},
-): MockContentRelationshipValueReturnType<IsFilled> => {
+export const contentRelationship = <
+	IsFilled extends boolean = true,
+	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
+>(
+	config: MockContentRelationshipValueConfig<IsFilled, Model> = {},
+): MockContentRelationshipValue<IsFilled> => {
 	const faker = createFaker(config.seed);
 
-	const isFilled = config.isFilled ?? faker.datatype.boolean();
+	const isFilled = config.isFilled ?? true;
 
 	if (isFilled) {
 		const model =
-			config.model ||
-			modelGen.contentRelationship({
-				seed: config.seed,
-			});
+			config.model || modelGen.contentRelationship({ seed: config.seed });
+
 		const type = model.config.customtypes
 			? faker.random.arrayElement(model.config.customtypes)
 			: generateCustomTypeId({ seed: config.seed });
+
+		const tags = model.config.tags
+			? faker.random.arrayElements(model.config.tags)
+			: Array(faker.datatype.number(2))
+					.fill(undefined)
+					.map(() =>
+						changeCase.capitalCase(
+							faker.lorem.words(faker.datatype.number({ min: 1, max: 3 })),
+						),
+					);
 
 		return {
 			link_type: prismicT.LinkType.Document,
@@ -46,6 +56,7 @@ export const contentRelationship = <IsFilled extends boolean = boolean>(
 				? changeCase.snakeCase(faker.lorem.words(2))
 				: undefined,
 			type,
+			tags,
 			lang: faker.lorem.word(),
 			url: "#",
 			slug: generateFieldId({ seed: config.seed }),
@@ -54,6 +65,6 @@ export const contentRelationship = <IsFilled extends boolean = boolean>(
 	} else {
 		return {
 			link_type: prismicT.LinkType.Document,
-		} as MockContentRelationshipValueReturnType<IsFilled>;
+		} as MockContentRelationshipValue<IsFilled>;
 	}
 };

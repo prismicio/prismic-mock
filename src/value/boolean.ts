@@ -4,7 +4,9 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockValueConfig } from "../types";
 
-type MockBooleanValueConfig = MockValueConfig;
+type MockBooleanValueConfig<
+	Model extends prismicT.CustomTypeModelBooleanField = prismicT.CustomTypeModelBooleanField,
+> = MockValueConfig<Model>;
 
 export const boolean = (
 	config: MockBooleanValueConfig = {},

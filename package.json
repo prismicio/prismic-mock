@@ -25,6 +25,10 @@
 			"require": "./dist/model/index.cjs",
 			"import": "./dist/model/index.mjs"
 		},
+		"./value": {
+			"require": "./dist/value/index.cjs",
+			"import": "./dist/value/index.mjs"
+		},
 		"./package.json": "./package.json"
 	},
 	"main": "dist/index.cjs",

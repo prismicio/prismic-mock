@@ -5,7 +5,9 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockValueConfig } from "../types";
 
-type MockEmbedValueConfig = MockValueConfig;
+type MockEmbedValueConfig<
+	Model extends prismicT.CustomTypeModelEmbedField = prismicT.CustomTypeModelEmbedField,
+> = MockValueConfig<Model>;
 
 const dataSet = [
 	{

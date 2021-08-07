@@ -15,6 +15,13 @@ export type MockValueConfig<Model extends PrismicModel = PrismicModel> = {
 	model?: Model;
 };
 
+export type MockRichTextValueConfig = {
+	seed?: number;
+	model?:
+		| prismicT.CustomTypeModelRichTextField
+		| prismicT.CustomTypeModelTitleField;
+};
+
 export type CustomTypeModelFieldValueMap<
 	T extends Record<string, prismicT.CustomTypeModelField>,
 > = {

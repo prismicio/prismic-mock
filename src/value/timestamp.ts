@@ -4,18 +4,24 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockValueConfig } from "../types";
 
-export type MockTimestampValueConfig = {
+export type MockTimestampValueConfig<
+	Model extends prismicT.CustomTypeModelTimestampField = prismicT.CustomTypeModelTimestampField,
+> = {
 	after?: Date;
 	before?: Date;
-} & MockValueConfig;
+} & MockValueConfig<Model>;
 
 export const timestamp = (
 	config: MockTimestampValueConfig = {},
 ): prismicT.TimestampField => {
 	const faker = createFaker(config.seed);
 
-	const after = config.after || new Date(2012, 0, 1);
-	const before = config.before || new Date();
+	// Faker seems to have problems accepting parameters for `faker.date.between`
+	// if the parameters are too precise. We can get around this by only using
+	// generated dates, not timestamps.
+	const after = config.after || faker.date.past().toISOString().split("T")[0];
+	const before =
+		config.before || faker.date.future().toISOString().split("T")[0];
 
 	return faker.date.between(after, before).toISOString();
 };
