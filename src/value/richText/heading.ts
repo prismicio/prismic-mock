@@ -55,13 +55,13 @@ export const heading = (
 		.split(",")
 		.filter((type) =>
 			[
-				"heading1",
-				"heading2",
-				"heading3",
-				"heading4",
-				"heading5",
-				"heading6",
-			].includes(type),
+				prismicT.RichTextNodeType.heading1,
+				prismicT.RichTextNodeType.heading2,
+				prismicT.RichTextNodeType.heading3,
+				prismicT.RichTextNodeType.heading4,
+				prismicT.RichTextNodeType.heading5,
+				prismicT.RichTextNodeType.heading6,
+			].includes(type as prismicT.RichTextNodeType),
 		) as RichTextNodeTitleType[];
 	const type = faker.random.arrayElement(types);
 
