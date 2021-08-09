@@ -5,32 +5,36 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
 
-export type MockRichTextModelConfig = {
-	withMultipleBlocks?: boolean;
+export type MockRichTextModelConfig<
+	WithMultipleBlocks extends boolean = boolean,
+> = {
+	withMultipleBlocks?: WithMultipleBlocks;
 } & MockModelConfig;
 
-export const richText = (
-	config: MockRichTextModelConfig = {},
-): prismicT.CustomTypeModelRichTextField => {
+export const richText = <WithMultipleBlocks extends boolean = boolean>(
+	config: MockRichTextModelConfig<WithMultipleBlocks> = {},
+): WithMultipleBlocks extends true
+	? prismicT.CustomTypeModelRichTextMultiField
+	: prismicT.CustomTypeModelRichTextSingleField => {
 	const faker = createFaker(config.seed);
 
 	const blockTypes = faker.random
 		.arrayElements([
-			"heading1",
-			"heading2",
-			"heading3",
-			"heading4",
-			"heading5",
-			"heading6",
-			"paragraph",
-			"preformatted",
-			"strong",
-			"em",
-			"list-item",
-			"o-list-item",
-			"image",
-			"embed",
-			"hyperlink",
+			prismicT.RichTextNodeType.heading1,
+			prismicT.RichTextNodeType.heading2,
+			prismicT.RichTextNodeType.heading3,
+			prismicT.RichTextNodeType.heading4,
+			prismicT.RichTextNodeType.heading5,
+			prismicT.RichTextNodeType.heading6,
+			prismicT.RichTextNodeType.paragraph,
+			prismicT.RichTextNodeType.preformatted,
+			prismicT.RichTextNodeType.strong,
+			prismicT.RichTextNodeType.em,
+			prismicT.RichTextNodeType.listItem,
+			prismicT.RichTextNodeType.oListItem,
+			prismicT.RichTextNodeType.image,
+			prismicT.RichTextNodeType.embed,
+			prismicT.RichTextNodeType.hyperlink,
 		])
 		.join(",");
 
@@ -47,5 +51,7 @@ export const richText = (
 			allowTargetBlank: faker.datatype.boolean() ? true : undefined,
 			...blockTypeConfig,
 		},
-	} as prismicT.CustomTypeModelRichTextField;
+	} as WithMultipleBlocks extends true
+		? prismicT.CustomTypeModelRichTextMultiField
+		: prismicT.CustomTypeModelRichTextSingleField;
 };

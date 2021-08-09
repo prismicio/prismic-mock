@@ -8,14 +8,14 @@ test(
 	"creates a mock Timestamp field value",
 	executeTwiceMacro,
 	value.timestamp,
-	["2021-08-17T00:59:06.020Z", "2021-07-26T21:31:33.781Z"],
+	["2021-10-09T12:31:48.785Z", "2020-08-09T00:52:01.724Z"],
 );
 
 test(
 	"supports custom seed",
 	executeTwiceMacro,
 	() => value.timestamp({ seed: 1 }),
-	["2022-03-14T09:47:10.547Z", "2020-10-13T16:34:13.730Z"],
+	["2033-03-15T15:07:14.368Z", "2004-12-05T06:30:35.173Z"],
 );
 
 test("can be configured to return a timestamp after and before given timestamps", (t) => {

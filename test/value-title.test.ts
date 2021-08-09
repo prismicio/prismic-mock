@@ -4,20 +4,19 @@ import { executeTwiceMacro } from "./__testutils__/executeTwiceMacro";
 
 import * as value from "../src/value";
 import * as model from "../src/model";
-import { MockRichTextHeadingValuePattern } from "../src/value/richText/heading";
 
 test("creates a mock Title field value", executeTwiceMacro, value.title, [
 	[
 		{
 			type: "heading1",
-			text: "Autem Consequuntur Nostrum Repellat Minus Repellat Modi Saepe Porro",
+			text: "Autem Consequuntur",
 			spans: [],
 		},
 	],
 	[
 		{
-			type: "heading1",
-			text: "Aliquam Soluta Unde Dolorum Qui",
+			type: "heading4",
+			text: "Ratione Distinctio Ipsum Placeat Et Cumque Mollitia Aliquam Soluta",
 			spans: [],
 		},
 	],
@@ -37,8 +36,8 @@ test(
 		],
 		[
 			{
-				type: "heading6",
-				text: "Debitis Incidunt Accusantium Sed",
+				type: "heading2",
+				text: "Debitis Incidunt",
 				spans: [],
 			},
 		],
@@ -62,21 +61,21 @@ test("supports custom model", (t) => {
 
 test("can be customized with a pattern to determine title length", (t) => {
 	const actualShort = value.title({
-		pattern: MockRichTextHeadingValuePattern.Short,
+		pattern: "short",
 	});
 	const actualShortWordCount = actualShort[0].text.split(" ").length;
 	t.true(actualShortWordCount >= 1);
 	t.true(actualShortWordCount <= 3);
 
 	const actualMedium = value.title({
-		pattern: MockRichTextHeadingValuePattern.Medium,
+		pattern: "medium",
 	});
 	const actualMediumWordCount = actualMedium[0].text.split(" ").length;
 	t.true(actualMediumWordCount >= 3);
 	t.true(actualMediumWordCount <= 6);
 
 	const actualLong = value.title({
-		pattern: MockRichTextHeadingValuePattern.Long,
+		pattern: "long",
 	});
 	const actualLongWordCount = actualLong[0].text.split(" ").length;
 	t.true(actualLongWordCount >= 6);

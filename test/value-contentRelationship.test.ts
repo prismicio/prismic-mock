@@ -81,3 +81,9 @@ test("supports custom model", (t) => {
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	t.true(actual.tags.every((tag) => customModel.config.tags!.includes(tag)));
 });
+
+test("can be configured to return an unfilled value", (t) => {
+	const actual = value.contentRelationship({ isFilled: false });
+
+	t.false("url" in actual);
+});

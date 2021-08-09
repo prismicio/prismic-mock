@@ -55,3 +55,9 @@ test(
 		},
 	],
 );
+
+test("can be configured to return an unfilled value", (t) => {
+	const actual = value.linkToMedia({ isFilled: false });
+
+	t.false("url" in actual);
+});

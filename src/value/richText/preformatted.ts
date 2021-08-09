@@ -16,13 +16,13 @@ const patterns = {
 	},
 } as const;
 
-type MockRichTextParagraphValueConfig = {
+type MockRichTextPreformattedValueConfig = {
 	pattern?: keyof typeof patterns;
 } & MockRichTextValueConfig;
 
-export const paragraph = (
-	config: MockRichTextParagraphValueConfig = {},
-): prismicT.RTParagraphNode | undefined => {
+export const preformatted = (
+	config: MockRichTextPreformattedValueConfig = {},
+): prismicT.RTPreformattedNode | undefined => {
 	const faker = createFaker(config.seed);
 
 	const patternKey =
@@ -33,7 +33,8 @@ export const paragraph = (
 	const pattern = patterns[patternKey];
 
 	return {
-		type: prismicT.RichTextNodeType.paragraph,
+		type: prismicT.RichTextNodeType.preformatted,
+		// TODO: Use code, not lorem ipsum.
 		text: faker.lorem.paragraph(pattern.sentenceCount),
 		spans: [],
 	};

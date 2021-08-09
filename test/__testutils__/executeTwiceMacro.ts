@@ -8,7 +8,7 @@ export const executeTwiceMacro = <MockReturnType>(
 ): void => {
 	const actual = [mockFn(), mockFn()];
 
-	t.log(util.inspect(actual, { colors: true, depth: null }));
+	t.log(util.inspect(actual, { depth: null, colors: true }));
 
 	t.deepEqual(actual, expected);
 };

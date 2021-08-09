@@ -1,39 +1,24 @@
 import * as prismicT from "@prismicio/types";
 
-import { createFaker } from "../lib/createFaker";
-
 import { MockValueConfig } from "../types";
 
-import * as modelGen from "../model";
-
-import { heading, MockRichTextHeadingValuePattern } from "./richText/heading";
+import { heading, MockRichTextHeadingValueConfig } from "./richText/heading";
 
 type MockTitleValueConfig<
 	Model extends prismicT.CustomTypeModelTitleField = prismicT.CustomTypeModelTitleField,
 > = {
-	pattern?: MockRichTextHeadingValuePattern;
+	pattern?: MockRichTextHeadingValueConfig["pattern"];
 } & MockValueConfig<Model>;
 
 export const title = (
 	config: MockTitleValueConfig = {},
 ): prismicT.TitleField => {
-	const faker = createFaker(config.seed);
-
-	const model =
-		config.model ||
-		modelGen.title({
-			seed: config.seed,
-		});
-
-	const pattern =
-		config.pattern ||
-		faker.random.arrayElement(Object.values(MockRichTextHeadingValuePattern));
-
 	return [
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		heading({
 			seed: config.seed,
-			model,
-			pattern,
-		}),
+			model: config.model,
+			pattern: config.pattern,
+		})!,
 	];
 };

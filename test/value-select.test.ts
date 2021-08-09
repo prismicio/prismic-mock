@@ -18,7 +18,7 @@ test(
 );
 
 test("supports custom model", (t) => {
-	const customModel = model.select();
+	const customModel = model.select({ withDefaultValue: true });
 
 	const actual = value.select({ model: customModel });
 

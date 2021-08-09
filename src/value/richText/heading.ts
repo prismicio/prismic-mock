@@ -23,37 +23,32 @@ type RTHeadingNode =
 	| prismicT.RTHeading5Node
 	| prismicT.RTHeading6Node;
 
-export enum MockRichTextHeadingValuePattern {
-	Short = "Short",
-	Medium = "Medium",
-	Long = "Long",
-}
-
-const patternConfigs = {
-	[MockRichTextHeadingValuePattern.Short]: {
+const patterns = {
+	short: {
 		minWords: 1,
 		maxWords: 3,
 	},
-	[MockRichTextHeadingValuePattern.Medium]: {
+	medium: {
 		minWords: 3,
 		maxWords: 6,
 	},
-	[MockRichTextHeadingValuePattern.Long]: {
+	long: {
 		minWords: 6,
 		maxWords: 12,
 	},
-};
+} as const;
 
-type MockRichTextHeadingValueConfig = {
-	pattern?: MockRichTextHeadingValuePattern;
+export type MockRichTextHeadingValueConfig = {
+	pattern?: keyof typeof patterns;
 } & MockRichTextValueConfig;
 
 export const heading = (
 	config: MockRichTextHeadingValueConfig = {},
-): RTHeadingNode => {
+): RTHeadingNode | undefined => {
 	const faker = createFaker(config.seed);
 
 	const model = config.model || modelGen.title({ seed: config.seed });
+
 	const types = (
 		"single" in model.config ? model.config.single : model.config.multi
 	)
@@ -68,28 +63,29 @@ export const heading = (
 				"heading6",
 			].includes(type),
 		) as RichTextNodeTitleType[];
-
-	if (types.length < 1) {
-		throw new Error("The model is not configured for headings.");
-	}
-
 	const type = faker.random.arrayElement(types);
 
-	const pattern =
-		config.pattern ||
-		faker.random.arrayElement(Object.values(MockRichTextHeadingValuePattern));
-	const patternConfig = patternConfigs[pattern];
+	if (type) {
+		const patternKey =
+			config.pattern ||
+			faker.random.arrayElement(
+				Object.keys(patterns) as (keyof typeof patterns)[],
+			);
+		const pattern = patterns[patternKey];
 
-	return {
-		type,
-		text: changeCase.capitalCase(
-			faker.lorem.words(
-				faker.datatype.number({
-					min: patternConfig.minWords,
-					max: patternConfig.maxWords,
-				}),
+		return {
+			type,
+			text: changeCase.capitalCase(
+				faker.lorem.words(
+					faker.datatype.number({
+						min: pattern.minWords,
+						max: pattern.maxWords,
+					}),
+				),
 			),
-		),
-		spans: [],
-	};
+			spans: [],
+		};
+	} else {
+		return undefined;
+	}
 };

@@ -1,5 +1,20 @@
 import * as prismicT from "@prismicio/types";
 
+export interface MockImageData {
+	url: string;
+	width: number;
+	height: number;
+}
+
+export interface MockEmbedData {
+	url: string;
+	embed_url: string;
+	html: string;
+	thumbnail_url: string | null;
+	thumbnail_height: number | null;
+	thumbnail_width: number | null;
+}
+
 export type MockModelConfig = {
 	seed?: number;
 };
@@ -7,19 +22,23 @@ export type MockModelConfig = {
 // TODO: Add to @prismicio/types
 type PrismicModel =
 	| prismicT.CustomTypeModel
-	| prismicT.SharedSliceModel
-	| prismicT.CustomTypeModelField;
+	| prismicT.CustomTypeModelField
+	| prismicT.SharedSliceModel;
 
 export type MockValueConfig<Model extends PrismicModel = PrismicModel> = {
 	seed?: number;
 	model?: Model;
 };
 
-export type MockRichTextValueConfig = {
+type CustomTypeModelStructuredTextField =
+	| prismicT.CustomTypeModelRichTextField
+	| prismicT.CustomTypeModelTitleField;
+
+export type MockRichTextValueConfig<
+	Model extends CustomTypeModelStructuredTextField = CustomTypeModelStructuredTextField,
+> = {
 	seed?: number;
-	model?:
-		| prismicT.CustomTypeModelRichTextField
-		| prismicT.CustomTypeModelTitleField;
+	model?: Model;
 };
 
 export type CustomTypeModelFieldValueMap<

@@ -195,6 +195,262 @@ test(
 	],
 );
 
+test(
+	"supports custom seed for repeat field",
+	executeTwiceMacro,
+	() =>
+		model.slice({
+			seed: 1,
+			repeatFieldConfig: {
+				seed: 2,
+			},
+		}),
+	[
+		{
+			type: "Slice",
+			icon: "roi",
+			display: "list",
+			fieldset: "Eos Quis Ut",
+			description: "Omnis delectus voluptas minima.",
+			repeat: {
+				rerum_iusto: {
+					type: "Date",
+					config: {
+						label: "Supply Chains",
+						placeholder: "Quam voluptatem sit",
+					},
+				},
+				nobis_dolores: {
+					type: "StructuredText",
+					config: {
+						label: "Mindshare",
+						placeholder: "Repellendus quaerat at",
+						single: "heading1,heading3,heading4",
+						allowTargetBlank: true,
+					},
+				},
+			},
+			"non-repeat": {
+				natus_consequatur: {
+					type: "Image",
+					config: {
+						label: "Networks",
+						constraint: { width: null, height: null },
+						thumbnails: [],
+					},
+				},
+				ut: {
+					type: "Text",
+					config: { label: "Mindshare", placeholder: "Aut laborum iure" },
+				},
+				placeat_molestiae_iste: {
+					type: "Link",
+					config: {
+						label: "Content",
+						placeholder: "Dolores commodi inventore",
+						select: "media",
+					},
+				},
+				sint: {
+					type: "Select",
+					config: {
+						label: "Communities",
+						placeholder: "Et quo aperiam",
+						options: ["Drive"],
+						default_value: undefined,
+					},
+				},
+			},
+		},
+		{
+			type: "Slice",
+			icon: "synergies",
+			display: "list",
+			fieldset: "Quasi Exercitationem Delectus",
+			description: "Similique ad sed architecto magnam.",
+			repeat: {
+				beatae: {
+					type: "Link",
+					config: {
+						label: "Methodologies",
+						placeholder: "Quas exercitationem et",
+						select: "document",
+						customtypes: undefined,
+						tags: undefined,
+					},
+				},
+			},
+			"non-repeat": {
+				quis_ut: {
+					type: "Embed",
+					config: { label: "Paradigms", placeholder: "Nulla quod labore" },
+				},
+				saepe_nesciunt_omnis: {
+					type: "Link",
+					config: {
+						label: "Synergies",
+						placeholder: "Et quasi eaque",
+						select: "media",
+					},
+				},
+				omnis_similique: {
+					type: "StructuredText",
+					config: {
+						label: "Architectures",
+						placeholder: "Numquam maxime sint",
+						allowTargetBlank: true,
+						multi:
+							"heading4,o-list-item,paragraph,heading2,image,preformatted,heading5",
+					},
+				},
+			},
+		},
+	],
+);
+
+test(
+	"supports custom seed for non-repeat field",
+	executeTwiceMacro,
+	() =>
+		model.slice({
+			seed: 1,
+			nonRepeatFieldConfig: {
+				seed: 2,
+			},
+		}),
+	[
+		{
+			type: "Slice",
+			icon: "paradigms",
+			display: "grid",
+			fieldset: "Quis Non Et",
+			description: "Non explicabo facere.",
+			repeat: {
+				adipisci: { type: "GeoPoint", config: { label: "Experiences" } },
+				fuga_voluptatem_quia: {
+					type: "Link",
+					config: {
+						label: "Paradigms",
+						placeholder: "Qui id cupiditate",
+						select: "media",
+					},
+				},
+				voluptates_dolorem_recusandae: {
+					type: "Number",
+					config: {
+						label: "Infomediaries",
+						placeholder: "Perferendis molestiae ut",
+					},
+				},
+				in_hic_molestiae: {
+					type: "Timestamp",
+					config: {
+						label: "Interfaces",
+						placeholder: "Sed repudiandae consequatur",
+					},
+				},
+			},
+			"non-repeat": {
+				in: { type: "Boolean", config: { label: "Action Items" } },
+				nam_iure: {
+					type: "Link",
+					config: {
+						label: "E Commerce",
+						placeholder: "Autem doloribus culpa",
+						select: "media",
+					},
+				},
+				molestias_et_eius: {
+					type: "StructuredText",
+					config: {
+						label: "Networks",
+						placeholder: "Iusto ex omnis",
+						single: "heading3,heading1,heading4,heading5,heading2,heading6",
+						allowTargetBlank: undefined,
+					},
+				},
+			},
+		},
+		{
+			type: "Slice",
+			icon: "experiences",
+			display: "list",
+			fieldset: "Exercitationem Corrupti Dolorem",
+			description:
+				"Accusantium unde qui molestiae consequatur sint consequatur.",
+			repeat: {
+				quia: {
+					type: "Link",
+					config: {
+						label: "Action Items",
+						placeholder: "Consequuntur beatae dolores",
+						select: "document",
+						customtypes: undefined,
+						tags: undefined,
+					},
+				},
+				dolorem_suscipit_perferendis: {
+					type: "Link",
+					config: {
+						label: "Supply Chains",
+						placeholder: "Quia odit sit",
+						select: null,
+						allowTargetBlank: true,
+					},
+				},
+				sed_nisi_veniam: {
+					type: "Number",
+					config: { label: "Web Services", placeholder: "Ex culpa eveniet" },
+				},
+				nulla: {
+					type: "StructuredText",
+					config: {
+						label: "Vortals",
+						placeholder: "Et unde ut",
+						allowTargetBlank: true,
+						multi: "embed",
+					},
+				},
+			},
+			"non-repeat": {
+				perspiciatis_vel_vitae: {
+					type: "Link",
+					config: {
+						label: "Web Services",
+						placeholder: "Consequatur qui pariatur",
+						select: "document",
+						customtypes: undefined,
+						tags: undefined,
+					},
+				},
+				earum_ut_quas: {
+					type: "StructuredText",
+					config: {
+						label: "Experiences",
+						placeholder: "Voluptatibus quo odio",
+						allowTargetBlank: true,
+						single:
+							"paragraph,heading5,o-list-item,heading4,preformatted,heading3,embed,heading2,heading6,image,em,strong,list-item",
+					},
+				},
+				omnis: {
+					type: "Timestamp",
+					config: { label: "Roi", placeholder: "Sunt iure qui" },
+				},
+				id_consequatur_vel: {
+					type: "StructuredText",
+					config: {
+						label: "Portals",
+						placeholder: "Qui debitis accusantium",
+						single: "heading3,heading6,heading4,heading2,heading1",
+						allowTargetBlank: undefined,
+					},
+				},
+			},
+		},
+	],
+);
+
 test("can be configured with specific repeat and non-repeat field configuration", (t) => {
 	const actual = model.slice({
 		repeatFieldConfig: {

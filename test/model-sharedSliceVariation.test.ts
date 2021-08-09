@@ -260,6 +260,279 @@ test(
 	],
 );
 
+test(
+	"supports custom seed for primary field",
+	executeTwiceMacro,
+	() =>
+		model.sharedSliceVariation({
+			seed: 1,
+			primaryFieldConfig: {
+				seed: 2,
+			},
+		}),
+	[
+		{
+			id: "partnerships",
+			name: "Partnerships",
+			description: "Molestias dolore aut.",
+			docURL: "https://edwina.name",
+			version: "38fd413",
+			primary: {
+				rerum_iusto: {
+					type: "Date",
+					config: {
+						label: "Supply Chains",
+						placeholder: "Quam voluptatem sit",
+					},
+				},
+				nobis_dolores: {
+					type: "StructuredText",
+					config: {
+						label: "Mindshare",
+						placeholder: "Repellendus quaerat at",
+						single: "heading1,heading3,heading4",
+						allowTargetBlank: true,
+					},
+				},
+			},
+			items: {
+				natus_consequatur: {
+					type: "Embed",
+					config: { label: "Synergies", placeholder: "Vel et nostrum" },
+				},
+				iure_molestiae: {
+					type: "Text",
+					config: { label: "Metrics", placeholder: "Facere placeat molestiae" },
+				},
+			},
+		},
+		{
+			id: "web_services",
+			name: "Web Services",
+			description: "Sint odit dolor.",
+			docURL: "http://lewis.net",
+			version: "08a0214",
+			primary: {
+				beatae: {
+					type: "Link",
+					config: {
+						label: "Methodologies",
+						placeholder: "Quas exercitationem et",
+						select: "document",
+						customtypes: undefined,
+						tags: undefined,
+					},
+				},
+			},
+			items: {
+				similique_ad: { type: "Boolean", config: { label: "Eyeballs" } },
+				quis_ut: {
+					type: "Text",
+					config: { label: "Paradigms", placeholder: "Nulla quod labore" },
+				},
+				saepe_nesciunt_omnis: {
+					type: "Select",
+					config: {
+						label: "Markets",
+						placeholder: "Eaque corrupti vel",
+						options: ["Reintermediate"],
+						default_value: undefined,
+					},
+				},
+				blanditiis_voluptatem: {
+					type: "StructuredText",
+					config: {
+						label: "Niches",
+						placeholder: "Molestias omnis numquam",
+						single: "heading5,heading3,heading1,heading6",
+						allowTargetBlank: true,
+					},
+				},
+			},
+		},
+	],
+);
+
+test(
+	"supports custom seed for items field",
+	executeTwiceMacro,
+	() =>
+		model.sharedSliceVariation({
+			seed: 1,
+			itemsFieldConfig: {
+				seed: 2,
+			},
+		}),
+	[
+		{
+			id: "experiences",
+			name: "Experiences",
+			description: "Laudantium voluptatem magni et voluptas quis non et.",
+			docURL: "http://cornell.com",
+			version: "c21541c",
+			primary: {
+				in_cupiditate: {
+					type: "Link",
+					config: {
+						label: "Applications",
+						placeholder: "Molestiae fuga voluptatem",
+						select: "document",
+						customtypes: undefined,
+						tags: undefined,
+					},
+				},
+				voluptates_dolorem_recusandae: {
+					type: "Link",
+					config: {
+						label: "Infomediaries",
+						placeholder: "Perferendis molestiae ut",
+						select: null,
+						allowTargetBlank: true,
+					},
+				},
+				in_hic_molestiae: {
+					type: "Number",
+					config: {
+						label: "Interfaces",
+						placeholder: "Sed repudiandae consequatur",
+					},
+				},
+				exercitationem_corrupti: {
+					type: "Select",
+					config: {
+						label: "Web Readiness",
+						placeholder: "Unde qui molestiae",
+						options: ["Maximize"],
+						default_value: undefined,
+					},
+				},
+				consequatur_qui_est: {
+					type: "Timestamp",
+					config: { label: "Methodologies", placeholder: "Aperiam quia ex" },
+				},
+			},
+			items: {
+				in: { type: "Boolean", config: { label: "Action Items" } },
+				nam_iure: {
+					type: "Link",
+					config: {
+						label: "E Commerce",
+						placeholder: "Autem doloribus culpa",
+						select: "media",
+					},
+				},
+				molestias_et_eius: {
+					type: "StructuredText",
+					config: {
+						label: "Networks",
+						placeholder: "Iusto ex omnis",
+						single: "heading3,heading1,heading4,heading5,heading2,heading6",
+						allowTargetBlank: undefined,
+					},
+				},
+			},
+		},
+		{
+			id: "markets",
+			name: "Markets",
+			description: "Eligendi quas perferendis voluptatem.",
+			docURL: "http://unique.org",
+			version: "d507215",
+			primary: {
+				sed_nisi_veniam: {
+					type: "Link",
+					config: {
+						label: "Web Services",
+						placeholder: "Ex culpa eveniet",
+						select: "document",
+						customtypes: undefined,
+						tags: undefined,
+					},
+				},
+				nulla: {
+					type: "Date",
+					config: {
+						label: "Web Readiness",
+						placeholder: "Et delectus praesentium",
+					},
+				},
+				quis_consequuntur: {
+					type: "Text",
+					config: { label: "Convergence", placeholder: "Hic animi ipsam" },
+				},
+				eius_et: {
+					type: "Link",
+					config: {
+						label: "Roi",
+						placeholder: "Consequatur et ipsam",
+						select: "media",
+					},
+				},
+				in_perspiciatis_sit: {
+					type: "StructuredText",
+					config: {
+						label: "Paradigms",
+						placeholder: "Perferendis quam ab",
+						allowTargetBlank: true,
+						single: "preformatted,strong,o-list-item",
+					},
+				},
+				alias_accusamus: {
+					type: "Timestamp",
+					config: {
+						label: "Methodologies",
+						placeholder: "Repellendus autem aliquam",
+					},
+				},
+				id: {
+					type: "StructuredText",
+					config: {
+						label: "Eyeballs",
+						placeholder: "In esse et",
+						single: "heading5",
+						allowTargetBlank: undefined,
+					},
+				},
+			},
+			items: {
+				perspiciatis_vel_vitae: {
+					type: "Link",
+					config: {
+						label: "Web Services",
+						placeholder: "Consequatur qui pariatur",
+						select: "document",
+						customtypes: undefined,
+						tags: undefined,
+					},
+				},
+				earum_ut_quas: {
+					type: "StructuredText",
+					config: {
+						label: "Experiences",
+						placeholder: "Voluptatibus quo odio",
+						allowTargetBlank: true,
+						single:
+							"paragraph,heading5,o-list-item,heading4,preformatted,heading3,embed,heading2,heading6,image,em,strong,list-item",
+					},
+				},
+				omnis: {
+					type: "Timestamp",
+					config: { label: "Roi", placeholder: "Sunt iure qui" },
+				},
+				id_consequatur_vel: {
+					type: "StructuredText",
+					config: {
+						label: "Portals",
+						placeholder: "Qui debitis accusantium",
+						single: "heading3,heading6,heading4,heading2,heading1",
+						allowTargetBlank: undefined,
+					},
+				},
+			},
+		},
+	],
+);
+
 test("can be configured with specific repeat and non-repeat field configuration", (t) => {
 	const actual = model.sharedSliceVariation({
 		itemsFieldConfig: {

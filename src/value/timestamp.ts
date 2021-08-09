@@ -19,9 +19,12 @@ export const timestamp = (
 	// Faker seems to have problems accepting parameters for `faker.date.between`
 	// if the parameters are too precise. We can get around this by only using
 	// generated dates, not timestamps.
-	const after = config.after || faker.date.past().toISOString().split("T")[0];
+	const after =
+		config.after ||
+		faker.date.past(20, new Date("2021-03-07")).toISOString().split("T")[0];
 	const before =
-		config.before || faker.date.future().toISOString().split("T")[0];
+		config.before ||
+		faker.date.future(20, new Date("2021-03-07")).toISOString().split("T")[0];
 
 	return faker.date.between(after, before).toISOString();
 };
