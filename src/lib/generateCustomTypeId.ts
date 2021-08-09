@@ -5,9 +5,7 @@ import { MockModelConfig } from "../types";
 
 type GenerateFieldIdConfig = Pick<MockModelConfig, "seed">;
 
-export const generateCustomTypeId = (
-	config: GenerateFieldIdConfig = {},
-): string => {
+export const generateCustomTypeId = (config: GenerateFieldIdConfig): string => {
 	const faker = createFaker(config.seed);
 
 	return changeCase.snakeCase(faker.company.bsNoun());

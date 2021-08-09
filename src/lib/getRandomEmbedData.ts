@@ -63,7 +63,7 @@ const dataSet: MockEmbedData[] = [
 type GetRandomEmbedDataConfig = Pick<MockValueConfig, "seed">;
 
 export const getRandomEmbedData = (
-	config: GetRandomEmbedDataConfig = {},
+	config: GetRandomEmbedDataConfig,
 ): MockEmbedData => {
 	const faker = createFaker(config.seed);
 
