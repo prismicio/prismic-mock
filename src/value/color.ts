@@ -4,7 +4,7 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockValueConfig } from "../types";
 
-type MockColorValueConfig<
+export type MockColorValueConfig<
 	Model extends prismicT.CustomTypeModelColorField = prismicT.CustomTypeModelColorField,
 > = MockValueConfig<Model>;
 

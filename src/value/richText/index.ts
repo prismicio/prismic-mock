@@ -28,7 +28,7 @@ const patterns = {
 	},
 } as const;
 
-type MockRichTextValueConfig = {
+export type MockRichTextValueConfig = {
 	pattern?: keyof typeof patterns;
 } & BaseMockRichTextValueConfig<prismicT.CustomTypeModelRichTextField>;
 
@@ -64,45 +64,36 @@ export const richText = (
 	)
 		.split(",")
 		.filter((type) =>
-			[
-				prismicT.RichTextNodeType.heading1,
-				prismicT.RichTextNodeType.heading2,
-				prismicT.RichTextNodeType.heading3,
-				prismicT.RichTextNodeType.heading4,
-				prismicT.RichTextNodeType.heading5,
-				prismicT.RichTextNodeType.heading6,
-				prismicT.RichTextNodeType.paragraph,
-				prismicT.RichTextNodeType.preformatted,
-				prismicT.RichTextNodeType.listItem,
-				prismicT.RichTextNodeType.oListItem,
-				prismicT.RichTextNodeType.image,
-				prismicT.RichTextNodeType.embed,
-			].includes(type as prismicT.RichTextNodeType),
+			Object.keys(generators).includes(type),
 		) as prismicT.RTNode["type"][];
 
-	const patternKey =
-		config.pattern ||
-		faker.random.arrayElement(
-			Object.keys(patterns) as (keyof typeof patterns)[],
-		);
-	const pattern = patterns[patternKey];
+	if (types.length > 0) {
+		const patternKey =
+			config.pattern ||
+			faker.random.arrayElement(
+				Object.keys(patterns) as (keyof typeof patterns)[],
+			);
+		const pattern = patterns[patternKey];
 
-	const blockCount = supportsMultipleBlocks
-		? faker.datatype.number({
-				min: pattern.blockCountMin,
-				max: pattern.blockCountMax,
-		  })
-		: 1;
+		const blockCount = supportsMultipleBlocks
+			? faker.datatype.number({
+					min: pattern.blockCountMin,
+					max: pattern.blockCountMax,
+			  })
+			: 1;
 
-	return Array(blockCount)
-		.fill(undefined)
-		.map(() => {
-			const type = faker.random.arrayElement(types);
-			const generator = generators[type];
+		return Array(blockCount)
+			.fill(undefined)
+			.map(() => {
+				const type = faker.random.arrayElement(types);
+				const generator = generators[type];
 
-			return generator({ seed: config.seed, model });
-		})
-		.flat()
-		.filter((block): block is prismicT.RTNode => block !== undefined)
-		.slice(0, blockCount);
+				return generator({ seed: config.seed, model });
+			})
+			.flat()
+			.filter((block): block is prismicT.RTNode => block !== undefined)
+			.slice(0, blockCount);
+	} else {
+		return [];
+	}
 };

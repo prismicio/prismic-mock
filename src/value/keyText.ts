@@ -5,7 +5,7 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockValueConfig } from "../types";
 
-type MockKeyTextValueConfig<
+export type MockKeyTextValueConfig<
 	Model extends prismicT.CustomTypeModelKeyTextField = prismicT.CustomTypeModelKeyTextField,
 > = MockValueConfig<Model>;
 

@@ -5,7 +5,7 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockValueConfig } from "../types";
 
-type MockUIDValueConfig<
+export type MockUIDValueConfig<
 	Model extends prismicT.CustomTypeModelUIDField = prismicT.CustomTypeModelUIDField,
 > = MockValueConfig<Model>;
 

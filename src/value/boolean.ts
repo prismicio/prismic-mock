@@ -4,12 +4,14 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockValueConfig } from "../types";
 
-type MockBooleanValueConfig<
+export type MockBooleanValueConfig<
 	Model extends prismicT.CustomTypeModelBooleanField = prismicT.CustomTypeModelBooleanField,
 > = MockValueConfig<Model>;
 
-export const boolean = (
-	config: MockBooleanValueConfig = {},
+export const boolean = <
+	Model extends prismicT.CustomTypeModelBooleanField = prismicT.CustomTypeModelBooleanField,
+>(
+	config: MockBooleanValueConfig<Model> = {},
 ): prismicT.BooleanField => {
 	const faker = createFaker(config.seed);
 

@@ -4,7 +4,7 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockValueConfig } from "../types";
 
-type MockGeoPointValueConfig<
+export type MockGeoPointValueConfig<
 	Model extends prismicT.CustomTypeModelGeoPointField = prismicT.CustomTypeModelGeoPointField,
 > = MockValueConfig<Model>;
 

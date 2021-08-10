@@ -4,7 +4,7 @@ import { MockValueConfig } from "../types";
 
 import { heading, MockRichTextHeadingValueConfig } from "./richText/heading";
 
-type MockTitleValueConfig<
+export type MockTitleValueConfig<
 	Model extends prismicT.CustomTypeModelTitleField = prismicT.CustomTypeModelTitleField,
 > = {
 	pattern?: MockRichTextHeadingValueConfig["pattern"];

@@ -7,7 +7,7 @@ import { buildImageField } from "../lib/buildImageField";
 
 import * as modelGen from "../model";
 
-type MockImageValueConfig<
+export type MockImageValueConfig<
 	Model extends prismicT.CustomTypeModelImageField = prismicT.CustomTypeModelImageField,
 > = MockValueConfig<Model>;
 

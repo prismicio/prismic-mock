@@ -4,7 +4,7 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockValueConfig } from "../types";
 
-type MockLinkToMediaValueConfig<
+export type MockLinkToMediaValueConfig<
 	IsFilled extends boolean = true,
 	Model extends prismicT.CustomTypeModelLinkToMediaField = prismicT.CustomTypeModelLinkToMediaField,
 > = {

@@ -4,7 +4,7 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockValueConfig } from "../types";
 
-type MockNumberValueConfig<
+export type MockNumberValueConfig<
 	Model extends prismicT.CustomTypeModelNumberField = prismicT.CustomTypeModelNumberField,
 > = MockValueConfig<Model>;
 

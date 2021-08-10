@@ -5,7 +5,7 @@ import { getRandomEmbedData } from "../lib/getRandomEmbedData";
 
 import { MockValueConfig } from "../types";
 
-type MockEmbedValueConfig<
+export type MockEmbedValueConfig<
 	Model extends prismicT.CustomTypeModelEmbedField = prismicT.CustomTypeModelEmbedField,
 > = MockValueConfig<Model>;
 

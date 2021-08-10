@@ -6,7 +6,7 @@ import { MockValueConfig } from "../types";
 
 import * as modelGen from "../model";
 
-type MockSelectValueConfig<
+export type MockSelectValueConfig<
 	Model extends prismicT.CustomTypeModelSelectField = prismicT.CustomTypeModelSelectField,
 > = MockValueConfig<Model>;
 

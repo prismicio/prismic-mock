@@ -1,6 +1,6 @@
 import * as prismicT from "@prismicio/types";
 
-import { CustomTypeModelFieldValue } from "./types";
+import { ModelValue } from "./types";
 import { boolean } from "./boolean";
 import { color } from "./color";
 import { geoPoint } from "./geoPoint";
@@ -19,66 +19,66 @@ import { embed } from "./embed";
 
 export const mockForFieldConfig = <T extends prismicT.CustomTypeModelField>(
 	fieldConfig: T,
-): CustomTypeModelFieldValue<T> => {
+): ModelValue<T> => {
 	switch (fieldConfig.type) {
 		case prismicT.CustomTypeModelFieldType.Boolean: {
-			return boolean() as CustomTypeModelFieldValue<T>;
+			return boolean() as ModelValue<T>;
 		}
 
 		case prismicT.CustomTypeModelFieldType.Color: {
-			return color() as CustomTypeModelFieldValue<T>;
+			return color() as ModelValue<T>;
 		}
 
 		case prismicT.CustomTypeModelFieldType.Date: {
-			return date() as CustomTypeModelFieldValue<T>;
+			return date() as ModelValue<T>;
 		}
 
 		case prismicT.CustomTypeModelFieldType.Embed: {
-			return embed() as CustomTypeModelFieldValue<T>;
+			return embed() as ModelValue<T>;
 		}
 
 		case prismicT.CustomTypeModelFieldType.GeoPoint: {
-			return geoPoint() as CustomTypeModelFieldValue<T>;
+			return geoPoint() as ModelValue<T>;
 		}
 
 		case prismicT.CustomTypeModelFieldType.Group: {
-			return group() as CustomTypeModelFieldValue<T>;
+			return group() as ModelValue<T>;
 		}
 
 		case prismicT.CustomTypeModelFieldType.Image: {
-			return image() as CustomTypeModelFieldValue<T>;
+			return image() as ModelValue<T>;
 		}
 
 		case prismicT.CustomTypeModelFieldType.Link: {
-			return link() as CustomTypeModelFieldValue<T>;
+			return link() as ModelValue<T>;
 		}
 
 		case prismicT.CustomTypeModelFieldType.Number: {
-			return number() as CustomTypeModelFieldValue<T>;
+			return number() as ModelValue<T>;
 		}
 
 		case prismicT.CustomTypeModelFieldType.Select: {
-			return select() as CustomTypeModelFieldValue<T>;
+			return select() as ModelValue<T>;
 		}
 
 		case prismicT.CustomTypeModelFieldType.StructuredText: {
 			if ("single" in fieldConfig.config) {
-				return title() as CustomTypeModelFieldValue<T>;
+				return title() as ModelValue<T>;
 			} else {
-				return richText() as CustomTypeModelFieldValue<T>;
+				return richText() as ModelValue<T>;
 			}
 		}
 
 		case prismicT.CustomTypeModelFieldType.Text: {
-			return text() as CustomTypeModelFieldValue<T>;
+			return text() as ModelValue<T>;
 		}
 
 		case prismicT.CustomTypeModelFieldType.Timestamp: {
-			return timestamp() as CustomTypeModelFieldValue<T>;
+			return timestamp() as ModelValue<T>;
 		}
 
 		case prismicT.CustomTypeModelFieldType.UID: {
-			return uid() as CustomTypeModelFieldValue<T>;
+			return uid() as ModelValue<T>;
 		}
 	}
 };

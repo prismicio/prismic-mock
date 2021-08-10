@@ -4,7 +4,7 @@ import { MockValueConfig } from "../types";
 
 import { MockTimestampValueConfig, timestamp } from "./timestamp";
 
-type MockDateValueConfig<
+export type MockDateValueConfig<
 	Model extends prismicT.CustomTypeModelDateField = prismicT.CustomTypeModelDateField,
 > = Pick<MockTimestampValueConfig, "after" | "before"> & MockValueConfig<Model>;
 

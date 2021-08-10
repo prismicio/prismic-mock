@@ -9,7 +9,7 @@ import * as modelGen from "../model";
 import { contentRelationship } from "./contentRelationship";
 import { linkToMedia } from "./linkToMedia";
 
-type MockLinkValueConfig<
+export type MockLinkValueConfig<
 	LinkType extends prismicT.LinkType = prismicT.LinkType,
 	IsFilled extends boolean = true,
 	Model extends prismicT.CustomTypeModelLinkField = prismicT.CustomTypeModelLinkField,

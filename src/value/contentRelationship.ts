@@ -9,7 +9,7 @@ import { MockValueConfig } from "../types";
 
 import * as modelGen from "../model";
 
-type MockContentRelationshipValueConfig<
+export type MockContentRelationshipValueConfig<
 	IsFilled extends boolean = true,
 	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
 > = {
