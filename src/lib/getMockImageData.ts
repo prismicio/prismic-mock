@@ -85,10 +85,10 @@ const dataSet: MockImageData[] = [
 	},
 ];
 
-type GetRandomImageDataConfig = Pick<MockValueConfig, "seed">;
+type GetMockImageDataConfig = Pick<MockValueConfig, "seed">;
 
-export const getRandomImageData = (
-	config: GetRandomImageDataConfig,
+export const getMockImageData = (
+	config: GetMockImageDataConfig,
 ): MockImageData => {
 	const faker = createFaker(config.seed);
 

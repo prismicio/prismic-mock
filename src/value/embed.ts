@@ -1,7 +1,7 @@
 import * as prismicT from "@prismicio/types";
 
 import { buildEmbedField } from "../lib/buildEmbedField";
-import { getRandomEmbedData } from "../lib/getRandomEmbedData";
+import { getMockEmbedData } from "../lib/getMockEmbedData";
 
 import { MockValueConfig } from "../types";
 
@@ -12,7 +12,7 @@ export type MockEmbedValueConfig<
 export const embed = (
 	config: MockEmbedValueConfig = {},
 ): prismicT.EmbedField => {
-	const embedData = getRandomEmbedData({ seed: config.seed });
+	const embedData = getMockEmbedData({ seed: config.seed });
 
 	return buildEmbedField({ seed: config.seed, embedData });
 };

@@ -2,8 +2,8 @@ import * as prismicT from "@prismicio/types";
 
 import { MockValueConfig } from "../types";
 
-import { getRandomImageData } from "../lib/getRandomImageData";
 import { buildImageField } from "../lib/buildImageField";
+import { getMockImageData } from "../lib/getMockImageData";
 
 import * as modelGen from "../model";
 
@@ -15,7 +15,7 @@ export const image = (
 	config: MockImageValueConfig = {},
 ): prismicT.ImageField => {
 	const model = config.model || modelGen.image({ seed: config.seed });
-	const imageData = getRandomImageData({ seed: config.seed });
+	const imageData = getMockImageData({ seed: config.seed });
 
 	const value = buildImageField({
 		seed: config.seed,
