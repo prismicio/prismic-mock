@@ -70,9 +70,23 @@ test("supports custom model", (t) => {
 
 test("can be configured to return an unfilled link value", (t) => {
 	const actual = value.link({
-		isFilled: false,
 		type: prismicT.LinkType.Web,
+		isFilled: false,
 	});
 
 	t.false("url" in actual);
+});
+
+test("can be configured to return a value with `_blank` target", (t) => {
+	const actualTrue = value.link({
+		type: prismicT.LinkType.Web,
+		withTargetBlank: true,
+	});
+	t.is(actualTrue.target, "_blank");
+
+	const actualFalse = value.link({
+		type: prismicT.LinkType.Web,
+		withTargetBlank: false,
+	});
+	t.is(actualFalse.target, undefined);
 });

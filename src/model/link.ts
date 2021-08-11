@@ -5,11 +5,24 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
 
-export type MockLinkModelConfig = MockModelConfig;
+type MockLinkModel<AllowTargetBlank extends boolean = boolean> =
+	prismicT.CustomTypeModelLinkField & {
+		config: AllowTargetBlank extends true
+			? {
+					allowTargetBlank: true;
+			  }
+			: {
+					allowTargetBlank?: undefined;
+			  };
+	};
 
-export const link = (
-	config: MockLinkModelConfig = {},
-): prismicT.CustomTypeModelLinkField => {
+export type MockLinkModelConfig<AllowTargetBlank extends boolean = boolean> = {
+	allowTargetBlank?: AllowTargetBlank;
+} & MockModelConfig;
+
+export const link = <AllowTargetBlank extends boolean = boolean>(
+	config: MockLinkModelConfig<AllowTargetBlank> = {},
+): MockLinkModel<AllowTargetBlank> => {
 	const faker = createFaker(config.seed);
 
 	return {
@@ -18,7 +31,10 @@ export const link = (
 			label: changeCase.capitalCase(faker.company.bsNoun()),
 			placeholder: changeCase.sentenceCase(faker.lorem.words(3)),
 			select: null,
-			allowTargetBlank: faker.datatype.boolean() || undefined,
+			allowTargetBlank:
+				("allowTargetBlank" in config
+					? config.allowTargetBlank
+					: faker.datatype.boolean()) || undefined,
 		},
-	};
+	} as MockLinkModel<AllowTargetBlank>;
 };

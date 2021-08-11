@@ -16,6 +16,9 @@ export type MockLinkValueConfig<
 > = {
 	type?: LinkType;
 	isFilled?: IsFilled;
+	withTargetBlank?: Model["config"]["allowTargetBlank"] extends undefined
+		? false
+		: boolean;
 } & MockValueConfig<Model>;
 
 type MockLinkValue<
@@ -73,7 +76,8 @@ export const link = <
 					link_type: prismicT.LinkType.Web,
 					url: "#",
 					target:
-						model.config.allowTargetBlank && faker.datatype.boolean()
+						config.withTargetBlank ??
+						(model.config.allowTargetBlank && faker.datatype.boolean())
 							? "_blank"
 							: undefined,
 				} as MockLinkValue<LinkType, IsFilled>;

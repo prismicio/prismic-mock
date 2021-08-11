@@ -45,3 +45,11 @@ test("supports custom seed", executeTwiceMacro, () => model.link({ seed: 1 }), [
 		type: "Link",
 	},
 ]);
+
+test("can be configured to explicitly support blank target", (t) => {
+	const actualTrue = model.link({ allowTargetBlank: true });
+	t.is(actualTrue.config.allowTargetBlank, true);
+
+	const actualFalse = model.link({ allowTargetBlank: false });
+	t.is(actualFalse.config.allowTargetBlank, undefined);
+});
