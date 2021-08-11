@@ -7,18 +7,14 @@ import {
 	SetRequired,
 } from "../types";
 
-type FieldForGroupModelValueConfig<
-	Model extends prismicT.CustomTypeModelFieldForGroup,
-> = {
+type ValueForModelConfig<Model extends prismicT.CustomTypeModelField> = {
 	config?: Omit<MockValueConfigForModel<Model>, "seed" | "model">;
 } & SetRequired<MockValueConfig<Model>, "model">;
 
 import * as value from "../value";
 
-export const fieldForGroupModelValue = <
-	Model extends prismicT.CustomTypeModelFieldForGroup,
->(
-	config: FieldForGroupModelValueConfig<Model>,
+export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
+	config: ValueForModelConfig<Model>,
 ): ModelValue<Model> => {
 	const model = config.model;
 
@@ -142,6 +138,30 @@ export const fieldForGroupModelValue = <
 		case prismicT.CustomTypeModelFieldType.IntegrationFields: {
 			// TODO: Should this be something else?
 			return {} as ModelValue<Model>;
+		}
+
+		case prismicT.CustomTypeModelFieldType.UID: {
+			return value.uid({
+				seed: config.seed,
+				model,
+				...config.config,
+			}) as ModelValue<Model>;
+		}
+
+		case prismicT.CustomTypeModelFieldType.Group: {
+			return value.group({
+				seed: config.seed,
+				model,
+				...config.config,
+			}) as ModelValue<Model>;
+		}
+
+		case prismicT.CustomTypeModelFieldType.Slices: {
+			return value.sliceZone({
+				seed: config.seed,
+				model,
+				...config.config,
+			}) as ModelValue<Model>;
 		}
 	}
 };

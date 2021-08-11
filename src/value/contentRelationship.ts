@@ -4,6 +4,7 @@ import * as changeCase from "change-case";
 import { createFaker } from "../lib/createFaker";
 import { generateCustomTypeId } from "../lib/generateCustomTypeId";
 import { generateFieldId } from "../lib/generateFieldId";
+import { generateTags } from "../lib/generateTags";
 
 import { MockValueConfig } from "../types";
 
@@ -41,13 +42,7 @@ export const contentRelationship = <
 
 		const tags = model.config.tags
 			? faker.random.arrayElements(model.config.tags)
-			: Array(faker.datatype.number(2))
-					.fill(undefined)
-					.map(() =>
-						changeCase.capitalCase(
-							faker.lorem.words(faker.datatype.number({ min: 1, max: 3 })),
-						),
-					);
+			: generateTags({ seed: config.seed });
 
 		return {
 			link_type: prismicT.LinkType.Document,

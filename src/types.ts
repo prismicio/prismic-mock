@@ -191,8 +191,11 @@ type SharedSliceModelValue<T extends prismicT.SharedSliceModel> =
 
 type SharedSliceModelVariationValue<
 	T extends prismicT.SharedSliceModelVariation,
-> = prismicT.SharedSliceVariation<
-	T["id"],
-	ModelValueMap<T["primary"]>,
-	ModelValueMap<T["items"]>
+> = prismicT.SharedSlice<
+	string,
+	prismicT.SharedSliceVariation<
+		T["id"],
+		ModelValueMap<T["primary"]>,
+		ModelValueMap<T["items"]>
+	>
 >;

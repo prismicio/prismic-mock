@@ -1,7 +1,7 @@
 import * as prismicT from "@prismicio/types";
 
 import { createFaker } from "../lib/createFaker";
-import { fieldForGroupModelValueMap } from "../lib/fieldForGroupModelValueMap";
+import { valueForModelMap } from "../lib/valueForModelMap";
 
 import { MockValueConfig, ModelValue } from "../types";
 
@@ -52,7 +52,7 @@ export const group = <
 	return Array(itemsCount)
 		.fill(undefined)
 		.map(() => {
-			return fieldForGroupModelValueMap({
+			return valueForModelMap({
 				seed: config.seed,
 				map: model.config.fields,
 			});

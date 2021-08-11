@@ -1,9 +1,9 @@
 import * as prismicT from "@prismicio/types";
 
-import { MockValueConfig } from "../types";
-
 import { buildImageField } from "../lib/buildImageField";
 import { getMockImageData } from "../lib/getMockImageData";
+
+import { MockValueConfig } from "../types";
 
 import * as modelGen from "../model";
 

@@ -5,15 +5,19 @@ import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 import * as value from "../src/value";
 import * as model from "../src/model";
 
-test("creates a mock Slice field value", snapshotTwiceMacro, value.slice);
+test(
+	"creates a mock Shared Slice field value",
+	snapshotTwiceMacro,
+	value.sharedSlice,
+);
 
 test("supports custom seed", snapshotTwiceMacro, () =>
-	value.slice({ seed: 1 }),
+	value.sharedSlice({ seed: 1 }),
 );
 
 test("supports custom model", (t) => {
-	const customModel = model.slice({
-		nonRepeatFieldConfig: {
+	const customModel = model.sharedSlice({
+		primaryFieldConfig: {
 			configs: {
 				boolean: { count: 1 },
 				color: { count: 0 },
@@ -32,7 +36,7 @@ test("supports custom model", (t) => {
 				title: { count: 0 },
 			},
 		},
-		repeatFieldConfig: {
+		itemsFieldConfig: {
 			configs: {
 				boolean: { count: 1 },
 				color: { count: 0 },
@@ -53,7 +57,7 @@ test("supports custom model", (t) => {
 		},
 	});
 
-	const actual = value.slice({ model: customModel });
+	const actual = value.sharedSlice({ model: customModel });
 
 	t.true(
 		Object.values(actual.primary).every((field) => typeof field === "boolean"),
@@ -66,40 +70,28 @@ test("supports custom model", (t) => {
 	);
 });
 
-test("returns no items if model does not include repeat model", (t) => {
-	const customModel = model.slice();
-	customModel.repeat = {};
+test("returns no items if model does not include items model", (t) => {
+	const customModel = model.sharedSlice({ variationsCount: 1 });
+	customModel.variations[0].items = {};
 
-	const actual = value.slice({ model: customModel });
+	const actual = value.sharedSlice({ model: customModel });
 
 	t.is(actual.items.length, 0);
 });
 
 test("can be customized with a pattern to determine the number of items", (t) => {
-	const actualNone = value.slice({ pattern: "none" });
+	const actualNone = value.sharedSlice({ pattern: "none" });
 	t.true(actualNone.items.length < 1);
 
-	const actualShort = value.slice({ pattern: "short" });
+	const actualShort = value.sharedSlice({ pattern: "short" });
 	t.true(actualShort.items.length >= 1);
 	t.true(actualShort.items.length <= 3);
 
-	const actualMedium = value.slice({ pattern: "medium" });
+	const actualMedium = value.sharedSlice({ pattern: "medium" });
 	t.true(actualMedium.items.length >= 3);
 	t.true(actualMedium.items.length <= 6);
 
-	const actualLong = value.slice({ pattern: "long" });
+	const actualLong = value.sharedSlice({ pattern: "long" });
 	t.true(actualLong.items.length >= 6);
 	t.true(actualLong.items.length <= 12);
-});
-
-test("can be customized to return a specific type", (t) => {
-	const actual = value.slice({ type: "type" });
-
-	t.is(actual.slice_type, "type");
-});
-
-test("can be customized to return a specific label", (t) => {
-	const actual = value.slice({ label: "label" });
-
-	t.is(actual.slice_label, "label");
 });

@@ -28,22 +28,23 @@ const patterns = {
 	},
 } as const;
 
-export type MockSliceValueConfig<
-	Model extends prismicT.CustomTypeModelSlice = prismicT.CustomTypeModelSlice,
+export type MockSharedSliceVariationValueConfig<
+	Model extends prismicT.SharedSliceModelVariation = prismicT.SharedSliceModelVariation,
 > = {
 	type?: string;
-	label?: string | null;
+	label?: string;
 	pattern?: keyof typeof patterns;
 } & MockValueConfig<Model>;
 
-export const slice = <
-	Model extends prismicT.CustomTypeModelSlice = prismicT.CustomTypeModelSlice,
+export const sharedSliceVariation = <
+	Model extends prismicT.SharedSliceModelVariation = prismicT.SharedSliceModelVariation,
 >(
-	config: MockSliceValueConfig<Model> = {},
+	config: MockSharedSliceVariationValueConfig<Model> = {},
 ): ModelValue<Model> => {
 	const faker = createFaker(config.seed);
 
-	const model = config.model || modelGen.slice({ seed: config.seed });
+	const model =
+		config.model || modelGen.sharedSliceVariation({ seed: config.seed });
 
 	const patternKey =
 		config.pattern ||
@@ -54,12 +55,10 @@ export const slice = <
 
 	const sliceType = config.type ?? generateFieldId({ seed: config.seed });
 	const sliceLabel =
-		config.label !== undefined
-			? config.label
-			: changeCase.capitalCase(faker.company.bsNoun());
+		config.label ?? changeCase.capitalCase(faker.company.bsNoun());
 
 	const itemsCount =
-		Object.keys(model.repeat).length > 0
+		Object.keys(model.items).length > 0
 			? faker.datatype.number({
 					min: pattern.minItems,
 					max: pattern.maxItems,
@@ -69,16 +68,18 @@ export const slice = <
 	return {
 		slice_type: sliceType,
 		slice_label: sliceLabel,
+		variation: model.id,
+		version: faker.git.shortSha(),
 		primary: valueForModelMap({
 			seed: config.seed,
-			map: model["non-repeat"],
+			map: model.primary,
 		}),
 		items: Array(itemsCount)
 			.fill(undefined)
 			.map(() => {
 				return valueForModelMap({
 					seed: config.seed,
-					map: model.repeat,
+					map: model.items,
 				});
 			}),
 	} as ModelValue<Model>;

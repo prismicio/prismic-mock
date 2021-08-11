@@ -1,6 +1,7 @@
 import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
+
 import { MockModelConfig } from "../types";
 
 type GenerateFieldIdConfig = Pick<MockModelConfig, "seed">;

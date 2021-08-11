@@ -1,11 +1,17 @@
 export { boolean } from "./boolean";
 export type { MockBooleanValueConfig } from "./boolean";
 
+export { customType } from "./customType";
+export type { MockCustomTypeValueConfig } from "./customType";
+
 export { color } from "./color";
 export type { MockColorValueConfig } from "./color";
 
 export { contentRelationship } from "./contentRelationship";
 export type { MockContentRelationshipValueConfig } from "./contentRelationship";
+
+export { document } from "./document";
+export type { MockDocumentValueConfig } from "./document";
 
 export { date } from "./date";
 export type { MockDateValueConfig } from "./date";
@@ -42,6 +48,15 @@ export type { MockSelectValueConfig } from "./select";
 
 export { slice } from "./slice";
 export type { MockSliceValueConfig } from "./slice";
+
+export { sliceZone } from "./sliceZone";
+export type { MockSliceZoneValueConfig } from "./sliceZone";
+
+export { sharedSlice } from "./sharedSlice";
+export type { MockSharedSliceValueConfig } from "./sharedSlice";
+
+export { sharedSliceVariation } from "./sharedSliceVariation";
+export type { MockSharedSliceVariationValueConfig } from "./sharedSliceVariation";
 
 export { timestamp } from "./timestamp";
 export type { MockTimestampValueConfig } from "./timestamp";
