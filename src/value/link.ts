@@ -74,7 +74,7 @@ export const link = <
 
 				return {
 					link_type: prismicT.LinkType.Web,
-					url: "#",
+					url: faker.internet.url(),
 					target:
 						config.withTargetBlank ??
 						(model.config.allowTargetBlank && faker.datatype.boolean())

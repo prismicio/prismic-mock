@@ -26,7 +26,7 @@ export const buildEmbedField = (
 			.toString(),
 		cache_age: faker.datatype.number(),
 		embed_url: config.embedData.embed_url,
-		author_url: "#",
+		author_url: faker.internet.url(),
 		author_name: faker.company.companyName(),
 		provider_name: faker.company.companyName(),
 		thumbnail_width: config.embedData.thumbnail_width,

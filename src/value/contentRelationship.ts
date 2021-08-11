@@ -53,7 +53,7 @@ export const contentRelationship = <
 			type,
 			tags,
 			lang: faker.lorem.word(),
-			url: "#",
+			url: faker.internet.url(),
 			slug: generateFieldId({ seed: config.seed }),
 			isBroken: faker.datatype.boolean(),
 		} as prismicT.FilledLinkToDocumentField;

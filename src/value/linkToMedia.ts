@@ -31,7 +31,7 @@ export const linkToMedia = <
 			link_type: prismicT.LinkType.Media,
 			name: faker.system.commonFileName(),
 			kind: faker.system.commonFileType(),
-			url: "#",
+			url: faker.internet.url(),
 			size: faker.datatype.number().toString(),
 			height: faker.datatype.number().toString(),
 			width: faker.datatype.number().toString(),
