@@ -1,18 +1,12 @@
 import test from "ava";
 
-import { executeTwiceMacro } from "./__testutils__/executeTwiceMacro";
+import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as value from "../src/value";
 
-test("creates a mock Date field value", executeTwiceMacro, value.date, [
-	"2021-10-09",
-	"2020-08-09",
-]);
+test("creates a mock Date field value", snapshotTwiceMacro, value.date);
 
-test("supports custom seed", executeTwiceMacro, () => value.date({ seed: 1 }), [
-	"2033-03-15",
-	"2004-12-05",
-]);
+test("supports custom seed", snapshotTwiceMacro, () => value.date({ seed: 1 }));
 
 test("can be configured to return a date after and before given dates", (t) => {
 	const actual = value.date({

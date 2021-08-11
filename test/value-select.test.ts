@@ -1,20 +1,14 @@
 import test from "ava";
 
-import { executeTwiceMacro } from "./__testutils__/executeTwiceMacro";
+import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as value from "../src/value";
 import * as model from "../src/model";
 
-test("creates a mock Select field value", executeTwiceMacro, value.select, [
-	"Embrace",
-	"Empower",
-]);
+test("creates a mock Select field value", snapshotTwiceMacro, value.select);
 
-test(
-	"supports custom seed",
-	executeTwiceMacro,
-	() => value.select({ seed: 1 }),
-	["Recontextualize", "Evolve"],
+test("supports custom seed", snapshotTwiceMacro, () =>
+	value.select({ seed: 1 }),
 );
 
 test("supports custom model", (t) => {

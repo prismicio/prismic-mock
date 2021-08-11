@@ -1,17 +1,11 @@
 import test from "ava";
 
-import { executeTwiceMacro } from "./__testutils__/executeTwiceMacro";
+import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as value from "../src/value";
 
-test("creates a mock Color field value", executeTwiceMacro, value.color, [
-	"#010F26",
-	"#340768",
-]);
+test("creates a mock Color field value", snapshotTwiceMacro, value.color);
 
-test(
-	"supports custom seed",
-	executeTwiceMacro,
-	() => value.color({ seed: 1 }),
-	["#35805C", "#770010"],
+test("supports custom seed", snapshotTwiceMacro, () =>
+	value.color({ seed: 1 }),
 );

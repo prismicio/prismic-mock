@@ -1,17 +1,11 @@
 import test from "ava";
 
-import { executeTwiceMacro } from "./__testutils__/executeTwiceMacro";
+import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as value from "../src/value";
 
-test("creates a mock KeyText field value", executeTwiceMacro, value.keyText, [
-	"Aut sed ullam",
-	"Voluptate inventore illum",
-]);
+test("creates a mock KeyText field value", snapshotTwiceMacro, value.keyText);
 
-test(
-	"supports custom seed",
-	executeTwiceMacro,
-	() => value.keyText({ seed: 1 }),
-	["Esse repellat quisquam", "Recusandae alias consequuntur"],
+test("supports custom seed", snapshotTwiceMacro, () =>
+	value.keyText({ seed: 1 }),
 );

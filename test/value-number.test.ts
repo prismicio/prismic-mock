@@ -1,19 +1,11 @@
 import test from "ava";
 
-import { executeTwiceMacro } from "./__testutils__/executeTwiceMacro";
+import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as value from "../src/value";
 
-test(
-	"creates a mock Number field value",
-	executeTwiceMacro,
-	value.number,
-	[875, 11994],
-);
+test("creates a mock Number field value", snapshotTwiceMacro, value.number);
 
-test(
-	"supports custom seed",
-	executeTwiceMacro,
-	() => value.number({ seed: 1 }),
-	[41702, 99718],
+test("supports custom seed", snapshotTwiceMacro, () =>
+	value.number({ seed: 1 }),
 );

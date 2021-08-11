@@ -1,47 +1,14 @@
 import test from "ava";
 
-import { executeTwiceMacro } from "./__testutils__/executeTwiceMacro";
+import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as value from "../src/value";
 import * as model from "../src/model";
 
-test("creates a mock Title field value", executeTwiceMacro, value.title, [
-	[
-		{
-			type: "heading1",
-			text: "Autem Consequuntur",
-			spans: [],
-		},
-	],
-	[
-		{
-			type: "heading4",
-			text: "Ratione Distinctio Ipsum Placeat Et Cumque Mollitia Aliquam Soluta",
-			spans: [],
-		},
-	],
-]);
+test("creates a mock Title field value", snapshotTwiceMacro, value.title);
 
-test(
-	"supports custom seed",
-	executeTwiceMacro,
-	() => value.title({ seed: 1 }),
-	[
-		[
-			{
-				type: "heading5",
-				text: "Amet Iure",
-				spans: [],
-			},
-		],
-		[
-			{
-				type: "heading2",
-				text: "Debitis Incidunt",
-				spans: [],
-			},
-		],
-	],
+test("supports custom seed", snapshotTwiceMacro, () =>
+	value.title({ seed: 1 }),
 );
 
 test("supports custom model", (t) => {

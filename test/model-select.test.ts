@@ -1,59 +1,18 @@
 import test from "ava";
 
-import { executeTwiceMacro } from "./__testutils__/executeTwiceMacro";
+import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as model from "../src/model";
 
-test("creates a mock Select field model", executeTwiceMacro, model.select, [
-	{
-		config: {
-			label: "E Tailers",
-			placeholder: "Voluptate inventore illum",
-			options: ["Embrace"],
-			default_value: undefined,
-		},
-		type: "Select",
-	},
-	{
-		config: {
-			label: "Schemas",
-			placeholder: "Consequuntur nostrum repellat",
-			options: ["Redefine", "Morph", "Syndicate"],
-			default_value: undefined,
-		},
-		type: "Select",
-	},
-]);
+test("creates a mock Select field model", snapshotTwiceMacro, model.select);
 
-test(
-	"supports custom seed",
-	executeTwiceMacro,
-	() => model.select({ seed: 1 }),
-	[
-		{
-			config: {
-				label: "Synergies",
-				placeholder: "Consequuntur corporis repellat",
-				options: ["Recontextualize", "Innovate", "Cultivate"],
-				default_value: undefined,
-			},
-			type: "Select",
-		},
-		{
-			config: {
-				label: "Partnerships",
-				placeholder: "Qui amet iure",
-				options: ["Enhance"],
-				default_value: undefined,
-			},
-			type: "Select",
-		},
-	],
+test("supports custom seed", snapshotTwiceMacro, () =>
+	model.select({ seed: 1 }),
 );
 
 test(
 	"can be configured for a specific number of options",
-	executeTwiceMacro,
+	snapshotTwiceMacro,
 	() => model.select({ optionsCount: 2 }),
 	[
 		{
@@ -79,7 +38,7 @@ test(
 
 test(
 	"can be configured to include a default value",
-	executeTwiceMacro,
+	snapshotTwiceMacro,
 	() => model.select({ withDefaultValue: true }),
 	[
 		{

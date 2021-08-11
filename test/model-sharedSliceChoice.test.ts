@@ -1,19 +1,11 @@
 import test from "ava";
 
-import { executeTwiceMacro } from "./__testutils__/executeTwiceMacro";
+import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as model from "../src/model";
 
 test(
 	"creates a mock Shared Slice choice field model",
-	executeTwiceMacro,
+	snapshotTwiceMacro,
 	model.sharedSliceChoice,
-	[
-		{
-			type: "SharedSlice",
-		},
-		{
-			type: "SharedSlice",
-		},
-	],
 );

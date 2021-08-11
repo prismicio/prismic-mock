@@ -1,52 +1,14 @@
 import test from "ava";
 import * as prismicT from "@prismicio/types";
 
-import { executeTwiceMacro } from "./__testutils__/executeTwiceMacro";
+import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as value from "../src/value";
 import * as model from "../src/model";
 
-test("creates a mock Link field value", executeTwiceMacro, value.link, [
-	{
-		link_type: "Web",
-		url: "#",
-		target: undefined,
-	},
-	{
-		link_type: "Media",
-		name: "buckinghamshire.wav",
-		kind: "text",
-		url: "#",
-		size: "99873",
-		height: "22156",
-		width: "89441",
-	},
-]);
+test("creates a mock Link field value", snapshotTwiceMacro, value.link);
 
-test("supports custom seed", executeTwiceMacro, () => value.link({ seed: 1 }), [
-	{
-		link_type: "Document",
-		id: "f231626",
-		uid: undefined,
-		type: "infrastructures",
-		tags: [],
-		lang: "libero",
-		url: "#",
-		slug: "recusandae_ut",
-		isBroken: true,
-	},
-	{
-		link_type: "Document",
-		id: "67862f3",
-		uid: "et_porro",
-		type: "content",
-		tags: ["Accusantium", "Libero Repudiandae"],
-		lang: "ut",
-		url: "#",
-		slug: "ipsam_explicabo_eligendi",
-		isBroken: true,
-	},
-]);
+test("supports custom seed", snapshotTwiceMacro, () => value.link({ seed: 1 }));
 
 test("supports custom model", (t) => {
 	const customModelBase = model.link();

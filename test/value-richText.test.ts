@@ -1,76 +1,14 @@
 import test from "ava";
 
-import { executeTwiceMacro } from "./__testutils__/executeTwiceMacro";
+import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as value from "../src/value";
 import * as model from "../src/model";
 
-test("creates a mock RichText field value", executeTwiceMacro, value.richText, [
-	[
-		{ type: "heading2", text: "Repellat", spans: [] },
-		{ type: "heading2", text: "Porro Voluptatem Ab", spans: [] },
-		{ type: "heading2", text: "Ipsum Placeat", spans: [] },
-		{ type: "heading2", text: "Soluta Unde Dolorum Qui", spans: [] },
-		{
-			type: "heading2",
-			text: "Quasi Ab Omnis Fugit Omnis Asperiores Consectetur",
-			spans: [],
-		},
-	],
-	[
-		{
-			type: "paragraph",
-			text: "Dicta et voluptatem. Quia assumenda maxime.",
-			spans: [],
-		},
-		{
-			type: "heading1",
-			text: "Excepturi Praesentium Blanditiis Reprehenderit Voluptatem Ut Doloribus",
-			spans: [],
-		},
-	],
-]);
+test("creates a mock RichText field value", snapshotTwiceMacro, value.richText);
 
-test(
-	"supports custom seed",
-	executeTwiceMacro,
-	() => value.richText({ seed: 1 }),
-	[
-		[
-			{
-				type: "image",
-				alt: "Ut nulla quam ipsam nobis cupiditate sed dignissimos debitis incidunt.",
-				url: "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?w=2560&h=1440&fit=crop",
-				copyright: "Sed libero repudiandae.",
-				dimensions: { width: 2560, height: 1440 },
-			},
-			{ type: "heading2", text: "Eos Itaque Velit Omnis", spans: [] },
-			{
-				type: "list-item",
-				text: "Ipsam explicabo eligendi occaecati debitis et saepe eum dicta.",
-				spans: [],
-			},
-		],
-		[
-			{
-				type: "heading2",
-				text: "Consequuntur Aut Est Fuga Est",
-				spans: [],
-			},
-			{
-				type: "image",
-				alt: "Voluptas enim ex eveniet facere.",
-				url: "https://images.unsplash.com/photo-1604537466608-109fa2f16c3b?w=4240&h=2832&fit=crop",
-				copyright: "Aut delectus aut nam et dolorum.",
-				dimensions: { width: 4240, height: 2832 },
-			},
-			{
-				type: "heading3",
-				text: "Veritatis Qui Ex Culpa Earum Voluptate Vel Labore Omnis Ut Est Sunt",
-				spans: [],
-			},
-		],
-	],
+test("supports custom seed", snapshotTwiceMacro, () =>
+	value.richText({ seed: 1 }),
 );
 
 test("supports custom model", (t) => {

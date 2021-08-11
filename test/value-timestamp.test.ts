@@ -1,21 +1,17 @@
 import test from "ava";
 
-import { executeTwiceMacro } from "./__testutils__/executeTwiceMacro";
+import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as value from "../src/value";
 
 test(
 	"creates a mock Timestamp field value",
-	executeTwiceMacro,
+	snapshotTwiceMacro,
 	value.timestamp,
-	["2021-10-09T12:31:48.785Z", "2020-08-09T00:52:01.724Z"],
 );
 
-test(
-	"supports custom seed",
-	executeTwiceMacro,
-	() => value.timestamp({ seed: 1 }),
-	["2033-03-15T15:07:14.368Z", "2004-12-05T06:30:35.173Z"],
+test("supports custom seed", snapshotTwiceMacro, () =>
+	value.timestamp({ seed: 1 }),
 );
 
 test("can be configured to return a timestamp after and before given timestamps", (t) => {

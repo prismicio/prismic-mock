@@ -1,64 +1,22 @@
 import test from "ava";
 
-import { executeTwiceMacro } from "./__testutils__/executeTwiceMacro";
+import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as model from "../src/model";
 
 test(
 	"creates a mock Rich Text field model",
-	executeTwiceMacro,
+	snapshotTwiceMacro,
 	model.richText,
-	[
-		{
-			config: {
-				label: "Technologies",
-				placeholder: "Inventore illum atque",
-				single: "heading2",
-				allowTargetBlank: true,
-			},
-			type: "StructuredText",
-		},
-		{
-			config: {
-				label: "Blockchains",
-				multi: "list-item,heading4,heading2,o-list-item,preformatted",
-				placeholder: "Modi saepe porro",
-				allowTargetBlank: undefined,
-			},
-			type: "StructuredText",
-		},
-	],
 );
 
-test(
-	"supports custom seed",
-	executeTwiceMacro,
-	() => model.richText({ seed: 1 }),
-	[
-		{
-			config: {
-				label: "Communities",
-				placeholder: "Sunt qui amet",
-				single: "strong,heading4,heading2,heading1,image,list-item,hyperlink",
-				allowTargetBlank: undefined,
-			},
-			type: "StructuredText",
-		},
-		{
-			config: {
-				label: "Infomediaries",
-				placeholder: "Cupiditate sed dignissimos",
-				single: "heading5,hyperlink,paragraph,image,heading6,em",
-				allowTargetBlank: true,
-			},
-			type: "StructuredText",
-		},
-	],
+test("supports custom seed", snapshotTwiceMacro, () =>
+	model.richText({ seed: 1 }),
 );
 
 test(
 	"can be configured to always allow multiple blocks",
-	executeTwiceMacro,
+	snapshotTwiceMacro,
 	() => model.richText({ withMultipleBlocks: true }),
 	[
 		{

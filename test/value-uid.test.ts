@@ -1,15 +1,9 @@
 import test from "ava";
 
-import { executeTwiceMacro } from "./__testutils__/executeTwiceMacro";
+import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as value from "../src/value";
 
-test("creates a mock UID field value", executeTwiceMacro, value.uid, [
-	"aut_sed",
-	"ullam_voluptate",
-]);
+test("creates a mock UID field value", snapshotTwiceMacro, value.uid);
 
-test("supports custom seed", executeTwiceMacro, () => value.uid({ seed: 1 }), [
-	"esse_repellat",
-	"quisquam_recusandae",
-]);
+test("supports custom seed", snapshotTwiceMacro, () => value.uid({ seed: 1 }));
