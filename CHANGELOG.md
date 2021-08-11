@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.2](https://github.com/prismicio/prismic-mock/compare/v0.0.1...v0.0.2) (2021-08-11)
+
+
+### Features
+
+* allow explicit blank target for link values ([93c87cf](https://github.com/prismicio/prismic-mock/commit/93c87cfc4960cb9f2dc4c43f734431bb039f7877))
+* use mock URLs for url fields ([414f35e](https://github.com/prismicio/prismic-mock/commit/414f35e14d3aad1ddb95a44c79afb65021a65e69))
+
 ### 0.0.1 (2021-08-11)
 
 
