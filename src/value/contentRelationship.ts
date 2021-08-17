@@ -11,7 +11,7 @@ import { generateCustomTypeId } from "../lib/generateCustomTypeId";
 import { generateTags } from "../lib/generateTags";
 
 export type MockContentRelationshipValueConfig<
-	IsFilled extends boolean = true,
+	IsFilled extends boolean = boolean,
 	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
 > = {
 	isFilled?: IsFilled;
@@ -21,7 +21,7 @@ export type MockContentRelationshipValueConfig<
 	linkableDocuments?: prismicT.PrismicDocument[];
 } & MockValueConfig<Model>;
 
-type MockContentRelationshipValue<IsFilled extends boolean = true> =
+type MockContentRelationshipValue<IsFilled extends boolean = boolean> =
 	IsFilled extends true
 		? prismicT.FilledLinkToDocumentField
 		: prismicT.EmptyLinkField<prismicT.LinkType.Document>;
@@ -72,9 +72,7 @@ export const contentRelationship = <
 		const document = faker.random.arrayElement(linkableDocuments);
 
 		if (!document) {
-			throw new Error(
-				"A linkable document could not be found within the constraints.",
-			);
+			throw new Error("A linkable document could not be found.");
 		}
 
 		return buildContentRelationshipField({ document });

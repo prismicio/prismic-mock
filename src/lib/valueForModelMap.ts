@@ -92,9 +92,6 @@ const getValueConfigType = <Model extends prismicT.CustomTypeModelField>(
 		case prismicT.CustomTypeModelFieldType.IntegrationFields:
 			return "integrationFields";
 
-		case prismicT.CustomTypeModelFieldType.Group:
-			return "group";
-
 		case prismicT.CustomTypeModelFieldType.Slices:
 			return "slices";
 	}
