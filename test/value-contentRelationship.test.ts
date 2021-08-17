@@ -37,3 +37,51 @@ test("can be configured to return an unfilled value", (t) => {
 
 	t.false("url" in actual);
 });
+
+test("can be configured to return a link from a given list of documents", (t) => {
+	const linkableDocuments = [value.document(), value.document()];
+	const actual = value.contentRelationship({ linkableDocuments });
+
+	t.true(
+		linkableDocuments.some(
+			(linkableDocument) => actual.id === linkableDocument.id,
+		),
+	);
+});
+
+test("can be configured to return a link from a given list of documents with constraints", (t) => {
+	const linkableDocuments = [
+		{ ...value.document(), type: "foo", tags: ["bar"] },
+		value.document(),
+	];
+
+	const customModel = model.contentRelationship();
+	customModel.config.customtypes = ["foo"];
+	customModel.config.tags = ["bar"];
+
+	const actual = value.contentRelationship({
+		model: customModel,
+		linkableDocuments,
+	});
+
+	t.is(actual.id, linkableDocuments[0].id);
+});
+
+test("throws if a linkable document cannot be found within constraints", (t) => {
+	const linkableDocuments = [
+		{ ...value.document(), type: "not-foo", tags: ["not-bar"] },
+	];
+
+	const customModel = model.contentRelationship();
+	customModel.config.customtypes = ["foo"];
+	customModel.config.tags = ["bar"];
+
+	t.throws(
+		() =>
+			value.contentRelationship({
+				model: customModel,
+				linkableDocuments,
+			}),
+		{ message: /could not be found/ },
+	);
+});

@@ -7,6 +7,7 @@ export { embed } from "./embed";
 export { geoPoint } from "./geoPoint";
 export { group } from "./group";
 export { image } from "./image";
+export { integrationFields } from "./integrationFields";
 export { keyText } from "./keyText";
 export { link } from "./link";
 export { linkToMedia } from "./linkToMedia";

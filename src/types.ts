@@ -168,8 +168,8 @@ type CustomTypeModelFieldForGroupValue<
 	? prismicT.EmbedField
 	: T extends prismicT.CustomTypeModelGeoPointField
 	? prismicT.GeoPointField
-	: T extends prismicT.CustomTypeModelIntegrationField
-	? prismicT.IntegrationField
+	: T extends prismicT.CustomTypeModelIntegrationFieldsField
+	? prismicT.IntegrationFields
 	: never;
 
 type CustomTypeModelGroupFieldValue<

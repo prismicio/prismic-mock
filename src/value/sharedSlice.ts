@@ -12,7 +12,10 @@ import {
 
 export type MockSharedSliceValueConfig<
 	Model extends prismicT.SharedSliceModel = prismicT.SharedSliceModel,
-> = Pick<MockSharedSliceVariationValueConfig, "pattern"> &
+> = Pick<
+	MockSharedSliceVariationValueConfig,
+	"pattern" | "primaryFieldConfigs" | "itemsFieldConfigs"
+> &
 	MockValueConfig<Model>;
 
 export const sharedSlice = <
@@ -30,5 +33,7 @@ export const sharedSlice = <
 		model: variationModel,
 		pattern: config.pattern,
 		type: model.id,
+		primaryFieldConfigs: config.primaryFieldConfigs,
+		itemsFieldConfigs: config.itemsFieldConfigs,
 	}) as ModelValue<Model>;
 };

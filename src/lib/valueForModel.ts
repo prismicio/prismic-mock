@@ -128,16 +128,32 @@ export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
 		}
 
 		case prismicT.CustomTypeModelFieldType.StructuredText: {
-			return value.richText({
+			if (
+				"single" in model.config &&
+				model.config.single
+					.split(",")
+					.every((element) => /heading[1-6]/.test(element.trim()))
+			) {
+				return value.title({
+					seed: config.seed,
+					model: model as prismicT.CustomTypeModelTitleField,
+					...config.config,
+				}) as ModelValue<Model>;
+			} else {
+				return value.richText({
+					seed: config.seed,
+					model,
+					...config.config,
+				}) as ModelValue<Model>;
+			}
+		}
+
+		case prismicT.CustomTypeModelFieldType.IntegrationFields: {
+			return value.integrationFields({
 				seed: config.seed,
 				model,
 				...config.config,
 			}) as ModelValue<Model>;
-		}
-
-		case prismicT.CustomTypeModelFieldType.IntegrationFields: {
-			// TODO: Should this be something else?
-			return {} as ModelValue<Model>;
 		}
 
 		case prismicT.CustomTypeModelFieldType.UID: {

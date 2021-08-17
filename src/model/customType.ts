@@ -1,7 +1,10 @@
 import * as prismicT from "@prismicio/types";
 import * as changeCase from "change-case";
 
-import { buildMockGroupFieldMap } from "../lib/buildMockGroupFieldMap";
+import {
+	buildMockGroupFieldMap,
+	BuildMockGroupFieldMapConfig,
+} from "../lib/buildMockGroupFieldMap";
 import { createFaker } from "../lib/createFaker";
 import { generateCustomTypeId } from "../lib/generateCustomTypeId";
 import { generateFieldId } from "../lib/generateFieldId";
@@ -14,6 +17,7 @@ import { sliceZone } from "./sliceZone";
 type MockCustomTypeModelConfig = {
 	tabsCount?: number;
 	withUID?: boolean;
+	configs?: BuildMockGroupFieldMapConfig["configs"];
 } & (
 	| {
 			withSliceZones?: false;
@@ -35,8 +39,11 @@ export const customType = (
 
 	const json: prismicT.CustomTypeModelDefinition = {};
 	for (let i = 0; i < tabsCount; i++) {
-		const tabName = generateFieldId({ seed: config.seed });
-		const tabFields: prismicT.CustomTypeModelTab = buildMockGroupFieldMap();
+		const tabName = changeCase.capitalCase(faker.company.bsNoun());
+		const tabFields: prismicT.CustomTypeModelTab = buildMockGroupFieldMap({
+			seed: config.seed,
+			configs: config.configs,
+		});
 
 		if (i === 0 && config.withUID) {
 			const fieldId = generateFieldId({ seed: config.seed });

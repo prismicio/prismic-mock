@@ -19,6 +19,12 @@ export type MockLinkValueConfig<
 	withTargetBlank?: Model["config"]["allowTargetBlank"] extends undefined
 		? false
 		: boolean;
+	/**
+	 * A list of potential documents to which the field can be linked.
+	 */
+	linkableDocuments?: LinkType extends prismicT.LinkType.Document
+		? prismicT.PrismicDocument[]
+		: never;
 } & MockValueConfig<Model>;
 
 type MockLinkValue<
@@ -59,6 +65,7 @@ export const link = <
 				return contentRelationship({
 					seed: config.seed,
 					isFilled,
+					linkableDocuments: config.linkableDocuments,
 				}) as MockLinkValue<LinkType, IsFilled>;
 			}
 

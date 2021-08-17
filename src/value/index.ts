@@ -28,6 +28,9 @@ export type { MockGroupValueConfig } from "./group";
 export { image } from "./image";
 export type { MockImageValueConfig } from "./image";
 
+export { integrationFields } from "./integrationFields";
+export type { MockIntegrationFieldsValueConfig } from "./integrationFields";
+
 export { keyText } from "./keyText";
 export type { MockKeyTextValueConfig } from "./keyText";
 

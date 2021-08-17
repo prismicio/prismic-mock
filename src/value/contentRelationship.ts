@@ -1,20 +1,24 @@
 import * as prismicT from "@prismicio/types";
-import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
-import { generateCustomTypeId } from "../lib/generateCustomTypeId";
-import { generateFieldId } from "../lib/generateFieldId";
-import { generateTags } from "../lib/generateTags";
 
 import { MockValueConfig } from "../types";
 
 import * as modelGen from "../model";
+import { document as documentGen } from "./document";
+import { buildContentRelationshipField } from "../lib/buildContentRelationshipField";
+import { generateCustomTypeId } from "../lib/generateCustomTypeId";
+import { generateTags } from "../lib/generateTags";
 
 export type MockContentRelationshipValueConfig<
 	IsFilled extends boolean = true,
 	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
 > = {
 	isFilled?: IsFilled;
+	/**
+	 * A list of potential documents to which the field can be linked.
+	 */
+	linkableDocuments?: prismicT.PrismicDocument[];
 } & MockValueConfig<Model>;
 
 type MockContentRelationshipValue<IsFilled extends boolean = true> =
@@ -36,27 +40,44 @@ export const contentRelationship = <
 		const model =
 			config.model || modelGen.contentRelationship({ seed: config.seed });
 
-		const type = model.config.customtypes
-			? faker.random.arrayElement(model.config.customtypes)
-			: generateCustomTypeId({ seed: config.seed });
+		const linkableDocuments = config.linkableDocuments
+			? config.linkableDocuments.filter((document) => {
+					let shouldKeep = true;
 
-		const tags = model.config.tags
-			? faker.random.arrayElements(model.config.tags)
-			: generateTags({ seed: config.seed });
+					if (model.config.customtypes) {
+						shouldKeep =
+							shouldKeep && model.config.customtypes.includes(document.type);
+					}
 
-		return {
-			link_type: prismicT.LinkType.Document,
-			id: faker.git.shortSha(),
-			uid: faker.datatype.boolean()
-				? changeCase.snakeCase(faker.lorem.words(2))
-				: undefined,
-			type,
-			tags,
-			lang: faker.lorem.word(),
-			url: faker.internet.url(),
-			slug: generateFieldId({ seed: config.seed }),
-			isBroken: faker.datatype.boolean(),
-		} as prismicT.FilledLinkToDocumentField;
+					if (model.config.tags) {
+						shouldKeep =
+							shouldKeep &&
+							model.config.tags.some((tag) => document.tags.includes(tag));
+					}
+
+					return shouldKeep;
+			  })
+			: [
+					{
+						...documentGen({ seed: config.seed }),
+						type: model.config.customtypes
+							? faker.random.arrayElement(model.config.customtypes)
+							: generateCustomTypeId({ seed: config.seed }),
+						tags: model.config.tags
+							? faker.random.arrayElements(model.config.tags)
+							: generateTags({ seed: config.seed }),
+					},
+			  ];
+
+		const document = faker.random.arrayElement(linkableDocuments);
+
+		if (!document) {
+			throw new Error(
+				"A linkable document could not be found within the constraints.",
+			);
+		}
+
+		return buildContentRelationshipField({ document });
 	} else {
 		return {
 			link_type: prismicT.LinkType.Document,

@@ -3,7 +3,10 @@ import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
 import { generateTags } from "../lib/generateTags";
-import { valueForModelMap } from "../lib/valueForModelMap";
+import {
+	valueForModelMap,
+	ValueForModelMapConfigs,
+} from "../lib/valueForModelMap";
 
 import { MockValueConfig, ModelValue } from "../types";
 
@@ -15,6 +18,7 @@ export type MockCustomTypeValueConfig<
 	Model extends prismicT.CustomTypeModel = prismicT.CustomTypeModel,
 > = {
 	sharedSliceModels?: prismicT.SharedSliceModel[];
+	configs?: ValueForModelMapConfigs;
 } & MockValueConfig<Model>;
 
 export const customType = <
@@ -37,19 +41,20 @@ export const customType = <
 	return {
 		type: model.id,
 		id: faker.git.shortSha(),
-		uid: hasUID ? changeCase.snakeCase(faker.lorem.words(2)) : undefined,
+		uid: hasUID ? changeCase.snakeCase(faker.lorem.words(2)) : null,
 		url: faker.internet.url(),
 		href: faker.internet.url(),
 		lang: faker.lorem.word(),
 		tags: generateTags({ seed: config.seed }),
-		slugs: [],
-		linked_documents: [],
-		alternate_languages: [],
+		slugs: [] as prismicT.PrismicDocument["slugs"],
+		linked_documents: [] as prismicT.PrismicDocument["linked_documents"],
+		alternate_languages: [] as prismicT.PrismicDocument["alternate_languages"],
 		first_publication_date: timestamp({ seed: config.seed }),
 		last_publication_date: timestamp({ seed: config.seed }),
 		data: valueForModelMap({
 			seed: config.seed,
 			map: fieldModelsMap,
+			configs: config.configs,
 		}),
 	} as ModelValue<Model>;
 };
