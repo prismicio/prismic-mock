@@ -28,7 +28,7 @@ export const integrationFields = <
 		title: changeCase.capitalCase(faker.lorem.words(3)),
 		description: faker.lorem.sentence(),
 		image_url: imageData.url,
-		last_update: faker.date.past().getTime(),
+		last_update: faker.date.past(20, new Date("2021-03-07")).getTime(),
 		blob: config.data as Blob,
 	};
 };
