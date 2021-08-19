@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/prismicio/prismic-mock/compare/v0.0.2...v0.0.3) (2021-08-19)
+
+
+### Features
+
+* support integration fields and linked documents ([921ce13](https://github.com/prismicio/prismic-mock/commit/921ce134cb530cfface37bf52f11a29f914f4ba2))
+
+
+### Bug Fixes
+
+* types ([3fe946e](https://github.com/prismicio/prismic-mock/commit/3fe946ecd74bfcfc306cef05ed57abca23307c86))
+* use deterministic timestamp for integration fields ([e3112d9](https://github.com/prismicio/prismic-mock/commit/e3112d92c215c582c3124c551230f08d6c930a51))
+
+
+### Documentation
+
+* add missing documentation disclaimer ([9dca75f](https://github.com/prismicio/prismic-mock/commit/9dca75f20f1d0db54ea52a9cee77f5ee0a608b2b))
+
 ### [0.0.2](https://github.com/prismicio/prismic-mock/compare/v0.0.1...v0.0.2) (2021-08-11)
 
 
