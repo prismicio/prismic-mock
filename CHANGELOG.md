@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/prismicio/prismic-mock/compare/v0.0.3...v0.0.4) (2021-08-20)
+
+
+### Features
+
+* add api mocks ([8e0ef1b](https://github.com/prismicio/prismic-mock/commit/8e0ef1be718a11482ecc2fbc9dc8c58ceda71cdc))
+
 ### [0.0.3](https://github.com/prismicio/prismic-mock/compare/v0.0.2...v0.0.3) (2021-08-19)
 
 
