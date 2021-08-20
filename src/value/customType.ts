@@ -17,6 +17,7 @@ import { timestamp } from "./timestamp";
 export type MockCustomTypeValueConfig<
 	Model extends prismicT.CustomTypeModel = prismicT.CustomTypeModel,
 > = {
+	withURL?: boolean;
 	sharedSliceModels?: prismicT.SharedSliceModel[];
 	configs?: ValueForModelMapConfigs;
 } & MockValueConfig<Model>;
@@ -34,15 +35,18 @@ export const customType = <
 		{},
 		...Object.values(model.json),
 	) as prismicT.CustomTypeModelTab;
+
 	const hasUID = Object.values(fieldModelsMap).some(
 		(fieldModel) => fieldModel.type === prismicT.CustomTypeModelFieldType.UID,
 	);
+
+	const withURL = config.withURL ?? true;
 
 	return {
 		type: model.id,
 		id: faker.git.shortSha(),
 		uid: hasUID ? changeCase.snakeCase(faker.lorem.words(2)) : null,
-		url: faker.internet.url(),
+		url: withURL ? faker.internet.url() : null,
 		href: faker.internet.url(),
 		lang: faker.lorem.word(),
 		tags: generateTags({ seed: config.seed }),

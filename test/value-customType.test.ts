@@ -28,7 +28,7 @@ test("supports custom model", (t) => {
 	t.is(typeof actual.uid, "string");
 });
 
-test.only("supports custom field configs", (t) => {
+test("supports custom field configs", (t) => {
 	const linkableDocuments = [value.document()];
 	const customModel = model.customType({
 		tabsCount: 1,

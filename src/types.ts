@@ -42,6 +42,10 @@ export interface MockEmbedData {
 	thumbnail_width: number | null;
 }
 
+export type MockRestApiConfig = {
+	seed?: number;
+};
+
 export type MockModelConfig = {
 	seed?: number;
 };
