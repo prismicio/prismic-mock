@@ -1,4 +1,5 @@
 import test from "ava";
+import * as prismicT from "@prismicio/types";
 
 import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
@@ -65,4 +66,20 @@ test("supports custom field configs", (t) => {
 
 	// @ts-expect-error - Untyped data field
 	t.is(actual.data?.[fieldKey]?.id, linkableDocuments[0].id);
+});
+
+test("uid field is not included in data field", (t) => {
+	const customModel = model.customType({ withUID: true });
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+	const uidFieldName = Object.values(customModel.json)
+		.flatMap((tab) => Object.entries(tab))
+		.find(
+			([_, fieldModel]) =>
+				fieldModel.type === prismicT.CustomTypeModelFieldType.UID,
+		)![0];
+
+	const actual = value.customType({ model: customModel });
+
+	t.is(typeof actual.uid, "string");
+	t.false(uidFieldName in actual.data);
 });

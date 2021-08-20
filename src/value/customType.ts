@@ -36,6 +36,17 @@ export const customType = <
 		...Object.values(model.json),
 	) as prismicT.CustomTypeModelTab;
 
+	const dataFieldMmodelsMap: prismicT.CustomTypeModelTab = {};
+	for (const key in fieldModelsMap) {
+		const fieldModel = fieldModelsMap[key];
+
+		// UID fields must be filtered out since they are not represented in
+		// the document's `data` field.
+		if (fieldModel.type !== prismicT.CustomTypeModelFieldType.UID) {
+			dataFieldMmodelsMap[key] = fieldModel;
+		}
+	}
+
 	const hasUID = Object.values(fieldModelsMap).some(
 		(fieldModel) => fieldModel.type === prismicT.CustomTypeModelFieldType.UID,
 	);
@@ -57,7 +68,7 @@ export const customType = <
 		last_publication_date: timestamp({ seed: config.seed }),
 		data: valueForModelMap({
 			seed: config.seed,
-			map: fieldModelsMap,
+			map: dataFieldMmodelsMap,
 			configs: config.configs,
 		}),
 	} as ModelValue<Model>;
