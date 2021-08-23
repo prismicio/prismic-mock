@@ -27,6 +27,8 @@ export type SetRequired<BaseType, Keys extends keyof BaseType> = Simplify<
 		Required<Pick<BaseType, Keys>>
 >;
 
+export type Seed = string | number | number[];
+
 export interface MockImageData {
 	url: string;
 	width: number;
@@ -43,11 +45,11 @@ export interface MockEmbedData {
 }
 
 export type MockRestApiConfig = {
-	seed?: number;
+	seed?: Seed;
 };
 
 export type MockModelConfig = {
-	seed?: number;
+	seed?: Seed;
 };
 
 // TODO: Add to @prismicio/types
@@ -59,7 +61,7 @@ export type PrismicModel =
 	| prismicT.SharedSliceModelVariation;
 
 export type MockValueConfig<Model extends PrismicModel = PrismicModel> = {
-	seed?: number;
+	seed?: Seed;
 	model?: Model;
 };
 
@@ -105,7 +107,7 @@ type CustomTypeModelStructuredTextField =
 export type MockRichTextValueConfig<
 	Model extends CustomTypeModelStructuredTextField = CustomTypeModelStructuredTextField,
 > = {
-	seed?: number;
+	seed?: Seed;
 	model?: Model;
 };
 

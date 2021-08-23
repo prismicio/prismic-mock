@@ -1,1 +1,3 @@
-export const FAKER_SEED = 1984;
+import { Seed } from "./types";
+
+export const FAKER_SEED: Seed = 1984;
