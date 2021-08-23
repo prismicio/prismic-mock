@@ -29,3 +29,14 @@ test("can be configured to use Shared Slices", (t) => {
 		),
 	);
 });
+
+test("can be configured to use a given set of choices", (t) => {
+	const choices = {
+		foo: model.slice(),
+		bar: model.slice(),
+	};
+
+	const actual = model.sliceZone({ choices });
+
+	t.deepEqual(actual.config.choices, choices);
+});

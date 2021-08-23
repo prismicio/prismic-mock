@@ -31,9 +31,14 @@ export const sliceZone = (
 ): prismicT.CustomTypeModelSliceZoneField => {
 	const faker = createFaker(config.seed);
 
-	const choices = "choices" in config ? config.choices || {} : {};
+	let choices: Record<
+		string,
+		prismicT.CustomTypeModelSlice | prismicT.CustomTypeModelSharedSlice
+	> = {};
 
-	if ("choicesCount" in config) {
+	if ("choices" in config) {
+		choices = config.choices || {};
+	} else {
 		const choicesCount =
 			config.choicesCount ?? faker.datatype.number({ min: 2, max: 6 });
 
