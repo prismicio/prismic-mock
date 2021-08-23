@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/prismicio/prismic-mock/compare/v0.0.4...v0.0.5) (2021-08-23)
+
+
+### Features
+
+* mock a Slice Zone with given choice models ([a565ebc](https://github.com/prismicio/prismic-mock/commit/a565ebc07b196052223eb3dc4a6cb3fe4b142c52))
+* support string seed ([3616cb8](https://github.com/prismicio/prismic-mock/commit/3616cb840c41dc9b11326a1a49b0980f7df64f39))
+
+
+### Bug Fixes
+
+* filter UID field from document's data field ([5e17ec9](https://github.com/prismicio/prismic-mock/commit/5e17ec94e78976a85de57d37f102040dfb719b34))
+* generate mock sliceZone choices if none are given ([c421c46](https://github.com/prismicio/prismic-mock/commit/c421c46ae5489e540308abd5e236f5e0ae9f5564))
+
 ### [0.0.4](https://github.com/prismicio/prismic-mock/compare/v0.0.3...v0.0.4) (2021-08-20)
 
 
