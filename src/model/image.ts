@@ -32,7 +32,7 @@ export const image = (
 			thumbnails: Array(thumbnailsCount)
 				.fill(undefined)
 				.map(() => ({
-					name: changeCase.capitalCase(faker.company.bsNoun()),
+					name: changeCase.pascalCase(faker.company.bsNoun()),
 					width: faker.datatype.number({ min: 500, max: 2000 }),
 					height: faker.datatype.number({ min: 500, max: 2000 }),
 				})),
