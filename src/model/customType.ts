@@ -39,7 +39,7 @@ export const customType = (
 
 	const json: prismicT.CustomTypeModelDefinition = {};
 	for (let i = 0; i < tabsCount; i++) {
-		const tabName = changeCase.capitalCase(faker.company.bsNoun());
+		const tabName = changeCase.capitalCase(faker.lorem.word());
 		const tabFields: prismicT.CustomTypeModelTab = buildMockGroupFieldMap({
 			seed: config.seed,
 			configs: config.configs,
