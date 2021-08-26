@@ -1,14 +1,15 @@
 import * as prismicT from "@prismicio/types";
 
+import { buildContentRelationshipField } from "../lib/buildContentRelationshipField";
 import { createFaker } from "../lib/createFaker";
+import { generateCustomTypeId } from "../lib/generateCustomTypeId";
+import { generateTags } from "../lib/generateTags";
 
 import { MockValueConfig } from "../types";
 
 import * as modelGen from "../model";
+
 import { document as documentGen } from "./document";
-import { buildContentRelationshipField } from "../lib/buildContentRelationshipField";
-import { generateCustomTypeId } from "../lib/generateCustomTypeId";
-import { generateTags } from "../lib/generateTags";
 
 export type MockContentRelationshipValueConfig<
 	IsFilled extends boolean = boolean,
