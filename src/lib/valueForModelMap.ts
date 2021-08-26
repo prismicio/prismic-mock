@@ -93,7 +93,7 @@ const getValueConfigType = <Model extends prismicT.CustomTypeModelField>(
 			return "integrationFields";
 
 		case prismicT.CustomTypeModelFieldType.Slices:
-			return "slices";
+			return "sliceZone";
 	}
 };
 
@@ -113,7 +113,7 @@ export type ValueForModelMapConfigs = {
 	number?: MockNumberValueConfig;
 	richText?: MockRichTextValueConfig;
 	select?: MockSelectValueConfig;
-	slices?: MockSliceZoneValueConfig;
+	sliceZone?: MockSliceZoneValueConfig;
 	timestamp?: MockTimestampValueConfig;
 	title?: MockTitleValueConfig;
 	uid?: MockUIDValueConfig;
