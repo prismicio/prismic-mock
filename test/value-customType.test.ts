@@ -83,3 +83,21 @@ test("uid field is not included in data field", (t) => {
 	t.is(typeof actual.uid, "string");
 	t.false(uidFieldName in actual.data);
 });
+
+test("can be configured to return value with alternative languages", (t) => {
+	const customModel = model.customType();
+	const alternateLanguages = [
+		value.customType({ model: customModel }),
+		value.customType({ model: customModel }),
+	];
+
+	const actual = value.customType({
+		model: customModel,
+		alternateLanguages,
+	});
+
+	t.deepEqual(
+		actual.alternate_languages.map((item) => item.id),
+		alternateLanguages.map((alternateLanguage) => alternateLanguage.id),
+	);
+});

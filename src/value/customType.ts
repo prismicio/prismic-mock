@@ -13,12 +13,13 @@ import { MockValueConfig, ModelValue } from "../types";
 import * as modelGen from "../model";
 
 import { timestamp } from "./timestamp";
+import { buildAlternativeLanguage } from "../lib/buildAlternativeLanguage";
 
 export type MockCustomTypeValueConfig<
 	Model extends prismicT.CustomTypeModel = prismicT.CustomTypeModel,
 > = {
 	withURL?: boolean;
-	sharedSliceModels?: prismicT.SharedSliceModel[];
+	alternateLanguages?: prismicT.PrismicDocument[];
 	configs?: ValueForModelMapConfigs;
 } & MockValueConfig<Model>;
 
@@ -53,6 +54,13 @@ export const customType = <
 
 	const withURL = config.withURL ?? true;
 
+	const alternateLanguages = (config.alternateLanguages || []).map(
+		(alternateLanguageDocument) =>
+			buildAlternativeLanguage({
+				document: alternateLanguageDocument,
+			}),
+	);
+
 	return {
 		type: model.id,
 		id: faker.git.shortSha(),
@@ -63,7 +71,7 @@ export const customType = <
 		tags: generateTags({ seed: config.seed }),
 		slugs: [] as prismicT.PrismicDocument["slugs"],
 		linked_documents: [] as prismicT.PrismicDocument["linked_documents"],
-		alternate_languages: [] as prismicT.PrismicDocument["alternate_languages"],
+		alternate_languages: alternateLanguages,
 		first_publication_date: timestamp({ seed: config.seed }),
 		last_publication_date: timestamp({ seed: config.seed }),
 		data: valueForModelMap({
