@@ -76,3 +76,14 @@ test("can be configured with specific repeat and non-repeat field configuration"
 	t.is(primaryFieldIds.length, 1);
 	t.is(variation.primary[primaryFieldIds[0]].type, "Boolean");
 });
+
+test("can be configured to use a given set of variations", (t) => {
+	const variations = [
+		model.sharedSliceVariation(),
+		model.sharedSliceVariation(),
+	];
+
+	const actual = model.sharedSlice({ variations });
+
+	t.deepEqual(actual.variations, variations);
+});
