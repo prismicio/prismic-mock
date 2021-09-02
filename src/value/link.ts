@@ -11,7 +11,7 @@ import { linkToMedia } from "./linkToMedia";
 
 export type MockLinkValueConfig<
 	LinkType extends prismicT.LinkType = prismicT.LinkType,
-	IsFilled extends boolean = true,
+	IsFilled extends boolean = boolean,
 	Model extends prismicT.CustomTypeModelLinkField = prismicT.CustomTypeModelLinkField,
 > = {
 	type?: LinkType;
@@ -29,7 +29,7 @@ export type MockLinkValueConfig<
 
 type MockLinkValue<
 	LinkType extends prismicT.LinkType = prismicT.LinkType,
-	IsFilled extends boolean = true,
+	IsFilled extends boolean = boolean,
 > = IsFilled extends true
 	? LinkType extends prismicT.LinkType.Web
 		? prismicT.FilledLinkToWebField
