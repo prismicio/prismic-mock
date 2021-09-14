@@ -1,22 +1,31 @@
 import * as fakerStatic from "faker";
 // @ts-expect-error - Missing .d.ts
-import * as fakerLocaleEN from "faker/lib/locales/en";
+import * as fakerLocaleEN from "faker/lib/locales/en/index.js";
 // @ts-expect-error - Missing .d.ts
-import Faker from "faker/lib";
+import Faker from "faker/lib/index.js";
 
 import { FAKER_SEED } from "../constants";
 
 export const createFaker = (seed = FAKER_SEED): typeof fakerStatic => {
-	if (createFaker.cache[seed]) {
-		return createFaker.cache[seed];
+	let normalizedSeed: number | number[];
+	if (typeof seed === "string") {
+		normalizedSeed = seed.split("").map((char) => char.charCodeAt(0));
+	} else {
+		normalizedSeed = seed;
 	}
 
-	const seededFaker = new Faker();
-	seededFaker.seed(seed);
-	seededFaker.locales["en"] = fakerLocaleEN;
+	const cacheKey = JSON.stringify(normalizedSeed);
 
-	createFaker.cache[seed] = seededFaker;
+	if (createFaker.cache[cacheKey]) {
+		return createFaker.cache[cacheKey];
+	}
 
-	return seededFaker;
+	const fakerInstance = new Faker();
+	fakerInstance.locales["en"] = fakerLocaleEN;
+	fakerInstance.seed(normalizedSeed);
+
+	createFaker.cache[cacheKey] = fakerInstance;
+
+	return fakerInstance;
 };
-createFaker.cache = {} as Record<number, typeof fakerStatic>;
+createFaker.cache = {} as Record<string, typeof fakerStatic>;

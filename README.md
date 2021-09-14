@@ -22,6 +22,8 @@ npm install @prismicio/mock
 
 ## Documentation
 
+> ⚠ Official documentation on the Prismic site is not yet available while the project is developed. Check the integrated [TSDoc](https://tsdoc.org/) for API documentation.
+
 To discover what's new on this package check out [the changelog][changelog]. For full documentation, visit the [official Prismic documentation][prismic-docs].
 
 ## Contributing

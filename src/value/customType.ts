@@ -3,24 +3,30 @@ import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
 import { generateTags } from "../lib/generateTags";
-import { valueForModelMap } from "../lib/valueForModelMap";
+import {
+	valueForModelMap,
+	ValueForModelMapConfigs,
+} from "../lib/valueForModelMap";
 
 import { MockValueConfig, ModelValue } from "../types";
 
 import * as modelGen from "../model";
 
 import { timestamp } from "./timestamp";
+import { buildAlternativeLanguage } from "../lib/buildAlternativeLanguage";
 
 export type MockCustomTypeValueConfig<
 	Model extends prismicT.CustomTypeModel = prismicT.CustomTypeModel,
 > = {
-	sharedSliceModels?: prismicT.SharedSliceModel[];
+	withURL?: boolean;
+	alternateLanguages?: prismicT.PrismicDocument[];
+	configs?: ValueForModelMapConfigs;
 } & MockValueConfig<Model>;
 
 export const customType = <
 	Model extends prismicT.CustomTypeModel = prismicT.CustomTypeModel,
 >(
-	config: MockCustomTypeValueConfig = {},
+	config: MockCustomTypeValueConfig<Model> = {},
 ): ModelValue<Model> => {
 	const faker = createFaker(config.seed);
 
@@ -30,26 +36,48 @@ export const customType = <
 		{},
 		...Object.values(model.json),
 	) as prismicT.CustomTypeModelTab;
+
+	const dataFieldModelsMap: prismicT.CustomTypeModelTab = {};
+	for (const key in fieldModelsMap) {
+		const fieldModel = fieldModelsMap[key];
+
+		// UID fields must be filtered out since they are not represented in
+		// the document's `data` field.
+		if (fieldModel.type !== prismicT.CustomTypeModelFieldType.UID) {
+			dataFieldModelsMap[key] = fieldModel;
+		}
+	}
+
 	const hasUID = Object.values(fieldModelsMap).some(
 		(fieldModel) => fieldModel.type === prismicT.CustomTypeModelFieldType.UID,
+	);
+
+	const withURL = config.withURL ?? true;
+
+	const alternateLanguages = (config.alternateLanguages || []).map(
+		(alternateLanguageDocument) =>
+			buildAlternativeLanguage({
+				document: alternateLanguageDocument,
+			}),
 	);
 
 	return {
 		type: model.id,
 		id: faker.git.shortSha(),
-		uid: hasUID ? changeCase.snakeCase(faker.lorem.words(2)) : undefined,
-		url: faker.internet.url(),
+		uid: hasUID ? changeCase.snakeCase(faker.lorem.words(2)) : null,
+		url: withURL ? faker.internet.url() : null,
 		href: faker.internet.url(),
 		lang: faker.lorem.word(),
 		tags: generateTags({ seed: config.seed }),
-		slugs: [],
-		linked_documents: [],
-		alternate_languages: [],
+		slugs: [] as prismicT.PrismicDocument["slugs"],
+		linked_documents: [] as prismicT.PrismicDocument["linked_documents"],
+		alternate_languages: alternateLanguages,
 		first_publication_date: timestamp({ seed: config.seed }),
 		last_publication_date: timestamp({ seed: config.seed }),
 		data: valueForModelMap({
 			seed: config.seed,
-			map: fieldModelsMap,
+			map: dataFieldModelsMap,
+			configs: config.configs,
 		}),
 	} as ModelValue<Model>;
 };

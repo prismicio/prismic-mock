@@ -1,80 +1,87 @@
 {
-	"name": "@prismicio/mock",
-	"version": "0.0.2",
-	"description": "Generate mock Prismic documents, fields, Slices, and models for development and testing environments",
-	"keywords": [
-		"typescript",
-		"prismic",
-		"mock",
-		"test",
-		"testing"
-	],
-	"repository": {
-		"type": "git",
-		"url": "ssh://git@github.com/prismicio/prismic-mock.git"
-	},
-	"license": "Apache-2.0",
-	"author": "Prismic <contact@prismic.io> (https://prismic.io)",
-	"type": "module",
-	"exports": {
-		".": {
-			"require": "./dist/index.cjs",
-			"import": "./dist/index.mjs"
-		},
-		"./model": {
-			"require": "./dist/model/index.cjs",
-			"import": "./dist/model/index.mjs"
-		},
-		"./value": {
-			"require": "./dist/value/index.cjs",
-			"import": "./dist/value/index.mjs"
-		},
-		"./package.json": "./package.json"
-	},
-	"main": "dist/index.cjs",
-	"module": "dist/index.mjs",
-	"types": "dist/index.d.ts",
-	"files": [
-		"dist",
-		"src"
-	],
-	"scripts": {
-		"build": "siroc build",
-		"dev": "siroc build --watch",
-		"format": "prettier --write .",
-		"prepare": "npm run build",
-		"release": "npm run build && npm run test && standard-version && git push --follow-tags && npm run build && npm publish",
-		"release:dry": "standard-version --dry-run",
-		"release:alpha": "npm run build && npm run test && standard-version --release-as major --prerelease alpha && git push --follow-tags && npm run build && npm publish --tag alpha",
-		"release:alpha:dry": "standard-version --release-as major --prerelease alpha --dry-run",
-		"lint": "eslint --ext .js,.ts .",
-		"unit": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava",
-		"test": "npm run lint && npm run unit"
-	},
-	"dependencies": {
-		"@prismicio/types": "^0.1.6",
-		"change-case": "^4.1.2",
-		"faker": "^5.5.3"
-	},
-	"devDependencies": {
-		"@types/faker": "^5.5.7",
-		"@typescript-eslint/eslint-plugin": "^4.29.1",
-		"@typescript-eslint/parser": "^4.29.1",
-		"ava": "^4.0.0-alpha.2",
-		"eslint": "^7.32.0",
-		"eslint-config-prettier": "^8.3.0",
-		"eslint-plugin-prettier": "^3.4.0",
-		"nyc": "^15.1.0",
-		"prettier": "^2.3.2",
-		"siroc": "^0.15.0",
-		"standard-version": "^9.3.1",
-		"ts-eager": "^2.0.2",
-		"typescript": "^4.3.5"
-	},
-	"engines": {
-		"node": ">=12.7.0"
-	},
-	"publishConfig": {
-		"access": "public"
-	}
+  "name": "@prismicio/mock",
+  "version": "0.0.6",
+  "description": "Generate mock Prismic documents, fields, Slices, and models for development and testing environments",
+  "keywords": [
+    "typescript",
+    "prismic",
+    "mock",
+    "test",
+    "testing"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/prismicio/prismic-mock.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Prismic <contact@prismic.io> (https://prismic.io)",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    },
+    "./api": {
+      "require": "./dist/api/index.cjs",
+      "import": "./dist/api/index.mjs"
+    },
+    "./model": {
+      "require": "./dist/model/index.cjs",
+      "import": "./dist/model/index.mjs"
+    },
+    "./value": {
+      "require": "./dist/value/index.cjs",
+      "import": "./dist/value/index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "siroc build",
+    "dev": "siroc build --watch",
+    "format": "prettier --write .",
+    "prepare": "npm run build",
+    "release": "npm run build && npm run test && standard-version && git push --follow-tags && npm run build && npm publish",
+    "release:dry": "standard-version --dry-run",
+    "release:alpha": "npm run build && npm run test && standard-version --release-as major --prerelease alpha && git push --follow-tags && npm run build && npm publish --tag alpha",
+    "release:alpha:dry": "standard-version --release-as major --prerelease alpha --dry-run",
+    "lint": "eslint --ext .js,.ts .",
+    "unit": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava",
+    "test": "npm run lint && npm run unit"
+  },
+  "dependencies": {
+    "@prismicio/types": "^0.1.10",
+    "change-case": "^4.1.2",
+    "faker": "^5.5.3"
+  },
+  "devDependencies": {
+    "@types/faker": "^5.5.8",
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
+    "ava": "^4.0.0-alpha.2",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-tsdoc": "^0.2.14",
+    "nyc": "^15.1.0",
+    "prettier": "^2.4.0",
+    "prettier-plugin-jsdoc": "^0.3.24",
+    "siroc": "^0.16.0",
+    "standard-version": "^9.3.1",
+    "ts-eager": "^2.0.2",
+    "typescript": "^4.4.3"
+  },
+  "engines": {
+    "node": ">=12.7.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }

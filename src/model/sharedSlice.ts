@@ -10,32 +10,52 @@ import {
 	sharedSliceVariation,
 } from "./sharedSliceVariation";
 
-type MockSharedSliceModelConfig = {
-	variationsCount?: number;
-} & Pick<
-	MockSharedSliceVariationModelConfig,
-	"itemsFieldConfig" | "primaryFieldConfig"
-> &
+type MockSharedSliceModelConfig<
+	Variation extends prismicT.SharedSliceModelVariation,
+> = (
+	| {
+			variations?: Variation[];
+			variationsCount?: never;
+	  }
+	| {
+			variations?: never;
+			variationsCount?: number;
+	  }
+) &
+	Pick<
+		MockSharedSliceVariationModelConfig,
+		"itemsFieldConfig" | "primaryFieldConfig"
+	> &
 	MockModelConfig;
 
-export const sharedSlice = (
-	config: MockSharedSliceModelConfig = {},
-): prismicT.SharedSliceModel => {
+export const sharedSlice = <
+	Variation extends prismicT.SharedSliceModelVariation,
+>(
+	config: MockSharedSliceModelConfig<Variation> = {},
+): prismicT.SharedSliceModel<string, Variation> => {
 	const faker = createFaker(config.seed);
 
-	const variationsCount =
-		config.variationsCount ?? faker.datatype.number({ min: 1, max: 3 });
-
 	const name = changeCase.capitalCase(faker.company.bsNoun());
-	const variations = Array(variationsCount)
-		.fill(undefined)
-		.map(() =>
-			sharedSliceVariation({
-				seed: config.seed,
-				itemsFieldConfig: config.itemsFieldConfig,
-				primaryFieldConfig: config.primaryFieldConfig,
-			}),
-		);
+
+	let variations: Variation[] = [];
+
+	if ("variations" in config) {
+		variations = config.variations || [];
+	} else {
+		const variationsCount =
+			config.variationsCount ?? faker.datatype.number({ min: 1, max: 3 });
+
+		variations = Array(variationsCount)
+			.fill(undefined)
+			.map(
+				() =>
+					sharedSliceVariation({
+						seed: config.seed,
+						itemsFieldConfig: config.itemsFieldConfig,
+						primaryFieldConfig: config.primaryFieldConfig,
+					}) as Variation,
+			);
+	}
 
 	return {
 		type: prismicT.CustomTypeModelSliceType.SharedSlice,

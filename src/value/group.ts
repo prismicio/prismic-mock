@@ -1,7 +1,10 @@
 import * as prismicT from "@prismicio/types";
 
 import { createFaker } from "../lib/createFaker";
-import { valueForModelMap } from "../lib/valueForModelMap";
+import {
+	valueForModelMap,
+	ValueForModelMapConfigs,
+} from "../lib/valueForModelMap";
 
 import { MockValueConfig, ModelValue } from "../types";
 
@@ -26,6 +29,7 @@ export type MockGroupValueConfig<
 	Model extends prismicT.CustomTypeModelGroupField = prismicT.CustomTypeModelGroupField,
 > = {
 	pattern?: keyof typeof patterns;
+	configs?: ValueForModelMapConfigs;
 } & MockValueConfig<Model>;
 
 export const group = <
@@ -55,6 +59,7 @@ export const group = <
 			return valueForModelMap({
 				seed: config.seed,
 				map: model.config.fields,
+				configs: config.configs,
 			});
 		}) as ModelValue<Model>;
 };

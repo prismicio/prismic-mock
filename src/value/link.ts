@@ -11,7 +11,7 @@ import { linkToMedia } from "./linkToMedia";
 
 export type MockLinkValueConfig<
 	LinkType extends prismicT.LinkType = prismicT.LinkType,
-	IsFilled extends boolean = true,
+	IsFilled extends boolean = boolean,
 	Model extends prismicT.CustomTypeModelLinkField = prismicT.CustomTypeModelLinkField,
 > = {
 	type?: LinkType;
@@ -19,11 +19,17 @@ export type MockLinkValueConfig<
 	withTargetBlank?: Model["config"]["allowTargetBlank"] extends undefined
 		? false
 		: boolean;
+	/**
+	 * A list of potential documents to which the field can be linked.
+	 */
+	linkableDocuments?: LinkType extends prismicT.LinkType.Document
+		? prismicT.PrismicDocument[]
+		: never;
 } & MockValueConfig<Model>;
 
 type MockLinkValue<
 	LinkType extends prismicT.LinkType = prismicT.LinkType,
-	IsFilled extends boolean = true,
+	IsFilled extends boolean = boolean,
 > = IsFilled extends true
 	? LinkType extends prismicT.LinkType.Web
 		? prismicT.FilledLinkToWebField
@@ -59,6 +65,7 @@ export const link = <
 				return contentRelationship({
 					seed: config.seed,
 					isFilled,
+					linkableDocuments: config.linkableDocuments,
 				}) as MockLinkValue<LinkType, IsFilled>;
 			}
 

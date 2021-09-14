@@ -1,6 +1,7 @@
 import * as prismicT from "@prismicio/types";
 
 import { createFaker } from "../lib/createFaker";
+import { ValueForModelMapConfigs } from "../lib/valueForModelMap";
 
 import { MockValueConfig, ModelValue } from "../types";
 
@@ -29,6 +30,8 @@ export type MockSliceZoneValueConfig<
 > = {
 	sharedSliceModels?: prismicT.SharedSliceModel[];
 	pattern?: keyof typeof patterns;
+	primaryFieldConfigs?: ValueForModelMapConfigs;
+	itemsFieldConfigs?: ValueForModelMapConfigs;
 } & MockValueConfig<Model>;
 
 export const sliceZone = <
@@ -68,6 +71,8 @@ export const sliceZone = <
 						model: choiceModel,
 						type: choiceType,
 						label: choiceLabel ? choiceLabel.name : null,
+						primaryFieldConfigs: config.primaryFieldConfigs,
+						itemsFieldConfigs: config.itemsFieldConfigs,
 					});
 				}
 
@@ -80,6 +85,8 @@ export const sliceZone = <
 						return sharedSlice({
 							seed: config.seed,
 							model: sharedSliceModel,
+							primaryFieldConfigs: config.primaryFieldConfigs,
+							itemsFieldConfigs: config.itemsFieldConfigs,
 						});
 					}
 				}

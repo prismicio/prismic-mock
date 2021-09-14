@@ -21,6 +21,7 @@ test("supports custom model", (t) => {
 			embed: { count: 0 },
 			geoPoint: { count: 0 },
 			image: { count: 0 },
+			integrationFields: { count: 0 },
 			keyText: { count: 0 },
 			link: { count: 0 },
 			linkToMedia: { count: 0 },

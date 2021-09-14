@@ -5,7 +5,10 @@ import { MockValueConfig, ModelValue } from "../types";
 
 import { createFaker } from "../lib/createFaker";
 import { generateFieldId } from "../lib/generateFieldId";
-import { valueForModelMap } from "../lib/valueForModelMap";
+import {
+	valueForModelMap,
+	ValueForModelMapConfigs,
+} from "../lib/valueForModelMap";
 
 import * as modelGen from "../model";
 
@@ -34,6 +37,8 @@ export type MockSliceValueConfig<
 	type?: string;
 	label?: string | null;
 	pattern?: keyof typeof patterns;
+	primaryFieldConfigs?: ValueForModelMapConfigs;
+	itemsFieldConfigs?: ValueForModelMapConfigs;
 } & MockValueConfig<Model>;
 
 export const slice = <
@@ -72,6 +77,7 @@ export const slice = <
 		primary: valueForModelMap({
 			seed: config.seed,
 			map: model["non-repeat"],
+			configs: config.primaryFieldConfigs,
 		}),
 		items: Array(itemsCount)
 			.fill(undefined)
@@ -79,6 +85,7 @@ export const slice = <
 				return valueForModelMap({
 					seed: config.seed,
 					map: model.repeat,
+					configs: config.itemsFieldConfigs,
 				});
 			}),
 	} as ModelValue<Model>;

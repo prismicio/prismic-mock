@@ -2,6 +2,65 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://github.com/prismicio/prismic-mock/compare/v0.0.5...v0.0.6) (2021-08-28)
+
+
+### Features
+
+* rename slices config to sliceZone ([50c1c9f](https://github.com/prismicio/prismic-mock/commit/50c1c9f3fca4d66b84d7e781ca8cb5f4290a0ed6))
+* return alternative language documents for mock documents ([4444df2](https://github.com/prismicio/prismic-mock/commit/4444df26736471ced2a875f0d52c681d96e2b0a3))
+* use given variations in a Shared Slice model ([c5b7afd](https://github.com/prismicio/prismic-mock/commit/c5b7afd6ddef481c2781f3dd8e9d4c6bafd69022))
+
+
+### Bug Fixes
+
+* generate image thumbnail names without spaces ([25b26b6](https://github.com/prismicio/prismic-mock/commit/25b26b65768abdebed6f1d9438bcf699aba017f8))
+* use Custom Type tab names with more variety ([f2c905c](https://github.com/prismicio/prismic-mock/commit/f2c905cc1b896c83fc3ea1217da43d81863ccccf))
+
+
+### Refactor
+
+* fix const name typo ([52d8119](https://github.com/prismicio/prismic-mock/commit/52d81191cc5cbdb3c3d26035aa05859355ac0b51))
+
+### [0.0.5](https://github.com/prismicio/prismic-mock/compare/v0.0.4...v0.0.5) (2021-08-23)
+
+
+### Features
+
+* mock a Slice Zone with given choice models ([a565ebc](https://github.com/prismicio/prismic-mock/commit/a565ebc07b196052223eb3dc4a6cb3fe4b142c52))
+* support string seed ([3616cb8](https://github.com/prismicio/prismic-mock/commit/3616cb840c41dc9b11326a1a49b0980f7df64f39))
+
+
+### Bug Fixes
+
+* filter UID field from document's data field ([5e17ec9](https://github.com/prismicio/prismic-mock/commit/5e17ec94e78976a85de57d37f102040dfb719b34))
+* generate mock sliceZone choices if none are given ([c421c46](https://github.com/prismicio/prismic-mock/commit/c421c46ae5489e540308abd5e236f5e0ae9f5564))
+
+### [0.0.4](https://github.com/prismicio/prismic-mock/compare/v0.0.3...v0.0.4) (2021-08-20)
+
+
+### Features
+
+* add api mocks ([8e0ef1b](https://github.com/prismicio/prismic-mock/commit/8e0ef1be718a11482ecc2fbc9dc8c58ceda71cdc))
+
+### [0.0.3](https://github.com/prismicio/prismic-mock/compare/v0.0.2...v0.0.3) (2021-08-19)
+
+
+### Features
+
+* support integration fields and linked documents ([921ce13](https://github.com/prismicio/prismic-mock/commit/921ce134cb530cfface37bf52f11a29f914f4ba2))
+
+
+### Bug Fixes
+
+* types ([3fe946e](https://github.com/prismicio/prismic-mock/commit/3fe946ecd74bfcfc306cef05ed57abca23307c86))
+* use deterministic timestamp for integration fields ([e3112d9](https://github.com/prismicio/prismic-mock/commit/e3112d92c215c582c3124c551230f08d6c930a51))
+
+
+### Documentation
+
+* add missing documentation disclaimer ([9dca75f](https://github.com/prismicio/prismic-mock/commit/9dca75f20f1d0db54ea52a9cee77f5ee0a608b2b))
+
 ### [0.0.2](https://github.com/prismicio/prismic-mock/compare/v0.0.1...v0.0.2) (2021-08-11)
 
 

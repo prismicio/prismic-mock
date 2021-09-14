@@ -20,6 +20,7 @@ test("can be configured for specific number of field types", (t) => {
 			embed: { count: 0 },
 			geoPoint: { count: 0 },
 			image: { count: 0 },
+			integrationFields: { count: 0 },
 			keyText: { count: 0 },
 			link: { count: 0 },
 			linkToMedia: { count: 0 },
@@ -53,6 +54,7 @@ test("can be configured for specific field type configurations", (t) => {
 					thumbnailsCount: 0,
 				},
 			},
+			integrationFields: { count: 0 },
 			keyText: { count: 0 },
 			link: { count: 0 },
 			linkToMedia: { count: 0 },
@@ -71,10 +73,10 @@ test("can be configured for specific field type configurations", (t) => {
 
 	t.deepEqual(actual.config.fields[fieldIds[0]].config, {
 		constraint: {
-			height: 629,
-			width: 665,
+			height: 1983,
+			width: 1854,
 		},
-		label: "Synergies",
+		label: "Roi",
 		thumbnails: [],
 	});
 });
