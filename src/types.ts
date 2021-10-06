@@ -65,6 +65,10 @@ export type MockValueConfig<Model extends PrismicModel = PrismicModel> = {
 	model?: Model;
 };
 
+export type IsEmptyMockValueConfig<IsEmpty extends boolean = boolean> = {
+	isEmpty?: IsEmpty;
+};
+
 export type MockValueConfigForModel<Model extends PrismicModel> =
 	Model extends prismicT.CustomTypeModelBooleanField
 		? value.MockBooleanValueConfig

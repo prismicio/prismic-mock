@@ -9,3 +9,9 @@ test("creates a mock Color field value", snapshotTwiceMacro, value.color);
 test("supports custom seed", snapshotTwiceMacro, () =>
 	value.color({ seed: 1 }),
 );
+
+test("can be configured to return an empty value", (t) => {
+	const actual = value.color({ isEmpty: true });
+
+	t.is(actual, null);
+});

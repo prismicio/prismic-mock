@@ -3,16 +3,25 @@ import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
 
-import { MockValueConfig } from "../types";
+import { IsEmptyMockValueConfig, MockValueConfig } from "../types";
 
 export type MockKeyTextValueConfig<
 	Model extends prismicT.CustomTypeModelKeyTextField = prismicT.CustomTypeModelKeyTextField,
-> = MockValueConfig<Model>;
+	IsEmpty extends boolean = boolean,
+> = MockValueConfig<Model> & IsEmptyMockValueConfig<IsEmpty>;
 
-export const keyText = (
-	config: MockKeyTextValueConfig = {},
-): prismicT.KeyTextField => {
+export type MockKeyTextValue<IsEmpty extends boolean = boolean> =
+	prismicT.KeyTextField<IsEmpty>;
+
+export const keyText = <
+	Model extends prismicT.CustomTypeModelKeyTextField = prismicT.CustomTypeModelKeyTextField,
+	IsEmpty extends boolean = false,
+>(
+	config: MockKeyTextValueConfig<Model, IsEmpty> = {},
+): MockKeyTextValue<IsEmpty> => {
 	const faker = createFaker(config.seed);
 
-	return changeCase.sentenceCase(faker.lorem.words(3));
+	return (
+		config.isEmpty ? null : changeCase.sentenceCase(faker.lorem.words(3))
+	) as MockKeyTextValue<IsEmpty>;
 };

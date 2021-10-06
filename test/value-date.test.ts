@@ -8,6 +8,12 @@ test("creates a mock Date field value", snapshotTwiceMacro, value.date);
 
 test("supports custom seed", snapshotTwiceMacro, () => value.date({ seed: 1 }));
 
+test("can be configured to return an empty value", (t) => {
+	const actual = value.date({ isEmpty: true });
+
+	t.is(actual, null);
+});
+
 test("can be configured to return a date after and before given dates", (t) => {
 	const actual = value.date({
 		after: new Date(1984, 0, 1),

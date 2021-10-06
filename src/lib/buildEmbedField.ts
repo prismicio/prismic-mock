@@ -11,7 +11,7 @@ type BuildEmbedFieldConfig = {
 
 export const buildEmbedField = (
 	config: BuildEmbedFieldConfig,
-): prismicT.EmbedField => {
+): prismicT.EmbedField<false> => {
 	const faker = createFaker(config.seed);
 
 	return {

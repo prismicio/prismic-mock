@@ -11,6 +11,12 @@ test("supports custom seed", snapshotTwiceMacro, () =>
 	value.select({ seed: 1 }),
 );
 
+test("can be configured to return an empty value", (t) => {
+	const actual = value.select({ isEmpty: true });
+
+	t.is(actual, null);
+});
+
 test("supports custom model", (t) => {
 	const customModel = model.select({ withDefaultValue: true });
 

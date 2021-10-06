@@ -2,7 +2,7 @@ import * as prismicT from "@prismicio/types";
 
 import { createFaker } from "../lib/createFaker";
 
-import { MockValueConfig } from "../types";
+import { IsEmptyMockValueConfig, MockValueConfig } from "../types";
 
 import * as modelGen from "../model";
 
@@ -11,11 +11,10 @@ import { linkToMedia } from "./linkToMedia";
 
 export type MockLinkValueConfig<
 	LinkType extends prismicT.LinkType = prismicT.LinkType,
-	IsFilled extends boolean = boolean,
 	Model extends prismicT.CustomTypeModelLinkField = prismicT.CustomTypeModelLinkField,
+	IsEmpty extends boolean = boolean,
 > = {
 	type?: LinkType;
-	isFilled?: IsFilled;
 	withTargetBlank?: Model["config"]["allowTargetBlank"] extends undefined
 		? false
 		: boolean;
@@ -25,31 +24,30 @@ export type MockLinkValueConfig<
 	linkableDocuments?: LinkType extends prismicT.LinkType.Document
 		? prismicT.PrismicDocument[]
 		: never;
-} & MockValueConfig<Model>;
+} & MockValueConfig<Model> &
+	IsEmptyMockValueConfig<IsEmpty>;
 
 type MockLinkValue<
 	LinkType extends prismicT.LinkType = prismicT.LinkType,
-	IsFilled extends boolean = boolean,
-> = IsFilled extends true
-	? LinkType extends prismicT.LinkType.Web
-		? prismicT.FilledLinkToWebField
-		: LinkType extends prismicT.LinkType.Media
-		? prismicT.FilledLinkToMediaField
-		: LinkType extends prismicT.LinkType.Document
-		? prismicT.FilledLinkToDocumentField
-		: never
-	: prismicT.EmptyLinkField<LinkType>;
+	IsEmpty extends boolean = boolean,
+> = IsEmpty extends true
+	? prismicT.EmptyLinkField<LinkType>
+	: LinkType extends prismicT.LinkType.Web
+	? prismicT.FilledLinkToWebField
+	: LinkType extends prismicT.LinkType.Media
+	? prismicT.FilledLinkToMediaField
+	: LinkType extends prismicT.LinkType.Document
+	? prismicT.FilledLinkToDocumentField
+	: never;
 
 export const link = <
 	LinkType extends prismicT.LinkType = prismicT.LinkType,
-	IsFilled extends boolean = true,
 	Model extends prismicT.CustomTypeModelLinkField = prismicT.CustomTypeModelLinkField,
+	IsEmpty extends boolean = false,
 >(
-	config: MockLinkValueConfig<LinkType, IsFilled, Model> = {},
-): MockLinkValue<LinkType, IsFilled> => {
+	config: MockLinkValueConfig<LinkType, Model, IsEmpty> = {},
+): MockLinkValue<LinkType, IsEmpty> => {
 	const faker = createFaker(config.seed);
-
-	const isFilled = config.isFilled ?? true;
 
 	const type =
 		config.type ||
@@ -59,24 +57,29 @@ export const link = <
 			prismicT.LinkType.Media,
 		]);
 
-	if (isFilled) {
+	if (config.isEmpty) {
+		return {
+			link_type: type,
+		} as MockLinkValue<LinkType, IsEmpty>;
+	} else {
 		switch (type) {
 			case prismicT.LinkType.Document: {
 				return contentRelationship({
 					seed: config.seed,
-					isFilled,
+					isEmpty: config.isEmpty,
 					linkableDocuments: config.linkableDocuments,
-				}) as MockLinkValue<LinkType, IsFilled>;
+				}) as MockLinkValue<LinkType, IsEmpty>;
 			}
 
 			case prismicT.LinkType.Media: {
 				return linkToMedia({
 					seed: config.seed,
-					isFilled,
-				}) as MockLinkValue<LinkType, IsFilled>;
+					isEmpty: config.isEmpty,
+				}) as MockLinkValue<LinkType, IsEmpty>;
 			}
 
-			case prismicT.LinkType.Web: {
+			case prismicT.LinkType.Web:
+			default: {
 				const model = config.model || modelGen.link({ seed: config.seed });
 
 				return {
@@ -87,12 +90,8 @@ export const link = <
 						(model.config.allowTargetBlank && faker.datatype.boolean())
 							? "_blank"
 							: undefined,
-				} as MockLinkValue<LinkType, IsFilled>;
+				} as MockLinkValue<LinkType, IsEmpty>;
 			}
 		}
 	}
-
-	return {
-		link_type: type,
-	} as MockLinkValue<LinkType, IsFilled>;
 };

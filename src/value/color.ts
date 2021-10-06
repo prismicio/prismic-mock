@@ -2,16 +2,25 @@ import * as prismicT from "@prismicio/types";
 
 import { createFaker } from "../lib/createFaker";
 
-import { MockValueConfig } from "../types";
+import { IsEmptyMockValueConfig, MockValueConfig } from "../types";
 
 export type MockColorValueConfig<
 	Model extends prismicT.CustomTypeModelColorField = prismicT.CustomTypeModelColorField,
-> = MockValueConfig<Model>;
+	IsEmpty extends boolean = boolean,
+> = MockValueConfig<Model> & IsEmptyMockValueConfig<IsEmpty>;
 
-export const color = (
-	config: MockColorValueConfig = {},
-): prismicT.ColorField => {
+export type MockColorValue<IsEmpty extends boolean = boolean> =
+	prismicT.ColorField<IsEmpty>;
+
+export const color = <
+	Model extends prismicT.CustomTypeModelColorField = prismicT.CustomTypeModelColorField,
+	IsEmpty extends boolean = false,
+>(
+	config: MockColorValueConfig<Model, IsEmpty> = {},
+): MockColorValue<IsEmpty> => {
 	const faker = createFaker(config.seed);
 
-	return faker.internet.color().toUpperCase() as prismicT.ColorField;
+	return (
+		config.isEmpty ? null : faker.internet.color().toUpperCase()
+	) as MockColorValue<IsEmpty>;
 };

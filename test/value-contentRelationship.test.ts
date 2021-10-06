@@ -32,8 +32,8 @@ test("supports custom model", (t) => {
 	t.true(actual.tags.every((tag) => customModel.config.tags!.includes(tag)));
 });
 
-test("can be configured to return an unfilled value", (t) => {
-	const actual = value.contentRelationship({ isFilled: false });
+test("can be configured to return an empty value", (t) => {
+	const actual = value.contentRelationship({ isEmpty: true });
 
 	t.false("url" in actual);
 });

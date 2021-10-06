@@ -8,7 +8,7 @@ export const buildContentRelationshipField = <
 	Document extends prismicT.PrismicDocument,
 >(
 	config: BuildEmbedFieldConfig<Document>,
-): prismicT.FilledLinkToDocumentField<Document["type"], Document["lang"]> => {
+): prismicT.RelationField<Document["type"], Document["lang"], never, false> => {
 	return {
 		link_type: prismicT.LinkType.Document,
 		id: config.document.id,

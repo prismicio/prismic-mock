@@ -9,3 +9,9 @@ test("creates a mock Key Text field value", snapshotTwiceMacro, value.keyText);
 test("supports custom seed", snapshotTwiceMacro, () =>
 	value.keyText({ seed: 1 }),
 );
+
+test("can be configured to return an empty value", (t) => {
+	const actual = value.keyText({ isEmpty: true });
+
+	t.is(actual, null);
+});

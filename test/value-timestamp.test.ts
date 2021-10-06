@@ -14,11 +14,19 @@ test("supports custom seed", snapshotTwiceMacro, () =>
 	value.timestamp({ seed: 1 }),
 );
 
-test("can be configured to return a timestamp after and before given timestamps", (t) => {
-	const actual = value.timestamp({
-		after: new Date(1984, 0, 1),
-		before: new Date(1984, 0, 3),
-	});
+test("can be configured to return an empty value", (t) => {
+	const actual = value.timestamp({ isEmpty: true });
 
-	t.is(actual, "1984-01-02T09:10:08.299Z");
+	t.is(actual, null);
+});
+
+test("can be configured to return a timestamp after and before given timestamps", (t) => {
+	const after = new Date(1984, 0, 1);
+	const before = new Date(1984, 0, 3);
+
+	const actual = value.timestamp({ after, before });
+	const actualTime = new Date(actual).getTime();
+
+	t.true(before.getTime() > actualTime);
+	t.true(after.getTime() < actualTime);
 });

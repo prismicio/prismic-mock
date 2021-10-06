@@ -5,39 +5,39 @@ import { createFaker } from "../lib/createFaker";
 import { generateCustomTypeId } from "../lib/generateCustomTypeId";
 import { generateTags } from "../lib/generateTags";
 
-import { MockValueConfig } from "../types";
+import { IsEmptyMockValueConfig, MockValueConfig } from "../types";
 
 import * as modelGen from "../model";
 
 import { document as documentGen } from "./document";
 
 export type MockContentRelationshipValueConfig<
-	IsFilled extends boolean = boolean,
 	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
+	IsEmpty extends boolean = boolean,
 > = {
-	isFilled?: IsFilled;
 	/**
 	 * A list of potential documents to which the field can be linked.
 	 */
 	linkableDocuments?: prismicT.PrismicDocument[];
-} & MockValueConfig<Model>;
+} & MockValueConfig<Model> &
+	IsEmptyMockValueConfig<IsEmpty>;
 
-type MockContentRelationshipValue<IsFilled extends boolean = boolean> =
-	IsFilled extends true
-		? prismicT.FilledLinkToDocumentField
-		: prismicT.EmptyLinkField<prismicT.LinkType.Document>;
+type MockContentRelationshipValue<IsEmpty extends boolean = boolean> =
+	prismicT.RelationField<string, string, never, IsEmpty>;
 
 export const contentRelationship = <
-	IsFilled extends boolean = true,
 	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
+	IsEmpty extends boolean = false,
 >(
-	config: MockContentRelationshipValueConfig<IsFilled, Model> = {},
-): MockContentRelationshipValue<IsFilled> => {
+	config: MockContentRelationshipValueConfig<Model, IsEmpty> = {},
+): MockContentRelationshipValue<IsEmpty> => {
 	const faker = createFaker(config.seed);
 
-	const isFilled = config.isFilled ?? true;
-
-	if (isFilled) {
+	if (config.isEmpty) {
+		return {
+			link_type: prismicT.LinkType.Document,
+		} as MockContentRelationshipValue<IsEmpty>;
+	} else {
 		const model =
 			config.model || modelGen.contentRelationship({ seed: config.seed });
 
@@ -77,9 +77,5 @@ export const contentRelationship = <
 		}
 
 		return buildContentRelationshipField({ document });
-	} else {
-		return {
-			link_type: prismicT.LinkType.Document,
-		} as MockContentRelationshipValue<IsFilled>;
 	}
 };

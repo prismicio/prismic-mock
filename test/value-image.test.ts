@@ -11,6 +11,34 @@ test("supports custom seed", snapshotTwiceMacro, () =>
 	value.image({ seed: 1 }),
 );
 
+test("can be configured to return an empty value", (t) => {
+	const customModel = model.image();
+	customModel.config.thumbnails = [{ name: "Foo", height: null, width: null }];
+
+	const actual = value.image({
+		model: customModel,
+		isEmpty: true,
+	});
+
+	t.deepEqual(
+		actual,
+		// TODO: Resolve the following type error
+		// @ts-expect-error - Unsure how to fix this type mismatch
+		{
+			url: null,
+			alt: null,
+			copyright: null,
+			dimensions: null,
+			Foo: {
+				url: null,
+				alt: null,
+				copyright: null,
+				dimensions: null,
+			},
+		},
+	);
+});
+
 test("supports custom model", (t) => {
 	t.plan(4);
 

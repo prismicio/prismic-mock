@@ -14,6 +14,12 @@ test("supports custom seed", snapshotTwiceMacro, () =>
 	value.integrationFields({ seed: 1 }),
 );
 
+test("can be configured to return an empty value", (t) => {
+	const actual = value.integrationFields({ isEmpty: true });
+
+	t.is(actual, null);
+});
+
 test("can be configured to return provided data", (t) => {
 	const data = { foo: "bar" };
 	const actual = value.integrationFields({ data });

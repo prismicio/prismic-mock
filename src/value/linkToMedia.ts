@@ -2,31 +2,29 @@ import * as prismicT from "@prismicio/types";
 
 import { createFaker } from "../lib/createFaker";
 
-import { MockValueConfig } from "../types";
+import { IsEmptyMockValueConfig, MockValueConfig } from "../types";
 
 export type MockLinkToMediaValueConfig<
-	IsFilled extends boolean = boolean,
 	Model extends prismicT.CustomTypeModelLinkToMediaField = prismicT.CustomTypeModelLinkToMediaField,
-> = {
-	isFilled?: IsFilled;
-} & MockValueConfig<Model>;
+	IsEmpty extends boolean = boolean,
+> = MockValueConfig<Model> & IsEmptyMockValueConfig<IsEmpty>;
 
-type MockLinkToMediaValue<IsFilled extends boolean = boolean> =
-	IsFilled extends true
-		? prismicT.FilledLinkToMediaField
-		: prismicT.EmptyLinkField<prismicT.LinkType.Media>;
+type MockLinkToMediaValue<IsEmpty extends boolean = boolean> =
+	prismicT.LinkToMediaField<IsEmpty>;
 
 export const linkToMedia = <
-	IsFilled extends boolean = true,
 	Model extends prismicT.CustomTypeModelLinkToMediaField = prismicT.CustomTypeModelLinkToMediaField,
+	IsEmpty extends boolean = false,
 >(
-	config: MockLinkToMediaValueConfig<IsFilled, Model> = {},
-): MockLinkToMediaValue<IsFilled> => {
+	config: MockLinkToMediaValueConfig<Model, IsEmpty> = {},
+): MockLinkToMediaValue<IsEmpty> => {
 	const faker = createFaker(config.seed);
 
-	const isFilled = config.isFilled ?? true;
-
-	if (isFilled) {
+	if (config.isEmpty) {
+		return {
+			link_type: prismicT.LinkType.Media,
+		} as MockLinkToMediaValue<IsEmpty>;
+	} else {
 		return {
 			link_type: prismicT.LinkType.Media,
 			name: faker.system.commonFileName(),
@@ -35,10 +33,6 @@ export const linkToMedia = <
 			size: faker.datatype.number().toString(),
 			height: faker.datatype.number().toString(),
 			width: faker.datatype.number().toString(),
-		} as prismicT.FilledLinkToMediaField;
-	} else {
-		return {
-			link_type: prismicT.LinkType.Media,
-		} as MockLinkToMediaValue<IsFilled>;
+		} as MockLinkToMediaValue<IsEmpty>;
 	}
 };
