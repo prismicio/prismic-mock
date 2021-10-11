@@ -11,7 +11,7 @@ test("supports custom seed", snapshotTwiceMacro, () =>
 );
 
 test("can be configured to return an empty value", (t) => {
-	const actual = value.keyText({ isEmpty: true });
+	const actual = value.keyText({ state: true });
 
 	t.is(actual, null);
 });

@@ -5,7 +5,7 @@ import { createFaker } from "../lib/createFaker";
 import { generateCustomTypeId } from "../lib/generateCustomTypeId";
 import { generateTags } from "../lib/generateTags";
 
-import { IsEmptyMockValueConfig, MockValueConfig } from "../types";
+import { MockValueStateConfig, MockValueConfig } from "../types";
 
 import * as modelGen from "../model";
 
@@ -13,30 +13,31 @@ import { document as documentGen } from "./document";
 
 export type MockContentRelationshipValueConfig<
 	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
-	IsEmpty extends boolean = boolean,
+	State extends prismicT.FieldState = prismicT.FieldState,
 > = {
 	/**
 	 * A list of potential documents to which the field can be linked.
 	 */
 	linkableDocuments?: prismicT.PrismicDocument[];
 } & MockValueConfig<Model> &
-	IsEmptyMockValueConfig<IsEmpty>;
+	MockValueStateConfig<State>;
 
-type MockContentRelationshipValue<IsEmpty extends boolean = boolean> =
-	prismicT.RelationField<string, string, never, IsEmpty>;
+type MockContentRelationshipValue<
+	State extends prismicT.FieldState = prismicT.FieldState,
+> = prismicT.RelationField<string, string, never, State>;
 
 export const contentRelationship = <
 	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
-	IsEmpty extends boolean = false,
+	State extends prismicT.FieldState = "filled",
 >(
-	config: MockContentRelationshipValueConfig<Model, IsEmpty> = {},
-): MockContentRelationshipValue<IsEmpty> => {
+	config: MockContentRelationshipValueConfig<Model, State> = {},
+): MockContentRelationshipValue<State> => {
 	const faker = createFaker(config.seed);
 
-	if (config.isEmpty) {
+	if (config.state) {
 		return {
 			link_type: prismicT.LinkType.Document,
-		} as MockContentRelationshipValue<IsEmpty>;
+		} as MockContentRelationshipValue<State>;
 	} else {
 		const model =
 			config.model || modelGen.contentRelationship({ seed: config.seed });

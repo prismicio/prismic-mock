@@ -65,8 +65,10 @@ export type MockValueConfig<Model extends PrismicModel = PrismicModel> = {
 	model?: Model;
 };
 
-export type IsEmptyMockValueConfig<IsEmpty extends boolean = boolean> = {
-	isEmpty?: IsEmpty;
+export type MockValueStateConfig<
+	State extends prismicT.FieldState = prismicT.FieldState,
+> = {
+	state?: State;
 };
 
 export type MockValueConfigForModel<Model extends PrismicModel> =

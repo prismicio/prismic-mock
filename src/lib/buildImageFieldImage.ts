@@ -2,28 +2,28 @@ import * as prismicT from "@prismicio/types";
 
 import { createFaker } from "../lib/createFaker";
 
-import {
-	IsEmptyMockValueConfig,
-	MockImageData,
-	MockValueConfig,
-} from "../types";
+import { MockValueStateConfig, MockImageData, MockValueConfig } from "../types";
 
-type BuildImageFieldConfig<IsEmpty extends boolean = boolean> = {
+type BuildImageFieldConfig<
+	State extends prismicT.FieldState = prismicT.FieldState,
+> = {
 	imageData: MockImageData;
 	constraint?: prismicT.CustomTypeModelImageField["config"]["constraint"];
 } & Pick<MockValueConfig, "seed"> &
-	Pick<IsEmptyMockValueConfig<IsEmpty>, "isEmpty">;
+	Pick<MockValueStateConfig<State>, "state">;
 
-export const buildImageFieldImage = <IsEmpty extends boolean = boolean>(
-	config: BuildImageFieldConfig<IsEmpty>,
-): prismicT.ImageFieldImage<IsEmpty> => {
-	if (config.isEmpty) {
+export const buildImageFieldImage = <
+	State extends prismicT.FieldState = prismicT.FieldState,
+>(
+	config: BuildImageFieldConfig<State>,
+): prismicT.ImageFieldImage<State> => {
+	if (config.state) {
 		return {
 			url: null,
 			dimensions: null,
 			alt: null,
 			copyright: null,
-		} as prismicT.ImageFieldImage<IsEmpty>;
+		} as prismicT.ImageFieldImage<State>;
 	} else {
 		const faker = createFaker(config.seed);
 
@@ -43,6 +43,6 @@ export const buildImageFieldImage = <IsEmpty extends boolean = boolean>(
 			dimensions,
 			alt: faker.lorem.sentence(),
 			copyright: faker.lorem.sentence(),
-		} as prismicT.ImageFieldImage<IsEmpty>;
+		} as prismicT.ImageFieldImage<State>;
 	}
 };

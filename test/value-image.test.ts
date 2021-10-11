@@ -17,7 +17,7 @@ test("can be configured to return an empty value", (t) => {
 
 	const actual = value.image({
 		model: customModel,
-		isEmpty: true,
+		state: true,
 	});
 
 	t.deepEqual(

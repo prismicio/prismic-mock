@@ -3,26 +3,26 @@ import * as prismicT from "@prismicio/types";
 import { buildImageFieldImage } from "../lib/buildImageFieldImage";
 import { getMockImageData } from "../lib/getMockImageData";
 
-import { IsEmptyMockValueConfig, MockValueConfig } from "../types";
+import { MockValueStateConfig, MockValueConfig } from "../types";
 
 import * as modelGen from "../model";
 
 export type MockImageValueConfig<
 	Model extends prismicT.CustomTypeModelImageField = prismicT.CustomTypeModelImageField,
-	IsEmpty extends boolean = boolean,
-> = MockValueConfig<Model> & IsEmptyMockValueConfig<IsEmpty>;
+	State extends prismicT.FieldState = prismicT.FieldState,
+> = MockValueConfig<Model> & MockValueStateConfig<State>;
 
 export type MockImageValue<
 	Model extends prismicT.CustomTypeModelImageField = prismicT.CustomTypeModelImageField,
-	IsEmpty extends boolean = boolean,
-> = prismicT.ImageField<Model["config"]["thumbnails"][number]["name"], IsEmpty>;
+	State extends prismicT.FieldState = prismicT.FieldState,
+> = prismicT.ImageField<Model["config"]["thumbnails"][number]["name"], State>;
 
 export const image = <
 	Model extends prismicT.CustomTypeModelImageField = prismicT.CustomTypeModelImageField,
-	IsEmpty extends boolean = false,
+	State extends prismicT.FieldState = "filled",
 >(
-	config: MockImageValueConfig<Model, IsEmpty> = {},
-): MockImageValue<Model, IsEmpty> => {
+	config: MockImageValueConfig<Model, State> = {},
+): MockImageValue<Model, State> => {
 	const model = config.model || modelGen.image({ seed: config.seed });
 	const imageData = getMockImageData({ seed: config.seed });
 
@@ -30,8 +30,8 @@ export const image = <
 		seed: config.seed,
 		imageData,
 		constraint: model.config.constraint,
-		isEmpty: config.isEmpty,
-	}) as MockImageValue<Model, IsEmpty>;
+		state: config.state,
+	}) as MockImageValue<Model, State>;
 
 	for (const thumbnail of model.config.thumbnails) {
 		// TODO: Resolve the following type error
@@ -43,7 +43,7 @@ export const image = <
 				width: thumbnail.width,
 				height: thumbnail.height,
 			},
-			isEmpty: config.isEmpty,
+			state: config.state,
 		});
 	}
 

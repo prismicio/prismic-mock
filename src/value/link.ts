@@ -2,7 +2,7 @@ import * as prismicT from "@prismicio/types";
 
 import { createFaker } from "../lib/createFaker";
 
-import { IsEmptyMockValueConfig, MockValueConfig } from "../types";
+import { MockValueStateConfig, MockValueConfig } from "../types";
 
 import * as modelGen from "../model";
 
@@ -12,7 +12,7 @@ import { linkToMedia } from "./linkToMedia";
 export type MockLinkValueConfig<
 	LinkType extends prismicT.LinkType = prismicT.LinkType,
 	Model extends prismicT.CustomTypeModelLinkField = prismicT.CustomTypeModelLinkField,
-	IsEmpty extends boolean = boolean,
+	State extends prismicT.FieldState = prismicT.FieldState,
 > = {
 	type?: LinkType;
 	withTargetBlank?: Model["config"]["allowTargetBlank"] extends undefined
@@ -25,12 +25,12 @@ export type MockLinkValueConfig<
 		? prismicT.PrismicDocument[]
 		: never;
 } & MockValueConfig<Model> &
-	IsEmptyMockValueConfig<IsEmpty>;
+	MockValueStateConfig<State>;
 
 type MockLinkValue<
 	LinkType extends prismicT.LinkType = prismicT.LinkType,
-	IsEmpty extends boolean = boolean,
-> = IsEmpty extends true
+	State extends prismicT.FieldState = prismicT.FieldState,
+> = State extends true
 	? prismicT.EmptyLinkField<LinkType>
 	: LinkType extends prismicT.LinkType.Web
 	? prismicT.FilledLinkToWebField
@@ -43,10 +43,10 @@ type MockLinkValue<
 export const link = <
 	LinkType extends prismicT.LinkType = prismicT.LinkType,
 	Model extends prismicT.CustomTypeModelLinkField = prismicT.CustomTypeModelLinkField,
-	IsEmpty extends boolean = false,
+	State extends prismicT.FieldState = "filled",
 >(
-	config: MockLinkValueConfig<LinkType, Model, IsEmpty> = {},
-): MockLinkValue<LinkType, IsEmpty> => {
+	config: MockLinkValueConfig<LinkType, Model, State> = {},
+): MockLinkValue<LinkType, State> => {
 	const faker = createFaker(config.seed);
 
 	const type =
@@ -57,25 +57,25 @@ export const link = <
 			prismicT.LinkType.Media,
 		]);
 
-	if (config.isEmpty) {
+	if (config.state) {
 		return {
 			link_type: type,
-		} as MockLinkValue<LinkType, IsEmpty>;
+		} as MockLinkValue<LinkType, State>;
 	} else {
 		switch (type) {
 			case prismicT.LinkType.Document: {
 				return contentRelationship({
 					seed: config.seed,
-					isEmpty: config.isEmpty,
+					state: config.state,
 					linkableDocuments: config.linkableDocuments,
-				}) as MockLinkValue<LinkType, IsEmpty>;
+				}) as MockLinkValue<LinkType, State>;
 			}
 
 			case prismicT.LinkType.Media: {
 				return linkToMedia({
 					seed: config.seed,
-					isEmpty: config.isEmpty,
-				}) as MockLinkValue<LinkType, IsEmpty>;
+					state: config.state,
+				}) as MockLinkValue<LinkType, State>;
 			}
 
 			case prismicT.LinkType.Web:
@@ -90,7 +90,7 @@ export const link = <
 						(model.config.allowTargetBlank && faker.datatype.boolean())
 							? "_blank"
 							: undefined,
-				} as MockLinkValue<LinkType, IsEmpty>;
+				} as MockLinkValue<LinkType, State>;
 			}
 		}
 	}

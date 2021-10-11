@@ -33,7 +33,7 @@ test("supports custom model", (t) => {
 test("can be configured to return an empty link value", (t) => {
 	const actual = value.link({
 		type: prismicT.LinkType.Web,
-		isEmpty: true,
+		state: true,
 	});
 
 	t.false("url" in actual);

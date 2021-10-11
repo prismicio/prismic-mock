@@ -11,7 +11,7 @@ test("supports custom seed", snapshotTwiceMacro, () =>
 );
 
 test("can be configured to return an empty value", (t) => {
-	const actual = value.embed({ isEmpty: true });
+	const actual = value.embed({ state: true });
 
 	t.deepEqual(actual, {});
 });

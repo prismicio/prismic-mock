@@ -11,7 +11,7 @@ test("supports custom seed", snapshotTwiceMacro, () =>
 );
 
 test("can be configured to return an empty value", (t) => {
-	const actual = value.geoPoint({ isEmpty: true });
+	const actual = value.geoPoint({ state: true });
 
 	t.deepEqual(actual, {});
 });

@@ -33,7 +33,7 @@ test("supports custom model", (t) => {
 });
 
 test("can be configured to return an empty value", (t) => {
-	const actual = value.contentRelationship({ isEmpty: true });
+	const actual = value.contentRelationship({ state: true });
 
 	t.false("url" in actual);
 });

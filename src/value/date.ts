@@ -1,33 +1,34 @@
 import * as prismicT from "@prismicio/types";
 
-import { IsEmptyMockValueConfig, MockValueConfig } from "../types";
+import { MockValueStateConfig, MockValueConfig } from "../types";
 
 import { MockTimestampValueConfig, timestamp } from "./timestamp";
 
 export type MockDateValueConfig<
 	Model extends prismicT.CustomTypeModelDateField = prismicT.CustomTypeModelDateField,
-	IsEmpty extends boolean = boolean,
+	State extends prismicT.FieldState = prismicT.FieldState,
 > = Pick<MockTimestampValueConfig, "after" | "before"> &
 	MockValueConfig<Model> &
-	IsEmptyMockValueConfig<IsEmpty>;
+	MockValueStateConfig<State>;
 
-export type MockDateValue<IsEmpty extends boolean = boolean> =
-	prismicT.DateField<IsEmpty>;
+export type MockDateValue<
+	State extends prismicT.FieldState = prismicT.FieldState,
+> = prismicT.DateField<State>;
 
 export const date = <
 	Model extends prismicT.CustomTypeModelDateField = prismicT.CustomTypeModelDateField,
-	IsEmpty extends boolean = false,
+	State extends prismicT.FieldState = "filled",
 >(
-	config: MockDateValueConfig<Model, IsEmpty> = {},
-): MockDateValue<IsEmpty> => {
+	config: MockDateValueConfig<Model, State> = {},
+): MockDateValue<State> => {
 	return (
-		config.isEmpty
+		config.state
 			? null
 			: timestamp({
 					seed: config.seed,
 					after: config.after,
 					before: config.before,
-					isEmpty: false,
+					state: false,
 			  }).split("T")[0]
-	) as MockDateValue<IsEmpty>;
+	) as MockDateValue<State>;
 };

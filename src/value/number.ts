@@ -2,25 +2,26 @@ import * as prismicT from "@prismicio/types";
 
 import { createFaker } from "../lib/createFaker";
 
-import { IsEmptyMockValueConfig, MockValueConfig } from "../types";
+import { MockValueStateConfig, MockValueConfig } from "../types";
 
 export type MockNumberValueConfig<
 	Model extends prismicT.CustomTypeModelNumberField = prismicT.CustomTypeModelNumberField,
-	IsEmpty extends boolean = boolean,
-> = MockValueConfig<Model> & IsEmptyMockValueConfig<IsEmpty>;
+	State extends prismicT.FieldState = prismicT.FieldState,
+> = MockValueConfig<Model> & MockValueStateConfig<State>;
 
-export type MockNumberValue<IsEmpty extends boolean = boolean> =
-	prismicT.NumberField<IsEmpty>;
+export type MockNumberValue<
+	State extends prismicT.FieldState = prismicT.FieldState,
+> = prismicT.NumberField<State>;
 
 export const number = <
 	Model extends prismicT.CustomTypeModelNumberField = prismicT.CustomTypeModelNumberField,
-	IsEmpty extends boolean = false,
+	State extends prismicT.FieldState = "filled",
 >(
-	config: MockNumberValueConfig<Model, IsEmpty> = {},
-): MockNumberValue<IsEmpty> => {
+	config: MockNumberValueConfig<Model, State> = {},
+): MockNumberValue<State> => {
 	const faker = createFaker(config.seed);
 
 	return (
-		config.isEmpty ? null : faker.datatype.number()
-	) as MockNumberValue<IsEmpty>;
+		config.state ? null : faker.datatype.number()
+	) as MockNumberValue<State>;
 };

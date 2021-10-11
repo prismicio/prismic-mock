@@ -14,7 +14,7 @@ export const image = (
 	const imageField = buildImageFieldImage({
 		seed: config.seed,
 		imageData,
-		isEmpty: false,
+		state: false,
 	});
 
 	return {

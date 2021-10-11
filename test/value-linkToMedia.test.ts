@@ -15,7 +15,7 @@ test("supports custom seed", snapshotTwiceMacro, () =>
 );
 
 test("can be configured to return an empty value", (t) => {
-	const actual = value.linkToMedia({ isEmpty: true });
+	const actual = value.linkToMedia({ state: true });
 
 	t.false("url" in actual);
 });

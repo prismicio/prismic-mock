@@ -2,26 +2,27 @@ import * as prismicT from "@prismicio/types";
 
 import { createFaker } from "../lib/createFaker";
 
-import { IsEmptyMockValueConfig, MockValueConfig } from "../types";
+import { MockValueStateConfig, MockValueConfig } from "../types";
 
 export type MockTimestampValueConfig<
 	Model extends prismicT.CustomTypeModelTimestampField = prismicT.CustomTypeModelTimestampField,
-	IsEmpty extends boolean = boolean,
+	State extends prismicT.FieldState = prismicT.FieldState,
 > = {
 	after?: Date;
 	before?: Date;
 } & MockValueConfig<Model> &
-	IsEmptyMockValueConfig<IsEmpty>;
+	MockValueStateConfig<State>;
 
-export type MockTimestampValue<IsEmpty extends boolean = boolean> =
-	prismicT.TimestampField<IsEmpty>;
+export type MockTimestampValue<
+	State extends prismicT.FieldState = prismicT.FieldState,
+> = prismicT.TimestampField<State>;
 
 export const timestamp = <
 	Model extends prismicT.CustomTypeModelTimestampField = prismicT.CustomTypeModelTimestampField,
-	IsEmpty extends boolean = false,
+	State extends prismicT.FieldState = "filled",
 >(
-	config: MockTimestampValueConfig<Model, IsEmpty> = {},
-): MockTimestampValue<IsEmpty> => {
+	config: MockTimestampValueConfig<Model, State> = {},
+): MockTimestampValue<State> => {
 	const faker = createFaker(config.seed);
 
 	// Faker seems to have problems accepting parameters for `faker.date.between`
@@ -35,6 +36,6 @@ export const timestamp = <
 		faker.date.future(20, new Date("2021-03-07")).toISOString().split("T")[0];
 
 	return (
-		config.isEmpty ? null : faker.date.between(after, before).toISOString()
-	) as MockTimestampValue<IsEmpty>;
+		config.state ? null : faker.date.between(after, before).toISOString()
+	) as MockTimestampValue<State>;
 };

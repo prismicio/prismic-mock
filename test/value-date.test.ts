@@ -9,7 +9,7 @@ test("creates a mock Date field value", snapshotTwiceMacro, value.date);
 test("supports custom seed", snapshotTwiceMacro, () => value.date({ seed: 1 }));
 
 test("can be configured to return an empty value", (t) => {
-	const actual = value.date({ isEmpty: true });
+	const actual = value.date({ state: true });
 
 	t.is(actual, null);
 });

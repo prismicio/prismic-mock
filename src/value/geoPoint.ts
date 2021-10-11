@@ -2,32 +2,33 @@ import * as prismicT from "@prismicio/types";
 
 import { createFaker } from "../lib/createFaker";
 
-import { IsEmptyMockValueConfig, MockValueConfig } from "../types";
+import { MockValueStateConfig, MockValueConfig } from "../types";
 
 export type MockGeoPointValueConfig<
 	Model extends prismicT.CustomTypeModelGeoPointField = prismicT.CustomTypeModelGeoPointField,
-	IsEmpty extends boolean = boolean,
-> = MockValueConfig<Model> & IsEmptyMockValueConfig<IsEmpty>;
+	State extends prismicT.FieldState = prismicT.FieldState,
+> = MockValueConfig<Model> & MockValueStateConfig<State>;
 
-export type MockGeoPointValue<IsEmpty extends boolean = boolean> =
-	prismicT.GeoPointField<IsEmpty>;
+export type MockGeoPointValue<
+	State extends prismicT.FieldState = prismicT.FieldState,
+> = prismicT.GeoPointField<State>;
 
 export const geoPoint = <
 	Model extends prismicT.CustomTypeModelGeoPointField = prismicT.CustomTypeModelGeoPointField,
-	IsEmpty extends boolean = false,
+	State extends prismicT.FieldState = "filled",
 >(
-	config: MockGeoPointValueConfig<Model, IsEmpty> = {},
-): MockGeoPointValue<IsEmpty> => {
+	config: MockGeoPointValueConfig<Model, State> = {},
+): MockGeoPointValue<State> => {
 	const faker = createFaker(config.seed);
 
 	const coordinates = faker.address.nearbyGPSCoordinate();
 
 	return (
-		config.isEmpty
+		config.state
 			? {}
 			: {
 					longitude: Number.parseFloat(coordinates[0]),
 					latitude: Number.parseFloat(coordinates[1]),
 			  }
-	) as MockGeoPointValue<IsEmpty>;
+	) as MockGeoPointValue<State>;
 };

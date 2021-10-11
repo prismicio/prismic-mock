@@ -3,25 +3,26 @@ import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
 
-import { IsEmptyMockValueConfig, MockValueConfig } from "../types";
+import { MockValueStateConfig, MockValueConfig } from "../types";
 
 export type MockKeyTextValueConfig<
 	Model extends prismicT.CustomTypeModelKeyTextField = prismicT.CustomTypeModelKeyTextField,
-	IsEmpty extends boolean = boolean,
-> = MockValueConfig<Model> & IsEmptyMockValueConfig<IsEmpty>;
+	State extends prismicT.FieldState = prismicT.FieldState,
+> = MockValueConfig<Model> & MockValueStateConfig<State>;
 
-export type MockKeyTextValue<IsEmpty extends boolean = boolean> =
-	prismicT.KeyTextField<IsEmpty>;
+export type MockKeyTextValue<
+	State extends prismicT.FieldState = prismicT.FieldState,
+> = prismicT.KeyTextField<State>;
 
 export const keyText = <
 	Model extends prismicT.CustomTypeModelKeyTextField = prismicT.CustomTypeModelKeyTextField,
-	IsEmpty extends boolean = false,
+	State extends prismicT.FieldState = "filled",
 >(
-	config: MockKeyTextValueConfig<Model, IsEmpty> = {},
-): MockKeyTextValue<IsEmpty> => {
+	config: MockKeyTextValueConfig<Model, State> = {},
+): MockKeyTextValue<State> => {
 	const faker = createFaker(config.seed);
 
 	return (
-		config.isEmpty ? null : changeCase.sentenceCase(faker.lorem.words(3))
-	) as MockKeyTextValue<IsEmpty>;
+		config.state ? null : changeCase.sentenceCase(faker.lorem.words(3))
+	) as MockKeyTextValue<State>;
 };
