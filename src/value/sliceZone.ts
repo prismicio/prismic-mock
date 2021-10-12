@@ -43,57 +43,61 @@ export const sliceZone = <
 
 	const model = config.model || modelGen.sliceZone({ seed: config.seed });
 
-	const patternKey =
-		config.pattern ||
-		faker.random.arrayElement(
-			Object.keys(patterns) as (keyof typeof patterns)[],
-		);
-	const pattern = patterns[patternKey];
+	if (Object.keys(model.config.choices).length > 0) {
+		const patternKey =
+			config.pattern ||
+			faker.random.arrayElement(
+				Object.keys(patterns) as (keyof typeof patterns)[],
+			);
+		const pattern = patterns[patternKey];
 
-	const itemsCount = faker.datatype.number({
-		min: pattern.minItems,
-		max: pattern.maxItems,
-	});
+		const itemsCount = faker.datatype.number({
+			min: pattern.minItems,
+			max: pattern.maxItems,
+		});
 
-	return Array(itemsCount)
-		.fill(undefined)
-		.map(() => {
-			const choices = Object.entries(model.config.choices);
-			const [choiceType, choiceModel] = faker.random.arrayElement(choices);
+		return Array(itemsCount)
+			.fill(undefined)
+			.map(() => {
+				const choices = Object.entries(model.config.choices);
+				const [choiceType, choiceModel] = faker.random.arrayElement(choices);
 
-			const choiceLabels = model.config.labels[choiceType] || [];
-			const choiceLabel = faker.random.arrayElement(choiceLabels);
+				const choiceLabels = model.config.labels[choiceType] || [];
+				const choiceLabel = faker.random.arrayElement(choiceLabels);
 
-			switch (choiceModel.type) {
-				case prismicT.CustomTypeModelSliceType.Slice: {
-					return slice({
-						seed: config.seed,
-						model: choiceModel,
-						type: choiceType,
-						label: choiceLabel ? choiceLabel.name : null,
-						primaryFieldConfigs: config.primaryFieldConfigs,
-						itemsFieldConfigs: config.itemsFieldConfigs,
-					});
-				}
-
-				case prismicT.CustomTypeModelSliceType.SharedSlice: {
-					const sharedSliceModel = config.sharedSliceModels?.find(
-						(sharedSliceModel) => sharedSliceModel.id === choiceType,
-					);
-
-					if (sharedSliceModel) {
-						return sharedSlice({
+				switch (choiceModel.type) {
+					case prismicT.CustomTypeModelSliceType.Slice: {
+						return slice({
 							seed: config.seed,
-							model: sharedSliceModel,
+							model: choiceModel,
+							type: choiceType,
+							label: choiceLabel ? choiceLabel.name : null,
 							primaryFieldConfigs: config.primaryFieldConfigs,
 							itemsFieldConfigs: config.itemsFieldConfigs,
 						});
 					}
+
+					case prismicT.CustomTypeModelSliceType.SharedSlice: {
+						const sharedSliceModel = config.sharedSliceModels?.find(
+							(sharedSliceModel) => sharedSliceModel.id === choiceType,
+						);
+
+						if (sharedSliceModel) {
+							return sharedSlice({
+								seed: config.seed,
+								model: sharedSliceModel,
+								primaryFieldConfigs: config.primaryFieldConfigs,
+								itemsFieldConfigs: config.itemsFieldConfigs,
+							});
+						}
+					}
 				}
-			}
-		})
-		.filter(
-			(slice): slice is prismicT.Slice | prismicT.SharedSlice =>
-				slice !== undefined,
-		) as ModelValue<Model>;
+			})
+			.filter(
+				(slice): slice is prismicT.Slice | prismicT.SharedSlice =>
+					slice !== undefined,
+			) as ModelValue<Model>;
+	} else {
+		return [] as unknown as ModelValue<Model>;
+	}
 };

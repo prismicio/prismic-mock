@@ -5,34 +5,52 @@ import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 import * as value from "../src/value";
 import * as model from "../src/model";
 
-test("creates a mock RichText field value", snapshotTwiceMacro, value.richText);
+test("creates a mock RichText field value", snapshotTwiceMacro, () =>
+	value.richText(),
+);
 
-test("supports custom seed", snapshotTwiceMacro, () =>
-	value.richText({ seed: 1 }),
+test("supports custom seed", snapshotTwiceMacro, (t) =>
+	value.richText({ seed: t.title }),
 );
 
 test("supports custom model", (t) => {
-	const customModel = model.richText({ withMultipleBlocks: false });
+	const customModel = model.richText({
+		seed: t.title,
+		withMultipleBlocks: false,
+	});
 	customModel.config.single = "paragraph";
 
-	const actual = value.richText({ model: customModel });
+	const actual = value.richText({
+		seed: t.title,
+		model: customModel,
+	});
 
 	t.is(actual[0].type, customModel.config.single);
 });
 
 test("models without multiple blocks returns one block", (t) => {
-	const customModel = model.richText({ withMultipleBlocks: false });
+	const customModel = model.richText({
+		seed: t.title,
+		withMultipleBlocks: false,
+	});
 	customModel.config.single = "paragraph";
 
-	const actual = value.richText({ model: customModel });
+	const actual = value.richText({
+		seed: t.title,
+		model: customModel,
+	});
 
 	t.is(actual.length, 1);
 });
 
 test("can be customized with a pattern to determine richText length", (t) => {
-	const customModel = model.richText({ withMultipleBlocks: true });
+	const customModel = model.richText({
+		seed: t.title,
+		withMultipleBlocks: true,
+	});
 
 	const actualShort = value.richText({
+		seed: t.title,
 		pattern: "short",
 		model: customModel,
 	});
@@ -40,6 +58,7 @@ test("can be customized with a pattern to determine richText length", (t) => {
 	t.true(actualShort.length <= 2);
 
 	const actualMedium = value.richText({
+		seed: t.title,
 		pattern: "medium",
 		model: customModel,
 	});
@@ -47,6 +66,7 @@ test("can be customized with a pattern to determine richText length", (t) => {
 	t.true(actualMedium.length <= 4);
 
 	const actualLong = value.richText({
+		seed: t.title,
 		pattern: "long",
 		model: customModel,
 	});

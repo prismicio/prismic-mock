@@ -60,6 +60,11 @@ export type PrismicModel =
 	| prismicT.SharedSliceModel
 	| prismicT.SharedSliceModelVariation;
 
+export type GroupFieldModelMap = Record<
+	string,
+	prismicT.CustomTypeModelFieldForGroup
+>;
+
 export type MockValueConfig<Model extends PrismicModel = PrismicModel> = {
 	seed?: Seed;
 	model?: Model;
@@ -146,7 +151,15 @@ export type ModelValue<T extends PrismicModel> =
 		: never;
 
 type CustomTypeModelValue<T extends prismicT.CustomTypeModel> =
-	prismicT.PrismicDocument<ModelValueMap<ValueOf<T["json"]>>>;
+	prismicT.PrismicDocument<
+		ModelValueMap<{
+			[P in keyof ValueOf<T["json"]> as ValueOf<
+				T["json"]
+			>[P]["type"] extends prismicT.CustomTypeModelFieldType.UID
+				? never
+				: P]: ValueOf<T["json"]>[P];
+		}>
+	>;
 
 type CustomTypeModelFieldForGroupValue<
 	T extends prismicT.CustomTypeModelFieldForGroup,

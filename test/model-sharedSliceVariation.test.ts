@@ -1,87 +1,62 @@
 import test from "ava";
+import * as prismicT from "@prismicio/types";
 
 import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
-import * as model from "../src/model";
+import * as prismicM from "../src";
 
 test(
 	"creates a mock Shared Slice variation field model",
 	snapshotTwiceMacro,
-	model.sharedSliceVariation,
+	() => prismicM.model.sharedSliceVariation(),
 );
 
-test("supports custom seed", snapshotTwiceMacro, () =>
-	model.sharedSliceVariation({ seed: 1 }),
+test("supports custom seed", snapshotTwiceMacro, (t) =>
+	prismicM.model.sharedSliceVariation({ seed: t.title }),
 );
 
-test("supports custom seed for primary field", snapshotTwiceMacro, () =>
-	model.sharedSliceVariation({
-		seed: 1,
-		primaryFieldConfig: {
-			seed: 2,
+test("can be configured with a specific id", (t) => {
+	const actual = prismicM.model.sharedSliceVariation({
+		seed: t.title,
+		id: "custom_id",
+	});
+
+	t.is(actual.id, "custom_id");
+	t.is(actual.name, "CustomId");
+});
+
+test("can be configured with a specific name", (t) => {
+	const actual = prismicM.model.sharedSliceVariation({
+		seed: t.title,
+		name: "Custom Name",
+	});
+
+	t.is(actual.id, "custom_name");
+	t.is(actual.name, "Custom Name");
+});
+
+test("can be configured with a specific id and name", (t) => {
+	const actual = prismicM.model.sharedSliceVariation({
+		seed: t.title,
+		id: "custom_id",
+		name: "Custom Name",
+	});
+
+	t.is(actual.id, "custom_id");
+	t.is(actual.name, "Custom Name");
+});
+
+test("can be configured for specific primary and items fields", (t) => {
+	const actual = prismicM.model.sharedSliceVariation({
+		seed: t.title,
+		primaryFields: {
+			boolean: prismicM.model.boolean({ seed: t.title }),
 		},
-	}),
-);
-
-test("supports custom seed for items field", snapshotTwiceMacro, () =>
-	model.sharedSliceVariation({
-		seed: 1,
-		itemsFieldConfig: {
-			seed: 2,
-		},
-	}),
-);
-
-test("can be configured with specific repeat and non-repeat field configuration", (t) => {
-	const actual = model.sharedSliceVariation({
-		itemsFieldConfig: {
-			configs: {
-				boolean: { count: 1 },
-				color: { count: 0 },
-				contentRelationship: { count: 0 },
-				date: { count: 0 },
-				embed: { count: 0 },
-				geoPoint: { count: 0 },
-				image: { count: 0 },
-				integrationFields: { count: 0 },
-				keyText: { count: 0 },
-				link: { count: 0 },
-				linkToMedia: { count: 0 },
-				number: { count: 0 },
-				richText: { count: 0 },
-				select: { count: 0 },
-				timestamp: { count: 0 },
-				title: { count: 0 },
-			},
-		},
-		primaryFieldConfig: {
-			configs: {
-				boolean: { count: 1 },
-				color: { count: 0 },
-				contentRelationship: { count: 0 },
-				date: { count: 0 },
-				embed: { count: 0 },
-				geoPoint: { count: 0 },
-				image: { count: 0 },
-				integrationFields: { count: 0 },
-				keyText: { count: 0 },
-				link: { count: 0 },
-				linkToMedia: { count: 0 },
-				number: { count: 0 },
-				richText: { count: 0 },
-				select: { count: 0 },
-				timestamp: { count: 0 },
-				title: { count: 0 },
-			},
+		itemsFields: {
+			keyText: prismicM.model.keyText({ seed: t.title }),
 		},
 	});
 
-	const itemsFieldIds = Object.keys(actual.items);
-	const primaryFieldIds = Object.keys(actual.primary);
-
-	t.is(itemsFieldIds.length, 1);
-	t.is(actual.items[itemsFieldIds[0]].type, "Boolean");
-
-	t.is(primaryFieldIds.length, 1);
-	t.is(actual.primary[primaryFieldIds[0]].type, "Boolean");
+	t.is(actual.primary.boolean.type, prismicT.CustomTypeModelFieldType.Boolean);
+	t.is(actual.items.keyText.type, prismicT.CustomTypeModelFieldType.Text);
 });

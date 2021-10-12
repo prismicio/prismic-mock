@@ -5,19 +5,28 @@ import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 import * as value from "../src/value";
 import * as model from "../src/model";
 
-test("creates a mock Image field value", snapshotTwiceMacro, value.image);
+test("creates a mock Image field value", snapshotTwiceMacro, () =>
+	value.image(),
+);
 
-test("supports custom seed", snapshotTwiceMacro, () =>
-	value.image({ seed: 1 }),
+test("supports custom seed", snapshotTwiceMacro, (t) =>
+	value.image({ seed: t.title }),
 );
 
 test("can be configured to return an empty value", (t) => {
-	const customModel = model.image();
-	customModel.config.thumbnails = [{ name: "Foo", height: null, width: null }];
+	const customModel = model.image({ seed: t.title });
+	customModel.config.thumbnails = [
+		{
+			name: "Foo",
+			height: null,
+			width: null,
+		},
+	];
 
 	const actual = value.image({
+		seed: t.title,
 		model: customModel,
-		state: true,
+		state: "empty",
 	});
 
 	t.deepEqual(
@@ -43,11 +52,13 @@ test("supports custom model", (t) => {
 	t.plan(4);
 
 	const customModel = model.image({
+		seed: t.title,
 		withConstraint: true,
 		thumbnailsCount: 2,
 	});
 
 	const actual = value.image({
+		seed: t.title,
 		model: customModel,
 	});
 

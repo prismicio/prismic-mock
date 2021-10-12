@@ -1,6 +1,4 @@
-import * as prismicT from "@prismicio/types";
-
-import { MockModelConfig } from "../types";
+import { GroupFieldModelMap, MockModelConfig } from "../types";
 
 import { boolean } from "../model/boolean";
 import { color } from "../model/color";
@@ -55,14 +53,14 @@ export type BuildMockGroupFieldMapConfig = {
 
 export const buildMockGroupFieldMap = (
 	config: BuildMockGroupFieldMapConfig = {},
-): Record<string, prismicT.CustomTypeModelFieldForGroup> => {
+): GroupFieldModelMap => {
 	const faker = createFaker(config.seed);
 
 	const configs =
 		config.configs ||
 		({} as NonNullable<BuildMockGroupFieldMapConfig["configs"]>);
 
-	const fields: Record<string, prismicT.CustomTypeModelFieldForGroup> = {};
+	const fields: GroupFieldModelMap = {};
 
 	for (const mockModelType in mockModelFns) {
 		const mockModelFn = mockModelFns[mockModelType as MockModelTypes];

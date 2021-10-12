@@ -4,18 +4,19 @@ import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as value from "../src/value";
 
-test(
-	"creates a mock Timestamp field value",
-	snapshotTwiceMacro,
-	value.timestamp,
+test("creates a mock Timestamp field value", snapshotTwiceMacro, () =>
+	value.timestamp(),
 );
 
-test("supports custom seed", snapshotTwiceMacro, () =>
-	value.timestamp({ seed: 1 }),
+test("supports custom seed", snapshotTwiceMacro, (t) =>
+	value.timestamp({ seed: t.title }),
 );
 
 test("can be configured to return an empty value", (t) => {
-	const actual = value.timestamp({ state: true });
+	const actual = value.timestamp({
+		seed: t.title,
+		state: "empty",
+	});
 
 	t.is(actual, null);
 });
@@ -24,7 +25,11 @@ test("can be configured to return a timestamp after and before given timestamps"
 	const after = new Date(1984, 0, 1);
 	const before = new Date(1984, 0, 3);
 
-	const actual = value.timestamp({ after, before });
+	const actual = value.timestamp({
+		seed: t.title,
+		after,
+		before,
+	});
 	const actualTime = new Date(actual).getTime();
 
 	t.true(before.getTime() > actualTime);

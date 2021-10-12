@@ -1,74 +1,75 @@
 import * as prismicT from "@prismicio/types";
 import * as changeCase from "change-case";
 
-import {
-	buildMockGroupFieldMap,
-	BuildMockGroupFieldMapConfig,
-} from "../lib/buildMockGroupFieldMap";
 import { createFaker } from "../lib/createFaker";
-import { generateCustomTypeId } from "../lib/generateCustomTypeId";
-import { generateFieldId } from "../lib/generateFieldId";
 
 import { MockModelConfig } from "../types";
 
-import { uid } from "./uid";
-import { sliceZone } from "./sliceZone";
-
-type MockCustomTypeModelConfig = {
-	tabsCount?: number;
-	withUID?: boolean;
-	configs?: BuildMockGroupFieldMapConfig["configs"];
+type MockCustomTypeModelConfig<
+	Definition extends
+		| prismicT.CustomTypeModelTab
+		| prismicT.CustomTypeModelDefinition =
+		| prismicT.CustomTypeModelTab
+		| prismicT.CustomTypeModelDefinition,
+> = {
+	id?: string;
+	label?: string;
+	status?: boolean;
+	repeatable?: boolean;
 } & (
 	| {
-			withSliceZones?: false;
+			fields?: Definition;
+			tabs?: never;
 	  }
 	| {
-			withSliceZones: true;
-			withSharedSlices?: boolean;
+			tabs?: Definition;
+			fields?: never;
 	  }
 ) &
 	MockModelConfig;
 
-export const customType = (
-	config: MockCustomTypeModelConfig = {},
-): prismicT.CustomTypeModel => {
+type MockCustomTypeModel<
+	Definition extends
+		| prismicT.CustomTypeModelTab
+		| prismicT.CustomTypeModelDefinition,
+> = Definition extends prismicT.CustomTypeModelTab
+	? prismicT.CustomTypeModel<string, Record<"Main", Definition>>
+	: Definition extends prismicT.CustomTypeModelDefinition
+	? prismicT.CustomTypeModel<string, Definition>
+	: never;
+
+export const customType = <
+	Definition extends
+		| prismicT.CustomTypeModelTab
+		| prismicT.CustomTypeModelDefinition,
+>(
+	config: MockCustomTypeModelConfig<Definition> = {},
+): MockCustomTypeModel<Definition> => {
 	const faker = createFaker(config.seed);
 
-	const tabsCount =
-		config.tabsCount ?? faker.datatype.number({ min: 1, max: 3 });
+	let label: string =
+		config.label || changeCase.capitalCase(faker.company.bsNoun());
+	let id: string = config.id || changeCase.snakeCase(label);
 
-	const json: prismicT.CustomTypeModelDefinition = {};
-	for (let i = 0; i < tabsCount; i++) {
-		const tabName = changeCase.capitalCase(faker.lorem.word());
-		const tabFields: prismicT.CustomTypeModelTab = buildMockGroupFieldMap({
-			seed: config.seed,
-			configs: config.configs,
-		});
-
-		if (i === 0 && config.withUID) {
-			const fieldId = generateFieldId({ seed: config.seed });
-
-			tabFields[fieldId] = uid();
-		}
-
-		if (config.withSliceZones) {
-			const sliceZoneId = generateFieldId({ seed: config.seed });
-
-			tabFields[sliceZoneId] = sliceZone({
-				withSharedSlices: config.withSharedSlices,
-			});
-		}
-
-		json[tabName] = tabFields;
+	if (config.id && !config.label) {
+		label = changeCase.capitalCase(config.id);
+	} else if (config.label && !config.label) {
+		id = changeCase.snakeCase(config.label);
 	}
 
-	const id = generateCustomTypeId({ seed: config.seed });
+	let json = {} as MockCustomTypeModel<Definition>["json"];
+
+	if ("fields" in config && config.fields) {
+		json = { Main: config.fields } as typeof json;
+	} else if ("tabs" in config && config.tabs) {
+		json = config.tabs as typeof json;
+	}
 
 	return {
 		id,
-		label: changeCase.capitalCase(id),
-		status: faker.datatype.boolean(),
-		repeatable: faker.datatype.boolean(),
+		label,
+		status: config.status ?? faker.datatype.boolean(),
+		repeatable: config.repeatable ?? faker.datatype.boolean(),
 		json,
-	};
+	} as MockCustomTypeModel<Definition>;
 };

@@ -2,38 +2,50 @@ import * as prismicT from "@prismicio/types";
 import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
-import {
-	buildMockGroupFieldMap,
-	BuildMockGroupFieldMapConfig,
-} from "../lib/buildMockGroupFieldMap";
 
-import { MockModelConfig } from "../types";
+import { GroupFieldModelMap, MockModelConfig } from "../types";
 
-export type MockSharedSliceVariationModelConfig = {
-	primaryFieldConfig?: BuildMockGroupFieldMapConfig;
-	itemsFieldConfig?: BuildMockGroupFieldMapConfig;
+export type MockSharedSliceVariationModelConfig<
+	ID extends string = string,
+	PrimaryFields extends GroupFieldModelMap = GroupFieldModelMap,
+	ItemsFields extends GroupFieldModelMap = GroupFieldModelMap,
+> = {
+	id?: ID;
+	name?: string;
+	primaryFields?: PrimaryFields;
+	itemsFields?: ItemsFields;
 } & MockModelConfig;
 
-export const sharedSliceVariation = (
-	config: MockSharedSliceVariationModelConfig = {},
-): prismicT.SharedSliceModelVariation => {
+export const sharedSliceVariation = <
+	ID extends string,
+	PrimaryFields extends GroupFieldModelMap,
+	ItemsFields extends GroupFieldModelMap,
+>(
+	config: MockSharedSliceVariationModelConfig<
+		ID,
+		PrimaryFields,
+		ItemsFields
+	> = {},
+): prismicT.SharedSliceModelVariation<ID, PrimaryFields, ItemsFields> => {
 	const faker = createFaker(config.seed);
 
-	const name = changeCase.capitalCase(faker.company.bsNoun());
+	let name: string =
+		config.name || changeCase.capitalCase(faker.company.bsNoun());
+	let id: ID = config.id || (changeCase.snakeCase(name) as ID);
+
+	if (config.id && !config.name) {
+		name = changeCase.pascalCase(config.id);
+	} else if (config.name && !config.name) {
+		id = changeCase.snakeCase(config.name) as ID;
+	}
 
 	return {
-		id: changeCase.snakeCase(name),
+		id,
 		name,
 		description: faker.lorem.sentence(),
 		docURL: faker.internet.url(),
 		version: faker.git.shortSha(),
-		primary: buildMockGroupFieldMap({
-			seed: config.primaryFieldConfig?.seed ?? config.seed,
-			configs: config.primaryFieldConfig?.configs,
-		}),
-		items: buildMockGroupFieldMap({
-			seed: config.itemsFieldConfig?.seed ?? config.seed,
-			configs: config.itemsFieldConfig?.configs,
-		}),
+		primary: config.primaryFields || ({} as PrimaryFields),
+		items: config.itemsFields || ({} as ItemsFields),
 	};
 };
