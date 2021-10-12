@@ -57,7 +57,7 @@ export const link = <
 			prismicT.LinkType.Media,
 		]);
 
-	if (config.state) {
+	if (config.state === "empty") {
 		return {
 			link_type: type,
 		} as MockLinkValue<LinkType, State>;
@@ -68,7 +68,7 @@ export const link = <
 					seed: config.seed,
 					state: config.state,
 					linkableDocuments: config.linkableDocuments,
-				}) as MockLinkValue<LinkType, State>;
+				}) as unknown as MockLinkValue<LinkType, State>;
 			}
 
 			case prismicT.LinkType.Media: {

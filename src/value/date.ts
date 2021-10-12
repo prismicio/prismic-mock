@@ -22,13 +22,13 @@ export const date = <
 	config: MockDateValueConfig<Model, State> = {},
 ): MockDateValue<State> => {
 	return (
-		config.state
+		config.state === "empty"
 			? null
 			: timestamp({
 					seed: config.seed,
 					after: config.after,
 					before: config.before,
-					state: false,
+					state: "filled",
 			  }).split("T")[0]
 	) as MockDateValue<State>;
 };

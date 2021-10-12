@@ -49,12 +49,10 @@ test("can be configured to return an empty value", (t) => {
 });
 
 test("supports custom model", (t) => {
-	t.plan(4);
-
 	const customModel = model.image({
 		seed: t.title,
 		withConstraint: true,
-		thumbnailsCount: 2,
+		thumbnailNames: ["Foo"],
 	});
 
 	const actual = value.image({
@@ -62,13 +60,7 @@ test("supports custom model", (t) => {
 		model: customModel,
 	});
 
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	t.is(actual.dimensions!.width, customModel.config.constraint.width);
-
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	t.is(actual.dimensions!.height, customModel.config.constraint.height);
-
-	for (const thumbnailConfig of customModel.config.thumbnails) {
-		t.true(thumbnailConfig.name in actual);
-	}
+	t.is(actual.dimensions.width, customModel.config.constraint.width);
+	t.is(actual.dimensions.height, customModel.config.constraint.height);
+	t.true("Foo" in actual);
 });

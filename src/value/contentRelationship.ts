@@ -23,42 +23,55 @@ export type MockContentRelationshipValueConfig<
 	MockValueStateConfig<State>;
 
 type MockContentRelationshipValue<
+	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
 	State extends prismicT.FieldState = prismicT.FieldState,
-> = prismicT.RelationField<string, string, never, State>;
+> = prismicT.RelationField<
+	Model["config"]["customtypes"],
+	string,
+	never,
+	State
+>;
 
 export const contentRelationship = <
 	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
 	State extends prismicT.FieldState = "filled",
 >(
 	config: MockContentRelationshipValueConfig<Model, State> = {},
-): MockContentRelationshipValue<State> => {
+): MockContentRelationshipValue<Model, State> => {
 	const faker = createFaker(config.seed);
 
-	if (config.state) {
+	if (config.state === "empty") {
 		return {
 			link_type: prismicT.LinkType.Document,
-		} as MockContentRelationshipValue<State>;
+		} as MockContentRelationshipValue<Model, State>;
 	} else {
 		const model =
 			config.model || modelGen.contentRelationship({ seed: config.seed });
 
 		const linkableDocuments = config.linkableDocuments
-			? config.linkableDocuments.filter((document) => {
-					let shouldKeep = true;
+			? config.linkableDocuments.filter(
+					(
+						document,
+					): document is prismicT.PrismicDocument<
+						never,
+						NonNullable<Model["config"]["customtypes"]>[number]
+					> => {
+						let shouldKeep = true;
 
-					if (model.config.customtypes) {
-						shouldKeep =
-							shouldKeep && model.config.customtypes.includes(document.type);
-					}
+						if (model.config.customtypes) {
+							shouldKeep =
+								shouldKeep && model.config.customtypes.includes(document.type);
+						}
 
-					if (model.config.tags) {
-						shouldKeep =
-							shouldKeep &&
-							model.config.tags.some((tag) => document.tags.includes(tag));
-					}
+						if (model.config.tags) {
+							shouldKeep =
+								shouldKeep &&
+								model.config.tags.some((tag) => document.tags.includes(tag));
+						}
 
-					return shouldKeep;
-			  })
+						return shouldKeep;
+					},
+			  )
 			: [
 					{
 						...documentGen({ seed: config.seed }),
@@ -68,7 +81,10 @@ export const contentRelationship = <
 						tags: model.config.tags
 							? faker.random.arrayElements(model.config.tags)
 							: generateTags({ seed: config.seed }),
-					},
+					} as prismicT.PrismicDocument<
+						never,
+						NonNullable<Model["config"]["customtypes"]>[number]
+					>,
 			  ];
 
 		const document = faker.random.arrayElement(linkableDocuments);
@@ -77,6 +93,8 @@ export const contentRelationship = <
 			throw new Error("A linkable document could not be found.");
 		}
 
-		return buildContentRelationshipField({ document });
+		return buildContentRelationshipField({
+			document,
+		}) as unknown as MockContentRelationshipValue<Model, State>;
 	}
 };

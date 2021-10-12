@@ -21,7 +21,7 @@ export const linkToMedia = <
 ): MockLinkToMediaValue<State> => {
 	const faker = createFaker(config.seed);
 
-	if (config.state) {
+	if (config.state === "empty") {
 		return {
 			link_type: prismicT.LinkType.Media,
 		} as MockLinkToMediaValue<State>;

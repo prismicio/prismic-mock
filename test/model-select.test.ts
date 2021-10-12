@@ -12,19 +12,22 @@ test("supports custom seed", snapshotTwiceMacro, (t) =>
 	model.select({ seed: t.title }),
 );
 
-test(
-	"can be configured for a specific number of options",
-	snapshotTwiceMacro,
-	(t) =>
-		model.select({
-			seed: t.title,
-			optionsCount: 2,
-		}),
-);
-
-test("can be configured to include a default value", snapshotTwiceMacro, (t) =>
-	model.select({
+test("can be configured for a specific options", (t) => {
+	const options = ["foo", "bar"];
+	const actual = model.select({
 		seed: t.title,
-		withDefaultValue: true,
-	}),
-);
+		options,
+	});
+
+	t.is(actual.config.options, options);
+});
+
+test("can be configured for a specific default value", (t) => {
+	const actual = model.select({
+		seed: t.title,
+		options: ["foo", "bar"],
+		defaultValue: "foo",
+	});
+
+	t.is(actual.config.default_value, "foo");
+});

@@ -2,18 +2,23 @@ import * as prismicT from "@prismicio/types";
 import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
-import { generateCustomTypeId } from "../lib/generateCustomTypeId";
 
 import { MockModelConfig } from "../types";
 
-export type MockContentRelationshipModelConfig = {
-	constrainCustomTypes?: boolean;
-	constrainTags?: boolean;
+export type MockContentRelationshipModelConfig<
+	CustomTypeIDs extends string = string,
+	Tags extends string = string,
+> = {
+	customTypeIDs?: readonly CustomTypeIDs[];
+	tags?: readonly Tags[];
 } & MockModelConfig;
 
-export const contentRelationship = (
-	config: MockContentRelationshipModelConfig = {},
-): prismicT.CustomTypeModelContentRelationshipField => {
+export const contentRelationship = <
+	CustomTypeIDs extends string,
+	Tags extends string,
+>(
+	config: MockContentRelationshipModelConfig<CustomTypeIDs, Tags> = {},
+): prismicT.CustomTypeModelContentRelationshipField<CustomTypeIDs, Tags> => {
 	const faker = createFaker(config.seed);
 
 	return {
@@ -22,20 +27,8 @@ export const contentRelationship = (
 			label: changeCase.capitalCase(faker.company.bsNoun()),
 			placeholder: changeCase.sentenceCase(faker.lorem.words(3)),
 			select: prismicT.CustomTypeModelLinkSelectType.Document,
-			customtypes: config.constrainCustomTypes
-				? Array(faker.datatype.number({ min: 1, max: 3 }))
-						.fill(undefined)
-						.map(() => generateCustomTypeId({ seed: config.seed }))
-				: undefined,
-			tags: config.constrainTags
-				? Array(faker.datatype.number({ min: 1, max: 3 }))
-						.fill(undefined)
-						.map(() =>
-							changeCase.capitalCase(
-								faker.lorem.words(faker.datatype.number({ min: 1, max: 3 })),
-							),
-						)
-				: undefined,
+			customtypes: config.customTypeIDs,
+			tags: config.tags,
 		},
 	};
 };

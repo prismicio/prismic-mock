@@ -1,4 +1,4 @@
-import { GroupFieldModelMap, MockModelConfig } from "../types";
+import { GroupFieldModelMap, MockModelConfig, ValueOf } from "../types";
 
 import { boolean } from "../model/boolean";
 import { color } from "../model/color";
@@ -17,8 +17,8 @@ import { select } from "../model/select";
 import { timestamp } from "../model/timestamp";
 import { title } from "../model/title";
 
-import { createFaker } from "./createFaker";
-import { generateFieldId } from "./generateFieldId";
+import { createFaker } from "../lib/createFaker";
+import { generateFieldId } from "../lib/generateFieldId";
 
 const mockModelFns = {
 	boolean,
@@ -37,45 +37,28 @@ const mockModelFns = {
 	select,
 	timestamp,
 	title,
-} as const;
+};
 
-type MockModelFns = typeof mockModelFns;
-type MockModelTypes = keyof MockModelFns;
-
-export type BuildMockGroupFieldMapConfig = {
-	configs?: {
-		[P in keyof MockModelFns]?: {
-			count?: number;
-			config?: Parameters<MockModelFns[P]>[0];
-		};
-	};
-} & MockModelConfig;
+export type BuildMockGroupFieldMapConfig = MockModelConfig;
 
 export const buildMockGroupFieldMap = (
 	config: BuildMockGroupFieldMapConfig = {},
 ): GroupFieldModelMap => {
 	const faker = createFaker(config.seed);
 
-	const configs =
-		config.configs ||
-		({} as NonNullable<BuildMockGroupFieldMapConfig["configs"]>);
-
 	const fields: GroupFieldModelMap = {};
 
-	for (const mockModelType in mockModelFns) {
-		const mockModelFn = mockModelFns[mockModelType as MockModelTypes];
-		const mockModelMapConfig = configs[mockModelType as MockModelTypes] || {};
-		const count =
-			mockModelMapConfig.count ?? faker.random.arrayElement([0, 0, 0, 1]);
+	const fieldTypes = faker.random.arrayElements(
+		Object.keys(mockModelFns) as (keyof typeof mockModelFns)[],
+	);
 
-		for (let i = 0; i < count; i++) {
-			const fieldId = generateFieldId({ seed: config.seed });
+	for (const fieldType of fieldTypes) {
+		const fieldId = generateFieldId({ seed: config.seed });
+		const mockModelFn = mockModelFns[fieldType] as (
+			config: MockModelConfig,
+		) => ValueOf<GroupFieldModelMap>;
 
-			fields[fieldId] = mockModelFn({
-				seed: config.seed,
-				...mockModelMapConfig.config,
-			});
-		}
+		fields[fieldId] = mockModelFn({ seed: config.seed });
 	}
 
 	return fields;

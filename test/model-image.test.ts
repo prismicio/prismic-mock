@@ -22,11 +22,12 @@ test("can be configured to include constraints", (t) => {
 	t.is(typeof actual.config.constraint.height, "number");
 });
 
-test("can be configured for a specific number of thumbnails", (t) => {
+test("can be configured for a specific thumbnails", (t) => {
 	const actual = model.image({
 		seed: t.title,
-		thumbnailsCount: 1,
+		thumbnailNames: ["Foo"],
 	});
 
 	t.is(actual.config.thumbnails.length, 1);
+	t.is(actual.config.thumbnails[0].name, "Foo");
 });

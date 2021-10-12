@@ -18,8 +18,8 @@ test("supports custom seed", snapshotTwiceMacro, (t) =>
 test("supports custom model", (t) => {
 	const customModel = model.contentRelationship({
 		seed: t.title,
-		constrainCustomTypes: true,
-		constrainTags: true,
+		customTypeIDs: ["type"],
+		tags: ["tag"],
 	});
 
 	const actual = value.contentRelationship({

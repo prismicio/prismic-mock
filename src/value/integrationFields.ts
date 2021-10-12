@@ -32,7 +32,7 @@ export const integrationFields = <
 	const imageData = getMockImageData({ seed: config.seed });
 
 	return (
-		config.state
+		config.state === "empty"
 			? null
 			: {
 					id: faker.git.shortSha(),

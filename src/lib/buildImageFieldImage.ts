@@ -17,7 +17,7 @@ export const buildImageFieldImage = <
 >(
 	config: BuildImageFieldConfig<State>,
 ): prismicT.ImageFieldImage<State> => {
-	if (config.state) {
+	if (config.state === "empty") {
 		return {
 			url: null,
 			dimensions: null,

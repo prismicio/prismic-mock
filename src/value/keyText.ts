@@ -23,6 +23,8 @@ export const keyText = <
 	const faker = createFaker(config.seed);
 
 	return (
-		config.state ? null : changeCase.sentenceCase(faker.lorem.words(3))
+		config.state === "empty"
+			? null
+			: changeCase.sentenceCase(faker.lorem.words(3))
 	) as MockKeyTextValue<State>;
 };

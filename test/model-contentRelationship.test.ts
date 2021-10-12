@@ -15,23 +15,21 @@ test("supports custom seed", snapshotTwiceMacro, (t) =>
 );
 
 test("can be configured to constrain by custom type", (t) => {
+	const customTypeIDs = ["foo", "bar"];
 	const actual = model.contentRelationship({
 		seed: t.title,
-		constrainCustomTypes: true,
+		customTypeIDs,
 	});
 
-	t.deepEqual(actual.config.customtypes, ["technologies"]);
+	t.is(actual.config.customtypes, customTypeIDs);
 });
 
 test("can be configured to constrain by tags", (t) => {
+	const tags = ["foo", "bar"];
 	const actual = model.contentRelationship({
 		seed: t.title,
-		constrainTags: true,
+		tags,
 	});
 
-	t.deepEqual(actual.config.tags, [
-		"Iure Molestias Consectetur",
-		"Asperiores",
-		"Quidem Cum Veritatis",
-	]);
+	t.is(actual.config.tags, tags);
 });

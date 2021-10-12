@@ -36,6 +36,8 @@ export const timestamp = <
 		faker.date.future(20, new Date("2021-03-07")).toISOString().split("T")[0];
 
 	return (
-		config.state ? null : faker.date.between(after, before).toISOString()
+		config.state === "empty"
+			? null
+			: faker.date.between(after, before).toISOString()
 	) as MockTimestampValue<State>;
 };

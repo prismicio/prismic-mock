@@ -23,6 +23,8 @@ export const embed = <
 	const embedData = getMockEmbedData({ seed: config.seed });
 
 	return (
-		config.state ? {} : buildEmbedField({ seed: config.seed, embedData })
+		config.state === "empty"
+			? {}
+			: buildEmbedField({ seed: config.seed, embedData })
 	) as prismicT.EmbedField<State>;
 };

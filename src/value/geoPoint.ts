@@ -24,7 +24,7 @@ export const geoPoint = <
 	const coordinates = faker.address.nearbyGPSCoordinate();
 
 	return (
-		config.state
+		config.state === "empty"
 			? {}
 			: {
 					longitude: Number.parseFloat(coordinates[0]),

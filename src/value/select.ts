@@ -27,7 +27,7 @@ export const select = <
 	const model = config.model || modelGen.select({ seed: config.seed });
 	const defaultValue = model.config.default_value;
 
-	if (config.state) {
+	if (config.state === "empty") {
 		return null as MockSelectValue<Model, State>;
 	} else {
 		return (

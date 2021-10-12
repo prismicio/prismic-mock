@@ -22,6 +22,6 @@ export const color = <
 	const faker = createFaker(config.seed);
 
 	return (
-		config.state ? null : faker.internet.color().toUpperCase()
+		config.state === "empty" ? null : faker.internet.color().toUpperCase()
 	) as MockColorValue<State>;
 };

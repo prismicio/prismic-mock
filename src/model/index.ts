@@ -22,3 +22,5 @@ export { sliceZone } from "./sliceZone";
 export { timestamp } from "./timestamp";
 export { title } from "./title";
 export { uid } from "./uid";
+
+export { buildMockGroupFieldMap } from "./buildMockGroupFieldMap";

@@ -25,11 +25,10 @@ test("can be configured to return an empty value", (t) => {
 test("supports custom model", (t) => {
 	const customModel = model.select({
 		seed: t.title,
-		withDefaultValue: true,
+		options: ["foo", "bar"],
 	});
 
 	const actual = value.select({ model: customModel });
 
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	t.true(customModel.config.options.includes(actual!));
+	t.true(customModel.config.options.includes(actual));
 });
