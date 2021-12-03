@@ -20,24 +20,24 @@
 	"exports": {
 		".": {
 			"require": "./dist/index.cjs",
-			"import": "./dist/index.mjs"
+			"import": "./dist/index.js"
 		},
 		"./api": {
 			"require": "./dist/api/index.cjs",
-			"import": "./dist/api/index.mjs"
+			"import": "./dist/api/index.js"
 		},
 		"./model": {
 			"require": "./dist/model/index.cjs",
-			"import": "./dist/model/index.mjs"
+			"import": "./dist/model/index.js"
 		},
 		"./value": {
 			"require": "./dist/value/index.cjs",
-			"import": "./dist/value/index.mjs"
+			"import": "./dist/value/index.js"
 		},
 		"./package.json": "./package.json"
 	},
 	"main": "dist/index.cjs",
-	"module": "dist/index.mjs",
+	"module": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"files": [
 		"dist",
