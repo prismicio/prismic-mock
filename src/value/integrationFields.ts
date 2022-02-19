@@ -8,7 +8,7 @@ import { MockValueStateConfig, MockValueConfig } from "../types";
 
 export type MockIntegrationFieldsValueConfig<
 	Model extends prismicT.CustomTypeModelIntegrationFieldsField = prismicT.CustomTypeModelIntegrationFieldsField,
-	Blob extends unknown = unknown,
+	Blob = unknown,
 	State extends prismicT.FieldState = prismicT.FieldState,
 > = {
 	data?: Blob;
@@ -16,13 +16,13 @@ export type MockIntegrationFieldsValueConfig<
 	MockValueStateConfig<State>;
 
 export type MockIntegrationFieldsValue<
-	Blob extends unknown = unknown,
+	Blob = unknown,
 	State extends prismicT.FieldState = prismicT.FieldState,
 > = prismicT.IntegrationFields<Blob, State>;
 
 export const integrationFields = <
 	Model extends prismicT.CustomTypeModelIntegrationFieldsField = prismicT.CustomTypeModelIntegrationFieldsField,
-	Blob extends unknown = unknown,
+	Blob = unknown,
 	State extends prismicT.FieldState = "filled",
 >(
 	config: MockIntegrationFieldsValueConfig<Model, Blob, State> = {},

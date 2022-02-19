@@ -29,8 +29,8 @@ export type MockLinkValueConfig<
 
 type MockLinkValue<
 	LinkType extends typeof prismicT.LinkType[keyof typeof prismicT.LinkType] = typeof prismicT.LinkType[keyof typeof prismicT.LinkType],
-	State extends prismicT.FieldState = prismicT.FieldState,
-> = State extends true
+	State extends prismicT.FieldState = "filled",
+> = State extends "empty"
 	? prismicT.EmptyLinkField<LinkType>
 	: LinkType extends typeof prismicT.LinkType.Web
 	? prismicT.FilledLinkToWebField

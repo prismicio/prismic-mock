@@ -10,10 +10,8 @@ export type IterableElement<TargetIterable> = TargetIterable extends Iterable<
 	? ElementType
 	: never;
 
-export type ValueOf<
-	ObjectType,
-	ValueType extends keyof ObjectType = keyof ObjectType,
-> = ObjectType[ValueType];
+export type ValueOf<ObjectType extends Record<string, unknown>> =
+	ObjectType[string];
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 type Except<ObjectType, KeysType extends keyof ObjectType> = Pick<
