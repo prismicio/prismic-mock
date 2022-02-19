@@ -10,8 +10,10 @@ export type IterableElement<TargetIterable> = TargetIterable extends Iterable<
 	? ElementType
 	: never;
 
-export type ValueOf<ObjectType extends Record<string, unknown>> =
-	ObjectType[string];
+export type ValueOf<
+	ObjectType,
+	ValueType extends keyof ObjectType = keyof ObjectType,
+> = ObjectType[ValueType];
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 type Except<ObjectType, KeysType extends keyof ObjectType> = Pick<
@@ -141,9 +143,12 @@ export type ModelValue<T extends PrismicModel> =
 					[P in keyof T["config"]["choices"] as P extends string
 						? P
 						: never]: T["config"]["choices"][P] extends prismicT.CustomTypeModelSlice
-						? CustomTypeModelSliceValue<T["config"]["choices"][P], P>
+						? CustomTypeModelSliceValue<
+								T["config"]["choices"][P],
+								P extends string ? P : string
+						  >
 						: T["config"]["choices"][P] extends prismicT.CustomTypeModelSharedSlice
-						? prismicT.SharedSlice<P>
+						? prismicT.SharedSlice<P extends string ? P : string>
 						: never;
 				}>
 		  >
