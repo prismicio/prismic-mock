@@ -32,25 +32,11 @@ test("supports custom model", (t) => {
 	}
 });
 
-test("can be customized with a pattern to determine the number of items", (t) => {
-	const actualShort = value.group({
+test("can be customized with a specific number of items", (t) => {
+	const actual = value.group({
 		seed: t.title,
-		pattern: "short",
+		itemsCount: 5,
 	});
-	t.true(actualShort.length >= 1);
-	t.true(actualShort.length <= 3);
 
-	const actualMedium = value.group({
-		seed: t.title,
-		pattern: "medium",
-	});
-	t.true(actualMedium.length >= 3);
-	t.true(actualMedium.length <= 6);
-
-	const actualLong = value.group({
-		seed: t.title,
-		pattern: "long",
-	});
-	t.true(actualLong.length >= 6);
-	t.true(actualLong.length <= 12);
+	t.is(actual.length, 5);
 });

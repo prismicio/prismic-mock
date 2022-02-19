@@ -49,7 +49,7 @@ test("returns no items if model does not include items model", (t) => {
 	t.is(actual.items.length, 0);
 });
 
-test("can be customized with a pattern to determine the number of items", (t) => {
+test("can be customized with a specific number of items", (t) => {
 	const customModel = model.sharedSliceVariation({
 		seed: t.title,
 		itemsFields: {
@@ -59,34 +59,10 @@ test("can be customized with a pattern to determine the number of items", (t) =>
 
 	const actualNone = value.sharedSliceVariation({
 		seed: t.title,
-		pattern: "none",
 		model: customModel,
+		itemsCount: 5,
 	});
-	t.true(actualNone.items.length < 1);
-
-	const actualShort = value.sharedSliceVariation({
-		seed: t.title,
-		pattern: "short",
-		model: customModel,
-	});
-	t.true(actualShort.items.length >= 1);
-	t.true(actualShort.items.length <= 3);
-
-	const actualMedium = value.sharedSliceVariation({
-		seed: t.title,
-		pattern: "medium",
-		model: customModel,
-	});
-	t.true(actualMedium.items.length >= 3);
-	t.true(actualMedium.items.length <= 6);
-
-	const actualLong = value.sharedSliceVariation({
-		seed: t.title,
-		pattern: "long",
-		model: customModel,
-	});
-	t.true(actualLong.items.length >= 6);
-	t.true(actualLong.items.length <= 12);
+	t.is(actualNone.items.length, 5);
 });
 
 test("can be customized to return a specific type", (t) => {
@@ -98,11 +74,10 @@ test("can be customized to return a specific type", (t) => {
 	t.is(actual.slice_type, "type");
 });
 
-test("can be customized to return a specific label", (t) => {
+test("slice_label is null", (t) => {
 	const actual = value.sharedSliceVariation({
 		seed: t.title,
-		label: "label",
 	});
 
-	t.is(actual.slice_label, "label");
+	t.is(actual.slice_label, null);
 });

@@ -47,7 +47,7 @@ test("returns no items if model does not include repeat model", (t) => {
 	t.is(actual.items.length, 0);
 });
 
-test("can be customized with a pattern to determine the number of items", (t) => {
+test("can be customized with a specific number of items", (t) => {
 	const customModel = model.slice({
 		seed: t.title,
 		repeatFields: {
@@ -55,36 +55,12 @@ test("can be customized with a pattern to determine the number of items", (t) =>
 		},
 	});
 
-	const actualNone = value.slice({
+	const actual = value.slice({
 		seed: t.title,
 		model: customModel,
-		pattern: "none",
+		itemsCount: 5,
 	});
-	t.true(actualNone.items.length < 1);
-
-	const actualShort = value.slice({
-		seed: t.title,
-		model: customModel,
-		pattern: "short",
-	});
-	t.true(actualShort.items.length >= 1);
-	t.true(actualShort.items.length <= 3);
-
-	const actualMedium = value.slice({
-		seed: t.title,
-		model: customModel,
-		pattern: "medium",
-	});
-	t.true(actualMedium.items.length >= 3);
-	t.true(actualMedium.items.length <= 6);
-
-	const actualLong = value.slice({
-		seed: t.title,
-		model: customModel,
-		pattern: "long",
-	});
-	t.true(actualLong.items.length >= 6);
-	t.true(actualLong.items.length <= 12);
+	t.is(actual.items.length, 5);
 });
 
 test("can be customized to return a specific type", (t) => {

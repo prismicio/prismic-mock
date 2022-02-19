@@ -1,5 +1,4 @@
 import * as prismicT from "@prismicio/types";
-import * as changeCase from "change-case";
 
 import { MockValueConfig, ModelValue } from "../types";
 
@@ -12,31 +11,12 @@ import {
 
 import * as modelGen from "../model";
 
-const patterns = {
-	none: {
-		minItems: 0,
-		maxItems: 0,
-	},
-	short: {
-		minItems: 1,
-		maxItems: 3,
-	},
-	medium: {
-		minItems: 3,
-		maxItems: 6,
-	},
-	long: {
-		minItems: 6,
-		maxItems: 12,
-	},
-} as const;
-
 export type MockSharedSliceVariationValueConfig<
 	Model extends prismicT.SharedSliceModelVariation = prismicT.SharedSliceModelVariation,
 > = {
 	type?: string;
 	label?: string;
-	pattern?: keyof typeof patterns;
+	itemsCount?: number;
 	primaryFieldConfigs?: ValueForModelMapConfigs;
 	itemsFieldConfigs?: ValueForModelMapConfigs;
 } & MockValueConfig<Model>;
@@ -51,28 +31,20 @@ export const sharedSliceVariation = <
 	const model =
 		config.model || modelGen.sharedSliceVariation({ seed: config.seed });
 
-	const patternKey =
-		config.pattern ||
-		faker.random.arrayElement(
-			Object.keys(patterns) as (keyof typeof patterns)[],
-		);
-	const pattern = patterns[patternKey];
-
 	const sliceType = config.type ?? generateFieldId({ seed: config.seed });
-	const sliceLabel =
-		config.label ?? changeCase.capitalCase(faker.company.bsNoun());
 
 	const itemsCount =
 		Object.keys(model.items).length > 0
-			? faker.datatype.number({
-					min: pattern.minItems,
-					max: pattern.maxItems,
+			? config.itemsCount ??
+			  faker.datatype.number({
+					min: 1,
+					max: 6,
 			  })
 			: 0;
 
 	return {
 		slice_type: sliceType,
-		slice_label: sliceLabel,
+		slice_label: null,
 		variation: model.id,
 		version: faker.git.shortSha(),
 		primary: valueForModelMap({

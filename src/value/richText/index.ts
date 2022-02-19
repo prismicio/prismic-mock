@@ -92,7 +92,7 @@ export const richText = (
 			})
 			.flat()
 			.filter((block): block is prismicT.RTNode => block !== undefined)
-			.slice(0, blockCount);
+			.slice(0, blockCount) as prismicT.RichTextField;
 	} else {
 		return [];
 	}

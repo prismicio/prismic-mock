@@ -12,7 +12,7 @@ export type MockEmbedValueConfig<
 
 export type MockEmbedValue<
 	State extends prismicT.FieldState = prismicT.FieldState,
-> = prismicT.EmbedField<State>;
+> = prismicT.EmbedField<prismicT.AnyOEmbed & prismicT.OEmbedExtra, State>;
 
 export const embed = <
 	Model extends prismicT.CustomTypeModelEmbedField = prismicT.CustomTypeModelEmbedField,
@@ -26,5 +26,5 @@ export const embed = <
 		config.state === "empty"
 			? {}
 			: buildEmbedField({ seed: config.seed, embedData })
-	) as prismicT.EmbedField<State>;
+	) as MockEmbedValue<State>;
 };

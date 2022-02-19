@@ -10,7 +10,7 @@ import { contentRelationship } from "./contentRelationship";
 import { linkToMedia } from "./linkToMedia";
 
 export type MockLinkValueConfig<
-	LinkType extends prismicT.LinkType = prismicT.LinkType,
+	LinkType extends typeof prismicT.LinkType[keyof typeof prismicT.LinkType] = typeof prismicT.LinkType[keyof typeof prismicT.LinkType],
 	Model extends prismicT.CustomTypeModelLinkField = prismicT.CustomTypeModelLinkField,
 	State extends prismicT.FieldState = prismicT.FieldState,
 > = {
@@ -21,27 +21,27 @@ export type MockLinkValueConfig<
 	/**
 	 * A list of potential documents to which the field can be linked.
 	 */
-	linkableDocuments?: LinkType extends prismicT.LinkType.Document
+	linkableDocuments?: LinkType extends typeof prismicT.LinkType.Document
 		? prismicT.PrismicDocument[]
 		: never;
 } & MockValueConfig<Model> &
 	MockValueStateConfig<State>;
 
 type MockLinkValue<
-	LinkType extends prismicT.LinkType = prismicT.LinkType,
+	LinkType extends typeof prismicT.LinkType[keyof typeof prismicT.LinkType] = typeof prismicT.LinkType[keyof typeof prismicT.LinkType],
 	State extends prismicT.FieldState = prismicT.FieldState,
 > = State extends true
 	? prismicT.EmptyLinkField<LinkType>
-	: LinkType extends prismicT.LinkType.Web
+	: LinkType extends typeof prismicT.LinkType.Web
 	? prismicT.FilledLinkToWebField
-	: LinkType extends prismicT.LinkType.Media
+	: LinkType extends typeof prismicT.LinkType.Media
 	? prismicT.FilledLinkToMediaField
-	: LinkType extends prismicT.LinkType.Document
+	: LinkType extends typeof prismicT.LinkType.Document
 	? prismicT.FilledLinkToDocumentField
 	: never;
 
 export const link = <
-	LinkType extends prismicT.LinkType = prismicT.LinkType,
+	LinkType extends typeof prismicT.LinkType[keyof typeof prismicT.LinkType] = typeof prismicT.LinkType[keyof typeof prismicT.LinkType],
 	Model extends prismicT.CustomTypeModelLinkField = prismicT.CustomTypeModelLinkField,
 	State extends prismicT.FieldState = "filled",
 >(

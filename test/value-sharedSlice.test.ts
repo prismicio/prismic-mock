@@ -56,7 +56,7 @@ test("returns no items if model does not include items model", (t) => {
 	t.is(actual.items.length, 0);
 });
 
-test("can be customized with a pattern to determine the number of items", (t) => {
+test("can be customized with a specific number of items", (t) => {
 	const customModel = model.sharedSlice({
 		seed: t.title,
 		variations: [
@@ -69,34 +69,10 @@ test("can be customized with a pattern to determine the number of items", (t) =>
 		],
 	});
 
-	const actualNone = value.sharedSlice({
+	const actual = value.sharedSlice({
 		seed: t.title,
 		model: customModel,
-		pattern: "none",
+		itemsCount: 5,
 	});
-	t.true(actualNone.items.length < 1);
-
-	const actualShort = value.sharedSlice({
-		seed: t.title,
-		model: customModel,
-		pattern: "short",
-	});
-	t.true(actualShort.items.length >= 1);
-	t.true(actualShort.items.length <= 3);
-
-	const actualMedium = value.sharedSlice({
-		seed: t.title,
-		model: customModel,
-		pattern: "medium",
-	});
-	t.true(actualMedium.items.length >= 3);
-	t.true(actualMedium.items.length <= 6);
-
-	const actualLong = value.sharedSlice({
-		seed: t.title,
-		model: customModel,
-		pattern: "long",
-	});
-	t.true(actualLong.items.length >= 6);
-	t.true(actualLong.items.length <= 12);
+	t.is(actual.items.length, 5);
 });

@@ -10,25 +10,10 @@ import { MockValueConfig, ModelValue } from "../types";
 
 import * as modelGen from "../model";
 
-const patterns = {
-	short: {
-		minItems: 1,
-		maxItems: 3,
-	},
-	medium: {
-		minItems: 3,
-		maxItems: 6,
-	},
-	long: {
-		minItems: 6,
-		maxItems: 12,
-	},
-} as const;
-
 export type MockGroupValueConfig<
 	Model extends prismicT.CustomTypeModelGroupField = prismicT.CustomTypeModelGroupField,
 > = {
-	pattern?: keyof typeof patterns;
+	itemsCount?: number;
 	configs?: ValueForModelMapConfigs;
 } & MockValueConfig<Model>;
 
@@ -41,17 +26,12 @@ export const group = <
 
 	const model = config.model || modelGen.group({ seed: config.seed });
 
-	const patternKey =
-		config.pattern ||
-		faker.random.arrayElement(
-			Object.keys(patterns) as (keyof typeof patterns)[],
-		);
-	const pattern = patterns[patternKey];
-
-	const itemsCount = faker.datatype.number({
-		min: pattern.minItems,
-		max: pattern.maxItems,
-	});
+	const itemsCount =
+		config.itemsCount ??
+		faker.datatype.number({
+			min: 1,
+			max: 6,
+		});
 
 	return Array(itemsCount)
 		.fill(undefined)

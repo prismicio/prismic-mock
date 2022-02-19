@@ -10,26 +10,11 @@ import * as modelGen from "../model";
 import { slice } from "./slice";
 import { sharedSlice } from "./sharedSlice";
 
-const patterns = {
-	short: {
-		minItems: 1,
-		maxItems: 3,
-	},
-	medium: {
-		minItems: 3,
-		maxItems: 6,
-	},
-	long: {
-		minItems: 6,
-		maxItems: 12,
-	},
-} as const;
-
 export type MockSliceZoneValueConfig<
 	Model extends prismicT.CustomTypeModelSliceZoneField = prismicT.CustomTypeModelSliceZoneField,
 > = {
 	sharedSliceModels?: prismicT.SharedSliceModel[];
-	pattern?: keyof typeof patterns;
+	itemsCount?: number;
 	primaryFieldConfigs?: ValueForModelMapConfigs;
 	itemsFieldConfigs?: ValueForModelMapConfigs;
 } & MockValueConfig<Model>;
@@ -44,17 +29,12 @@ export const sliceZone = <
 	const model = config.model || modelGen.sliceZone({ seed: config.seed });
 
 	if (Object.keys(model.config.choices).length > 0) {
-		const patternKey =
-			config.pattern ||
-			faker.random.arrayElement(
-				Object.keys(patterns) as (keyof typeof patterns)[],
-			);
-		const pattern = patterns[patternKey];
-
-		const itemsCount = faker.datatype.number({
-			min: pattern.minItems,
-			max: pattern.maxItems,
-		});
+		const itemsCount =
+			config.itemsCount ??
+			faker.datatype.number({
+				min: 1,
+				max: 6,
+			});
 
 		return Array(itemsCount)
 			.fill(undefined)

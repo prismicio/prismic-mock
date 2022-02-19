@@ -165,7 +165,7 @@ type CustomTypeModelValue<T extends prismicT.CustomTypeModel> =
 		ModelValueMap<{
 			[P in keyof ValueOf<T["json"]> as ValueOf<
 				T["json"]
-			>[P]["type"] extends prismicT.CustomTypeModelFieldType.UID
+			>[P]["type"] extends typeof prismicT.CustomTypeModelFieldType.UID
 				? never
 				: P]: ValueOf<T["json"]>[P];
 		}>

@@ -13,7 +13,7 @@ test("supports custom seed", snapshotTwiceMacro, (t) =>
 	value.sliceZone({ seed: t.title }),
 );
 
-test("can be customized with a pattern to determine the number of Slices", (t) => {
+test("can be customized with a specific number of Slices", (t) => {
 	const customModel = model.sliceZone({
 		seed: t.title,
 		choices: {
@@ -21,29 +21,12 @@ test("can be customized with a pattern to determine the number of Slices", (t) =
 		},
 	});
 
-	const actualShort = value.sliceZone({
+	const actual = value.sliceZone({
 		seed: t.title,
-		pattern: "short",
 		model: customModel,
+		itemsCount: 5,
 	});
-	t.true(actualShort.length >= 1);
-	t.true(actualShort.length <= 3);
-
-	const actualMedium = value.sliceZone({
-		seed: t.title,
-		pattern: "medium",
-		model: customModel,
-	});
-	t.true(actualMedium.length >= 3);
-	t.true(actualMedium.length <= 6);
-
-	const actualLong = value.sliceZone({
-		seed: t.title,
-		pattern: "long",
-		model: customModel,
-	});
-	t.true(actualLong.length >= 6);
-	t.true(actualLong.length <= 12);
+	t.is(actual.length, 5);
 });
 
 test("can be provided with a list of Shared Slice models for Slice Zones containing Shared Slices", (t) => {
