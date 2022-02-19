@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://github.com/prismicio/prismic-mock/compare/v0.0.6...v0.0.7) (2022-02-19)
+
+
+### Features
+
+* more customizable and deterministic generated models and values ([#7](https://github.com/prismicio/prismic-mock/issues/7)) ([274f5ca](https://github.com/prismicio/prismic-mock/commit/274f5caa66e483828b70f1877087b08f58de4146))
+
+
+### Bug Fixes
+
+* support boolean for `isFilled` link value option ([ee4e473](https://github.com/prismicio/prismic-mock/commit/ee4e4735834e15fb9a98b8a9996204f0c6b039b2))
+
+
+### Documentation
+
+* add CONTRIBUTING link ([3026178](https://github.com/prismicio/prismic-mock/commit/302617836bbf8f275ed99d64ad9dada94145bd39))
+
+
+### Chore
+
+* add esbuild as dev dependency ([ac6ff21](https://github.com/prismicio/prismic-mock/commit/ac6ff211067fb446b014b10079a6ec31e66076c9))
+* **config:** update config to latest standards ([6b85471](https://github.com/prismicio/prismic-mock/commit/6b85471296cd1d3baac96070f5b343b4565360f1))
+* **deps:** update dependencies with `npm update` ([028c5f2](https://github.com/prismicio/prismic-mock/commit/028c5f27422325636de9805e5455bb0b073fc8e3))
+* downgrade to AVA 3 ([fccbbec](https://github.com/prismicio/prismic-mock/commit/fccbbec674d36e9f0029872d05444e6535d04e8f))
+* replace esbuild-register with ts-eager ([791bd74](https://github.com/prismicio/prismic-mock/commit/791bd749daff96d64dd6f0a68c89bfc614f929ab))
+* update dependencies ([eba4a05](https://github.com/prismicio/prismic-mock/commit/eba4a05fef6cbdda119cbd4bdeedbd832810b380))
+* update dependencies ([1fdfe6e](https://github.com/prismicio/prismic-mock/commit/1fdfe6e422e651a441d3553c0ea45bfa20797d83))
+* update dependencies (except faker) ([dd59fad](https://github.com/prismicio/prismic-mock/commit/dd59fad939591579f5dd135747738b46d47116ed))
+
 ### [0.0.6](https://github.com/prismicio/prismic-mock/compare/v0.0.5...v0.0.6) (2021-08-28)
 
 
