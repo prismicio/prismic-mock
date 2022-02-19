@@ -2,21 +2,23 @@ import * as prismicT from "@prismicio/types";
 import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
-import {
-	buildMockGroupFieldMap,
-	BuildMockGroupFieldMapConfig,
-} from "../lib/buildMockGroupFieldMap";
 
-import { MockModelConfig } from "../types";
+import { GroupFieldModelMap, MockModelConfig } from "../types";
 
-type MockSliceModelConfig = {
-	repeatFieldConfig?: BuildMockGroupFieldMapConfig;
-	nonRepeatFieldConfig?: BuildMockGroupFieldMapConfig;
+type MockSliceModelConfig<
+	NonRepeatFields extends GroupFieldModelMap = GroupFieldModelMap,
+	RepeatFields extends GroupFieldModelMap = GroupFieldModelMap,
+> = {
+	nonRepeatFields?: NonRepeatFields;
+	repeatFields?: RepeatFields;
 } & MockModelConfig;
 
-export const slice = (
-	config: MockSliceModelConfig = {},
-): prismicT.CustomTypeModelSlice => {
+export const slice = <
+	NonRepeatFields extends GroupFieldModelMap,
+	RepeatFields extends GroupFieldModelMap,
+>(
+	config: MockSliceModelConfig<NonRepeatFields, RepeatFields> = {},
+): prismicT.CustomTypeModelSlice<NonRepeatFields, RepeatFields> => {
 	const faker = createFaker(config.seed);
 
 	return {
@@ -27,13 +29,7 @@ export const slice = (
 			: prismicT.CustomTypeModelSliceDisplay.List,
 		fieldset: changeCase.capitalCase(faker.lorem.words()),
 		description: faker.lorem.sentence(),
-		repeat: buildMockGroupFieldMap({
-			seed: config.repeatFieldConfig?.seed ?? config.seed,
-			configs: config.repeatFieldConfig?.configs,
-		}),
-		"non-repeat": buildMockGroupFieldMap({
-			seed: config.nonRepeatFieldConfig?.seed ?? config.seed,
-			configs: config.nonRepeatFieldConfig?.configs,
-		}),
+		repeat: config.repeatFields || ({} as RepeatFields),
+		"non-repeat": config.nonRepeatFields || ({} as NonRepeatFields),
 	};
 };

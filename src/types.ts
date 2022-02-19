@@ -60,9 +60,20 @@ export type PrismicModel =
 	| prismicT.SharedSliceModel
 	| prismicT.SharedSliceModelVariation;
 
+export type GroupFieldModelMap = Record<
+	string,
+	prismicT.CustomTypeModelFieldForGroup
+>;
+
 export type MockValueConfig<Model extends PrismicModel = PrismicModel> = {
 	seed?: Seed;
 	model?: Model;
+};
+
+export type MockValueStateConfig<
+	State extends prismicT.FieldState = prismicT.FieldState,
+> = {
+	state?: State;
 };
 
 export type MockValueConfigForModel<Model extends PrismicModel> =
@@ -127,7 +138,17 @@ export type ModelValue<T extends PrismicModel> =
 		: T extends prismicT.CustomTypeModelGroupField
 		? CustomTypeModelGroupFieldValue<T>
 		: T extends prismicT.CustomTypeModelSliceZoneField
-		? prismicT.SliceZone
+		? prismicT.SliceZone<
+				ValueOf<{
+					[P in keyof T["config"]["choices"] as P extends string
+						? P
+						: never]: T["config"]["choices"][P] extends prismicT.CustomTypeModelSlice
+						? CustomTypeModelSliceValue<T["config"]["choices"][P], P>
+						: T["config"]["choices"][P] extends prismicT.CustomTypeModelSharedSlice
+						? prismicT.SharedSlice<P>
+						: never;
+				}>
+		  >
 		: T extends prismicT.CustomTypeModelSlice
 		? CustomTypeModelSliceValue<T>
 		: T extends prismicT.CustomTypeModelSharedSlice
@@ -140,7 +161,15 @@ export type ModelValue<T extends PrismicModel> =
 		: never;
 
 type CustomTypeModelValue<T extends prismicT.CustomTypeModel> =
-	prismicT.PrismicDocument<ModelValueMap<ValueOf<T["json"]>>>;
+	prismicT.PrismicDocument<
+		ModelValueMap<{
+			[P in keyof ValueOf<T["json"]> as ValueOf<
+				T["json"]
+			>[P]["type"] extends typeof prismicT.CustomTypeModelFieldType.UID
+				? never
+				: P]: ValueOf<T["json"]>[P];
+		}>
+	>;
 
 type CustomTypeModelFieldForGroupValue<
 	T extends prismicT.CustomTypeModelFieldForGroup,
@@ -182,12 +211,14 @@ type CustomTypeModelGroupFieldValue<
 	T extends prismicT.CustomTypeModelGroupField,
 > = prismicT.GroupField<ModelValueMap<T["config"]["fields"]>>;
 
-type CustomTypeModelSliceValue<T extends prismicT.CustomTypeModelSlice> =
-	prismicT.Slice<
-		string,
-		ModelValueMap<T["non-repeat"]>,
-		ModelValueMap<T["repeat"]>
-	>;
+type CustomTypeModelSliceValue<
+	T extends prismicT.CustomTypeModelSlice,
+	SliceType = string,
+> = prismicT.Slice<
+	SliceType,
+	ModelValueMap<T["non-repeat"]>,
+	ModelValueMap<T["repeat"]>
+>;
 
 type SharedSliceModelValue<T extends prismicT.SharedSliceModel> =
 	prismicT.SharedSlice<

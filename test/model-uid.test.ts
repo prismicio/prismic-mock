@@ -4,6 +4,8 @@ import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as model from "../src/model";
 
-test("creates a mock UID field model", snapshotTwiceMacro, model.uid);
+test("creates a mock UID field model", snapshotTwiceMacro, () => model.uid());
 
-test("supports custom seed", snapshotTwiceMacro, () => model.uid({ seed: 1 }));
+test("supports custom seed", snapshotTwiceMacro, (t) =>
+	model.uid({ seed: t.title }),
+);

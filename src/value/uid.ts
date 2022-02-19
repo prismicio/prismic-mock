@@ -11,7 +11,7 @@ export type MockUIDValueConfig<
 
 export const uid = (
 	config: MockUIDValueConfig = {},
-): prismicT.PrismicDocument["uid"] => {
+): NonNullable<prismicT.PrismicDocument["uid"]> => {
 	const faker = createFaker(config.seed);
 
 	return changeCase.snakeCase(faker.lorem.words(2));

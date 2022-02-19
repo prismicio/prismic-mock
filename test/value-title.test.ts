@@ -5,14 +5,16 @@ import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 import * as value from "../src/value";
 import * as model from "../src/model";
 
-test("creates a mock Title field value", snapshotTwiceMacro, value.title);
+test("creates a mock Title field value", snapshotTwiceMacro, () =>
+	value.title(),
+);
 
-test("supports custom seed", snapshotTwiceMacro, () =>
-	value.title({ seed: 1 }),
+test("supports custom seed", snapshotTwiceMacro, (t) =>
+	value.title({ seed: t.title }),
 );
 
 test("supports custom model", (t) => {
-	const customModelBase = model.title();
+	const customModelBase = model.title({ seed: t.title });
 	const customModel = {
 		...customModelBase,
 		config: {
@@ -21,13 +23,17 @@ test("supports custom model", (t) => {
 		},
 	};
 
-	const actual = value.title({ model: customModel });
+	const actual = value.title({
+		seed: t.title,
+		model: customModel,
+	});
 
 	t.is(actual[0].type, customModel.config.single);
 });
 
 test("can be customized with a pattern to determine title length", (t) => {
 	const actualShort = value.title({
+		seed: t.title,
 		pattern: "short",
 	});
 	const actualShortWordCount = actualShort[0].text.split(" ").length;
@@ -35,6 +41,7 @@ test("can be customized with a pattern to determine title length", (t) => {
 	t.true(actualShortWordCount <= 3);
 
 	const actualMedium = value.title({
+		seed: t.title,
 		pattern: "medium",
 	});
 	const actualMediumWordCount = actualMedium[0].text.split(" ").length;
@@ -42,6 +49,7 @@ test("can be customized with a pattern to determine title length", (t) => {
 	t.true(actualMediumWordCount <= 6);
 
 	const actualLong = value.title({
+		seed: t.title,
 		pattern: "long",
 	});
 	const actualLongWordCount = actualLong[0].text.split(" ").length;

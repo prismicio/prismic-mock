@@ -4,8 +4,10 @@ import { value, model } from "../src";
 import { buildContentRelationshipField } from "../src/lib/buildContentRelationshipField";
 
 test("returns undefined uid if document.uid is null", (t) => {
-	const customModel = model.customType({ withUID: false });
-	const document = value.document({ model: customModel });
+	const document = value.document({
+		seed: t.title,
+		model: model.customType({ seed: t.title }),
+	});
 
 	const actual = buildContentRelationshipField({ document });
 
@@ -14,7 +16,7 @@ test("returns undefined uid if document.uid is null", (t) => {
 });
 
 test("returns undefined url if document.url is null", (t) => {
-	const document = value.document();
+	const document = value.document({ seed: t.title });
 	document.url = null;
 
 	const actual = buildContentRelationshipField({ document });

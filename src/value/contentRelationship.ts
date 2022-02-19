@@ -5,59 +5,73 @@ import { createFaker } from "../lib/createFaker";
 import { generateCustomTypeId } from "../lib/generateCustomTypeId";
 import { generateTags } from "../lib/generateTags";
 
-import { MockValueConfig } from "../types";
+import { MockValueStateConfig, MockValueConfig } from "../types";
 
 import * as modelGen from "../model";
 
 import { document as documentGen } from "./document";
 
 export type MockContentRelationshipValueConfig<
-	IsFilled extends boolean = boolean,
 	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
+	State extends prismicT.FieldState = prismicT.FieldState,
 > = {
-	isFilled?: IsFilled;
 	/**
 	 * A list of potential documents to which the field can be linked.
 	 */
 	linkableDocuments?: prismicT.PrismicDocument[];
-} & MockValueConfig<Model>;
+} & MockValueConfig<Model> &
+	MockValueStateConfig<State>;
 
-type MockContentRelationshipValue<IsFilled extends boolean = boolean> =
-	IsFilled extends true
-		? prismicT.FilledLinkToDocumentField
-		: prismicT.EmptyLinkField<prismicT.LinkType.Document>;
+type MockContentRelationshipValue<
+	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
+	State extends prismicT.FieldState = prismicT.FieldState,
+> = prismicT.RelationField<
+	Model["config"]["customtypes"],
+	string,
+	never,
+	State
+>;
 
 export const contentRelationship = <
-	IsFilled extends boolean = true,
 	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
+	State extends prismicT.FieldState = "filled",
 >(
-	config: MockContentRelationshipValueConfig<IsFilled, Model> = {},
-): MockContentRelationshipValue<IsFilled> => {
+	config: MockContentRelationshipValueConfig<Model, State> = {},
+): MockContentRelationshipValue<Model, State> => {
 	const faker = createFaker(config.seed);
 
-	const isFilled = config.isFilled ?? true;
-
-	if (isFilled) {
+	if (config.state === "empty") {
+		return {
+			link_type: prismicT.LinkType.Document,
+		} as MockContentRelationshipValue<Model, State>;
+	} else {
 		const model =
 			config.model || modelGen.contentRelationship({ seed: config.seed });
 
 		const linkableDocuments = config.linkableDocuments
-			? config.linkableDocuments.filter((document) => {
-					let shouldKeep = true;
+			? config.linkableDocuments.filter(
+					(
+						document,
+					): document is prismicT.PrismicDocument<
+						never,
+						NonNullable<Model["config"]["customtypes"]>[number]
+					> => {
+						let shouldKeep = true;
 
-					if (model.config.customtypes) {
-						shouldKeep =
-							shouldKeep && model.config.customtypes.includes(document.type);
-					}
+						if (model.config.customtypes) {
+							shouldKeep =
+								shouldKeep && model.config.customtypes.includes(document.type);
+						}
 
-					if (model.config.tags) {
-						shouldKeep =
-							shouldKeep &&
-							model.config.tags.some((tag) => document.tags.includes(tag));
-					}
+						if (model.config.tags) {
+							shouldKeep =
+								shouldKeep &&
+								model.config.tags.some((tag) => document.tags.includes(tag));
+						}
 
-					return shouldKeep;
-			  })
+						return shouldKeep;
+					},
+			  )
 			: [
 					{
 						...documentGen({ seed: config.seed }),
@@ -67,7 +81,10 @@ export const contentRelationship = <
 						tags: model.config.tags
 							? faker.random.arrayElements(model.config.tags)
 							: generateTags({ seed: config.seed }),
-					},
+					} as prismicT.PrismicDocument<
+						never,
+						NonNullable<Model["config"]["customtypes"]>[number]
+					>,
 			  ];
 
 		const document = faker.random.arrayElement(linkableDocuments);
@@ -76,10 +93,8 @@ export const contentRelationship = <
 			throw new Error("A linkable document could not be found.");
 		}
 
-		return buildContentRelationshipField({ document });
-	} else {
-		return {
-			link_type: prismicT.LinkType.Document,
-		} as MockContentRelationshipValue<IsFilled>;
+		return buildContentRelationshipField({
+			document,
+		}) as unknown as MockContentRelationshipValue<Model, State>;
 	}
 };

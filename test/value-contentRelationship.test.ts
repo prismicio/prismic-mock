@@ -8,20 +8,22 @@ import * as model from "../src/model";
 test(
 	"creates a mock Content Relationship field value",
 	snapshotTwiceMacro,
-	value.contentRelationship,
+	() => value.contentRelationship(),
 );
 
-test("supports custom seed", snapshotTwiceMacro, () =>
-	value.contentRelationship({ seed: 1 }),
+test("supports custom seed", snapshotTwiceMacro, (t) =>
+	value.contentRelationship({ seed: t.title }),
 );
 
 test("supports custom model", (t) => {
 	const customModel = model.contentRelationship({
-		constrainCustomTypes: true,
-		constrainTags: true,
+		seed: t.title,
+		customTypeIDs: ["type"],
+		tags: ["tag"],
 	});
 
 	const actual = value.contentRelationship({
+		seed: t.title,
 		model: customModel,
 	});
 
@@ -32,15 +34,24 @@ test("supports custom model", (t) => {
 	t.true(actual.tags.every((tag) => customModel.config.tags!.includes(tag)));
 });
 
-test("can be configured to return an unfilled value", (t) => {
-	const actual = value.contentRelationship({ isFilled: false });
+test("can be configured to return an empty value", (t) => {
+	const actual = value.contentRelationship({
+		seed: t.title,
+		state: "empty",
+	});
 
 	t.false("url" in actual);
 });
 
 test("can be configured to return a link from a given list of documents", (t) => {
-	const linkableDocuments = [value.document(), value.document()];
-	const actual = value.contentRelationship({ linkableDocuments });
+	const linkableDocuments = [
+		value.document({ seed: t.title }),
+		value.document({ seed: t.title }),
+	];
+	const actual = value.contentRelationship({
+		seed: t.title,
+		linkableDocuments,
+	});
 
 	t.true(
 		linkableDocuments.some(
@@ -51,15 +62,16 @@ test("can be configured to return a link from a given list of documents", (t) =>
 
 test("can be configured to return a link from a given list of documents with constraints", (t) => {
 	const linkableDocuments = [
-		{ ...value.document(), type: "foo", tags: ["bar"] },
-		value.document(),
+		{ ...value.document({ seed: t.title }), type: "foo", tags: ["bar"] },
+		value.document({ seed: t.title }),
 	];
 
-	const customModel = model.contentRelationship();
+	const customModel = model.contentRelationship({ seed: t.title });
 	customModel.config.customtypes = ["foo"];
 	customModel.config.tags = ["bar"];
 
 	const actual = value.contentRelationship({
+		seed: t.title,
 		model: customModel,
 		linkableDocuments,
 	});
@@ -69,16 +81,21 @@ test("can be configured to return a link from a given list of documents with con
 
 test("throws if a linkable document cannot be found within constraints", (t) => {
 	const linkableDocuments = [
-		{ ...value.document(), type: "not-foo", tags: ["not-bar"] },
+		{
+			...value.document({ seed: t.title }),
+			type: "not-foo",
+			tags: ["not-bar"],
+		},
 	];
 
-	const customModel = model.contentRelationship();
+	const customModel = model.contentRelationship({ seed: t.title });
 	customModel.config.customtypes = ["foo"];
 	customModel.config.tags = ["bar"];
 
 	t.throws(
 		() =>
 			value.contentRelationship({
+				seed: t.title,
 				model: customModel,
 				linkableDocuments,
 			}),

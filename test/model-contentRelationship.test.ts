@@ -7,25 +7,29 @@ import * as model from "../src/model";
 test(
 	"creates a mock Content Relationship field model",
 	snapshotTwiceMacro,
-	model.contentRelationship,
+	() => model.contentRelationship(),
 );
 
-test("supports custom seed", snapshotTwiceMacro, () =>
-	model.contentRelationship({ seed: 1 }),
+test("supports custom seed", snapshotTwiceMacro, (t) =>
+	model.contentRelationship({ seed: t.title }),
 );
 
 test("can be configured to constrain by custom type", (t) => {
-	const actual = model.contentRelationship({ constrainCustomTypes: true });
+	const customTypeIDs = ["foo", "bar"];
+	const actual = model.contentRelationship({
+		seed: t.title,
+		customTypeIDs,
+	});
 
-	t.deepEqual(actual.config.customtypes, ["blockchains"]);
+	t.is(actual.config.customtypes, customTypeIDs);
 });
 
 test("can be configured to constrain by tags", (t) => {
-	const actual = model.contentRelationship({ constrainTags: true });
+	const tags = ["foo", "bar"];
+	const actual = model.contentRelationship({
+		seed: t.title,
+		tags,
+	});
 
-	t.deepEqual(actual.config.tags, [
-		"Ab",
-		"Dolores Ratione Distinctio",
-		"Placeat",
-	]);
+	t.is(actual.config.tags, tags);
 });

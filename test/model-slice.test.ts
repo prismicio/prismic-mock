@@ -1,83 +1,32 @@
 import test from "ava";
+import * as prismicT from "@prismicio/types";
 
 import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
-import * as model from "../src/model";
+import * as prismicM from "../src";
 
-test("creates a mock Slice field model", snapshotTwiceMacro, model.slice);
-
-test("supports custom seed", snapshotTwiceMacro, () =>
-	model.slice({ seed: 1 }),
+test("creates a mock Slice field model", snapshotTwiceMacro, () =>
+	prismicM.model.slice(),
 );
 
-test("supports custom seed for repeat field", snapshotTwiceMacro, () =>
-	model.slice({
-		seed: 1,
-		repeatFieldConfig: {
-			seed: 2,
-		},
-	}),
+test("supports custom seed", snapshotTwiceMacro, (t) =>
+	prismicM.model.slice({ seed: t.title }),
 );
 
-test("supports custom seed for non-repeat field", snapshotTwiceMacro, () =>
-	model.slice({
-		seed: 1,
-		nonRepeatFieldConfig: {
-			seed: 2,
+test("can be configured for specific non-repeat and repeat fields", (t) => {
+	const actual = prismicM.model.slice({
+		seed: t.title,
+		nonRepeatFields: {
+			boolean: prismicM.model.boolean({ seed: t.title }),
 		},
-	}),
-);
-
-test("can be configured with specific repeat and non-repeat field configuration", (t) => {
-	const actual = model.slice({
-		repeatFieldConfig: {
-			configs: {
-				boolean: { count: 1 },
-				color: { count: 0 },
-				contentRelationship: { count: 0 },
-				date: { count: 0 },
-				embed: { count: 0 },
-				geoPoint: { count: 0 },
-				image: { count: 0 },
-				integrationFields: { count: 0 },
-				keyText: { count: 0 },
-				link: { count: 0 },
-				linkToMedia: { count: 0 },
-				number: { count: 0 },
-				richText: { count: 0 },
-				select: { count: 0 },
-				timestamp: { count: 0 },
-				title: { count: 0 },
-			},
-		},
-		nonRepeatFieldConfig: {
-			configs: {
-				boolean: { count: 1 },
-				color: { count: 0 },
-				contentRelationship: { count: 0 },
-				date: { count: 0 },
-				embed: { count: 0 },
-				geoPoint: { count: 0 },
-				image: { count: 0 },
-				integrationFields: { count: 0 },
-				keyText: { count: 0 },
-				link: { count: 0 },
-				linkToMedia: { count: 0 },
-				number: { count: 0 },
-				richText: { count: 0 },
-				select: { count: 0 },
-				timestamp: { count: 0 },
-				title: { count: 0 },
-			},
+		repeatFields: {
+			keyText: prismicM.model.keyText({ seed: t.title }),
 		},
 	});
 
-	const repeatFieldIds = Object.keys(actual.repeat);
-	const nonRepeatFieldIds = Object.keys(actual["non-repeat"]);
-
-	t.is(repeatFieldIds.length, 1);
-	t.is(actual.repeat[repeatFieldIds[0]].type, "Boolean");
-
-	t.is(nonRepeatFieldIds.length, 1);
-	t.is(actual["non-repeat"][nonRepeatFieldIds[0]].type, "Boolean");
+	t.is(
+		actual["non-repeat"].boolean.type,
+		prismicT.CustomTypeModelFieldType.Boolean,
+	);
+	t.is(actual.repeat.keyText.type, prismicT.CustomTypeModelFieldType.Text);
 });

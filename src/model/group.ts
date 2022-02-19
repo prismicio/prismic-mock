@@ -1,31 +1,24 @@
 import * as prismicT from "@prismicio/types";
 import * as changeCase from "change-case";
 
-import {
-	buildMockGroupFieldMap,
-	BuildMockGroupFieldMapConfig,
-} from "../lib/buildMockGroupFieldMap";
 import { createFaker } from "../lib/createFaker";
 
-import { MockModelConfig } from "../types";
+import { GroupFieldModelMap, MockModelConfig } from "../types";
 
-type MockGroupModelConfig = BuildMockGroupFieldMapConfig & MockModelConfig;
+type MockGroupModelConfig<Fields extends GroupFieldModelMap> = {
+	fields?: Fields;
+} & MockModelConfig;
 
-export const group = (
-	config: MockGroupModelConfig = {},
-): prismicT.CustomTypeModelGroupField => {
+export const group = <Fields extends GroupFieldModelMap>(
+	config: MockGroupModelConfig<Fields> = {},
+): prismicT.CustomTypeModelGroupField<Fields> => {
 	const faker = createFaker(config.seed);
-
-	const fields = buildMockGroupFieldMap({
-		seed: config.seed,
-		configs: config.configs,
-	});
 
 	return {
 		type: prismicT.CustomTypeModelFieldType.Group,
 		config: {
 			label: changeCase.capitalCase(faker.company.bsNoun()),
-			fields,
+			fields: config.fields || ({} as Fields),
 		},
 	};
 };

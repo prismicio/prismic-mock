@@ -8,12 +8,12 @@ import { MockRichTextValueConfig } from "../../types";
 import * as modelGen from "../../model";
 
 type RichTextNodeTitleType =
-	| prismicT.RichTextNodeType.heading1
-	| prismicT.RichTextNodeType.heading2
-	| prismicT.RichTextNodeType.heading3
-	| prismicT.RichTextNodeType.heading4
-	| prismicT.RichTextNodeType.heading5
-	| prismicT.RichTextNodeType.heading6;
+	| typeof prismicT.RichTextNodeType.heading1
+	| typeof prismicT.RichTextNodeType.heading2
+	| typeof prismicT.RichTextNodeType.heading3
+	| typeof prismicT.RichTextNodeType.heading4
+	| typeof prismicT.RichTextNodeType.heading5
+	| typeof prismicT.RichTextNodeType.heading6;
 
 type RTHeadingNode =
 	| prismicT.RTHeading1Node
@@ -61,7 +61,7 @@ export const heading = (
 				prismicT.RichTextNodeType.heading4,
 				prismicT.RichTextNodeType.heading5,
 				prismicT.RichTextNodeType.heading6,
-			].includes(type as prismicT.RichTextNodeType),
+			].includes(type as RichTextNodeTitleType),
 		) as RichTextNodeTitleType[];
 	const type = faker.random.arrayElement(types);
 

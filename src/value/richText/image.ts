@@ -1,6 +1,6 @@
 import * as prismicT from "@prismicio/types";
 
-import { buildImageField } from "../../lib/buildImageField";
+import { buildImageFieldImage } from "../../lib/buildImageFieldImage";
 import { getMockImageData } from "../../lib/getMockImageData";
 
 import { MockRichTextValueConfig } from "../../types";
@@ -11,7 +11,11 @@ export const image = (
 	config: MockRichTextImageValueConfig = {},
 ): prismicT.RTImageNode | undefined => {
 	const imageData = getMockImageData({ seed: config.seed });
-	const imageField = buildImageField({ seed: config.seed, imageData });
+	const imageField = buildImageFieldImage({
+		seed: config.seed,
+		imageData,
+		state: false,
+	});
 
 	return {
 		type: prismicT.RichTextNodeType.image,

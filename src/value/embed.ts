@@ -3,16 +3,28 @@ import * as prismicT from "@prismicio/types";
 import { buildEmbedField } from "../lib/buildEmbedField";
 import { getMockEmbedData } from "../lib/getMockEmbedData";
 
-import { MockValueConfig } from "../types";
+import { MockValueStateConfig, MockValueConfig } from "../types";
 
 export type MockEmbedValueConfig<
 	Model extends prismicT.CustomTypeModelEmbedField = prismicT.CustomTypeModelEmbedField,
-> = MockValueConfig<Model>;
+	State extends prismicT.FieldState = prismicT.FieldState,
+> = MockValueConfig<Model> & MockValueStateConfig<State>;
 
-export const embed = (
-	config: MockEmbedValueConfig = {},
-): prismicT.EmbedField => {
+export type MockEmbedValue<
+	State extends prismicT.FieldState = prismicT.FieldState,
+> = prismicT.EmbedField<prismicT.AnyOEmbed & prismicT.OEmbedExtra, State>;
+
+export const embed = <
+	Model extends prismicT.CustomTypeModelEmbedField = prismicT.CustomTypeModelEmbedField,
+	State extends prismicT.FieldState = "filled",
+>(
+	config: MockEmbedValueConfig<Model, State> = {},
+): MockEmbedValue<State> => {
 	const embedData = getMockEmbedData({ seed: config.seed });
 
-	return buildEmbedField({ seed: config.seed, embedData });
+	return (
+		config.state === "empty"
+			? {}
+			: buildEmbedField({ seed: config.seed, embedData })
+	) as MockEmbedValue<State>;
 };

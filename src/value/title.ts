@@ -20,5 +20,5 @@ export const title = (
 			model: config.model,
 			pattern: config.pattern,
 		})!,
-	];
+	] as prismicT.TitleField;
 };

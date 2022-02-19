@@ -5,17 +5,23 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
 
-type MockImageModelConfig = {
+type MockImageModelConfig<ThumbnailNames extends string = string> = {
 	withConstraint?: boolean;
-	thumbnailsCount?: number;
+	thumbnailNames?: readonly ThumbnailNames[];
 } & MockModelConfig;
 
-export const image = (
-	config: MockImageModelConfig = {},
-): prismicT.CustomTypeModelImageField => {
+export const image = <ThumbnailNames extends string = string>(
+	config: MockImageModelConfig<ThumbnailNames> = {},
+): prismicT.CustomTypeModelImageField<ThumbnailNames> => {
 	const faker = createFaker(config.seed);
 
-	const thumbnailsCount = config.thumbnailsCount ?? faker.datatype.number(3);
+	const thumbnails = (config.thumbnailNames || []).map((name) => {
+		return {
+			name,
+			width: faker.datatype.number({ min: 500, max: 2000 }),
+			height: faker.datatype.number({ min: 500, max: 2000 }),
+		};
+	});
 
 	return {
 		type: prismicT.CustomTypeModelFieldType.Image,
@@ -29,13 +35,7 @@ export const image = (
 					? faker.datatype.number({ min: 500, max: 2000 })
 					: null,
 			},
-			thumbnails: Array(thumbnailsCount)
-				.fill(undefined)
-				.map(() => ({
-					name: changeCase.pascalCase(faker.company.bsNoun()),
-					width: faker.datatype.number({ min: 500, max: 2000 }),
-					height: faker.datatype.number({ min: 500, max: 2000 }),
-				})),
+			thumbnails,
 		},
 	};
 };

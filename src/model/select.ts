@@ -5,31 +5,26 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
 
-type MockSelectModelConfig = {
-	optionsCount?: number;
-	withDefaultValue?: boolean;
+type MockSelectModelConfig<
+	Option extends string = string,
+	DefaultOption extends Option = Option,
+> = {
+	options?: Option[];
+	defaultValue?: DefaultOption;
 } & MockModelConfig;
 
-export const select = (
-	config: MockSelectModelConfig = {},
-): prismicT.CustomTypeModelSelectField => {
+export const select = <Option extends string, DefaultOption extends Option>(
+	config: MockSelectModelConfig<Option, DefaultOption> = {},
+): prismicT.CustomTypeModelSelectField<Option, DefaultOption> => {
 	const faker = createFaker(config.seed);
-
-	const optionsCount =
-		config.optionsCount ?? faker.datatype.number({ min: 1, max: 5 });
-	const options = Array(optionsCount)
-		.fill(undefined)
-		.map(() => changeCase.capitalCase(faker.company.bsBuzz()));
 
 	return {
 		type: prismicT.CustomTypeModelFieldType.Select,
 		config: {
 			label: changeCase.capitalCase(faker.company.bsNoun()),
 			placeholder: changeCase.sentenceCase(faker.lorem.words(3)),
-			options,
-			default_value: config.withDefaultValue
-				? faker.random.arrayElement(options)
-				: undefined,
+			options: config.options || [],
+			default_value: config.defaultValue || undefined,
 		},
 	};
 };
