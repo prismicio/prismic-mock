@@ -14,5 +14,5 @@ export const uid = (
 ): NonNullable<prismicT.PrismicDocument["uid"]> => {
 	const faker = createFaker(config.seed);
 
-	return changeCase.snakeCase(faker.lorem.words(2));
+	return changeCase.snakeCase(faker.words(faker.range(1, 3)));
 };

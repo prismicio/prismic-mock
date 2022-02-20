@@ -17,7 +17,7 @@ export const group = <Fields extends GroupFieldModelMap>(
 	return {
 		type: prismicT.CustomTypeModelFieldType.Group,
 		config: {
-			label: changeCase.capitalCase(faker.company.bsNoun()),
+			label: changeCase.capitalCase(faker.word()),
 			fields: config.fields || ({} as Fields),
 		},
 	};

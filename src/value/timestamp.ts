@@ -25,19 +25,21 @@ export const timestamp = <
 ): MockTimestampValue<State> => {
 	const faker = createFaker(config.seed);
 
-	// Faker seems to have problems accepting parameters for `faker.date.between`
-	// if the parameters are too precise. We can get around this by only using
-	// generated dates, not timestamps.
-	const after =
-		config.after ||
-		faker.date.past(20, new Date("2021-03-07")).toISOString().split("T")[0];
-	const before =
-		config.before ||
-		faker.date.future(20, new Date("2021-03-07")).toISOString().split("T")[0];
+	if (config.state === "empty") {
+		return null as MockTimestampValue<State>;
+	} else {
+		let date: Date;
 
-	return (
-		config.state === "empty"
-			? null
-			: faker.date.between(after, before).toISOString()
-	) as MockTimestampValue<State>;
+		if (config.after && config.before) {
+			date = faker.dateBetween(config.after, config.before);
+		} else if (config.after) {
+			date = faker.dateAfter(config.after);
+		} else if (config.before) {
+			date = faker.dateBefore(config.before);
+		} else {
+			date = faker.date();
+		}
+
+		return date.toISOString() as MockTimestampValue<State>;
+	}
 };

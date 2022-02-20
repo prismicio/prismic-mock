@@ -24,7 +24,7 @@ test("supports custom model", (t) => {
 
 	const actual = value.link({
 		// This specific seed ensures `target` will be "_blank".
-		seed: 1,
+		seed: 2,
 		model: customModel,
 		type: prismicT.LinkType.Web,
 	});

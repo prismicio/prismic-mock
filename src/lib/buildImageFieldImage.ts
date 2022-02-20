@@ -1,4 +1,5 @@
 import * as prismicT from "@prismicio/types";
+import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
 
@@ -41,8 +42,8 @@ export const buildImageFieldImage = <
 		return {
 			url: url.toString(),
 			dimensions,
-			alt: faker.lorem.sentence(),
-			copyright: faker.lorem.sentence(),
+			alt: changeCase.sentenceCase(faker.words(faker.range(5, 15))),
+			copyright: changeCase.sentenceCase(faker.words(faker.range(5, 15))),
 		} as prismicT.ImageFieldImage<State>;
 	}
 };

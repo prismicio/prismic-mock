@@ -18,22 +18,18 @@ export const image = <ThumbnailNames extends string = string>(
 	const thumbnails = (config.thumbnailNames || []).map((name) => {
 		return {
 			name,
-			width: faker.datatype.number({ min: 500, max: 2000 }),
-			height: faker.datatype.number({ min: 500, max: 2000 }),
+			width: faker.range(500, 2000),
+			height: faker.range(500, 2000),
 		};
 	});
 
 	return {
 		type: prismicT.CustomTypeModelFieldType.Image,
 		config: {
-			label: changeCase.capitalCase(faker.company.bsNoun()),
+			label: changeCase.capitalCase(faker.word()),
 			constraint: {
-				width: config.withConstraint
-					? faker.datatype.number({ min: 500, max: 2000 })
-					: null,
-				height: config.withConstraint
-					? faker.datatype.number({ min: 500, max: 2000 })
-					: null,
+				width: config.withConstraint ? faker.range(500, 2000) : null,
+				height: config.withConstraint ? faker.range(500, 2000) : null,
 			},
 			thumbnails,
 		},

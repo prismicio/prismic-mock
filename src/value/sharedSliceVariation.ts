@@ -35,18 +35,14 @@ export const sharedSliceVariation = <
 
 	const itemsCount =
 		Object.keys(model.items).length > 0
-			? config.itemsCount ??
-			  faker.datatype.number({
-					min: 1,
-					max: 6,
-			  })
+			? config.itemsCount ?? faker.range(1, 6)
 			: 0;
 
 	return {
 		slice_type: sliceType,
 		slice_label: null,
 		variation: model.id,
-		version: faker.git.shortSha(),
+		version: faker.hash(7),
 		primary: valueForModelMap({
 			seed: config.seed,
 			map: model.primary,

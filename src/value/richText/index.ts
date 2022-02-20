@@ -70,22 +70,17 @@ export const richText = (
 	if (types.length > 0) {
 		const patternKey =
 			config.pattern ||
-			faker.random.arrayElement(
-				Object.keys(patterns) as (keyof typeof patterns)[],
-			);
+			faker.randomElement(Object.keys(patterns) as (keyof typeof patterns)[]);
 		const pattern = patterns[patternKey];
 
 		const blockCount = supportsMultipleBlocks
-			? faker.datatype.number({
-					min: pattern.blockCountMin,
-					max: pattern.blockCountMax,
-			  })
+			? faker.range(pattern.blockCountMin, pattern.blockCountMax)
 			: 1;
 
 		return Array(blockCount)
 			.fill(undefined)
 			.map(() => {
-				const type = faker.random.arrayElement(types);
+				const type = faker.randomElement(types);
 				const generator = generators[type];
 
 				return generator({ seed: config.seed, model });

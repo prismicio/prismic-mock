@@ -1,4 +1,5 @@
 import * as prismicT from "@prismicio/types";
+import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
 
@@ -28,12 +29,12 @@ export const linkToMedia = <
 	} else {
 		return {
 			link_type: prismicT.LinkType.Media,
-			name: faker.system.commonFileName(),
-			kind: faker.system.commonFileType(),
-			url: faker.internet.url(),
-			size: faker.datatype.number().toString(),
-			height: faker.datatype.number().toString(),
-			width: faker.datatype.number().toString(),
+			name: `${changeCase.snakeCase(faker.words(faker.range(1, 2)))}.example`,
+			kind: changeCase.snakeCase(faker.word()),
+			url: faker.url(),
+			size: faker.range(500, 3000).toString(),
+			height: faker.range(500, 3000).toString(),
+			width: faker.range(500, 3000).toString(),
 		} as MockLinkToMediaValue<State>;
 	}
 };

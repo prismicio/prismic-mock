@@ -23,12 +23,12 @@ export const slice = <
 
 	return {
 		type: prismicT.CustomTypeModelSliceType.Slice,
-		icon: changeCase.snakeCase(faker.company.bsNoun()),
-		display: faker.datatype.boolean()
+		icon: changeCase.snakeCase(faker.word()),
+		display: faker.boolean()
 			? prismicT.CustomTypeModelSliceDisplay.Grid
 			: prismicT.CustomTypeModelSliceDisplay.List,
-		fieldset: changeCase.capitalCase(faker.lorem.words()),
-		description: faker.lorem.sentence(),
+		fieldset: changeCase.capitalCase(faker.words(2)),
+		description: changeCase.sentenceCase(faker.words(faker.range(5, 10))),
 		repeat: config.repeatFields || ({} as RepeatFields),
 		"non-repeat": config.nonRepeatFields || ({} as NonRepeatFields),
 	};

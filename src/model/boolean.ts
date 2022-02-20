@@ -15,7 +15,7 @@ export const boolean = (
 	return {
 		type: prismicT.CustomTypeModelFieldType.Boolean,
 		config: {
-			label: changeCase.capitalCase(faker.company.bsNoun()),
+			label: changeCase.capitalCase(faker.word()),
 		},
 	};
 };

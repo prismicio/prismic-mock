@@ -1,4 +1,5 @@
 import * as prismicT from "@prismicio/types";
+import * as changeCase from "change-case";
 
 import { createFaker } from "../../lib/createFaker";
 
@@ -30,22 +31,17 @@ export const oList = (
 
 	const patternKey =
 		config.pattern ||
-		faker.random.arrayElement(
-			Object.keys(patterns) as (keyof typeof patterns)[],
-		);
+		faker.randomElement(Object.keys(patterns) as (keyof typeof patterns)[]);
 	const pattern = patterns[patternKey];
 
-	const itemsCount = faker.datatype.number({
-		min: pattern.minItems,
-		max: pattern.maxItems,
-	});
+	const itemsCount = faker.range(pattern.minItems, pattern.maxItems);
 
 	return Array(itemsCount)
 		.fill(undefined)
 		.map(() => {
 			return {
 				type: prismicT.RichTextNodeType.oListItem,
-				text: faker.lorem.sentence(),
+				text: changeCase.sentenceCase(faker.words(faker.range(5, 15))),
 				spans: [],
 			};
 		});

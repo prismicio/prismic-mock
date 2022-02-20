@@ -12,8 +12,8 @@ export const title = (
 ): prismicT.CustomTypeModelTitleField => {
 	const faker = createFaker(config.seed);
 
-	const single = faker.random
-		.arrayElements([
+	const single = faker
+		.randomElements([
 			"heading1",
 			"heading2",
 			"heading3",
@@ -26,10 +26,10 @@ export const title = (
 	return {
 		type: prismicT.CustomTypeModelFieldType.StructuredText,
 		config: {
-			label: changeCase.capitalCase(faker.company.bsNoun()),
-			placeholder: changeCase.sentenceCase(faker.lorem.words(3)),
+			label: changeCase.capitalCase(faker.word()),
+			placeholder: changeCase.sentenceCase(faker.words(3)),
 			single,
-			allowTargetBlank: faker.datatype.boolean() ? true : undefined,
+			allowTargetBlank: faker.boolean() || undefined,
 		},
 	};
 };

@@ -59,7 +59,8 @@
 	"dependencies": {
 		"@prismicio/types": "^0.1.25",
 		"change-case": "^4.1.2",
-		"faker": "^5.5.3"
+		"faker": "^5.5.3",
+		"rand-seed": "^1.0.1"
 	},
 	"devDependencies": {
 		"@types/faker": "^5.5.8",

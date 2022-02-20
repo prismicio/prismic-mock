@@ -48,7 +48,7 @@ export const customType = <
 	const faker = createFaker(config.seed);
 
 	let label: string =
-		config.label || changeCase.capitalCase(faker.company.bsNoun());
+		config.label || changeCase.capitalCase(faker.words(faker.range(1, 2)));
 	let id: string = config.id || changeCase.snakeCase(label);
 
 	if (config.id && !config.label) {
@@ -68,8 +68,8 @@ export const customType = <
 	return {
 		id,
 		label,
-		status: config.status ?? faker.datatype.boolean(),
-		repeatable: config.repeatable ?? faker.datatype.boolean(),
+		status: config.status ?? faker.boolean(),
+		repeatable: config.repeatable ?? faker.boolean(),
 		json,
 	} as MockCustomTypeModel<Definition>;
 };

@@ -26,7 +26,7 @@ export const sharedSlice = <
 	const faker = createFaker(config.seed);
 
 	const model = config.model || modelGen.sharedSlice({ seed: config.seed });
-	const variationModel = faker.random.arrayElement(model.variations);
+	const variationModel = faker.randomElement(model.variations);
 
 	return sharedSliceVariation({
 		seed: config.seed,

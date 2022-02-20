@@ -63,11 +63,11 @@ export const customType = <
 
 	return {
 		type: model.id,
-		id: faker.git.shortSha(),
-		uid: hasUID ? changeCase.snakeCase(faker.lorem.words(2)) : null,
-		url: withURL ? faker.internet.url() : null,
-		href: faker.internet.url(),
-		lang: faker.lorem.word(),
+		id: faker.hash(7),
+		uid: hasUID ? changeCase.snakeCase(faker.words(faker.range(1, 3))) : null,
+		url: withURL ? faker.url() : null,
+		href: faker.url(),
+		lang: faker.word(),
 		tags: generateTags({ seed: config.seed }),
 		slugs: [] as prismicT.PrismicDocument["slugs"],
 		linked_documents: [] as prismicT.PrismicDocument["linked_documents"],

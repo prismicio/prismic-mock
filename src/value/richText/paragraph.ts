@@ -1,4 +1,5 @@
 import * as prismicT from "@prismicio/types";
+import * as changeCase from "change-case";
 
 import { createFaker } from "../../lib/createFaker";
 
@@ -27,14 +28,17 @@ export const paragraph = (
 
 	const patternKey =
 		config.pattern ||
-		faker.random.arrayElement(
-			Object.keys(patterns) as (keyof typeof patterns)[],
-		);
+		faker.randomElement(Object.keys(patterns) as (keyof typeof patterns)[]);
 	const pattern = patterns[patternKey];
+
+	const text = Array.from(
+		{ length: pattern.sentenceCount },
+		() => changeCase.sentenceCase(faker.words(faker.range(5, 15))) + ".",
+	).join(" ");
 
 	return {
 		type: prismicT.RichTextNodeType.paragraph,
-		text: faker.lorem.paragraph(pattern.sentenceCount),
+		text,
 		spans: [],
 	};
 };

@@ -18,8 +18,8 @@ export const richText = <WithMultipleBlocks extends boolean = boolean>(
 	: prismicT.CustomTypeModelRichTextSingleField => {
 	const faker = createFaker(config.seed);
 
-	const blockTypes = faker.random
-		.arrayElements([
+	const blockTypes = faker
+		.randomElements([
 			prismicT.RichTextNodeType.heading1,
 			prismicT.RichTextNodeType.heading2,
 			prismicT.RichTextNodeType.heading3,
@@ -39,16 +39,16 @@ export const richText = <WithMultipleBlocks extends boolean = boolean>(
 		.join(",");
 
 	const blockTypeConfig =
-		config.withMultipleBlocks ?? faker.datatype.boolean()
+		config.withMultipleBlocks ?? faker.boolean()
 			? { multi: blockTypes }
 			: { single: blockTypes };
 
 	return {
 		type: prismicT.CustomTypeModelFieldType.StructuredText,
 		config: {
-			label: changeCase.capitalCase(faker.company.bsNoun()),
-			placeholder: changeCase.sentenceCase(faker.lorem.words(3)),
-			allowTargetBlank: faker.datatype.boolean() ? true : undefined,
+			label: changeCase.capitalCase(faker.word()),
+			placeholder: changeCase.sentenceCase(faker.words(3)),
+			allowTargetBlank: faker.boolean() ? true : undefined,
 			...blockTypeConfig,
 		},
 	} as WithMultipleBlocks extends true

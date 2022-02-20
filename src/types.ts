@@ -27,7 +27,7 @@ export type SetRequired<BaseType, Keys extends keyof BaseType> = Simplify<
 		Required<Pick<BaseType, Keys>>
 >;
 
-export type Seed = string | number | number[];
+export type Seed = string | number;
 
 export interface MockImageData {
 	url: string;

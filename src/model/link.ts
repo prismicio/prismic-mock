@@ -28,13 +28,13 @@ export const link = <AllowTargetBlank extends boolean = boolean>(
 	return {
 		type: prismicT.CustomTypeModelFieldType.Link,
 		config: {
-			label: changeCase.capitalCase(faker.company.bsNoun()),
-			placeholder: changeCase.sentenceCase(faker.lorem.words(3)),
+			label: changeCase.capitalCase(faker.word()),
+			placeholder: changeCase.sentenceCase(faker.words(3)),
 			select: null,
 			allowTargetBlank:
 				("allowTargetBlank" in config
 					? config.allowTargetBlank
-					: faker.datatype.boolean()) || undefined,
+					: faker.boolean()) || undefined,
 		},
 	} as MockLinkModel<AllowTargetBlank>;
 };

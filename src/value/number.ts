@@ -22,6 +22,6 @@ export const number = <
 	const faker = createFaker(config.seed);
 
 	return (
-		config.state === "empty" ? null : faker.datatype.number()
+		config.state === "empty" ? null : faker.range(1, 100)
 	) as MockNumberValue<State>;
 };

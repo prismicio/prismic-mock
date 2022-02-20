@@ -21,14 +21,12 @@ export const geoPoint = <
 ): MockGeoPointValue<State> => {
 	const faker = createFaker(config.seed);
 
-	const coordinates = faker.address.nearbyGPSCoordinate();
-
 	return (
 		config.state === "empty"
 			? {}
 			: {
-					longitude: Number.parseFloat(coordinates[0]),
-					latitude: Number.parseFloat(coordinates[1]),
+					longitude: faker.rangeFloat(-180, 180),
+					latitude: faker.rangeFloat(-90, 90),
 			  }
 	) as MockGeoPointValue<State>;
 };

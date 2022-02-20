@@ -35,21 +35,16 @@ export const sliceZone = <
 		const model = config.model || modelGen.sliceZone({ seed: config.seed });
 
 		if (Object.keys(model.config.choices).length > 0) {
-			const itemsCount =
-				config.itemsCount ??
-				faker.datatype.number({
-					min: 1,
-					max: 6,
-				});
+			const itemsCount = config.itemsCount ?? faker.range(1, 6);
 
 			return Array(itemsCount)
 				.fill(undefined)
 				.map(() => {
 					const choices = Object.entries(model.config.choices);
-					const [choiceType, choiceModel] = faker.random.arrayElement(choices);
+					const [choiceType, choiceModel] = faker.randomElement(choices);
 
 					const choiceLabels = model.config.labels[choiceType] || [];
-					const choiceLabel = faker.random.arrayElement(choiceLabels);
+					const choiceLabel = faker.randomElement(choiceLabels);
 
 					switch (choiceModel.type) {
 						case prismicT.CustomTypeModelSliceType.Slice: {

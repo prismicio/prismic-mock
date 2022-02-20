@@ -36,12 +36,7 @@ export const group = <
 
 		const model = config.model || modelGen.group({ seed: config.seed });
 
-		const itemsCount =
-			config.itemsCount ??
-			faker.datatype.number({
-				min: 1,
-				max: 6,
-			});
+		const itemsCount = config.itemsCount ?? faker.range(1, 6);
 
 		return Array(itemsCount)
 			.fill(undefined)
