@@ -11,13 +11,3 @@ test("creates a mock Integration Fields field model", snapshotTwiceMacro, () =>
 test("supports custom seed", snapshotTwiceMacro, (t) =>
 	model.integrationFields({ seed: t.title }),
 );
-
-test("can be configured for a specific catalog", (t) => {
-	const catalog = "foo";
-	const actual = model.integrationFields({
-		seed: t.title,
-		catalog,
-	});
-
-	t.is(actual.config.catalog, catalog);
-});
