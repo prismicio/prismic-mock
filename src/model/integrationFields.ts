@@ -5,7 +5,9 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
 
-export type MockIntegrationFieldsModelConfig = MockModelConfig;
+export type MockIntegrationFieldsModelConfig = {
+	catalog?: string;
+} & MockModelConfig;
 
 export const integrationFields = (
 	config: MockIntegrationFieldsModelConfig = {},
@@ -16,7 +18,7 @@ export const integrationFields = (
 		type: prismicT.CustomTypeModelFieldType.IntegrationFields,
 		config: {
 			label: changeCase.capitalCase(faker.company.bsNoun()),
-			catalog: changeCase.snakeCase(faker.lorem.words(4)),
+			catalog: config.catalog || changeCase.snakeCase(faker.lorem.words(4)),
 		},
 	};
 };
