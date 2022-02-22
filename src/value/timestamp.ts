@@ -30,12 +30,23 @@ export const timestamp = <
 	} else {
 		let date: Date;
 
-		if (config.after && config.before) {
-			date = faker.dateBetween(config.after, config.before);
-		} else if (config.after) {
-			date = faker.dateAfter(config.after);
-		} else if (config.before) {
-			date = faker.dateBefore(config.before);
+		// Working with Date objects produces non-deterministic values;
+		// machines can return different values due to differing
+		// timezones and other unknown factors. To get around this, we
+		// can can remove time from the given values and only use their dates.
+		const after = config.after
+			? new Date(config.after.toISOString().split("T")[0])
+			: undefined;
+		const before = config.before
+			? new Date(config.before.toISOString().split("T")[0])
+			: undefined;
+
+		if (after && before) {
+			date = faker.dateBetween(after, before);
+		} else if (after) {
+			date = faker.dateAfter(after);
+		} else if (before) {
+			date = faker.dateBefore(before);
 		} else {
 			date = faker.date();
 		}
