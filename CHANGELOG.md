@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.8](https://github.com/prismicio/prismic-mock/compare/v0.0.7...v0.0.8) (2022-02-22)
+
+
+### Features
+
+* customize Integration Fields field model with a specific catalog ([b349ee6](https://github.com/prismicio/prismic-mock/commit/b349ee600c5014f77ade55abe9450835b469014f))
+* support empty Group, Slice Zone, and Title fields ([82d02ff](https://github.com/prismicio/prismic-mock/commit/82d02ff632f13d60883b710fe929018f687cf11b))
+
+
+### Bug Fixes
+
+* type issue with SliceZone `slice_type` field ([b8b490b](https://github.com/prismicio/prismic-mock/commit/b8b490b48cee73c510df8056af460157173d2db0))
+
 ### [0.0.7](https://github.com/prismicio/prismic-mock/compare/v0.0.6...v0.0.7) (2022-02-19)
 
 
