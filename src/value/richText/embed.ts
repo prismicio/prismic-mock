@@ -10,8 +10,8 @@ type MockRichTextEmbedValueConfig = MockRichTextValueConfig;
 export const embed = (
 	config: MockRichTextEmbedValueConfig = {},
 ): prismicT.RTEmbedNode | undefined => {
-	const embedData = getMockEmbedData({ seed: config.seed });
-	const embedField = buildEmbedField({ seed: config.seed, embedData });
+	const data = getMockEmbedData({ seed: config.seed });
+	const embedField = buildEmbedField({ seed: config.seed, data });
 
 	return {
 		type: prismicT.RichTextNodeType.embed,
