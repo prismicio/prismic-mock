@@ -31,9 +31,9 @@ export const select = <
 		return null as MockSelectValue<Model, State>;
 	} else {
 		return (
-			typeof defaultValue === "string" && faker.datatype.boolean()
+			typeof defaultValue === "string" && faker.boolean()
 				? defaultValue
-				: faker.random.arrayElement(model.config.options)
+				: faker.randomElement(model.config.options)
 		) as MockSelectValue<Model, State>;
 	}
 };

@@ -14,16 +14,14 @@ export const image = (
 	const imageField = buildImageFieldImage({
 		seed: config.seed,
 		imageData,
-		state: false,
+		state: "filled",
 	});
 
 	return {
 		type: prismicT.RichTextNodeType.image,
 		alt: imageField.alt,
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		url: imageField.url!,
+		url: imageField.url,
 		copyright: imageField.copyright,
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		dimensions: imageField.dimensions!,
+		dimensions: imageField.dimensions,
 	};
 };

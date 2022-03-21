@@ -15,5 +15,5 @@ export const boolean = <
 ): prismicT.BooleanField => {
 	const faker = createFaker(config.seed);
 
-	return faker.datatype.boolean();
+	return faker.boolean();
 };

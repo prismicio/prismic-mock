@@ -34,8 +34,8 @@ export const repository = (
 		types,
 		languages: [
 			{
-				id: faker.lorem.word(),
-				name: changeCase.capitalCase(faker.lorem.word()),
+				id: faker.word(),
+				name: changeCase.capitalCase(faker.word()),
 			},
 		],
 		tags: generateTags({
@@ -45,10 +45,10 @@ export const repository = (
 		}),
 		forms: {},
 		license: "All Rights Reserved",
-		version: faker.git.shortSha(),
+		version: faker.hash(7),
 		bookmarks: {},
 		experiments: {},
-		oauth_token: faker.internet.url(),
-		oauth_initiate: faker.internet.url(),
+		oauth_token: faker.url(),
+		oauth_initiate: faker.url(),
 	};
 };

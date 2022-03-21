@@ -35,15 +35,11 @@ export const slice = <
 	const sliceLabel =
 		config.label !== undefined
 			? config.label
-			: changeCase.capitalCase(faker.company.bsNoun());
+			: changeCase.capitalCase(faker.words(faker.range(1, 2)));
 
 	const itemsCount =
 		Object.keys(model.repeat).length > 0
-			? config.itemsCount ??
-			  faker.datatype.number({
-					min: 1,
-					max: 6,
-			  })
+			? config.itemsCount ?? faker.range(1, 6)
 			: 0;
 
 	return {

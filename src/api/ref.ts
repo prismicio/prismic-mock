@@ -24,12 +24,12 @@ export const ref = <IsScheduled extends boolean = false>(
 	const faker = createFaker(config.seed);
 
 	const value: prismicT.Ref = {
-		id: faker.git.shortSha(),
-		ref: faker.git.shortSha(),
+		id: faker.hash(16),
+		ref: faker.hash(16),
 		isMasterRef: config.isMasterRef ?? false,
 		label: config.isMasterRef
 			? "Master"
-			: changeCase.capitalCase(faker.company.bsNoun()),
+			: changeCase.capitalCase(faker.words(faker.range(1, 3))),
 	};
 
 	if (config.isScheduled) {

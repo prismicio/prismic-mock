@@ -15,7 +15,7 @@ export const geoPoint = (
 	return {
 		type: prismicT.CustomTypeModelFieldType.GeoPoint,
 		config: {
-			label: changeCase.capitalCase(faker.company.bsNoun()),
+			label: changeCase.capitalCase(faker.word()),
 		},
 	};
 };

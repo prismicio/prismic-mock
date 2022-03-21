@@ -24,8 +24,8 @@ export const contentRelationship = <
 	return {
 		type: prismicT.CustomTypeModelFieldType.Link,
 		config: {
-			label: changeCase.capitalCase(faker.company.bsNoun()),
-			placeholder: changeCase.sentenceCase(faker.lorem.words(3)),
+			label: changeCase.capitalCase(faker.word()),
+			placeholder: changeCase.sentenceCase(faker.words(3)),
 			select: prismicT.CustomTypeModelLinkSelectType.Document,
 			customtypes: config.customTypeIDs,
 			tags: config.tags,

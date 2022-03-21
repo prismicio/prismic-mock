@@ -51,7 +51,7 @@ export const link = <
 
 	const type =
 		config.type ||
-		faker.random.arrayElement([
+		faker.randomElement([
 			prismicT.LinkType.Web,
 			prismicT.LinkType.Document,
 			prismicT.LinkType.Media,
@@ -84,10 +84,10 @@ export const link = <
 
 				return {
 					link_type: prismicT.LinkType.Web,
-					url: faker.internet.url(),
+					url: faker.url(),
 					target:
 						config.withTargetBlank ??
-						(model.config.allowTargetBlank && faker.datatype.boolean())
+						(model.config.allowTargetBlank && faker.boolean())
 							? "_blank"
 							: undefined,
 				} as MockLinkValue<LinkType, State>;

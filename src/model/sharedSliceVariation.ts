@@ -30,7 +30,7 @@ export const sharedSliceVariation = <
 	const faker = createFaker(config.seed);
 
 	let name: string =
-		config.name || changeCase.capitalCase(faker.company.bsNoun());
+		config.name || changeCase.capitalCase(faker.words(faker.range(1, 2)));
 	let id: ID = config.id || (changeCase.snakeCase(name) as ID);
 
 	if (config.id && !config.name) {
@@ -42,9 +42,9 @@ export const sharedSliceVariation = <
 	return {
 		id,
 		name,
-		description: faker.lorem.sentence(),
-		docURL: faker.internet.url(),
-		version: faker.git.shortSha(),
+		description: changeCase.sentenceCase(faker.words(faker.range(5, 10))),
+		docURL: faker.url(),
+		version: faker.hash(7),
 		primary: config.primaryFields || ({} as PrimaryFields),
 		items: config.itemsFields || ({} as ItemsFields),
 	};

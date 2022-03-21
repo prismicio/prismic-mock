@@ -17,8 +17,8 @@ export const integrationFields = (
 	return {
 		type: prismicT.CustomTypeModelFieldType.IntegrationFields,
 		config: {
-			label: changeCase.capitalCase(faker.company.bsNoun()),
-			catalog: config.catalog || changeCase.snakeCase(faker.lorem.words(4)),
+			label: changeCase.capitalCase(faker.word()),
+			catalog: config.catalog || changeCase.snakeCase(faker.words(2)),
 		},
 	};
 };

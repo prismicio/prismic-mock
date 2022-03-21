@@ -27,8 +27,8 @@ export const query = <
 
 	return {
 		page,
-		next_page: page < totalPages ? faker.internet.url() : null,
-		prev_page: page > 1 ? faker.internet.url() : null,
+		next_page: page < totalPages ? faker.url() : null,
+		prev_page: page > 1 ? faker.url() : null,
 		total_pages: totalPages,
 		results_size: results.length,
 		results_per_page: pageSize,

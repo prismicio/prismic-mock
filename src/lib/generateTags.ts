@@ -12,16 +12,8 @@ type GenerateTagsConfig = {
 export const generateTags = (config: GenerateTagsConfig): string[] => {
 	const faker = createFaker(config.seed);
 
-	return Array(
-		faker.datatype.number({
-			min: config.min ?? 0,
-			max: config.max ?? 2,
-		}),
-	)
-		.fill(undefined)
-		.map(() =>
-			changeCase.capitalCase(
-				faker.lorem.words(faker.datatype.number({ min: 1, max: 3 })),
-			),
-		);
+	return Array.from(
+		{ length: faker.range(config.min ?? 0, config.max ?? 2) },
+		() => changeCase.capitalCase(faker.words(faker.range(1, 3))),
+	);
 };

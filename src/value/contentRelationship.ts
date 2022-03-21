@@ -76,10 +76,10 @@ export const contentRelationship = <
 					{
 						...documentGen({ seed: config.seed }),
 						type: model.config.customtypes
-							? faker.random.arrayElement(model.config.customtypes)
+							? faker.randomElement(model.config.customtypes)
 							: generateCustomTypeId({ seed: config.seed }),
 						tags: model.config.tags
-							? faker.random.arrayElements(model.config.tags)
+							? faker.randomElements(model.config.tags)
 							: generateTags({ seed: config.seed }),
 					} as prismicT.PrismicDocument<
 						never,
@@ -87,7 +87,7 @@ export const contentRelationship = <
 					>,
 			  ];
 
-		const document = faker.random.arrayElement(linkableDocuments);
+		const document = faker.randomElement(linkableDocuments);
 
 		if (!document) {
 			throw new Error("A linkable document could not be found.");

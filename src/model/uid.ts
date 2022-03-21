@@ -15,8 +15,8 @@ export const uid = (
 	return {
 		type: prismicT.CustomTypeModelFieldType.UID,
 		config: {
-			label: changeCase.capitalCase(faker.company.bsNoun()),
-			placeholder: changeCase.sentenceCase(faker.lorem.words(3)),
+			label: changeCase.capitalCase(faker.word()),
+			placeholder: changeCase.sentenceCase(faker.words(3)),
 		},
 	};
 };

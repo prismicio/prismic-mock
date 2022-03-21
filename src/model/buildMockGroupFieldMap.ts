@@ -48,7 +48,7 @@ export const buildMockGroupFieldMap = (
 
 	const fields: GroupFieldModelMap = {};
 
-	const fieldTypes = faker.random.arrayElements(
+	const fieldTypes = faker.randomElements(
 		Object.keys(mockModelFns) as (keyof typeof mockModelFns)[],
 	);
 

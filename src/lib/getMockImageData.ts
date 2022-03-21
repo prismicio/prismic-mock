@@ -92,5 +92,5 @@ export const getMockImageData = (
 ): MockImageData => {
 	const faker = createFaker(config.seed);
 
-	return faker.random.arrayElement(dataSet);
+	return faker.randomElement(dataSet);
 };

@@ -21,8 +21,8 @@ export const select = <Option extends string, DefaultOption extends Option>(
 	return {
 		type: prismicT.CustomTypeModelFieldType.Select,
 		config: {
-			label: changeCase.capitalCase(faker.company.bsNoun()),
-			placeholder: changeCase.sentenceCase(faker.lorem.words(3)),
+			label: changeCase.capitalCase(faker.word()),
+			placeholder: changeCase.sentenceCase(faker.words(3)),
 			options: config.options || [],
 			default_value: config.defaultValue || undefined,
 		},

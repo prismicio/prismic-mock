@@ -15,8 +15,8 @@ export const keyText = (
 	return {
 		type: prismicT.CustomTypeModelFieldType.Text,
 		config: {
-			label: changeCase.capitalCase(faker.company.bsNoun()),
-			placeholder: changeCase.sentenceCase(faker.lorem.words(3)),
+			label: changeCase.capitalCase(faker.word()),
+			placeholder: changeCase.sentenceCase(faker.words(3)),
 		},
 	};
 };

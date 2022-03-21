@@ -21,7 +21,7 @@ export const sharedSlice = <
 	const faker = createFaker(config.seed);
 
 	let name: string =
-		config.name || changeCase.capitalCase(faker.company.bsNoun());
+		config.name || changeCase.capitalCase(faker.words(faker.range(1, 2)));
 	let id: string = config.id || changeCase.snakeCase(name);
 
 	if (config.id && !config.name) {
@@ -34,7 +34,7 @@ export const sharedSlice = <
 		type: prismicT.CustomTypeModelSliceType.SharedSlice,
 		id,
 		name,
-		description: faker.lorem.sentence(),
+		description: changeCase.sentenceCase(faker.words(faker.range(5, 10))),
 		variations: config.variations || ([] as Variation[]),
 	};
 };

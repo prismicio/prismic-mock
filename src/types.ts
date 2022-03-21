@@ -27,7 +27,7 @@ export type SetRequired<BaseType, Keys extends keyof BaseType> = Simplify<
 		Required<Pick<BaseType, Keys>>
 >;
 
-export type Seed = string | number | number[];
+export type Seed = string | number;
 
 export interface MockImageData {
 	url: string;
@@ -35,14 +35,11 @@ export interface MockImageData {
 	height: number;
 }
 
-export interface MockEmbedData {
-	url: string;
-	embed_url: string;
-	html: string;
-	thumbnail_url: string | null;
-	thumbnail_height: number | null;
-	thumbnail_width: number | null;
-}
+export type MockEmbedData = prismicT.AnyOEmbed &
+	prismicT.OEmbedExtra & {
+		embed_url: string;
+		html: string;
+	};
 
 export type MockRestApiConfig = {
 	seed?: Seed;
@@ -88,7 +85,7 @@ export type MockValueConfigForModel<
 	: Model extends prismicT.CustomTypeModelDateField
 	? value.MockDateValueConfig<Model, State>
 	: Model extends prismicT.CustomTypeModelEmbedField
-	? value.MockEmbedValueConfig<Model, State>
+	? value.MockEmbedValueConfig<Model, prismicT.AnyOEmbed, State>
 	: Model extends prismicT.CustomTypeModelGeoPointField
 	? value.MockGeoPointValueConfig<Model, State>
 	: Model extends prismicT.CustomTypeModelImageField

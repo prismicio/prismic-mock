@@ -35,11 +35,11 @@ export const integrationFields = <
 		config.state === "empty"
 			? null
 			: {
-					id: faker.git.shortSha(),
-					title: changeCase.capitalCase(faker.lorem.words(3)),
-					description: faker.lorem.sentence(),
+					id: faker.hash(7),
+					title: changeCase.capitalCase(faker.words(faker.range(1, 3))),
+					description: changeCase.sentenceCase(faker.words(faker.range(5, 10))),
 					image_url: imageData.url,
-					last_update: faker.date.past(20, new Date("2021-03-07")).getTime(),
+					last_update: faker.date().getTime(),
 					blob: config.data as Blob,
 			  }
 	) as MockIntegrationFieldsValue<Blob, State>;

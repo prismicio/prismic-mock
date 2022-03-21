@@ -63,25 +63,18 @@ export const heading = (
 				prismicT.RichTextNodeType.heading6,
 			].includes(type as RichTextNodeTitleType),
 		) as RichTextNodeTitleType[];
-	const type = faker.random.arrayElement(types);
+	const type = faker.randomElement(types);
 
 	if (type) {
 		const patternKey =
 			config.pattern ||
-			faker.random.arrayElement(
-				Object.keys(patterns) as (keyof typeof patterns)[],
-			);
+			faker.randomElement(Object.keys(patterns) as (keyof typeof patterns)[]);
 		const pattern = patterns[patternKey];
 
 		return {
 			type,
 			text: changeCase.capitalCase(
-				faker.lorem.words(
-					faker.datatype.number({
-						min: pattern.minWords,
-						max: pattern.maxWords,
-					}),
-				),
+				faker.words(faker.range(pattern.minWords, pattern.maxWords)),
 			),
 			spans: [],
 		};
