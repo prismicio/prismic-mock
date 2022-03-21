@@ -5,14 +5,14 @@ import { createFaker } from "../lib/createFaker";
 
 import { GroupFieldModelMap, MockModelConfig } from "../types";
 
-type MockGroupModelConfig<Fields extends GroupFieldModelMap> = {
+export type MockGroupModelConfig<Fields extends GroupFieldModelMap> = {
 	fields?: Fields;
 } & MockModelConfig;
 
-export const group = <Fields extends GroupFieldModelMap>(
+export function group<Fields extends GroupFieldModelMap>(
 	config: MockGroupModelConfig<Fields> = {},
-): prismicT.CustomTypeModelGroupField<Fields> => {
-	const faker = createFaker(config.seed);
+): prismicT.CustomTypeModelGroupField<Fields> {
+	const faker = config.faker || createFaker(config.seed);
 
 	return {
 		type: prismicT.CustomTypeModelFieldType.Group,
@@ -21,4 +21,4 @@ export const group = <Fields extends GroupFieldModelMap>(
 			fields: config.fields || ({} as Fields),
 		},
 	};
-};
+}

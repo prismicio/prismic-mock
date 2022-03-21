@@ -16,7 +16,7 @@ type MockSelectModelConfig<
 export const select = <Option extends string, DefaultOption extends Option>(
 	config: MockSelectModelConfig<Option, DefaultOption> = {},
 ): prismicT.CustomTypeModelSelectField<Option, DefaultOption> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	return {
 		type: prismicT.CustomTypeModelFieldType.Select,

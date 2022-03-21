@@ -13,7 +13,7 @@ type MockImageModelConfig<ThumbnailNames extends string = string> = {
 export const image = <ThumbnailNames extends string = string>(
 	config: MockImageModelConfig<ThumbnailNames> = {},
 ): prismicT.CustomTypeModelImageField<ThumbnailNames> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	const thumbnails = (config.thumbnailNames || []).map((name) => {
 		return {

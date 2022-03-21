@@ -18,7 +18,7 @@ export const sharedSlice = <
 >(
 	config: MockSharedSliceModelConfig<Variation> = {},
 ): prismicT.SharedSliceModel<string, Variation> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	let name: string =
 		config.name || changeCase.capitalCase(faker.words(faker.range(1, 2)));

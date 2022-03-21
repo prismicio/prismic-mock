@@ -1,4 +1,5 @@
 import * as prismicT from "@prismicio/types";
+import { Faker } from "./lib/createFaker";
 
 import * as value from "./value";
 
@@ -45,9 +46,15 @@ export type MockRestApiConfig = {
 	seed?: Seed;
 };
 
-export type MockModelConfig = {
-	seed?: Seed;
-};
+export type MockModelConfig =
+	| {
+			seed?: Seed;
+			faker?: never;
+	  }
+	| {
+			seed?: never;
+			faker: Faker;
+	  };
 
 // TODO: Add to @prismicio/types
 export type PrismicModel =

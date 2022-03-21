@@ -23,7 +23,7 @@ export type MockLinkModelConfig<AllowTargetBlank extends boolean = boolean> = {
 export const link = <AllowTargetBlank extends boolean = boolean>(
 	config: MockLinkModelConfig<AllowTargetBlank> = {},
 ): MockLinkModel<AllowTargetBlank> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	return {
 		type: prismicT.CustomTypeModelFieldType.Link,

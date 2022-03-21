@@ -16,7 +16,7 @@ export const richText = <WithMultipleBlocks extends boolean = boolean>(
 ): WithMultipleBlocks extends true
 	? prismicT.CustomTypeModelRichTextMultiField
 	: prismicT.CustomTypeModelRichTextSingleField => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	const blockTypes = faker
 		.randomElements([

@@ -19,7 +19,7 @@ export const slice = <
 >(
 	config: MockSliceModelConfig<NonRepeatFields, RepeatFields> = {},
 ): prismicT.CustomTypeModelSlice<NonRepeatFields, RepeatFields> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	return {
 		type: prismicT.CustomTypeModelSliceType.Slice,

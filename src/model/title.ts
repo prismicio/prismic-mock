@@ -10,7 +10,7 @@ export type MockTitleModelConfig = MockModelConfig;
 export const title = (
 	config: MockTitleModelConfig = {},
 ): prismicT.CustomTypeModelTitleField => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	const single = faker
 		.randomElements([

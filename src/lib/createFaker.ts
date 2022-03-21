@@ -1,21 +1,11 @@
 import Rand from "rand-seed";
 
 import { Seed } from "../types";
-import { FAKER_SEED } from "../constants";
 import { lorem, loremWords } from "./lorem";
 
-export const createFaker = (seed: Seed = FAKER_SEED) => {
-	const normalizedSeed = seed.toString();
-
-	if (createFaker.cache[normalizedSeed]) {
-		return createFaker.cache[normalizedSeed];
-	} else {
-		const faker = new Faker(normalizedSeed);
-
-		return (createFaker.cache[normalizedSeed] = faker);
-	}
+export const createFaker = (seed: Seed = Math.random()): Faker => {
+	return new Faker(seed.toString());
 };
-createFaker.cache = {} as Record<string, Faker>;
 
 const DAY_MS = 1000 * 60 * 60 * 24;
 const YEAR_MS = DAY_MS * 365;

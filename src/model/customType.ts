@@ -45,7 +45,7 @@ export const customType = <
 >(
 	config: MockCustomTypeModelConfig<Definition> = {},
 ): MockCustomTypeModel<Definition> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	let label: string =
 		config.label || changeCase.capitalCase(faker.words(faker.range(1, 2)));

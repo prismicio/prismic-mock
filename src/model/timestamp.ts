@@ -10,7 +10,7 @@ export type MockTimestampModelConfig = MockModelConfig;
 export const timestamp = (
 	config: MockTimestampModelConfig = {},
 ): prismicT.CustomTypeModelTimestampField => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	return {
 		type: prismicT.CustomTypeModelFieldType.Timestamp,
