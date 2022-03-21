@@ -75,8 +75,7 @@ export const sliceZone = <
 					}
 				})
 				.filter(
-					(slice): slice is prismicT.Slice | prismicT.SharedSlice =>
-						slice !== undefined,
+					(slice): slice is NonNullable<typeof slice> => slice !== undefined,
 				) as ModelValue<Model, State>;
 		} else {
 			return [] as unknown as ModelValue<Model, State>;
