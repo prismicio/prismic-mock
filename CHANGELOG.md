@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.10](https://github.com/prismicio/prismic-mock/compare/v0.0.9...v0.0.10) (2022-04-15)
+
+
+### Chore
+
+* do not declare package as an ES Module ([cd19441](https://github.com/prismicio/prismic-mock/commit/cd19441737f7a5298489db9185629b52f63ed2d8))
+
 ### [0.0.9](https://github.com/prismicio/prismic-mock/compare/v0.0.8...v0.0.9) (2022-03-21)
 
 
