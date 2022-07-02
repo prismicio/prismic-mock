@@ -28,5 +28,5 @@ test("can be configured to return provided data", (t) => {
 		data,
 	});
 
-	t.is(actual.blob, data);
+	t.is(actual, data);
 });
