@@ -23,7 +23,10 @@ export const integrationFields = <
 >(
 	config: MockIntegrationFieldsValueConfig<Model, Data, State> = {},
 ): MockIntegrationFieldsValue<Data, State> => {
-	return (
-		config.state === "empty" ? null : config.data
-	) as MockIntegrationFieldsValue<Data, State>;
+	const data = config.data ?? {};
+
+	return (config.state === "empty" ? null : data) as MockIntegrationFieldsValue<
+		Data,
+		State
+	>;
 };
