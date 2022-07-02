@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.10](https://github.com/prismicio/prismic-mock/compare/v0.0.9...v0.0.10) (2022-04-15)
+
+
+### Chore
+
+* do not declare package as an ES Module ([cd19441](https://github.com/prismicio/prismic-mock/commit/cd19441737f7a5298489db9185629b52f63ed2d8))
+
+### [0.0.9](https://github.com/prismicio/prismic-mock/compare/v0.0.8...v0.0.9) (2022-03-21)
+
+
+### Features
+
+* replace faker with custom fake data generator ([#8](https://github.com/prismicio/prismic-mock/issues/8)) ([bd60c5c](https://github.com/prismicio/prismic-mock/commit/bd60c5c19afaaa9514fca6d3bc31dd86f5547a5b))
+
+
+### Bug Fixes
+
+* type in SliceZone value generator ([75b21ca](https://github.com/prismicio/prismic-mock/commit/75b21ca704a867a8a970348f5822d5e649d11a6f))
+
+
+### Chore
+
+* add Size Limit support ([7a734d2](https://github.com/prismicio/prismic-mock/commit/7a734d2e7d665a0dc7ebe1e2664f6415c6ff23dc))
+* **ci:** fix ci workflow branch ([fbeaabe](https://github.com/prismicio/prismic-mock/commit/fbeaabe111f71e66441a86df721652759aae014e))
+* **deps:** upgrade dependencies ([fcffc72](https://github.com/prismicio/prismic-mock/commit/fcffc72ac02e51c21d4019cbe1dda466f54688a0))
+
 ### [0.0.8](https://github.com/prismicio/prismic-mock/compare/v0.0.7...v0.0.8) (2022-02-22)
 
 

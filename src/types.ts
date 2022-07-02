@@ -221,7 +221,7 @@ type CustomTypeModelFieldForGroupValue<
 	: T extends prismicT.CustomTypeModelGeoPointField
 	? prismicT.GeoPointField<State>
 	: T extends prismicT.CustomTypeModelIntegrationFieldsField
-	? prismicT.IntegrationFields<unknown, State>
+	? prismicT.IntegrationFields<Record<string, unknown>, State>
 	: never;
 
 type CustomTypeModelGroupFieldValue<
