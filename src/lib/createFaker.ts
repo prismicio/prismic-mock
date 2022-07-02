@@ -3,8 +3,8 @@ import Rand from "rand-seed";
 import { Seed } from "../types";
 import { lorem, loremWords } from "./lorem";
 
-export const createFaker = (seed: Seed = Math.random()): Faker => {
-	return new Faker(seed.toString());
+export const createFaker = (seed?: Seed): Faker => {
+	return new Faker(seed);
 };
 
 const DAY_MS = 1000 * 60 * 60 * 24;
@@ -14,8 +14,8 @@ const YEAR_2022_MS = 52 * (YEAR_MS + DAY_MS / 4);
 export class Faker {
 	private rand: Rand;
 
-	constructor(seed: string) {
-		this.rand = new Rand(seed);
+	constructor(seed: Seed = Math.random()) {
+		this.rand = new Rand(seed.toString());
 	}
 
 	boolean(): boolean {

@@ -5,7 +5,7 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
 
-type MockSelectModelConfig<
+export type MockSelectModelConfig<
 	Option extends string = string,
 	DefaultOption extends Option = Option,
 > = {

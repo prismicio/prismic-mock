@@ -5,7 +5,7 @@ import { createFaker } from "../lib/createFaker";
 
 import { GroupFieldModelMap, MockModelConfig } from "../types";
 
-type MockSliceModelConfig<
+export type MockSliceModelConfig<
 	NonRepeatFields extends GroupFieldModelMap = GroupFieldModelMap,
 	RepeatFields extends GroupFieldModelMap = GroupFieldModelMap,
 > = {

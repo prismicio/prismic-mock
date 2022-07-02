@@ -5,7 +5,7 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
 
-type MockCustomTypeModelConfig<
+export type MockCustomTypeModelConfig<
 	Definition extends
 		| prismicT.CustomTypeModelTab
 		| prismicT.CustomTypeModelDefinition =
@@ -19,11 +19,9 @@ type MockCustomTypeModelConfig<
 } & (
 	| {
 			fields?: Definition;
-			tabs?: never;
 	  }
 	| {
 			tabs?: Definition;
-			fields?: never;
 	  }
 ) &
 	MockModelConfig;

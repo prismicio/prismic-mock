@@ -5,7 +5,7 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
 
-type MockLinkModel<AllowTargetBlank extends boolean = boolean> =
+export type MockLinkModel<AllowTargetBlank extends boolean = boolean> =
 	prismicT.CustomTypeModelLinkField & {
 		config: AllowTargetBlank extends true
 			? {

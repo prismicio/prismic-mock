@@ -5,7 +5,7 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
 
-type MockSharedSliceModelConfig<
+export type MockSharedSliceModelConfig<
 	Variation extends prismicT.SharedSliceModelVariation,
 > = {
 	id?: string;

@@ -5,7 +5,7 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
 
-type MockImageModelConfig<ThumbnailNames extends string = string> = {
+export type MockImageModelConfig<ThumbnailNames extends string = string> = {
 	withConstraint?: boolean;
 	thumbnailNames?: readonly ThumbnailNames[];
 } & MockModelConfig;
