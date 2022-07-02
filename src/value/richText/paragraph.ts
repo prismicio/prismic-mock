@@ -24,7 +24,7 @@ type MockRichTextParagraphValueConfig = {
 export const paragraph = (
 	config: MockRichTextParagraphValueConfig = {},
 ): prismicT.RTParagraphNode | undefined => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	const patternKey =
 		config.pattern ||

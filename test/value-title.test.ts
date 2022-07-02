@@ -19,7 +19,7 @@ test("supports custom model", (t) => {
 		...customModelBase,
 		config: {
 			...customModelBase.config,
-			single: "heading3",
+			single: "heading3" as const,
 		},
 	};
 

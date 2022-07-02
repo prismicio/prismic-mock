@@ -23,13 +23,13 @@ export const sharedSlice = <
 >(
 	config: MockSharedSliceValueConfig<Model> = {},
 ): ModelValue<Model> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
-	const model = config.model || modelGen.sharedSlice({ seed: config.seed });
+	const model = config.model || modelGen.sharedSlice({ faker });
 	const variationModel = faker.randomElement(model.variations);
 
 	return sharedSliceVariation({
-		seed: config.seed,
+		faker,
 		model: variationModel,
 		itemsCount: config.itemsCount,
 		type: model.id,

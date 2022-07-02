@@ -38,15 +38,14 @@ export const contentRelationship = <
 >(
 	config: MockContentRelationshipValueConfig<Model, State> = {},
 ): MockContentRelationshipValue<Model, State> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	if (config.state === "empty") {
 		return {
 			link_type: prismicT.LinkType.Document,
 		} as MockContentRelationshipValue<Model, State>;
 	} else {
-		const model =
-			config.model || modelGen.contentRelationship({ seed: config.seed });
+		const model = config.model || modelGen.contentRelationship({ faker });
 
 		const linkableDocuments = config.linkableDocuments
 			? config.linkableDocuments.filter(
@@ -74,13 +73,13 @@ export const contentRelationship = <
 			  )
 			: [
 					{
-						...documentGen({ seed: config.seed }),
+						...documentGen({ faker }),
 						type: model.config.customtypes
 							? faker.randomElement(model.config.customtypes)
-							: generateCustomTypeId({ seed: config.seed }),
+							: generateCustomTypeId({ faker }),
 						tags: model.config.tags
 							? faker.randomElements(model.config.tags)
-							: generateTags({ seed: config.seed }),
+							: generateTags({ faker }),
 					} as prismicT.PrismicDocument<
 						never,
 						NonNullable<Model["config"]["customtypes"]>[number]

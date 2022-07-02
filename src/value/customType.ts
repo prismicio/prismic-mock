@@ -28,9 +28,9 @@ export const customType = <
 >(
 	config: MockCustomTypeValueConfig<Model> = {},
 ): ModelValue<Model> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
-	const model = config.model || modelGen.customType({ seed: config.seed });
+	const model = config.model || modelGen.customType({ faker });
 
 	const fieldModelsMap = Object.assign(
 		{},
@@ -68,14 +68,14 @@ export const customType = <
 		url: withURL ? faker.url() : null,
 		href: faker.url(),
 		lang: faker.word(),
-		tags: generateTags({ seed: config.seed }),
+		tags: generateTags({ faker }),
 		slugs: [] as prismicT.PrismicDocument["slugs"],
 		linked_documents: [] as prismicT.PrismicDocument["linked_documents"],
 		alternate_languages: alternateLanguages,
-		first_publication_date: timestamp({ seed: config.seed }),
-		last_publication_date: timestamp({ seed: config.seed }),
+		first_publication_date: timestamp({ faker }),
+		last_publication_date: timestamp({ faker }),
 		data: valueForModelMap({
-			seed: config.seed,
+			faker,
 			map: dataFieldModelsMap,
 			configs: config.configs,
 		}),

@@ -20,7 +20,7 @@ export const linkToMedia = <
 >(
 	config: MockLinkToMediaValueConfig<Model, State> = {},
 ): MockLinkToMediaValue<State> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	if (config.state === "empty") {
 		return {

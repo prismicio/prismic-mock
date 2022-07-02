@@ -10,7 +10,7 @@ type BuildImageFieldConfig<
 > = {
 	imageData: MockImageData;
 	constraint?: prismicT.CustomTypeModelImageField["config"]["constraint"];
-} & Pick<MockValueConfig, "seed"> &
+} & Pick<MockValueConfig, "faker" | "seed"> &
 	Pick<MockValueStateConfig<State>, "state">;
 
 export const buildImageFieldImage = <
@@ -26,7 +26,7 @@ export const buildImageFieldImage = <
 			copyright: null,
 		} as prismicT.ImageFieldImage<State>;
 	} else {
-		const faker = createFaker(config.seed);
+		const faker = config.faker || createFaker(config.seed);
 
 		const url = new URL(config.imageData.url);
 

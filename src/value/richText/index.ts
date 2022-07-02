@@ -2,7 +2,10 @@ import * as prismicT from "@prismicio/types";
 
 import { createFaker } from "../../lib/createFaker";
 
-import { MockRichTextValueConfig as BaseMockRichTextValueConfig } from "../../types";
+import {
+	MockRichTextValueConfig as BaseMockRichTextValueConfig,
+	MockValueStateConfig,
+} from "../../types";
 
 import * as modelGen from "../../model";
 import { heading } from "./heading";
@@ -28,10 +31,6 @@ const patterns = {
 	},
 } as const;
 
-export type MockRichTextValueConfig = {
-	pattern?: keyof typeof patterns;
-} & BaseMockRichTextValueConfig<prismicT.CustomTypeModelRichTextField>;
-
 const generators = {
 	[prismicT.RichTextNodeType.heading1]: heading,
 	[prismicT.RichTextNodeType.heading2]: heading,
@@ -47,48 +46,67 @@ const generators = {
 	[prismicT.RichTextNodeType.embed]: embed,
 };
 
-export const richText = (
-	config: MockRichTextValueConfig = {},
-): prismicT.RichTextField => {
-	const faker = createFaker(config.seed);
+export type MockRichTextValueConfig<
+	Model extends prismicT.CustomTypeModelRichTextField = prismicT.CustomTypeModelRichTextField,
+	State extends prismicT.FieldState = prismicT.FieldState,
+> = {
+	pattern?: keyof typeof patterns;
+} & BaseMockRichTextValueConfig<Model> &
+	MockValueStateConfig<State>;
 
-	const model =
-		config.model ||
-		modelGen.richText({
-			seed: config.seed,
-			withMultipleBlocks: true,
-		});
-	const supportsMultipleBlocks = "multi" in model.config;
-	const types = (
-		"multi" in model.config ? model.config.multi : model.config.single
-	)
-		.split(",")
-		.filter((type) =>
-			Object.keys(generators).includes(type),
-		) as prismicT.RTNode["type"][];
+export type MockRichTextValue<
+	State extends prismicT.FieldState = prismicT.FieldState,
+> = prismicT.RichTextField<State>;
 
-	if (types.length > 0) {
-		const patternKey =
-			config.pattern ||
-			faker.randomElement(Object.keys(patterns) as (keyof typeof patterns)[]);
-		const pattern = patterns[patternKey];
+export const richText = <
+	Model extends prismicT.CustomTypeModelRichTextField = prismicT.CustomTypeModelRichTextField,
+	State extends prismicT.FieldState = prismicT.FieldState,
+>(
+	config: MockRichTextValueConfig<Model, State> = {},
+): MockRichTextValue<State> => {
+	const faker = config.faker || createFaker(config.seed);
 
-		const blockCount = supportsMultipleBlocks
-			? faker.range(pattern.blockCountMin, pattern.blockCountMax)
-			: 1;
-
-		return Array(blockCount)
-			.fill(undefined)
-			.map(() => {
-				const type = faker.randomElement(types);
-				const generator = generators[type];
-
-				return generator({ seed: config.seed, model });
-			})
-			.flat()
-			.filter((block): block is prismicT.RTNode => block !== undefined)
-			.slice(0, blockCount) as prismicT.RichTextField;
+	if (config.state === "empty") {
+		return [] as MockRichTextValue<State>;
 	} else {
-		return [];
+		const model =
+			config.model ||
+			modelGen.richText({
+				faker,
+				withMultipleBlocks: true,
+			});
+		const supportsMultipleBlocks = "multi" in model.config;
+		const types = (
+			"multi" in model.config ? model.config.multi : model.config.single
+		)
+			.split(",")
+			.filter((type) =>
+				Object.keys(generators).includes(type),
+			) as prismicT.RTNode["type"][];
+
+		if (types.length > 0) {
+			const patternKey =
+				config.pattern ||
+				faker.randomElement(Object.keys(patterns) as (keyof typeof patterns)[]);
+			const pattern = patterns[patternKey];
+
+			const blockCount = supportsMultipleBlocks
+				? faker.range(pattern.blockCountMin, pattern.blockCountMax)
+				: 1;
+
+			return Array(blockCount)
+				.fill(undefined)
+				.map(() => {
+					const type = faker.randomElement(types);
+					const generator = generators[type];
+
+					return generator({ faker, model });
+				})
+				.flat()
+				.filter((block): block is prismicT.RTNode => block !== undefined)
+				.slice(0, blockCount) as MockRichTextValue<State>;
+		} else {
+			return [] as MockRichTextValue<State>;
+		}
 	}
 };

@@ -81,12 +81,12 @@ const dataSet: MockEmbedData[] = [
 		height: 113,
 	},
 ];
-type GetMockEmbedDataConfig = Pick<MockValueConfig, "seed">;
+type GetMockEmbedDataConfig = Pick<MockValueConfig, "faker" | "seed">;
 
 export const getMockEmbedData = (
 	config: GetMockEmbedDataConfig,
 ): MockEmbedData => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	return faker.randomElement(dataSet);
 };

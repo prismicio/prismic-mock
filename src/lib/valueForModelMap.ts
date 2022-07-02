@@ -24,6 +24,7 @@ import {
 } from "../value";
 
 import { valueForModel } from "./valueForModel";
+import { createFaker } from "./createFaker";
 
 const getValueConfigType = <Model extends prismicT.CustomTypeModelField>(
 	model: Model,
@@ -131,6 +132,8 @@ export const valueForModelMap = <
 >(
 	config: ValueForModelMapConfig<ModelMap>,
 ): ModelValueMap<ModelMap> => {
+	const faker = config.faker || createFaker(config.seed);
+
 	const result = {} as ModelValueMap<ModelMap>;
 
 	for (const fieldId in config.map) {
@@ -139,7 +142,7 @@ export const valueForModelMap = <
 		const fieldConfig = config.configs?.[fieldConfigType];
 
 		result[fieldId] = valueForModel({
-			seed: config.seed,
+			faker,
 			model: fieldModel as prismicT.CustomTypeModelField,
 			config: fieldConfig,
 		}) as ModelValue<typeof fieldModel>;

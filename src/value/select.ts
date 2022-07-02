@@ -22,9 +22,9 @@ export const select = <
 >(
 	config: MockSelectValueConfig<Model, State> = {},
 ): MockSelectValue<Model, State> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
-	const model = config.model || modelGen.select({ seed: config.seed });
+	const model = config.model || modelGen.select({ faker });
 	const defaultValue = model.config.default_value;
 
 	if (config.state === "empty") {

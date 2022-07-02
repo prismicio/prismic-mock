@@ -2,7 +2,7 @@ import * as prismicT from "@prismicio/types";
 
 import { MockModelConfig } from "../types";
 
-type MockSliceZoneModelConfig<
+export type MockSliceZoneModelConfig<
 	Slices extends Record<
 		string,
 		prismicT.CustomTypeModelSlice | prismicT.CustomTypeModelSharedSlice

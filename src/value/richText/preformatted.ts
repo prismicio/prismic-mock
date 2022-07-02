@@ -24,7 +24,7 @@ type MockRichTextPreformattedValueConfig = {
 export const preformatted = (
 	config: MockRichTextPreformattedValueConfig = {},
 ): prismicT.RTPreformattedNode | undefined => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	const patternKey =
 		config.pattern ||

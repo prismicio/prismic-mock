@@ -19,7 +19,7 @@ export const geoPoint = <
 >(
 	config: MockGeoPointValueConfig<Model, State> = {},
 ): MockGeoPointValue<State> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	return (
 		config.state === "empty"

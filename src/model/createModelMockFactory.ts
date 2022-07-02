@@ -42,15 +42,15 @@ import { timestamp, MockTimestampModelConfig } from "./timestamp";
 import { title, MockTitleModelConfig } from "./title";
 import { uid, MockUIDModelConfig } from "./uid";
 
-export const createModelFactory = (
-	...args: ConstructorParameters<typeof ModelFactory>
-): ModelFactory => {
-	return new ModelFactory(...args);
+export const createModelMockFactory = (
+	...args: ConstructorParameters<typeof ModelMockFactory>
+): ModelMockFactory => {
+	return new ModelMockFactory(...args);
 };
 
 type WithoutFakerConfig<T> = Omit<T, "faker" | "seed">;
 
-type PrismicMockConfig =
+type ModelMockFactoryConfig =
 	| {
 			seed: Seed;
 	  }
@@ -58,11 +58,15 @@ type PrismicMockConfig =
 			faker: Faker;
 	  };
 
-export class ModelFactory {
+export class ModelMockFactory {
 	private faker: Faker;
 
-	constructor(config: PrismicMockConfig) {
+	constructor(config: ModelMockFactoryConfig) {
 		this.faker = "faker" in config ? config.faker : createFaker(config.seed);
+	}
+
+	get seed() {
+		return this.faker.seed;
 	}
 
 	buildMockGroupFieldMap(

@@ -42,9 +42,15 @@ export type MockEmbedData = prismicT.AnyOEmbed &
 		html: string;
 	};
 
-export type MockRestApiConfig = {
-	seed?: Seed;
-};
+export type MockRestApiConfig =
+	| {
+			seed?: Seed;
+			faker?: never;
+	  }
+	| {
+			faker: Faker;
+			seed?: never;
+	  };
 
 export type MockModelConfig =
 	| {
@@ -52,8 +58,8 @@ export type MockModelConfig =
 			faker?: never;
 	  }
 	| {
-			seed?: never;
 			faker: Faker;
+			seed?: never;
 	  };
 
 // TODO: Add to @prismicio/types
@@ -70,9 +76,17 @@ export type GroupFieldModelMap = Record<
 >;
 
 export type MockValueConfig<Model extends PrismicModel = PrismicModel> = {
-	seed?: Seed;
 	model?: Model;
-};
+} & (
+	| {
+			seed?: Seed;
+			faker?: never;
+	  }
+	| {
+			faker: Faker;
+			seed?: never;
+	  }
+);
 
 export type MockValueStateConfig<
 	State extends prismicT.FieldState = prismicT.FieldState,
@@ -128,9 +142,17 @@ type CustomTypeModelStructuredTextField =
 export type MockRichTextValueConfig<
 	Model extends CustomTypeModelStructuredTextField = CustomTypeModelStructuredTextField,
 > = {
-	seed?: Seed;
 	model?: Model;
-};
+} & (
+	| {
+			seed?: Seed;
+			faker?: never;
+	  }
+	| {
+			faker: Faker;
+			seed?: never;
+	  }
+);
 
 export type ModelValueMap<
 	T extends Record<string, prismicT.CustomTypeModelField>,

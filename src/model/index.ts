@@ -25,4 +25,4 @@ export { uid } from "./uid";
 
 export { buildMockGroupFieldMap } from "./buildMockGroupFieldMap";
 
-export { createModelFactory } from "./createModelFactory";
+export { createModelMockFactory as createModelFactory } from "./createModelMockFactory";

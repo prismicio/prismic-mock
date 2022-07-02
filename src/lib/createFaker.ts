@@ -1,9 +1,11 @@
 import Rand from "rand-seed";
 
 import { Seed } from "../types";
+import { FAKER_SEED } from "../constants";
+
 import { lorem, loremWords } from "./lorem";
 
-export const createFaker = (seed?: Seed): Faker => {
+export const createFaker = (seed: Seed = FAKER_SEED): Faker => {
 	return new Faker(seed);
 };
 
@@ -12,9 +14,13 @@ const YEAR_MS = DAY_MS * 365;
 const YEAR_2022_MS = 52 * (YEAR_MS + DAY_MS / 4);
 
 export class Faker {
+	seed: Seed;
+
 	private rand: Rand;
 
-	constructor(seed: Seed = Math.random()) {
+	constructor(seed: Seed) {
+		this.seed = seed;
+
 		this.rand = new Rand(seed.toString());
 	}
 

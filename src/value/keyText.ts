@@ -20,7 +20,7 @@ export const keyText = <
 >(
 	config: MockKeyTextValueConfig<Model, State> = {},
 ): MockKeyTextValue<State> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	return (
 		config.state === "empty" ? null : changeCase.sentenceCase(faker.words(3))

@@ -4,7 +4,7 @@ import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as mock from "../src";
 
-test("creates a mock query value", snapshotTwiceMacro, mock.api.query);
+test("creates a mock query value", snapshotTwiceMacro, () => mock.api.query());
 
 test("supports custom seed", snapshotTwiceMacro, () =>
 	mock.api.query({ seed: 1 }),

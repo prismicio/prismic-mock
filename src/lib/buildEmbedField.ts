@@ -10,14 +10,14 @@ type BuildEmbedFieldConfig<
 	url?: string;
 	html?: string;
 	data: Data;
-} & Pick<MockValueConfig, "seed">;
+} & Pick<MockValueConfig, "faker" | "seed">;
 
 export const buildEmbedField = <
 	Data extends prismicT.AnyOEmbed = prismicT.AnyOEmbed,
 >(
 	config: BuildEmbedFieldConfig<Data>,
 ): prismicT.EmbedField<Data, "filled"> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	return {
 		embed_url: config.url ?? faker.url(),

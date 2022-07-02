@@ -1,5 +1,7 @@
 import * as prismicT from "@prismicio/types";
 
+import { createFaker } from "../lib/createFaker";
+
 import { MockValueStateConfig, MockValueConfig } from "../types";
 
 import { MockTimestampValueConfig, timestamp } from "./timestamp";
@@ -21,11 +23,13 @@ export const date = <
 >(
 	config: MockDateValueConfig<Model, State> = {},
 ): MockDateValue<State> => {
+	const faker = config.faker || createFaker(config.seed);
+
 	return (
 		config.state === "empty"
 			? null
 			: timestamp({
-					seed: config.seed,
+					faker,
 					after: config.after,
 					before: config.before,
 					state: "filled",

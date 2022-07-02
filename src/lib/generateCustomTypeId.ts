@@ -4,10 +4,10 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
 
-type GenerateFieldIdConfig = Pick<MockModelConfig, "seed">;
+type GenerateFieldIdConfig = Pick<MockModelConfig, "faker" | "seed">;
 
 export const generateCustomTypeId = (config: GenerateFieldIdConfig): string => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	return changeCase.snakeCase(faker.words(faker.range(1, 3)));
 };

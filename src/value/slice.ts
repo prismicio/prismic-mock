@@ -27,11 +27,11 @@ export const slice = <
 >(
 	config: MockSliceValueConfig<Model> = {},
 ): ModelValue<Model> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
-	const model = config.model || modelGen.slice({ seed: config.seed });
+	const model = config.model || modelGen.slice({ faker });
 
-	const sliceType = config.type ?? generateFieldId({ seed: config.seed });
+	const sliceType = config.type ?? generateFieldId({ faker });
 	const sliceLabel =
 		config.label !== undefined
 			? config.label
@@ -46,7 +46,7 @@ export const slice = <
 		slice_type: sliceType,
 		slice_label: sliceLabel,
 		primary: valueForModelMap({
-			seed: config.seed,
+			faker,
 			map: model["non-repeat"],
 			configs: config.primaryFieldConfigs,
 		}),
@@ -54,7 +54,7 @@ export const slice = <
 			.fill(undefined)
 			.map(() => {
 				return valueForModelMap({
-					seed: config.seed,
+					faker,
 					map: model.repeat,
 					configs: config.itemsFieldConfigs,
 				});

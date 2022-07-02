@@ -1,6 +1,7 @@
 import * as prismicT from "@prismicio/types";
 
 import { buildEmbedField } from "../lib/buildEmbedField";
+import { createFaker } from "../lib/createFaker";
 import { getMockEmbedData } from "../lib/getMockEmbedData";
 
 import { MockValueStateConfig, MockValueConfig } from "../types";
@@ -28,13 +29,19 @@ export const embed = <
 >(
 	config: MockEmbedValueConfig<Model, Data, State> = {},
 ): MockEmbedValue<Data, State> => {
-	const data = config.data ?? getMockEmbedData({ seed: config.seed });
+	const faker = config.faker || createFaker(config.seed);
+
+	const data =
+		config.data ??
+		getMockEmbedData({
+			faker: config.faker,
+		});
 
 	return (
 		config.state === "empty"
 			? {}
 			: buildEmbedField({
-					seed: config.seed,
+					faker,
 					url: config.url ?? ("embed_url" in data ? data.embed_url : undefined),
 					html: config.html ?? ("html" in data ? data.html : undefined),
 					data,

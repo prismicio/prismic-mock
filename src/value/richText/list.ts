@@ -27,7 +27,7 @@ type MockRichTextListValueConfig = {
 export const list = (
 	config: MockRichTextListValueConfig = {},
 ): prismicT.RTListItemNode[] | undefined => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	const patternKey =
 		config.pattern ||

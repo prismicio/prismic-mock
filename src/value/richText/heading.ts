@@ -45,9 +45,9 @@ export type MockRichTextHeadingValueConfig = {
 export const heading = (
 	config: MockRichTextHeadingValueConfig = {},
 ): RTHeadingNode | undefined => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
-	const model = config.model || modelGen.title({ seed: config.seed });
+	const model = config.model || modelGen.title({ faker });
 
 	const types = (
 		"single" in model.config ? model.config.single : model.config.multi

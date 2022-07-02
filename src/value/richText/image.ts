@@ -1,6 +1,7 @@
 import * as prismicT from "@prismicio/types";
 
 import { buildImageFieldImage } from "../../lib/buildImageFieldImage";
+import { createFaker } from "../../lib/createFaker";
 import { getMockImageData } from "../../lib/getMockImageData";
 
 import { MockRichTextValueConfig } from "../../types";
@@ -10,9 +11,11 @@ type MockRichTextImageValueConfig = MockRichTextValueConfig;
 export const image = (
 	config: MockRichTextImageValueConfig = {},
 ): prismicT.RTImageNode | undefined => {
-	const imageData = getMockImageData({ seed: config.seed });
+	const faker = config.faker || createFaker(config.seed);
+
+	const imageData = getMockImageData({ faker });
 	const imageField = buildImageFieldImage({
-		seed: config.seed,
+		faker,
 		imageData,
 		state: "filled",
 	});

@@ -32,9 +32,9 @@ export const group = <
 	if (config.state === "empty") {
 		return [] as ModelValue<Model, State>;
 	} else {
-		const faker = createFaker(config.seed);
+		const faker = config.faker || createFaker(config.seed);
 
-		const model = config.model || modelGen.group({ seed: config.seed });
+		const model = config.model || modelGen.group({ faker });
 
 		const itemsCount = config.itemsCount ?? faker.range(1, 6);
 
@@ -42,7 +42,7 @@ export const group = <
 			.fill(undefined)
 			.map(() => {
 				return valueForModelMap({
-					seed: config.seed,
+					faker,
 					map: model.config.fields,
 					configs: config.configs,
 				});

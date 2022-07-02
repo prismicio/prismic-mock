@@ -30,9 +30,9 @@ export const sliceZone = <
 	if (config.state === "empty") {
 		return [] as ModelValue<Model, State>;
 	} else {
-		const faker = createFaker(config.seed);
+		const faker = config.faker || createFaker(config.seed);
 
-		const model = config.model || modelGen.sliceZone({ seed: config.seed });
+		const model = config.model || modelGen.sliceZone({ faker });
 
 		if (Object.keys(model.config.choices).length > 0) {
 			const itemsCount = config.itemsCount ?? faker.range(1, 6);
@@ -49,7 +49,7 @@ export const sliceZone = <
 					switch (choiceModel.type) {
 						case prismicT.CustomTypeModelSliceType.Slice: {
 							return slice({
-								seed: config.seed,
+								faker,
 								model: choiceModel,
 								type: choiceType,
 								label: choiceLabel ? choiceLabel.name : null,
@@ -65,7 +65,7 @@ export const sliceZone = <
 
 							if (sharedSliceModel) {
 								return sharedSlice({
-									seed: config.seed,
+									faker,
 									model: sharedSliceModel,
 									primaryFieldConfigs: config.primaryFieldConfigs,
 									itemsFieldConfigs: config.itemsFieldConfigs,

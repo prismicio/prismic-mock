@@ -15,7 +15,7 @@ export type MockRestApiRepositoryConfig = {
 export const repository = (
 	config: MockRestApiRepositoryConfig = {},
 ): prismicT.Repository => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	const types = (config.customTypeModels || []).reduce((acc, model) => {
 		acc[model.id] = model.label;
@@ -25,12 +25,10 @@ export const repository = (
 
 	return {
 		refs: [
-			ref({ seed: config.seed, isMasterRef: true }),
-			...(config.withReleases
-				? [ref({ seed: config.seed }), ref({ seed: config.seed })]
-				: []),
+			ref({ faker, isMasterRef: true }),
+			...(config.withReleases ? [ref({ faker }), ref({ faker })] : []),
 		],
-		integrationFieldsRef: ref({ seed: config.seed }).ref,
+		integrationFieldsRef: ref({ faker }).ref,
 		types,
 		languages: [
 			{
@@ -39,7 +37,7 @@ export const repository = (
 			},
 		],
 		tags: generateTags({
-			seed: config.seed,
+			faker,
 			min: 1,
 			max: 10,
 		}),

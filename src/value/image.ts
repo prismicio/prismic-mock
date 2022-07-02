@@ -1,6 +1,7 @@
 import * as prismicT from "@prismicio/types";
 
 import { buildImageFieldImage } from "../lib/buildImageFieldImage";
+import { createFaker } from "../lib/createFaker";
 import { getMockImageData } from "../lib/getMockImageData";
 
 import { MockValueStateConfig, MockValueConfig } from "../types";
@@ -23,11 +24,13 @@ export const image = <
 >(
 	config: MockImageValueConfig<Model, State> = {},
 ): MockImageValue<Model, State> => {
-	const model = config.model || modelGen.image({ seed: config.seed });
-	const imageData = getMockImageData({ seed: config.seed });
+	const faker = config.faker || createFaker(config.seed);
+
+	const model = config.model || modelGen.image({ faker });
+	const imageData = getMockImageData({ faker });
 
 	const value = buildImageFieldImage({
-		seed: config.seed,
+		faker,
 		imageData,
 		constraint: model.config.constraint,
 		state: config.state,
@@ -37,7 +40,7 @@ export const image = <
 		// TODO: Resolve the following type error
 		// @ts-expect-error - Unsure how to fix this type mismatch
 		value[thumbnail.name as keyof typeof value] = buildImageFieldImage({
-			seed: config.seed,
+			faker,
 			imageData,
 			constraint: {
 				width: thumbnail.width,

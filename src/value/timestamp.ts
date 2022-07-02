@@ -23,7 +23,7 @@ export const timestamp = <
 >(
 	config: MockTimestampValueConfig<Model, State> = {},
 ): MockTimestampValue<State> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	if (config.state === "empty") {
 		return null as MockTimestampValue<State>;

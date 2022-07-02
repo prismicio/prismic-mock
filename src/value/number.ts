@@ -19,7 +19,7 @@ export const number = <
 >(
 	config: MockNumberValueConfig<Model, State> = {},
 ): MockNumberValue<State> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	return (
 		config.state === "empty" ? null : faker.range(1, 100)
