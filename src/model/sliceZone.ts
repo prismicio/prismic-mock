@@ -20,7 +20,7 @@ export const sliceZone = <
 		prismicT.CustomTypeModelSlice | prismicT.CustomTypeModelSharedSlice
 	>,
 >(
-	config: MockSliceZoneModelConfig<Slices> = {},
+	config: MockSliceZoneModelConfig<Slices>,
 ): prismicT.CustomTypeModelSliceZoneField<Slices> => {
 	const labels =
 		{} as prismicT.CustomTypeModelSliceZoneField<Slices>["config"]["labels"];

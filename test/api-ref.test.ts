@@ -4,10 +4,12 @@ import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as mock from "../src";
 
-test("creates a mock ref value", snapshotTwiceMacro, () => mock.api.ref());
-
-test("supports custom seed", snapshotTwiceMacro, (t) =>
+test("creates a mock ref value", snapshotTwiceMacro, (t) =>
 	mock.api.ref({ seed: t.title }),
+);
+
+test("supports number seed", snapshotTwiceMacro, () =>
+	mock.api.ref({ seed: 1 }),
 );
 
 test("can be configured to return a master ref", (t) => {

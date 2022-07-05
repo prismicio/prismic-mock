@@ -7,7 +7,7 @@ import { MockRestApiConfig } from "../types";
 
 export type MockRestApiTagsConfig = MockRestApiConfig;
 
-export const tags = (config: MockRestApiTagsConfig = {}): prismicT.Tags => {
+export const tags = (config: MockRestApiTagsConfig): prismicT.Tags => {
 	const faker = config.faker || createFaker(config.seed);
 
 	return generateTags({

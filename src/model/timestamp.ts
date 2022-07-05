@@ -8,7 +8,7 @@ import { MockModelConfig } from "../types";
 export type MockTimestampModelConfig = MockModelConfig;
 
 export const timestamp = (
-	config: MockTimestampModelConfig = {},
+	config: MockTimestampModelConfig,
 ): prismicT.CustomTypeModelTimestampField => {
 	const faker = config.faker || createFaker(config.seed);
 

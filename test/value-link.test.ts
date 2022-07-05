@@ -6,11 +6,11 @@ import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 import * as value from "../src/value";
 import * as model from "../src/model";
 
-test("creates a mock Link field value", snapshotTwiceMacro, () => value.link());
-
-test("supports custom seed", snapshotTwiceMacro, (t) =>
+test("creates a mock Link field value", snapshotTwiceMacro, (t) =>
 	value.link({ seed: t.title }),
 );
+
+test("supports number seed", snapshotTwiceMacro, () => value.link({ seed: 1 }));
 
 test("supports custom model", (t) => {
 	const customModelBase = model.link({ seed: t.title });

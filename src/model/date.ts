@@ -8,7 +8,7 @@ import { MockModelConfig } from "../types";
 export type MockDateModelConfig = MockModelConfig;
 
 export const date = (
-	config: MockDateModelConfig = {},
+	config: MockDateModelConfig,
 ): prismicT.CustomTypeModelDateField => {
 	const faker = config.faker || createFaker(config.seed);
 

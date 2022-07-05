@@ -8,11 +8,11 @@ import * as model from "../src/model";
 test(
 	"creates a mock Content Relationship field value",
 	snapshotTwiceMacro,
-	() => value.contentRelationship(),
+	(t) => value.contentRelationship({ seed: t.title }),
 );
 
-test("supports custom seed", snapshotTwiceMacro, (t) =>
-	value.contentRelationship({ seed: t.title }),
+test("supports number seed", snapshotTwiceMacro, () =>
+	value.contentRelationship({ seed: 1 }),
 );
 
 test("supports custom model", (t) => {
@@ -31,7 +31,7 @@ test("supports custom model", (t) => {
 	t.true(customModel.config.customtypes!.includes(actual.type));
 
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	t.true(actual.tags.every((tag) => customModel.config.tags!.includes(tag)));
+	t.true(customModel.config.tags!.every((tag) => actual.tags.includes(tag)));
 });
 
 test("can be configured to return an empty value", (t) => {

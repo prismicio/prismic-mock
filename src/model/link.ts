@@ -21,7 +21,7 @@ export type MockLinkModelConfig<AllowTargetBlank extends boolean = boolean> = {
 } & MockModelConfig;
 
 export const link = <AllowTargetBlank extends boolean = boolean>(
-	config: MockLinkModelConfig<AllowTargetBlank> = {},
+	config: MockLinkModelConfig<AllowTargetBlank>,
 ): MockLinkModel<AllowTargetBlank> => {
 	const faker = config.faker || createFaker(config.seed);
 

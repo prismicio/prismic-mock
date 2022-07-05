@@ -1,11 +1,10 @@
 import Rand from "rand-seed";
 
 import { Seed } from "../types";
-import { FAKER_SEED } from "../constants";
 
 import { lorem, loremWords } from "./lorem";
 
-export const createFaker = (seed: Seed = FAKER_SEED): Faker => {
+export const createFaker = (seed: Seed): Faker => {
 	return new Faker(seed);
 };
 
@@ -37,7 +36,11 @@ export class Faker {
 	}
 
 	randomElements<T>(elements: readonly T[]): T[] {
-		return elements.filter(() => this.boolean());
+		const alwaysInclude = this.randomElement(elements);
+
+		return elements.filter(
+			(element) => element === alwaysInclude || this.boolean(),
+		);
 	}
 
 	range(min: number, max: number): number {

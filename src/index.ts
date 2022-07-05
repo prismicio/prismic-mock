@@ -1,4 +1,4 @@
-export { createMockFactory, MockFactory } from "./createMockInstance";
+export { createMockFactory, MockFactory } from "./createMockFactory";
 
 export {
 	createAPIMockFactory,

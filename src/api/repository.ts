@@ -13,7 +13,7 @@ export type MockRestApiRepositoryConfig = {
 } & MockRestApiConfig;
 
 export const repository = (
-	config: MockRestApiRepositoryConfig = {},
+	config: MockRestApiRepositoryConfig,
 ): prismicT.Repository => {
 	const faker = config.faker || createFaker(config.seed);
 

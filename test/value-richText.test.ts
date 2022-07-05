@@ -5,12 +5,12 @@ import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 import * as value from "../src/value";
 import * as model from "../src/model";
 
-test("creates a mock RichText field value", snapshotTwiceMacro, () =>
-	value.richText(),
+test("creates a mock RichText field value", snapshotTwiceMacro, (t) =>
+	value.richText({ seed: t.title }),
 );
 
-test("supports custom seed", snapshotTwiceMacro, (t) =>
-	value.richText({ seed: t.title }),
+test("supports number seed", snapshotTwiceMacro, () =>
+	value.richText({ seed: 1 }),
 );
 
 test("supports custom model", (t) => {

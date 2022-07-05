@@ -5,12 +5,12 @@ import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as prismicM from "../src";
 
-test("creates a mock Slice field model", snapshotTwiceMacro, () =>
-	prismicM.model.slice(),
+test("creates a mock Slice field model", snapshotTwiceMacro, (t) =>
+	prismicM.model.slice({ seed: t.title }),
 );
 
-test("supports custom seed", snapshotTwiceMacro, (t) =>
-	prismicM.model.slice({ seed: t.title }),
+test("supports number seed", snapshotTwiceMacro, () =>
+	prismicM.model.slice({ seed: 1 }),
 );
 
 test("can be configured for specific non-repeat and repeat fields", (t) => {

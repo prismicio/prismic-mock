@@ -9,7 +9,7 @@ export type MockBooleanValueConfig<
 > = MockValueConfig<Model>;
 
 export const boolean = <Model extends prismicT.CustomTypeModelBooleanField>(
-	config: MockBooleanValueConfig<Model> = {},
+	config: MockBooleanValueConfig<Model>,
 ): prismicT.BooleanField => {
 	const faker = config.faker || createFaker(config.seed);
 

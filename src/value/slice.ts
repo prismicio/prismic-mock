@@ -25,7 +25,7 @@ export type MockSliceValueConfig<
 export const slice = <
 	Model extends prismicT.CustomTypeModelSlice = prismicT.CustomTypeModelSlice,
 >(
-	config: MockSliceValueConfig<Model> = {},
+	config: MockSliceValueConfig<Model>,
 ): ModelValue<Model> => {
 	const faker = config.faker || createFaker(config.seed);
 

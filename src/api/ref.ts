@@ -19,7 +19,7 @@ export type MockRestApiRefValue<IsScheduled extends boolean = false> = Omit<
 		: { scheduledAt?: never });
 
 export const ref = <IsScheduled extends boolean = false>(
-	config: MockRestApiRefConfig<IsScheduled> = {},
+	config: MockRestApiRefConfig<IsScheduled>,
 ): MockRestApiRefValue<IsScheduled> => {
 	const faker = config.faker || createFaker(config.seed);
 

@@ -10,7 +10,7 @@ export type MockGroupModelConfig<Fields extends GroupFieldModelMap> = {
 } & MockModelConfig;
 
 export function group<Fields extends GroupFieldModelMap>(
-	config: MockGroupModelConfig<Fields> = {},
+	config: MockGroupModelConfig<Fields>,
 ): prismicT.CustomTypeModelGroupField<Fields> {
 	const faker = config.faker || createFaker(config.seed);
 

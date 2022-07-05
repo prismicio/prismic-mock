@@ -4,12 +4,12 @@ import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as prismicM from "../src";
 
-test("creates a mock CustomType field value", snapshotTwiceMacro, () =>
-	prismicM.value.customType(),
+test("creates a mock CustomType field value", snapshotTwiceMacro, (t) =>
+	prismicM.value.customType({ seed: t.title }),
 );
 
-test("supports custom seed", snapshotTwiceMacro, (t) =>
-	prismicM.value.customType({ seed: t.title }),
+test("supports number seed", snapshotTwiceMacro, () =>
+	prismicM.value.customType({ seed: 1 }),
 );
 
 test("supports custom model", (t) => {
@@ -65,20 +65,23 @@ test("uid field is null if not UID field is not in model", (t) => {
 });
 
 test("can be configured to return value with alternative languages", (t) => {
-	const customModel = prismicM.model.customType({ seed: t.title });
+	const seed = t.title;
+
+	const customModel = prismicM.model.customType({ seed });
 
 	const alternateLanguages = [
 		prismicM.value.customType({
-			seed: t.title,
+			seed,
 			model: customModel,
 		}),
 		prismicM.value.customType({
-			seed: t.title,
+			seed,
 			model: customModel,
 		}),
 	];
 
 	const actual = prismicM.value.customType({
+		seed,
 		model: customModel,
 		alternateLanguages,
 	});

@@ -5,7 +5,11 @@ import { createFaker } from "../lib/createFaker";
 import { generateCustomTypeId } from "../lib/generateCustomTypeId";
 import { generateTags } from "../lib/generateTags";
 
-import { MockValueStateConfig, MockValueConfig } from "../types";
+import {
+	MockValueStateConfig,
+	MockValueConfig,
+	IterableElement,
+} from "../types";
 
 import * as modelGen from "../model";
 
@@ -26,7 +30,7 @@ type MockContentRelationshipValue<
 	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
 	State extends prismicT.FieldState = prismicT.FieldState,
 > = prismicT.RelationField<
-	Model["config"]["customtypes"],
+	IterableElement<Model["config"]["customtypes"]>,
 	string,
 	never,
 	State
@@ -36,7 +40,7 @@ export const contentRelationship = <
 	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
 	State extends prismicT.FieldState = "filled",
 >(
-	config: MockContentRelationshipValueConfig<Model, State> = {},
+	config: MockContentRelationshipValueConfig<Model, State>,
 ): MockContentRelationshipValue<Model, State> => {
 	const faker = config.faker || createFaker(config.seed);
 

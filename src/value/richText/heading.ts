@@ -43,7 +43,7 @@ export type MockRichTextHeadingValueConfig = {
 } & MockRichTextValueConfig;
 
 export const heading = (
-	config: MockRichTextHeadingValueConfig = {},
+	config: MockRichTextHeadingValueConfig,
 ): RTHeadingNode | undefined => {
 	const faker = config.faker || createFaker(config.seed);
 

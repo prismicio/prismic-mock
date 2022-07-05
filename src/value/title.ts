@@ -22,7 +22,7 @@ export const title = <
 	Model extends prismicT.CustomTypeModelTitleField = prismicT.CustomTypeModelTitleField,
 	State extends prismicT.FieldState = "filled",
 >(
-	config: MockTitleValueConfig<Model, State> = {},
+	config: MockTitleValueConfig<Model, State>,
 ): MockTitleValue<State> => {
 	const faker = config.faker || createFaker(config.seed);
 

@@ -8,11 +8,11 @@ import * as model from "../src/model";
 test(
 	"creates a mock Shared Slice Variation field value",
 	snapshotTwiceMacro,
-	() => value.sharedSliceVariation(),
+	(t) => value.sharedSliceVariation({ seed: t.title }),
 );
 
-test("supports custom seed", snapshotTwiceMacro, (t) =>
-	value.sharedSliceVariation({ seed: t.title }),
+test("supports number seed", snapshotTwiceMacro, () =>
+	value.sharedSliceVariation({ seed: 1 }),
 );
 
 test("supports custom model", (t) => {

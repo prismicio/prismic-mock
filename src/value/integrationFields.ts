@@ -21,7 +21,7 @@ export const integrationFields = <
 	Data extends Record<string, unknown> = Record<string, unknown>,
 	State extends prismicT.FieldState = "filled",
 >(
-	config: MockIntegrationFieldsValueConfig<Model, Data, State> = {},
+	config: MockIntegrationFieldsValueConfig<Model, Data, State>,
 ): MockIntegrationFieldsValue<Data, State> => {
 	const data = config.data ?? {};
 

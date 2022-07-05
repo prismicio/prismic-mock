@@ -21,11 +21,7 @@ export const sharedSliceVariation = <
 	PrimaryFields extends GroupFieldModelMap,
 	ItemsFields extends GroupFieldModelMap,
 >(
-	config: MockSharedSliceVariationModelConfig<
-		ID,
-		PrimaryFields,
-		ItemsFields
-	> = {},
+	config: MockSharedSliceVariationModelConfig<ID, PrimaryFields, ItemsFields>,
 ): prismicT.SharedSliceModelVariation<ID, PrimaryFields, ItemsFields> => {
 	const faker = config.faker || createFaker(config.seed);
 

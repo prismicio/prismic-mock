@@ -21,7 +21,7 @@ export const date = <
 	Model extends prismicT.CustomTypeModelDateField = prismicT.CustomTypeModelDateField,
 	State extends prismicT.FieldState = "filled",
 >(
-	config: MockDateValueConfig<Model, State> = {},
+	config: MockDateValueConfig<Model, State>,
 ): MockDateValue<State> => {
 	const faker = config.faker || createFaker(config.seed);
 

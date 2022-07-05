@@ -15,7 +15,7 @@ export type MockRestApiQueryConfig<
 export const query = <
 	Document extends prismicT.PrismicDocument = prismicT.PrismicDocument,
 >(
-	config: MockRestApiQueryConfig<Document> = {},
+	config: MockRestApiQueryConfig<Document>,
 ): prismicT.Query<Document> => {
 	const faker = config.faker || createFaker(config.seed);
 

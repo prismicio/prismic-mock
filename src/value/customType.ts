@@ -26,7 +26,7 @@ export type MockCustomTypeValueConfig<
 export const customType = <
 	Model extends prismicT.CustomTypeModel = prismicT.CustomTypeModel,
 >(
-	config: MockCustomTypeValueConfig<Model> = {},
+	config: MockCustomTypeValueConfig<Model>,
 ): ModelValue<Model> => {
 	const faker = config.faker || createFaker(config.seed);
 

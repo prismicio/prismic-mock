@@ -27,7 +27,7 @@ export const group = <
 	Model extends prismicT.CustomTypeModelGroupField = prismicT.CustomTypeModelGroupField,
 	State extends prismicT.FieldState = "filled",
 >(
-	config: MockGroupValueConfig<Model, State> = {},
+	config: MockGroupValueConfig<Model, State>,
 ): ModelValue<Model, State> => {
 	if (config.state === "empty") {
 		return [] as ModelValue<Model, State>;

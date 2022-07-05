@@ -45,7 +45,7 @@ export const link = <
 	Model extends prismicT.CustomTypeModelLinkField = prismicT.CustomTypeModelLinkField,
 	State extends prismicT.FieldState = "filled",
 >(
-	config: MockLinkValueConfig<LinkType, Model, State> = {},
+	config: MockLinkValueConfig<LinkType, Model, State>,
 ): MockLinkValue<LinkType, State> => {
 	const faker = config.faker || createFaker(config.seed);
 

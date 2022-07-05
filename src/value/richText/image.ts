@@ -9,7 +9,7 @@ import { MockRichTextValueConfig } from "../../types";
 type MockRichTextImageValueConfig = MockRichTextValueConfig;
 
 export const image = (
-	config: MockRichTextImageValueConfig = {},
+	config: MockRichTextImageValueConfig,
 ): prismicT.RTImageNode | undefined => {
 	const faker = config.faker || createFaker(config.seed);
 

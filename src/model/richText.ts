@@ -12,7 +12,7 @@ export type MockRichTextModelConfig<
 } & MockModelConfig;
 
 export const richText = <WithMultipleBlocks extends boolean = boolean>(
-	config: MockRichTextModelConfig<WithMultipleBlocks> = {},
+	config: MockRichTextModelConfig<WithMultipleBlocks>,
 ): WithMultipleBlocks extends true
 	? prismicT.CustomTypeModelRichTextMultiField
 	: prismicT.CustomTypeModelRichTextSingleField => {

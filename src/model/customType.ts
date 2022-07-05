@@ -41,7 +41,7 @@ export const customType = <
 		| prismicT.CustomTypeModelTab
 		| prismicT.CustomTypeModelDefinition,
 >(
-	config: MockCustomTypeModelConfig<Definition> = {},
+	config: MockCustomTypeModelConfig<Definition>,
 ): MockCustomTypeModel<Definition> => {
 	const faker = config.faker || createFaker(config.seed);
 

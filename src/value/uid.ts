@@ -12,7 +12,7 @@ export type MockUIDValueConfig<
 export const uid = <
 	Model extends prismicT.CustomTypeModelUIDField = prismicT.CustomTypeModelUIDField,
 >(
-	config: MockUIDValueConfig<Model> = {},
+	config: MockUIDValueConfig<Model>,
 ): NonNullable<prismicT.PrismicDocument["uid"]> => {
 	const faker = config.faker || createFaker(config.seed);
 

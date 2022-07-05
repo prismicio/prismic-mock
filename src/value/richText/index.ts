@@ -62,7 +62,7 @@ export const richText = <
 	Model extends prismicT.CustomTypeModelRichTextField = prismicT.CustomTypeModelRichTextField,
 	State extends prismicT.FieldState = prismicT.FieldState,
 >(
-	config: MockRichTextValueConfig<Model, State> = {},
+	config: MockRichTextValueConfig<Model, State>,
 ): MockRichTextValue<State> => {
 	const faker = config.faker || createFaker(config.seed);
 

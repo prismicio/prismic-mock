@@ -8,7 +8,7 @@ import { MockModelConfig } from "../types";
 export type MockEmbedModelConfig = MockModelConfig;
 
 export const embed = (
-	config: MockEmbedModelConfig = {},
+	config: MockEmbedModelConfig,
 ): prismicT.CustomTypeModelEmbedField => {
 	const faker = config.faker || createFaker(config.seed);
 

@@ -25,7 +25,7 @@ export const sliceZone = <
 	Model extends prismicT.CustomTypeModelSliceZoneField = prismicT.CustomTypeModelSliceZoneField,
 	State extends prismicT.FieldState = prismicT.FieldState,
 >(
-	config: MockSliceZoneValueConfig<Model, State> = {},
+	config: MockSliceZoneValueConfig<Model, State>,
 ): ModelValue<Model, State> => {
 	if (config.state === "empty") {
 		return [] as ModelValue<Model, State>;

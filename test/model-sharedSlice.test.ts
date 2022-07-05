@@ -4,12 +4,12 @@ import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as prismicM from "../src";
 
-test("creates a mock Shared Slice model", snapshotTwiceMacro, () =>
-	prismicM.model.sharedSlice(),
+test("creates a mock Shared Slice model", snapshotTwiceMacro, (t) =>
+	prismicM.model.sharedSlice({ seed: t.title }),
 );
 
-test("supports custom seed", snapshotTwiceMacro, (t) =>
-	prismicM.model.sharedSlice({ seed: t.title }),
+test("supports number seed", snapshotTwiceMacro, () =>
+	prismicM.model.sharedSlice({ seed: 1 }),
 );
 
 test("can be configured with a specific id", (t) => {

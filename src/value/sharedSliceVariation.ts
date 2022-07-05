@@ -24,7 +24,7 @@ export type MockSharedSliceVariationValueConfig<
 export const sharedSliceVariation = <
 	Model extends prismicT.SharedSliceModelVariation = prismicT.SharedSliceModelVariation,
 >(
-	config: MockSharedSliceVariationValueConfig<Model> = {},
+	config: MockSharedSliceVariationValueConfig<Model>,
 ): ModelValue<Model> => {
 	const faker = config.faker || createFaker(config.seed);
 

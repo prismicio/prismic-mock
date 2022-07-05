@@ -8,7 +8,7 @@ import { MockModelConfig } from "../types";
 export type MockBooleanModelConfig = MockModelConfig;
 
 export function boolean(
-	config: MockBooleanModelConfig = {},
+	config: MockBooleanModelConfig,
 ): prismicT.CustomTypeModelBooleanField {
 	const faker = config.faker || createFaker(config.seed);
 

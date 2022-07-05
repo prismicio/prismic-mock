@@ -8,7 +8,7 @@ import { MockModelConfig } from "../types";
 export type MockLinkToMediaModelConfig = MockModelConfig;
 
 export const linkToMedia = (
-	config: MockLinkToMediaModelConfig = {},
+	config: MockLinkToMediaModelConfig,
 ): prismicT.CustomTypeModelLinkToMediaField => {
 	const faker = config.faker || createFaker(config.seed);
 

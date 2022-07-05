@@ -9,7 +9,7 @@ import { MockRichTextValueConfig } from "../../types";
 type MockRichTextEmbedValueConfig = MockRichTextValueConfig;
 
 export const embed = (
-	config: MockRichTextEmbedValueConfig = {},
+	config: MockRichTextEmbedValueConfig,
 ): prismicT.RTEmbedNode | undefined => {
 	const faker = config.faker || createFaker(config.seed);
 

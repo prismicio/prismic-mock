@@ -21,9 +21,15 @@ export const createMockFactory = (
 	return new MockFactory(...args);
 };
 
-type PrismicMockConfig = {
-	seed?: Seed;
-};
+type PrismicMockConfig =
+	| {
+			seed: Seed;
+			faker?: never;
+	  }
+	| {
+			faker: Faker;
+			seed?: never;
+	  };
 
 export class MockFactory {
 	private faker: Faker;
@@ -32,8 +38,8 @@ export class MockFactory {
 	model: ModelMockFactory;
 	value: ValueMockFactory;
 
-	constructor(config: PrismicMockConfig = {}) {
-		this.faker = createFaker(config.seed);
+	constructor(config: PrismicMockConfig) {
+		this.faker = config.faker || createFaker(config.seed);
 
 		this.api = createAPIMockFactory({ faker: this.faker });
 		this.model = createModelMockFactory({ faker: this.faker });

@@ -95,7 +95,7 @@ export class ModelMockFactory {
 		Definition extends
 			| prismicT.CustomTypeModelTab
 			| prismicT.CustomTypeModelDefinition,
-	>(config: WithoutFakerConfig<MockCustomTypeModelConfig<Definition>> = {}) {
+	>(config?: WithoutFakerConfig<MockCustomTypeModelConfig<Definition>>) {
 		return customType({ ...config, faker: this.faker });
 	}
 

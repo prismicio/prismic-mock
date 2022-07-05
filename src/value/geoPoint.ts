@@ -17,7 +17,7 @@ export const geoPoint = <
 	Model extends prismicT.CustomTypeModelGeoPointField = prismicT.CustomTypeModelGeoPointField,
 	State extends prismicT.FieldState = "filled",
 >(
-	config: MockGeoPointValueConfig<Model, State> = {},
+	config: MockGeoPointValueConfig<Model, State>,
 ): MockGeoPointValue<State> => {
 	const faker = config.faker || createFaker(config.seed);
 

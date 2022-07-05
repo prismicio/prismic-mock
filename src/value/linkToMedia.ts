@@ -18,7 +18,7 @@ export const linkToMedia = <
 	Model extends prismicT.CustomTypeModelLinkToMediaField = prismicT.CustomTypeModelLinkToMediaField,
 	State extends prismicT.FieldState = "filled",
 >(
-	config: MockLinkToMediaValueConfig<Model, State> = {},
+	config: MockLinkToMediaValueConfig<Model, State>,
 ): MockLinkToMediaValue<State> => {
 	const faker = config.faker || createFaker(config.seed);
 

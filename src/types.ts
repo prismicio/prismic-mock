@@ -44,7 +44,7 @@ export type MockEmbedData = prismicT.AnyOEmbed &
 
 export type MockRestApiConfig =
 	| {
-			seed?: Seed;
+			seed: Seed;
 			faker?: never;
 	  }
 	| {
@@ -54,7 +54,7 @@ export type MockRestApiConfig =
 
 export type MockModelConfig =
 	| {
-			seed?: Seed;
+			seed: Seed;
 			faker?: never;
 	  }
 	| {
@@ -79,7 +79,7 @@ export type MockValueConfig<Model extends PrismicModel = PrismicModel> = {
 	model?: Model;
 } & (
 	| {
-			seed?: Seed;
+			seed: Seed;
 			faker?: never;
 	  }
 	| {
@@ -145,7 +145,7 @@ export type MockRichTextValueConfig<
 	model?: Model;
 } & (
 	| {
-			seed?: Seed;
+			seed: Seed;
 			faker?: never;
 	  }
 	| {

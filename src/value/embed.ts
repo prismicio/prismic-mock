@@ -27,15 +27,11 @@ export const embed = <
 	Data extends prismicT.AnyOEmbed = prismicT.AnyOEmbed,
 	State extends prismicT.FieldState = "filled",
 >(
-	config: MockEmbedValueConfig<Model, Data, State> = {},
+	config: MockEmbedValueConfig<Model, Data, State>,
 ): MockEmbedValue<Data, State> => {
 	const faker = config.faker || createFaker(config.seed);
 
-	const data =
-		config.data ??
-		getMockEmbedData({
-			faker: config.faker,
-		});
+	const data = config.data ?? getMockEmbedData({ faker });
 
 	return (
 		config.state === "empty"

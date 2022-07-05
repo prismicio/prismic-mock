@@ -5,12 +5,12 @@ import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 import * as value from "../src/value";
 import * as model from "../src/model";
 
-test("creates a mock Image field value", snapshotTwiceMacro, () =>
-	value.image(),
+test("creates a mock Image field value", snapshotTwiceMacro, (t) =>
+	value.image({ seed: t.title }),
 );
 
-test("supports custom seed", snapshotTwiceMacro, (t) =>
-	value.image({ seed: t.title }),
+test("supports number seed", snapshotTwiceMacro, () =>
+	value.image({ seed: 1 }),
 );
 
 test("can be configured to return an empty value", (t) => {

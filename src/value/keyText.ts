@@ -18,7 +18,7 @@ export const keyText = <
 	Model extends prismicT.CustomTypeModelKeyTextField = prismicT.CustomTypeModelKeyTextField,
 	State extends prismicT.FieldState = "filled",
 >(
-	config: MockKeyTextValueConfig<Model, State> = {},
+	config: MockKeyTextValueConfig<Model, State>,
 ): MockKeyTextValue<State> => {
 	const faker = config.faker || createFaker(config.seed);
 

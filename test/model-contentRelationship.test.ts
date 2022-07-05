@@ -7,11 +7,11 @@ import * as model from "../src/model";
 test(
 	"creates a mock Content Relationship field model",
 	snapshotTwiceMacro,
-	() => model.contentRelationship(),
+	(t) => model.contentRelationship({ seed: t.title }),
 );
 
-test("supports custom seed", snapshotTwiceMacro, (t) =>
-	model.contentRelationship({ seed: t.title }),
+test("supports number seed", snapshotTwiceMacro, () =>
+	model.contentRelationship({ seed: 1 }),
 );
 
 test("can be configured to constrain by custom type", (t) => {

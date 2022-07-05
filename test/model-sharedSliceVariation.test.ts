@@ -8,11 +8,11 @@ import * as prismicM from "../src";
 test(
 	"creates a mock Shared Slice variation field model",
 	snapshotTwiceMacro,
-	() => prismicM.model.sharedSliceVariation(),
+	(t) => prismicM.model.sharedSliceVariation({ seed: t.title }),
 );
 
-test("supports custom seed", snapshotTwiceMacro, (t) =>
-	prismicM.model.sharedSliceVariation({ seed: t.title }),
+test("supports number seed", snapshotTwiceMacro, () =>
+	prismicM.model.sharedSliceVariation({ seed: 1 }),
 );
 
 test("can be configured with a specific id", (t) => {

@@ -20,7 +20,7 @@ export const select = <
 	Model extends prismicT.CustomTypeModelSelectField = prismicT.CustomTypeModelSelectField,
 	State extends prismicT.FieldState = "filled",
 >(
-	config: MockSelectValueConfig<Model, State> = {},
+	config: MockSelectValueConfig<Model, State>,
 ): MockSelectValue<Model, State> => {
 	const faker = config.faker || createFaker(config.seed);
 

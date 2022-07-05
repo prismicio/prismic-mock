@@ -22,7 +22,7 @@ export const image = <
 	Model extends prismicT.CustomTypeModelImageField = prismicT.CustomTypeModelImageField,
 	State extends prismicT.FieldState = "filled",
 >(
-	config: MockImageValueConfig<Model, State> = {},
+	config: MockImageValueConfig<Model, State>,
 ): MockImageValue<Model, State> => {
 	const faker = config.faker || createFaker(config.seed);
 
