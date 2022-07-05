@@ -1,6 +1,6 @@
 import * as prismicT from "@prismicio/types";
 
-import { MockValueConfig, ModelValue, ModelValueMap } from "../types";
+import { ModelValue, ModelValueMap, Seed } from "../types";
 import {
 	MockBooleanValueConfig,
 	MockColorValueConfig,
@@ -24,7 +24,7 @@ import {
 } from "../value";
 
 import { valueForModel } from "./valueForModel";
-import { createFaker } from "./createFaker";
+import { createFaker, Faker } from "./createFaker";
 
 const getValueConfigType = <Model extends prismicT.CustomTypeModelField>(
 	model: Model,
@@ -125,7 +125,16 @@ type ValueForModelMapConfig<
 > = {
 	map: ModelMap;
 	configs?: ValueForModelMapConfigs;
-} & Omit<MockValueConfig, "model">;
+} & (
+	| {
+			seed: Seed;
+			faker?: never;
+	  }
+	| {
+			faker: Faker;
+			seed?: never;
+	  }
+);
 
 export const valueForModelMap = <
 	ModelMap extends Record<string, prismicT.CustomTypeModelField>,
