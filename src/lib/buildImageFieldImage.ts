@@ -1,16 +1,27 @@
 import * as prismicT from "@prismicio/types";
 import * as changeCase from "change-case";
 
-import { createFaker } from "../lib/createFaker";
+import { createFaker, Faker } from "../lib/createFaker";
 
-import { MockValueStateConfig, MockImageData, MockValueConfig } from "../types";
+import { MockValueStateConfig, MockImageData, Seed } from "../types";
 
 type BuildImageFieldConfig<
 	State extends prismicT.FieldState = prismicT.FieldState,
 > = {
 	imageData: MockImageData;
-	constraint?: prismicT.CustomTypeModelImageField["config"]["constraint"];
-} & Pick<MockValueConfig, "faker" | "seed"> &
+	constraint?: NonNullable<
+		prismicT.CustomTypeModelImageField["config"]
+	>["constraint"];
+} & (
+	| {
+			seed: Seed;
+			faker?: never;
+	  }
+	| {
+			faker: Faker;
+			seed?: never;
+	  }
+) &
 	Pick<MockValueStateConfig<State>, "state">;
 
 export const buildImageFieldImage = <

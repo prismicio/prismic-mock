@@ -33,7 +33,7 @@ export const sharedSliceVariation = <
 	const sliceType = config.type ?? generateFieldId({ faker });
 
 	const itemsCount =
-		Object.keys(model.items).length > 0
+		model.items && Object.keys(model.items).length > 0
 			? config.itemsCount ?? faker.range(1, 6)
 			: 0;
 
@@ -44,7 +44,7 @@ export const sharedSliceVariation = <
 		version: faker.hash(7),
 		primary: valueForModelMap({
 			faker,
-			map: model.primary,
+			map: model.primary || {},
 			configs: config.primaryFieldConfigs,
 		}),
 		items: Array(itemsCount)
@@ -52,7 +52,7 @@ export const sharedSliceVariation = <
 			.map(() => {
 				return valueForModelMap({
 					faker,
-					map: model.items,
+					map: model.items || {},
 					configs: config.itemsFieldConfigs,
 				});
 			}),

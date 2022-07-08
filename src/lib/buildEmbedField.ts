@@ -1,8 +1,8 @@
 import * as prismicT from "@prismicio/types";
 
-import { createFaker } from "../lib/createFaker";
+import { createFaker, Faker } from "../lib/createFaker";
 
-import { MockValueConfig } from "../types";
+import { Seed } from "../types";
 
 type BuildEmbedFieldConfig<
 	Data extends prismicT.AnyOEmbed = prismicT.AnyOEmbed,
@@ -10,7 +10,16 @@ type BuildEmbedFieldConfig<
 	url?: string;
 	html?: string;
 	data: Data;
-} & Pick<MockValueConfig, "faker" | "seed">;
+} & (
+	| {
+			seed: Seed;
+			faker?: never;
+	  }
+	| {
+			faker: Faker;
+			seed?: never;
+	  }
+);
 
 export const buildEmbedField = <
 	Data extends prismicT.AnyOEmbed = prismicT.AnyOEmbed,

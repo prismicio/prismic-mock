@@ -38,7 +38,7 @@ export const slice = <
 			: changeCase.capitalCase(faker.words(faker.range(1, 2)));
 
 	const itemsCount =
-		Object.keys(model.repeat).length > 0
+		model.repeat && Object.keys(model.repeat).length > 0
 			? config.itemsCount ?? faker.range(1, 6)
 			: 0;
 
@@ -47,7 +47,7 @@ export const slice = <
 		slice_label: sliceLabel,
 		primary: valueForModelMap({
 			faker,
-			map: model["non-repeat"],
+			map: model["non-repeat"] || {},
 			configs: config.primaryFieldConfigs,
 		}),
 		items: Array(itemsCount)
@@ -55,7 +55,7 @@ export const slice = <
 			.map(() => {
 				return valueForModelMap({
 					faker,
-					map: model.repeat,
+					map: model.repeat || {},
 					configs: config.itemsFieldConfigs,
 				});
 			}),

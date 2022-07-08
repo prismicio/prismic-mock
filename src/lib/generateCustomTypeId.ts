@@ -1,10 +1,18 @@
 import * as changeCase from "change-case";
 
-import { createFaker } from "../lib/createFaker";
+import { createFaker, Faker } from "../lib/createFaker";
 
-import { MockModelConfig } from "../types";
+import { Seed } from "../types";
 
-type GenerateFieldIdConfig = Pick<MockModelConfig, "faker" | "seed">;
+type GenerateFieldIdConfig =
+	| {
+			seed: Seed;
+			faker?: never;
+	  }
+	| {
+			faker: Faker;
+			seed?: never;
+	  };
 
 export const generateCustomTypeId = (config: GenerateFieldIdConfig): string => {
 	const faker = config.faker || createFaker(config.seed);

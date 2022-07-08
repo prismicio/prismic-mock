@@ -52,7 +52,7 @@ const getValueConfigType = <Model extends prismicT.CustomTypeModelField>(
 			return "image";
 
 		case prismicT.CustomTypeModelFieldType.Link: {
-			switch (model.config.select) {
+			switch (model.config?.select) {
 				case prismicT.CustomTypeModelLinkSelectType.Document:
 					return "contentRelationship";
 				case prismicT.CustomTypeModelLinkSelectType.Media:
@@ -70,7 +70,9 @@ const getValueConfigType = <Model extends prismicT.CustomTypeModelField>(
 
 		case prismicT.CustomTypeModelFieldType.StructuredText: {
 			if (
+				model.config &&
 				"single" in model.config &&
+				model.config.single &&
 				model.config.single
 					.split(",")
 					.every((element) => /heading{1,6}/.test(element.trim()))
@@ -95,6 +97,12 @@ const getValueConfigType = <Model extends prismicT.CustomTypeModelField>(
 
 		case prismicT.CustomTypeModelFieldType.Slices:
 			return "sliceZone";
+
+		default: {
+			throw new Error(
+				`The "${model.type}" field type is not supported in @prismicio/mock.`,
+			);
+		}
 	}
 };
 

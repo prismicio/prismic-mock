@@ -15,7 +15,9 @@ export type MockLinkValueConfig<
 	State extends prismicT.FieldState = prismicT.FieldState,
 > = {
 	type?: LinkType;
-	withTargetBlank?: Model["config"]["allowTargetBlank"] extends undefined
+	withTargetBlank?: NonNullable<
+		Model["config"]
+	>["allowTargetBlank"] extends undefined
 		? false
 		: boolean;
 	/**
@@ -87,7 +89,7 @@ export const link = <
 					url: faker.url(),
 					target:
 						config.withTargetBlank ??
-						(model.config.allowTargetBlank && faker.boolean())
+						(model.config?.allowTargetBlank && faker.boolean())
 							? "_blank"
 							: undefined,
 				} as MockLinkValue<LinkType, State>;

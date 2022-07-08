@@ -75,14 +75,24 @@ export const richText = <
 				faker,
 				withMultipleBlocks: true,
 			});
-		const supportsMultipleBlocks = "multi" in model.config;
-		const types = (
-			"multi" in model.config ? model.config.multi : model.config.single
-		)
-			.split(",")
-			.filter((type) =>
-				Object.keys(generators).includes(type),
-			) as prismicT.RTNode["type"][];
+		const supportsMultipleBlocks = model.config && "multi" in model.config;
+
+		let types: prismicT.RTNode["type"][] = [];
+		if (model.config) {
+			if ("multi" in model.config && model.config.multi) {
+				types = model.config.multi
+					.split(",")
+					.filter((type): type is prismicT.RTNode["type"] =>
+						Object.keys(generators).includes(type),
+					);
+			} else if ("single" in model.config && model.config.single) {
+				types = model.config.single
+					.split(",")
+					.filter((type): type is prismicT.RTNode["type"] =>
+						Object.keys(generators).includes(type),
+					);
+			}
+		}
 
 		if (types.length > 0) {
 			const patternKey =

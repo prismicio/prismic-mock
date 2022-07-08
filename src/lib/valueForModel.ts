@@ -1,18 +1,23 @@
 import * as prismicT from "@prismicio/types";
 
-import {
-	MockValueConfig,
-	MockValueConfigForModel,
-	ModelValue,
-	SetRequired,
-} from "../types";
+import { MockValueConfigForModel, ModelValue, Seed } from "../types";
 import * as value from "../value";
 
-import { createFaker } from "./createFaker";
+import { createFaker, Faker } from "./createFaker";
 
 type ValueForModelConfig<Model extends prismicT.CustomTypeModelField> = {
+	model: Model;
 	config?: Omit<MockValueConfigForModel<Model>, "faker" | "seed" | "model">;
-} & SetRequired<MockValueConfig<Model>, "model">;
+} & (
+	| {
+			seed: Seed;
+			faker?: never;
+	  }
+	| {
+			faker: Faker;
+			seed?: never;
+	  }
+);
 
 export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
 	config: ValueForModelConfig<Model>,
@@ -39,7 +44,7 @@ export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
 		}
 
 		case prismicT.CustomTypeModelFieldType.Link: {
-			switch (model.config.select) {
+			switch (model.config?.select) {
 				case prismicT.CustomTypeModelLinkSelectType.Document: {
 					return value.contentRelationship({
 						faker,
@@ -132,7 +137,9 @@ export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
 
 		case prismicT.CustomTypeModelFieldType.StructuredText: {
 			if (
+				model.config &&
 				"single" in model.config &&
+				model.config.single &&
 				model.config.single
 					.split(",")
 					.every((element) => /heading[1-6]/.test(element.trim()))
@@ -175,12 +182,19 @@ export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
 			}) as ModelValue<Model>;
 		}
 
+		case prismicT.CustomTypeModelFieldType.LegacySlices:
 		case prismicT.CustomTypeModelFieldType.Slices: {
 			return value.sliceZone({
 				faker,
 				model,
 				...config.config,
 			}) as ModelValue<Model>;
+		}
+
+		default: {
+			throw new Error(
+				`The "${model.type}" field type is not supported in @prismicio/mock.`,
+			);
 		}
 	}
 };

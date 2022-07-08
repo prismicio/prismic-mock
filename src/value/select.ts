@@ -14,7 +14,10 @@ export type MockSelectValueConfig<
 export type MockSelectValue<
 	Model extends prismicT.CustomTypeModelSelectField = prismicT.CustomTypeModelSelectField,
 	State extends prismicT.FieldState = prismicT.FieldState,
-> = prismicT.SelectField<Model["config"]["options"][number], State>;
+> = prismicT.SelectField<
+	NonNullable<NonNullable<Model["config"]>["options"]>[number],
+	State
+>;
 
 export const select = <
 	Model extends prismicT.CustomTypeModelSelectField = prismicT.CustomTypeModelSelectField,
@@ -25,7 +28,8 @@ export const select = <
 	const faker = config.faker || createFaker(config.seed);
 
 	const model = config.model || modelGen.select({ faker });
-	const defaultValue = model.config.default_value;
+	const defaultValue = model.config?.default_value;
+	const options = model.config?.options || [];
 
 	if (config.state === "empty") {
 		return null as MockSelectValue<Model, State>;
@@ -33,7 +37,7 @@ export const select = <
 		return (
 			typeof defaultValue === "string" && faker.boolean()
 				? defaultValue
-				: faker.randomElement(model.config.options)
+				: faker.randomElement(options)
 		) as MockSelectValue<Model, State>;
 	}
 };

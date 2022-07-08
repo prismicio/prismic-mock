@@ -42,6 +42,15 @@ export type MockRichTextHeadingValueConfig = {
 	pattern?: keyof typeof patterns;
 } & MockRichTextValueConfig;
 
+const headingNoteTypes = [
+	prismicT.RichTextNodeType.heading1,
+	prismicT.RichTextNodeType.heading2,
+	prismicT.RichTextNodeType.heading3,
+	prismicT.RichTextNodeType.heading4,
+	prismicT.RichTextNodeType.heading5,
+	prismicT.RichTextNodeType.heading6,
+];
+
 export const heading = (
 	config: MockRichTextHeadingValueConfig,
 ): RTHeadingNode | undefined => {
@@ -49,20 +58,23 @@ export const heading = (
 
 	const model = config.model || modelGen.title({ faker });
 
-	const types = (
-		"single" in model.config ? model.config.single : model.config.multi
-	)
-		.split(",")
-		.filter((type) =>
-			[
-				prismicT.RichTextNodeType.heading1,
-				prismicT.RichTextNodeType.heading2,
-				prismicT.RichTextNodeType.heading3,
-				prismicT.RichTextNodeType.heading4,
-				prismicT.RichTextNodeType.heading5,
-				prismicT.RichTextNodeType.heading6,
-			].includes(type as RichTextNodeTitleType),
-		) as RichTextNodeTitleType[];
+	let types: RichTextNodeTitleType[] = [];
+	if (model.config) {
+		if ("single" in model.config && model.config.single) {
+			types = model.config.single
+				.split(",")
+				.filter((type): type is RichTextNodeTitleType =>
+					headingNoteTypes.includes(type as RichTextNodeTitleType),
+				);
+		} else if ("multi" in model.config && model.config.multi) {
+			types = model.config.multi
+				.split(",")
+				.filter((type): type is RichTextNodeTitleType =>
+					headingNoteTypes.includes(type as RichTextNodeTitleType),
+				);
+		}
+	}
+
 	const type = faker.randomElement(types);
 
 	if (type) {

@@ -2,6 +2,7 @@ import * as prismicT from "@prismicio/types";
 import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
+import { getMockImageData } from "../lib/getMockImageData";
 
 import { GroupFieldModelMap, MockModelConfig } from "../types";
 
@@ -35,6 +36,8 @@ export const sharedSliceVariation = <
 		id = changeCase.snakeCase(config.name) as ID;
 	}
 
+	const imageData = getMockImageData({ faker });
+
 	return {
 		id,
 		name,
@@ -43,5 +46,6 @@ export const sharedSliceVariation = <
 		version: faker.hash(7),
 		primary: config.primaryFields || ({} as PrimaryFields),
 		items: config.itemsFields || ({} as ItemsFields),
+		imageUrl: imageData.url,
 	};
 };

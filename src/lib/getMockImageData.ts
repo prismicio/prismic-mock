@@ -1,6 +1,6 @@
-import { createFaker } from "../lib/createFaker";
+import { createFaker, Faker } from "../lib/createFaker";
 
-import { MockImageData, MockValueConfig } from "../types";
+import { MockImageData, Seed } from "../types";
 
 const dataSet: MockImageData[] = [
 	{
@@ -85,7 +85,15 @@ const dataSet: MockImageData[] = [
 	},
 ];
 
-type GetMockImageDataConfig = Pick<MockValueConfig, "faker" | "seed">;
+type GetMockImageDataConfig =
+	| {
+			seed: Seed;
+			faker?: never;
+	  }
+	| {
+			faker: Faker;
+			seed?: never;
+	  };
 
 export const getMockImageData = (
 	config: GetMockImageDataConfig,

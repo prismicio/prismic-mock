@@ -43,7 +43,7 @@ export const group = <
 			.map(() => {
 				return valueForModelMap({
 					faker,
-					map: model.config.fields,
+					map: model.config?.fields || {},
 					configs: config.configs,
 				});
 			}) as ModelValue<Model, State>;

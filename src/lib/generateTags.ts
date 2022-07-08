@@ -1,13 +1,22 @@
 import * as changeCase from "change-case";
 
-import { createFaker } from "../lib/createFaker";
+import { createFaker, Faker } from "../lib/createFaker";
 
-import { MockValueConfig } from "../types";
+import { Seed } from "../types";
 
 type GenerateTagsConfig = {
 	min?: number;
 	max?: number;
-} & Pick<MockValueConfig, "faker" | "seed">;
+} & (
+	| {
+			seed: Seed;
+			faker?: never;
+	  }
+	| {
+			faker: Faker;
+			seed?: never;
+	  }
+);
 
 export const generateTags = (config: GenerateTagsConfig): string[] => {
 	const faker = config.faker || createFaker(config.seed);

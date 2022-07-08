@@ -34,16 +34,18 @@ export const sliceZone = <
 
 		const model = config.model || modelGen.sliceZone({ faker });
 
-		if (Object.keys(model.config.choices).length > 0) {
+		if (model.config?.choices && Object.keys(model.config.choices).length > 0) {
 			const itemsCount = config.itemsCount ?? faker.range(1, 6);
 
 			return Array(itemsCount)
 				.fill(undefined)
 				.map(() => {
-					const choices = Object.entries(model.config.choices);
+					const choices =
+						(model.config?.choices && Object.entries(model.config.choices)) ||
+						[];
 					const [choiceType, choiceModel] = faker.randomElement(choices);
 
-					const choiceLabels = model.config.labels[choiceType] || [];
+					const choiceLabels = model.config?.labels?.[choiceType] || [];
 					const choiceLabel = faker.randomElement(choiceLabels);
 
 					switch (choiceModel.type) {

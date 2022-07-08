@@ -30,7 +30,7 @@ type MockContentRelationshipValue<
 	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
 	State extends prismicT.FieldState = prismicT.FieldState,
 > = prismicT.RelationField<
-	IterableElement<Model["config"]["customtypes"]>,
+	IterableElement<NonNullable<Model["config"]>["customtypes"]>,
 	string,
 	never,
 	State
@@ -57,16 +57,16 @@ export const contentRelationship = <
 						document,
 					): document is prismicT.PrismicDocument<
 						never,
-						NonNullable<Model["config"]["customtypes"]>[number]
+						NonNullable<NonNullable<Model["config"]>["customtypes"]>[number]
 					> => {
 						let shouldKeep = true;
 
-						if (model.config.customtypes) {
+						if (model.config?.customtypes) {
 							shouldKeep =
 								shouldKeep && model.config.customtypes.includes(document.type);
 						}
 
-						if (model.config.tags) {
+						if (model.config?.tags) {
 							shouldKeep =
 								shouldKeep &&
 								model.config.tags.some((tag) => document.tags.includes(tag));
@@ -78,15 +78,15 @@ export const contentRelationship = <
 			: [
 					{
 						...documentGen({ faker }),
-						type: model.config.customtypes
+						type: model.config?.customtypes
 							? faker.randomElement(model.config.customtypes)
 							: generateCustomTypeId({ faker }),
-						tags: model.config.tags
+						tags: model.config?.tags
 							? faker.randomElements(model.config.tags)
 							: generateTags({ faker }),
 					} as prismicT.PrismicDocument<
 						never,
-						NonNullable<Model["config"]["customtypes"]>[number]
+						NonNullable<NonNullable<Model["config"]>["customtypes"]>[number]
 					>,
 			  ];
 

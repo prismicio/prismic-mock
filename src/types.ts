@@ -174,14 +174,18 @@ export type ModelValue<
 	: T extends prismicT.CustomTypeModelSliceZoneField
 	? prismicT.SliceZone<
 			ValueOf<{
-				[P in keyof T["config"]["choices"] as P extends string
+				[P in keyof NonNullable<T["config"]>["choices"] as P extends string
 					? P
-					: never]: T["config"]["choices"][P] extends prismicT.CustomTypeModelSlice
+					: never]: NonNullable<
+					T["config"]
+				>["choices"][P] extends prismicT.CustomTypeModelSlice
 					? CustomTypeModelSliceValue<
-							T["config"]["choices"][P],
+							NonNullable<T["config"]>["choices"][P],
 							P extends string ? P : string
 					  >
-					: T["config"]["choices"][P] extends prismicT.CustomTypeModelSharedSlice
+					: NonNullable<
+							T["config"]
+					  >["choices"][P] extends prismicT.CustomTypeModelSharedSlice
 					? prismicT.SharedSlice<P extends string ? P : string>
 					: never;
 			}>,
@@ -249,21 +253,26 @@ type CustomTypeModelFieldForGroupValue<
 type CustomTypeModelGroupFieldValue<
 	T extends prismicT.CustomTypeModelGroupField,
 	State extends prismicT.FieldState = prismicT.FieldState,
-> = prismicT.GroupField<ModelValueMap<T["config"]["fields"]>, State>;
+> = prismicT.GroupField<
+	ModelValueMap<NonNullable<NonNullable<T["config"]>["fields"]>>,
+	State
+>;
 
 type CustomTypeModelSliceValue<
 	T extends prismicT.CustomTypeModelSlice,
 	SliceType = string,
 > = prismicT.Slice<
 	SliceType,
-	ModelValueMap<T["non-repeat"]>,
-	ModelValueMap<T["repeat"]>
+	ModelValueMap<NonNullable<T["non-repeat"]>>,
+	ModelValueMap<NonNullable<T["repeat"]>>
 >;
 
 type SharedSliceModelValue<T extends prismicT.SharedSliceModel> =
 	prismicT.SharedSlice<
 		T["id"],
-		SharedSliceModelVariationValue<IterableElement<T["variations"]>>
+		SharedSliceModelVariationValue<
+			IterableElement<NonNullable<T["variations"]>>
+		>
 	>;
 
 type SharedSliceModelVariationValue<
@@ -272,7 +281,7 @@ type SharedSliceModelVariationValue<
 	string,
 	prismicT.SharedSliceVariation<
 		T["id"],
-		ModelValueMap<T["primary"]>,
-		ModelValueMap<T["items"]>
+		ModelValueMap<NonNullable<T["primary"]>>,
+		ModelValueMap<NonNullable<T["items"]>>
 	>
 >;

@@ -22,8 +22,11 @@ export const sliceZone = <
 >(
 	config: MockSliceZoneModelConfig<Slices>,
 ): prismicT.CustomTypeModelSliceZoneField<Slices> => {
-	const labels =
-		{} as prismicT.CustomTypeModelSliceZoneField<Slices>["config"]["labels"];
+	const labels = {} as NonNullable<
+		NonNullable<
+			prismicT.CustomTypeModelSliceZoneField<Slices>["config"]
+		>["labels"]
+	>;
 
 	for (const choiceId in config.choices) {
 		const choice = config.choices[choiceId];

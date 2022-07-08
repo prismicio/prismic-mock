@@ -18,7 +18,7 @@ export const repository = (
 	const faker = config.faker || createFaker(config.seed);
 
 	const types = (config.customTypeModels || []).reduce((acc, model) => {
-		acc[model.id] = model.label;
+		acc[model.id] = model.label || model.id;
 
 		return acc;
 	}, {} as prismicT.Repository["types"]);
