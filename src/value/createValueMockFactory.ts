@@ -2,7 +2,7 @@ import * as prismicT from "@prismicio/types";
 
 import { createFaker, Faker } from "../lib/createFaker";
 
-import { Seed } from "../types";
+import { Seed, WithoutFakerConfig } from "../types";
 
 import { boolean, MockBooleanValueConfig } from "./boolean";
 import { color, MockColorValueConfig } from "./color";
@@ -43,8 +43,6 @@ export const createValueMockFactory = (
 ): ValueMockFactory => {
 	return new ValueMockFactory(...args);
 };
-
-type WithoutFakerConfig<T> = Omit<T, "faker" | "seed">;
 
 type ValueMockFactoryConfig =
 	| {

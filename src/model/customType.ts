@@ -19,9 +19,11 @@ export type MockCustomTypeModelConfig<
 } & (
 	| {
 			fields?: Definition;
+			tabs?: never;
 	  }
 	| {
 			tabs?: Definition;
+			fields?: never;
 	  }
 ) &
 	MockModelConfig;

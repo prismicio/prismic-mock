@@ -30,6 +30,10 @@ export type SetRequired<BaseType, Keys extends keyof BaseType> = Simplify<
 
 export type Seed = string | number;
 
+export type WithoutFakerConfig<T> = {
+	[P in keyof T as P extends "seed" | "faker" ? never : P]: T[P];
+};
+
 export interface MockImageData {
 	url: string;
 	width: number;
