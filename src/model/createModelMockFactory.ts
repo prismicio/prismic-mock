@@ -2,7 +2,7 @@ import * as prismicT from "@prismicio/types";
 
 import { createFaker, Faker } from "../lib/createFaker";
 
-import { GroupFieldModelMap, Seed } from "../types";
+import { GroupFieldModelMap, Seed, WithoutFakerConfig } from "../types";
 
 import { boolean, MockBooleanModelConfig } from "./boolean";
 import {
@@ -47,8 +47,6 @@ export const createModelMockFactory = (
 ): ModelMockFactory => {
 	return new ModelMockFactory(...args);
 };
-
-type WithoutFakerConfig<T> = Omit<T, "faker" | "seed">;
 
 type ModelMockFactoryConfig =
 	| {

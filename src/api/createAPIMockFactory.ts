@@ -2,7 +2,7 @@ import * as prismicT from "@prismicio/types";
 
 import { createFaker, Faker } from "../lib/createFaker";
 
-import { Seed } from "../types";
+import { Seed, WithoutFakerConfig } from "../types";
 
 import { query, MockRestApiQueryConfig } from "./query";
 import { ref, MockRestApiRefConfig } from "./ref";
@@ -14,8 +14,6 @@ export const createAPIMockFactory = (
 ): APIMockFactory => {
 	return new APIMockFactory(...args);
 };
-
-type WithoutFakerConfig<T> = Omit<T, "faker" | "seed">;
 
 type APIMockFactoryConfig =
 	| {
