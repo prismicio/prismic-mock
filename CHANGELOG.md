@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.0](https://github.com/prismicio/prismic-mock/compare/v0.0.10...v0.1.0) (2022-07-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* factory API (#9)
+
+### Features
+
+* factory API ([#9](https://github.com/prismicio/prismic-mock/issues/9)) ([7cbadce](https://github.com/prismicio/prismic-mock/commit/7cbadcea96763a1a14388857dd3b3e0a512e6017))
+
+
+### Bug Fixes
+
+* return correct Integration Fields value data ([21b882c](https://github.com/prismicio/prismic-mock/commit/21b882cfc9f972d0281812b604d63a6e158ae763))
+* type and bundle order bugs ([#10](https://github.com/prismicio/prismic-mock/issues/10)) ([0f389e0](https://github.com/prismicio/prismic-mock/commit/0f389e0f69e56186b8fdcb217f840331095fcb1d))
+* use corrected IntegrationFields value ([36dda0e](https://github.com/prismicio/prismic-mock/commit/36dda0edc79aea9fb245c78e136e54187665ae7f))
+
+
+### Chore
+
+* **deps:** upgrade dependencies ([a8ddb6b](https://github.com/prismicio/prismic-mock/commit/a8ddb6b6ad6f3fe4b17a2a0adc8946b1cd9be831))
+
 ### [0.0.10](https://github.com/prismicio/prismic-mock/compare/v0.0.9...v0.0.10) (2022-04-15)
 
 
