@@ -17,9 +17,9 @@ export const contentRelationship = <
 	CustomTypeIDs extends string,
 	Tags extends string,
 >(
-	config: MockContentRelationshipModelConfig<CustomTypeIDs, Tags> = {},
+	config: MockContentRelationshipModelConfig<CustomTypeIDs, Tags>,
 ): prismicT.CustomTypeModelContentRelationshipField<CustomTypeIDs, Tags> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	return {
 		type: prismicT.CustomTypeModelFieldType.Link,

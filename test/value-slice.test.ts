@@ -5,12 +5,12 @@ import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 import * as value from "../src/value";
 import * as model from "../src/model";
 
-test("creates a mock Slice field value", snapshotTwiceMacro, () =>
-	value.slice(),
+test("creates a mock Slice field value", snapshotTwiceMacro, (t) =>
+	value.slice({ seed: t.title }),
 );
 
-test("supports custom seed", snapshotTwiceMacro, (t) =>
-	value.slice({ seed: t.title }),
+test("supports number seed", snapshotTwiceMacro, () =>
+	value.slice({ seed: 1 }),
 );
 
 test("supports custom model", (t) => {

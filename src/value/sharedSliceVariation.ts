@@ -24,17 +24,16 @@ export type MockSharedSliceVariationValueConfig<
 export const sharedSliceVariation = <
 	Model extends prismicT.SharedSliceModelVariation = prismicT.SharedSliceModelVariation,
 >(
-	config: MockSharedSliceVariationValueConfig<Model> = {},
+	config: MockSharedSliceVariationValueConfig<Model>,
 ): ModelValue<Model> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
-	const model =
-		config.model || modelGen.sharedSliceVariation({ seed: config.seed });
+	const model = config.model || modelGen.sharedSliceVariation({ faker });
 
-	const sliceType = config.type ?? generateFieldId({ seed: config.seed });
+	const sliceType = config.type ?? generateFieldId({ faker });
 
 	const itemsCount =
-		Object.keys(model.items).length > 0
+		model.items && Object.keys(model.items).length > 0
 			? config.itemsCount ?? faker.range(1, 6)
 			: 0;
 
@@ -44,16 +43,16 @@ export const sharedSliceVariation = <
 		variation: model.id,
 		version: faker.hash(7),
 		primary: valueForModelMap({
-			seed: config.seed,
-			map: model.primary,
+			faker,
+			map: model.primary || {},
 			configs: config.primaryFieldConfigs,
 		}),
 		items: Array(itemsCount)
 			.fill(undefined)
 			.map(() => {
 				return valueForModelMap({
-					seed: config.seed,
-					map: model.items,
+					faker,
+					map: model.items || {},
 					configs: config.itemsFieldConfigs,
 				});
 			}),

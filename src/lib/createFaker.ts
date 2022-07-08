@@ -1,31 +1,26 @@
 import Rand from "rand-seed";
 
 import { Seed } from "../types";
-import { FAKER_SEED } from "../constants";
+
 import { lorem, loremWords } from "./lorem";
 
-export const createFaker = (seed: Seed = FAKER_SEED) => {
-	const normalizedSeed = seed.toString();
-
-	if (createFaker.cache[normalizedSeed]) {
-		return createFaker.cache[normalizedSeed];
-	} else {
-		const faker = new Faker(normalizedSeed);
-
-		return (createFaker.cache[normalizedSeed] = faker);
-	}
+export const createFaker = (seed: Seed): Faker => {
+	return new Faker(seed);
 };
-createFaker.cache = {} as Record<string, Faker>;
 
 const DAY_MS = 1000 * 60 * 60 * 24;
 const YEAR_MS = DAY_MS * 365;
 const YEAR_2022_MS = 52 * (YEAR_MS + DAY_MS / 4);
 
 export class Faker {
+	seed: Seed;
+
 	private rand: Rand;
 
-	constructor(seed: string) {
-		this.rand = new Rand(seed);
+	constructor(seed: Seed) {
+		this.seed = seed;
+
+		this.rand = new Rand(seed.toString());
 	}
 
 	boolean(): boolean {
@@ -41,7 +36,11 @@ export class Faker {
 	}
 
 	randomElements<T>(elements: readonly T[]): T[] {
-		return elements.filter(() => this.boolean());
+		const alwaysInclude = this.randomElement(elements);
+
+		return elements.filter(
+			(element) => element === alwaysInclude || this.boolean(),
+		);
 	}
 
 	range(min: number, max: number): number {

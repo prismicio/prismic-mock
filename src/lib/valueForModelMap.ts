@@ -1,6 +1,6 @@
 import * as prismicT from "@prismicio/types";
 
-import { MockValueConfig, ModelValue, ModelValueMap } from "../types";
+import { ModelValue, ModelValueMap, Seed } from "../types";
 import {
 	MockBooleanValueConfig,
 	MockColorValueConfig,
@@ -24,6 +24,7 @@ import {
 } from "../value";
 
 import { valueForModel } from "./valueForModel";
+import { createFaker, Faker } from "./createFaker";
 
 const getValueConfigType = <Model extends prismicT.CustomTypeModelField>(
 	model: Model,
@@ -51,7 +52,7 @@ const getValueConfigType = <Model extends prismicT.CustomTypeModelField>(
 			return "image";
 
 		case prismicT.CustomTypeModelFieldType.Link: {
-			switch (model.config.select) {
+			switch (model.config?.select) {
 				case prismicT.CustomTypeModelLinkSelectType.Document:
 					return "contentRelationship";
 				case prismicT.CustomTypeModelLinkSelectType.Media:
@@ -69,7 +70,9 @@ const getValueConfigType = <Model extends prismicT.CustomTypeModelField>(
 
 		case prismicT.CustomTypeModelFieldType.StructuredText: {
 			if (
+				model.config &&
 				"single" in model.config &&
+				model.config.single &&
 				model.config.single
 					.split(",")
 					.every((element) => /heading{1,6}/.test(element.trim()))
@@ -94,6 +97,12 @@ const getValueConfigType = <Model extends prismicT.CustomTypeModelField>(
 
 		case prismicT.CustomTypeModelFieldType.Slices:
 			return "sliceZone";
+
+		default: {
+			throw new Error(
+				`The "${model.type}" field type is not supported in @prismicio/mock.`,
+			);
+		}
 	}
 };
 
@@ -124,13 +133,24 @@ type ValueForModelMapConfig<
 > = {
 	map: ModelMap;
 	configs?: ValueForModelMapConfigs;
-} & Omit<MockValueConfig, "model">;
+} & (
+	| {
+			seed: Seed;
+			faker?: never;
+	  }
+	| {
+			faker: Faker;
+			seed?: never;
+	  }
+);
 
 export const valueForModelMap = <
 	ModelMap extends Record<string, prismicT.CustomTypeModelField>,
 >(
 	config: ValueForModelMapConfig<ModelMap>,
 ): ModelValueMap<ModelMap> => {
+	const faker = config.faker || createFaker(config.seed);
+
 	const result = {} as ModelValueMap<ModelMap>;
 
 	for (const fieldId in config.map) {
@@ -139,7 +159,7 @@ export const valueForModelMap = <
 		const fieldConfig = config.configs?.[fieldConfigType];
 
 		result[fieldId] = valueForModel({
-			seed: config.seed,
+			faker,
 			model: fieldModel as prismicT.CustomTypeModelField,
 			config: fieldConfig,
 		}) as ModelValue<typeof fieldModel>;

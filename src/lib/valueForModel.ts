@@ -1,27 +1,35 @@
 import * as prismicT from "@prismicio/types";
 
-import {
-	MockValueConfig,
-	MockValueConfigForModel,
-	ModelValue,
-	SetRequired,
-} from "../types";
+import { MockValueConfigForModel, ModelValue, Seed } from "../types";
+import * as value from "../value";
+
+import { createFaker, Faker } from "./createFaker";
 
 type ValueForModelConfig<Model extends prismicT.CustomTypeModelField> = {
-	config?: Omit<MockValueConfigForModel<Model>, "seed" | "model">;
-} & SetRequired<MockValueConfig<Model>, "model">;
-
-import * as value from "../value";
+	model: Model;
+	config?: Omit<MockValueConfigForModel<Model>, "faker" | "seed" | "model">;
+} & (
+	| {
+			seed: Seed;
+			faker?: never;
+	  }
+	| {
+			faker: Faker;
+			seed?: never;
+	  }
+);
 
 export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
 	config: ValueForModelConfig<Model>,
 ): ModelValue<Model> => {
+	const faker = config.faker || createFaker(config.seed);
+
 	const model = config.model;
 
 	switch (model.type) {
 		case prismicT.CustomTypeModelFieldType.Boolean: {
 			return value.boolean({
-				seed: config.seed,
+				faker,
 				model,
 				...config.config,
 			}) as ModelValue<Model>;
@@ -29,17 +37,17 @@ export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
 
 		case prismicT.CustomTypeModelFieldType.Color: {
 			return value.color({
-				seed: config.seed,
+				faker,
 				model,
 				...config.config,
 			}) as ModelValue<Model>;
 		}
 
 		case prismicT.CustomTypeModelFieldType.Link: {
-			switch (model.config.select) {
+			switch (model.config?.select) {
 				case prismicT.CustomTypeModelLinkSelectType.Document: {
 					return value.contentRelationship({
-						seed: config.seed,
+						faker,
 						model: model as prismicT.CustomTypeModelContentRelationshipField,
 						...config.config,
 					}) as ModelValue<Model>;
@@ -47,7 +55,7 @@ export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
 
 				case prismicT.CustomTypeModelLinkSelectType.Media: {
 					return value.linkToMedia({
-						seed: config.seed,
+						faker,
 						model: model as prismicT.CustomTypeModelLinkToMediaField,
 						...config.config,
 					}) as ModelValue<Model>;
@@ -55,7 +63,7 @@ export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
 
 				default: {
 					return value.link({
-						seed: config.seed,
+						faker,
 						model: model as prismicT.CustomTypeModelLinkField,
 						...config.config,
 					}) as ModelValue<Model>;
@@ -65,7 +73,7 @@ export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
 
 		case prismicT.CustomTypeModelFieldType.Date: {
 			return value.date({
-				seed: config.seed,
+				faker,
 				model,
 				...config.config,
 			}) as ModelValue<Model>;
@@ -73,7 +81,7 @@ export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
 
 		case prismicT.CustomTypeModelFieldType.Embed: {
 			return value.embed({
-				seed: config.seed,
+				faker,
 				model,
 				...config.config,
 			}) as ModelValue<Model>;
@@ -81,7 +89,7 @@ export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
 
 		case prismicT.CustomTypeModelFieldType.GeoPoint: {
 			return value.geoPoint({
-				seed: config.seed,
+				faker,
 				model,
 				...config.config,
 			}) as ModelValue<Model>;
@@ -89,7 +97,7 @@ export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
 
 		case prismicT.CustomTypeModelFieldType.Image: {
 			return value.image({
-				seed: config.seed,
+				faker,
 				model,
 				...config.config,
 			}) as ModelValue<Model>;
@@ -97,7 +105,7 @@ export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
 
 		case prismicT.CustomTypeModelFieldType.Text: {
 			return value.keyText({
-				seed: config.seed,
+				faker,
 				model,
 				...config.config,
 			}) as ModelValue<Model>;
@@ -105,7 +113,7 @@ export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
 
 		case prismicT.CustomTypeModelFieldType.Number: {
 			return value.number({
-				seed: config.seed,
+				faker,
 				model,
 				...config.config,
 			}) as ModelValue<Model>;
@@ -113,7 +121,7 @@ export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
 
 		case prismicT.CustomTypeModelFieldType.Select: {
 			return value.select({
-				seed: config.seed,
+				faker,
 				model,
 				...config.config,
 			}) as ModelValue<Model>;
@@ -121,7 +129,7 @@ export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
 
 		case prismicT.CustomTypeModelFieldType.Timestamp: {
 			return value.timestamp({
-				seed: config.seed,
+				faker,
 				model,
 				...config.config,
 			}) as ModelValue<Model>;
@@ -129,19 +137,21 @@ export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
 
 		case prismicT.CustomTypeModelFieldType.StructuredText: {
 			if (
+				model.config &&
 				"single" in model.config &&
+				model.config.single &&
 				model.config.single
 					.split(",")
 					.every((element) => /heading[1-6]/.test(element.trim()))
 			) {
 				return value.title({
-					seed: config.seed,
+					faker,
 					model: model as prismicT.CustomTypeModelTitleField,
 					...config.config,
 				}) as ModelValue<Model>;
 			} else {
 				return value.richText({
-					seed: config.seed,
+					faker,
 					model,
 					...config.config,
 				}) as ModelValue<Model>;
@@ -150,7 +160,7 @@ export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
 
 		case prismicT.CustomTypeModelFieldType.IntegrationFields: {
 			return value.integrationFields({
-				seed: config.seed,
+				faker,
 				model,
 				...config.config,
 			}) as ModelValue<Model>;
@@ -158,7 +168,7 @@ export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
 
 		case prismicT.CustomTypeModelFieldType.UID: {
 			return value.uid({
-				seed: config.seed,
+				faker,
 				model,
 				...config.config,
 			}) as ModelValue<Model>;
@@ -166,18 +176,25 @@ export const valueForModel = <Model extends prismicT.CustomTypeModelField>(
 
 		case prismicT.CustomTypeModelFieldType.Group: {
 			return value.group({
-				seed: config.seed,
+				faker,
 				model,
 				...config.config,
 			}) as ModelValue<Model>;
 		}
 
+		case prismicT.CustomTypeModelFieldType.LegacySlices:
 		case prismicT.CustomTypeModelFieldType.Slices: {
 			return value.sliceZone({
-				seed: config.seed,
+				faker,
 				model,
 				...config.config,
 			}) as ModelValue<Model>;
+		}
+
+		default: {
+			throw new Error(
+				`The "${model.type}" field type is not supported in @prismicio/mock.`,
+			);
 		}
 	}
 };

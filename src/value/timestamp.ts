@@ -21,9 +21,9 @@ export const timestamp = <
 	Model extends prismicT.CustomTypeModelTimestampField = prismicT.CustomTypeModelTimestampField,
 	State extends prismicT.FieldState = "filled",
 >(
-	config: MockTimestampValueConfig<Model, State> = {},
+	config: MockTimestampValueConfig<Model, State>,
 ): MockTimestampValue<State> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	if (config.state === "empty") {
 		return null as MockTimestampValue<State>;

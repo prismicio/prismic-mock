@@ -17,9 +17,9 @@ export const color = <
 	Model extends prismicT.CustomTypeModelColorField = prismicT.CustomTypeModelColorField,
 	State extends prismicT.FieldState = "filled",
 >(
-	config: MockColorValueConfig<Model, State> = {},
+	config: MockColorValueConfig<Model, State>,
 ): MockColorValue<State> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	return (
 		config.state === "empty" ? null : faker.hexColor().toUpperCase()

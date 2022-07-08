@@ -24,3 +24,5 @@ export { title } from "./title";
 export { uid } from "./uid";
 
 export { buildMockGroupFieldMap } from "./buildMockGroupFieldMap";
+
+export { createModelMockFactory as createModelFactory } from "./createModelMockFactory";

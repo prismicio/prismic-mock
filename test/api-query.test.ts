@@ -4,30 +4,37 @@ import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as mock from "../src";
 
-test("creates a mock query value", snapshotTwiceMacro, mock.api.query);
+test("creates a mock query value", snapshotTwiceMacro, (t) =>
+	mock.api.query({ seed: t.title }),
+);
 
-test("supports custom seed", snapshotTwiceMacro, () =>
+test("supports number seed", snapshotTwiceMacro, () =>
 	mock.api.query({ seed: 1 }),
 );
 
 test("can be configured to return a set of documents", (t) => {
+	const seed = t.title;
+
 	const documents = Array(20)
 		.fill(undefined)
-		.map(() => mock.value.document());
+		.map(() => mock.value.document({ seed }));
 
-	const actual = mock.api.query({ documents });
+	const actual = mock.api.query({ seed, documents });
 
 	t.deepEqual(actual.results, documents);
 });
 
 test("can be configured to return paginated results", (t) => {
+	const seed = t.title;
+
 	const documents = Array(100)
 		.fill(undefined)
-		.map(() => mock.value.document());
+		.map(() => mock.value.document({ seed }));
 	const page = 2;
 	const pageSize = 10;
 
 	const actual = mock.api.query({
+		seed,
 		documents,
 		page: 2,
 		pageSize: 10,

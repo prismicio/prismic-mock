@@ -42,9 +42,9 @@ const mockModelFns = {
 export type BuildMockGroupFieldMapConfig = MockModelConfig;
 
 export const buildMockGroupFieldMap = (
-	config: BuildMockGroupFieldMapConfig = {},
+	config: BuildMockGroupFieldMapConfig,
 ): GroupFieldModelMap => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	const fields: GroupFieldModelMap = {};
 
@@ -53,12 +53,12 @@ export const buildMockGroupFieldMap = (
 	);
 
 	for (const fieldType of fieldTypes) {
-		const fieldId = generateFieldId({ seed: config.seed });
+		const fieldId = generateFieldId({ faker });
 		const mockModelFn = mockModelFns[fieldType] as (
 			config: MockModelConfig,
 		) => ValueOf<GroupFieldModelMap>;
 
-		fields[fieldId] = mockModelFn({ seed: config.seed });
+		fields[fieldId] = mockModelFn({ faker });
 	}
 
 	return fields;

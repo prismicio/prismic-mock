@@ -8,9 +8,9 @@ import { MockModelConfig } from "../types";
 export type MockTitleModelConfig = MockModelConfig;
 
 export const title = (
-	config: MockTitleModelConfig = {},
+	config: MockTitleModelConfig,
 ): prismicT.CustomTypeModelTitleField => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	const single = faker
 		.randomElements([

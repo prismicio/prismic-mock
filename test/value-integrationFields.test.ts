@@ -4,12 +4,12 @@ import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as value from "../src/value";
 
-test("creates a mock Integration Fields field value", snapshotTwiceMacro, () =>
-	value.integrationFields(),
+test("creates a mock Integration Fields field value", snapshotTwiceMacro, (t) =>
+	value.integrationFields({ seed: t.title }),
 );
 
-test("supports custom seed", snapshotTwiceMacro, (t) =>
-	value.integrationFields({ seed: t.title }),
+test("supports number seed", snapshotTwiceMacro, () =>
+	value.integrationFields({ seed: 1 }),
 );
 
 test("can be configured to return an empty value", (t) => {

@@ -17,9 +17,9 @@ export const number = <
 	Model extends prismicT.CustomTypeModelNumberField = prismicT.CustomTypeModelNumberField,
 	State extends prismicT.FieldState = "filled",
 >(
-	config: MockNumberValueConfig<Model, State> = {},
+	config: MockNumberValueConfig<Model, State>,
 ): MockNumberValue<State> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	return (
 		config.state === "empty" ? null : faker.range(1, 100)

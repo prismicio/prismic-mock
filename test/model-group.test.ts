@@ -5,12 +5,12 @@ import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as model from "../src/model";
 
-test("creates a mock Group field model", snapshotTwiceMacro, () =>
-	model.group(),
+test("creates a mock Group field model", snapshotTwiceMacro, (t) =>
+	model.group({ seed: t.title }),
 );
 
-test("supports custom seed", snapshotTwiceMacro, (t) =>
-	model.group({ seed: t.title }),
+test("supports number seed", snapshotTwiceMacro, () =>
+	model.group({ seed: 1 }),
 );
 
 test("can be configured for specific fields", (t) => {

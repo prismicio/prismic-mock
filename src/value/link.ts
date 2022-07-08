@@ -15,7 +15,9 @@ export type MockLinkValueConfig<
 	State extends prismicT.FieldState = prismicT.FieldState,
 > = {
 	type?: LinkType;
-	withTargetBlank?: Model["config"]["allowTargetBlank"] extends undefined
+	withTargetBlank?: NonNullable<
+		Model["config"]
+	>["allowTargetBlank"] extends undefined
 		? false
 		: boolean;
 	/**
@@ -45,9 +47,9 @@ export const link = <
 	Model extends prismicT.CustomTypeModelLinkField = prismicT.CustomTypeModelLinkField,
 	State extends prismicT.FieldState = "filled",
 >(
-	config: MockLinkValueConfig<LinkType, Model, State> = {},
+	config: MockLinkValueConfig<LinkType, Model, State>,
 ): MockLinkValue<LinkType, State> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	const type =
 		config.type ||
@@ -65,7 +67,7 @@ export const link = <
 		switch (type) {
 			case prismicT.LinkType.Document: {
 				return contentRelationship({
-					seed: config.seed,
+					faker,
 					state: config.state,
 					linkableDocuments: config.linkableDocuments,
 				}) as unknown as MockLinkValue<LinkType, State>;
@@ -73,21 +75,21 @@ export const link = <
 
 			case prismicT.LinkType.Media: {
 				return linkToMedia({
-					seed: config.seed,
+					faker,
 					state: config.state,
 				}) as MockLinkValue<LinkType, State>;
 			}
 
 			case prismicT.LinkType.Web:
 			default: {
-				const model = config.model || modelGen.link({ seed: config.seed });
+				const model = config.model || modelGen.link({ faker });
 
 				return {
 					link_type: prismicT.LinkType.Web,
 					url: faker.url(),
 					target:
 						config.withTargetBlank ??
-						(model.config.allowTargetBlank && faker.boolean())
+						(model.config?.allowTargetBlank && faker.boolean())
 							? "_blank"
 							: undefined,
 				} as MockLinkValue<LinkType, State>;

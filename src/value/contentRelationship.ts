@@ -5,7 +5,11 @@ import { createFaker } from "../lib/createFaker";
 import { generateCustomTypeId } from "../lib/generateCustomTypeId";
 import { generateTags } from "../lib/generateTags";
 
-import { MockValueStateConfig, MockValueConfig } from "../types";
+import {
+	MockValueStateConfig,
+	MockValueConfig,
+	IterableElement,
+} from "../types";
 
 import * as modelGen from "../model";
 
@@ -26,7 +30,7 @@ type MockContentRelationshipValue<
 	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
 	State extends prismicT.FieldState = prismicT.FieldState,
 > = prismicT.RelationField<
-	Model["config"]["customtypes"],
+	IterableElement<NonNullable<Model["config"]>["customtypes"]>,
 	string,
 	never,
 	State
@@ -36,17 +40,16 @@ export const contentRelationship = <
 	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
 	State extends prismicT.FieldState = "filled",
 >(
-	config: MockContentRelationshipValueConfig<Model, State> = {},
+	config: MockContentRelationshipValueConfig<Model, State>,
 ): MockContentRelationshipValue<Model, State> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	if (config.state === "empty") {
 		return {
 			link_type: prismicT.LinkType.Document,
 		} as MockContentRelationshipValue<Model, State>;
 	} else {
-		const model =
-			config.model || modelGen.contentRelationship({ seed: config.seed });
+		const model = config.model || modelGen.contentRelationship({ faker });
 
 		const linkableDocuments = config.linkableDocuments
 			? config.linkableDocuments.filter(
@@ -54,16 +57,16 @@ export const contentRelationship = <
 						document,
 					): document is prismicT.PrismicDocument<
 						never,
-						NonNullable<Model["config"]["customtypes"]>[number]
+						NonNullable<NonNullable<Model["config"]>["customtypes"]>[number]
 					> => {
 						let shouldKeep = true;
 
-						if (model.config.customtypes) {
+						if (model.config?.customtypes) {
 							shouldKeep =
 								shouldKeep && model.config.customtypes.includes(document.type);
 						}
 
-						if (model.config.tags) {
+						if (model.config?.tags) {
 							shouldKeep =
 								shouldKeep &&
 								model.config.tags.some((tag) => document.tags.includes(tag));
@@ -74,16 +77,16 @@ export const contentRelationship = <
 			  )
 			: [
 					{
-						...documentGen({ seed: config.seed }),
-						type: model.config.customtypes
+						...documentGen({ faker }),
+						type: model.config?.customtypes
 							? faker.randomElement(model.config.customtypes)
-							: generateCustomTypeId({ seed: config.seed }),
-						tags: model.config.tags
+							: generateCustomTypeId({ faker }),
+						tags: model.config?.tags
 							? faker.randomElements(model.config.tags)
-							: generateTags({ seed: config.seed }),
+							: generateTags({ faker }),
 					} as prismicT.PrismicDocument<
 						never,
-						NonNullable<Model["config"]["customtypes"]>[number]
+						NonNullable<NonNullable<Model["config"]>["customtypes"]>[number]
 					>,
 			  ];
 

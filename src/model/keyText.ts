@@ -8,9 +8,9 @@ import { MockModelConfig } from "../types";
 export type MockKeyTextModelConfig = MockModelConfig;
 
 export const keyText = (
-	config: MockKeyTextModelConfig = {},
+	config: MockKeyTextModelConfig,
 ): prismicT.CustomTypeModelKeyTextField => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	return {
 		type: prismicT.CustomTypeModelFieldType.Text,

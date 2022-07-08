@@ -5,7 +5,7 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
 
-type MockCustomTypeModelConfig<
+export type MockCustomTypeModelConfig<
 	Definition extends
 		| prismicT.CustomTypeModelTab
 		| prismicT.CustomTypeModelDefinition =
@@ -19,11 +19,9 @@ type MockCustomTypeModelConfig<
 } & (
 	| {
 			fields?: Definition;
-			tabs?: never;
 	  }
 	| {
 			tabs?: Definition;
-			fields?: never;
 	  }
 ) &
 	MockModelConfig;
@@ -43,9 +41,9 @@ export const customType = <
 		| prismicT.CustomTypeModelTab
 		| prismicT.CustomTypeModelDefinition,
 >(
-	config: MockCustomTypeModelConfig<Definition> = {},
+	config: MockCustomTypeModelConfig<Definition>,
 ): MockCustomTypeModel<Definition> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	let label: string =
 		config.label || changeCase.capitalCase(faker.words(faker.range(1, 2)));

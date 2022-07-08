@@ -5,12 +5,12 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
 
-export type MockLinkTomediaModelConfig = MockModelConfig;
+export type MockLinkToMediaModelConfig = MockModelConfig;
 
 export const linkToMedia = (
-	config: MockLinkTomediaModelConfig = {},
+	config: MockLinkToMediaModelConfig,
 ): prismicT.CustomTypeModelLinkToMediaField => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	return {
 		type: prismicT.CustomTypeModelFieldType.Link,

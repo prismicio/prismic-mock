@@ -7,10 +7,10 @@ import { MockModelConfig } from "../types";
 
 export type MockBooleanModelConfig = MockModelConfig;
 
-export const boolean = (
-	config: MockBooleanModelConfig = {},
-): prismicT.CustomTypeModelBooleanField => {
-	const faker = createFaker(config.seed);
+export function boolean(
+	config: MockBooleanModelConfig,
+): prismicT.CustomTypeModelBooleanField {
+	const faker = config.faker || createFaker(config.seed);
 
 	return {
 		type: prismicT.CustomTypeModelFieldType.Boolean,
@@ -18,4 +18,4 @@ export const boolean = (
 			label: changeCase.capitalCase(faker.word()),
 		},
 	};
-};
+}

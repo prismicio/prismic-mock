@@ -1,5 +1,7 @@
 import * as prismicT from "@prismicio/types";
 
+import { createFaker } from "../lib/createFaker";
+
 import { MockValueConfig, MockValueStateConfig } from "../types";
 
 import { heading, MockRichTextHeadingValueConfig } from "./richText/heading";
@@ -18,17 +20,19 @@ export type MockTitleValue<
 
 export const title = <
 	Model extends prismicT.CustomTypeModelTitleField = prismicT.CustomTypeModelTitleField,
-	State extends prismicT.FieldState = prismicT.FieldState,
+	State extends prismicT.FieldState = "filled",
 >(
-	config: MockTitleValueConfig<Model, State> = {},
+	config: MockTitleValueConfig<Model, State>,
 ): MockTitleValue<State> => {
+	const faker = config.faker || createFaker(config.seed);
+
 	if (config.state === "empty") {
 		return [] as MockTitleValue<State>;
 	} else {
 		return [
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			heading({
-				seed: config.seed,
+				faker,
 				model: config.model,
 				pattern: config.pattern,
 			})!,

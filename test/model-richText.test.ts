@@ -4,12 +4,12 @@ import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as model from "../src/model";
 
-test("creates a mock Rich Text field model", snapshotTwiceMacro, () =>
-	model.richText(),
+test("creates a mock Rich Text field model", snapshotTwiceMacro, (t) =>
+	model.richText({ seed: t.title }),
 );
 
-test("supports custom seed", snapshotTwiceMacro, (t) =>
-	model.richText({ seed: t.title }),
+test("supports number seed", snapshotTwiceMacro, () =>
+	model.richText({ seed: 1 }),
 );
 
 test(

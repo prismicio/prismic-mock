@@ -10,9 +10,9 @@ export type MockIntegrationFieldsModelConfig = {
 } & MockModelConfig;
 
 export const integrationFields = (
-	config: MockIntegrationFieldsModelConfig = {},
+	config: MockIntegrationFieldsModelConfig,
 ): prismicT.CustomTypeModelIntegrationFieldsField => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	return {
 		type: prismicT.CustomTypeModelFieldType.IntegrationFields,

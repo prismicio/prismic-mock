@@ -5,12 +5,12 @@ import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 import * as value from "../src/value";
 import * as model from "../src/model";
 
-test("creates a mock Shared Slice field value", snapshotTwiceMacro, () =>
-	value.sharedSlice(),
+test("creates a mock Shared Slice field value", snapshotTwiceMacro, (t) =>
+	value.sharedSlice({ seed: t.title }),
 );
 
-test("supports custom seed", snapshotTwiceMacro, (t) =>
-	value.sharedSlice({ seed: t.title }),
+test("supports number seed", snapshotTwiceMacro, () =>
+	value.sharedSlice({ seed: 1 }),
 );
 
 test("supports custom model", (t) => {
@@ -46,12 +46,14 @@ test("supports custom model", (t) => {
 });
 
 test("returns no items if model does not include items model", (t) => {
+	const seed = t.title;
+
 	const customModel = model.sharedSlice({
-		seed: t.title,
+		seed,
 		variations: [model.sharedSliceVariation({ seed: t.title })],
 	});
 
-	const actual = value.sharedSlice({ model: customModel });
+	const actual = value.sharedSlice({ seed, model: customModel });
 
 	t.is(actual.items.length, 0);
 });

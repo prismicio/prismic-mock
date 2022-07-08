@@ -25,9 +25,9 @@ type MockRichTextOListValueConfig = {
 } & MockRichTextValueConfig;
 
 export const oList = (
-	config: MockRichTextOListValueConfig = {},
+	config: MockRichTextOListValueConfig,
 ): prismicT.RTOListItemNode[] | undefined => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	const patternKey =
 		config.pattern ||

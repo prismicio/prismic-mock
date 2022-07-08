@@ -1,13 +1,21 @@
 import * as changeCase from "change-case";
 
-import { createFaker } from "../lib/createFaker";
+import { createFaker, Faker } from "../lib/createFaker";
 
-import { MockModelConfig } from "../types";
+import { Seed } from "../types";
 
-type GenerateFieldIdConfig = Pick<MockModelConfig, "seed">;
+type GenerateFieldIdConfig =
+	| {
+			seed: Seed;
+			faker?: never;
+	  }
+	| {
+			faker: Faker;
+			seed?: never;
+	  };
 
 export const generateFieldId = (config: GenerateFieldIdConfig): string => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	return changeCase.snakeCase(faker.words(faker.range(1, 3)));
 };

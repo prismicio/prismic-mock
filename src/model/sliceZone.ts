@@ -2,7 +2,7 @@ import * as prismicT from "@prismicio/types";
 
 import { MockModelConfig } from "../types";
 
-type MockSliceZoneModelConfig<
+export type MockSliceZoneModelConfig<
 	Slices extends Record<
 		string,
 		prismicT.CustomTypeModelSlice | prismicT.CustomTypeModelSharedSlice
@@ -20,10 +20,13 @@ export const sliceZone = <
 		prismicT.CustomTypeModelSlice | prismicT.CustomTypeModelSharedSlice
 	>,
 >(
-	config: MockSliceZoneModelConfig<Slices> = {},
+	config: MockSliceZoneModelConfig<Slices>,
 ): prismicT.CustomTypeModelSliceZoneField<Slices> => {
-	const labels =
-		{} as prismicT.CustomTypeModelSliceZoneField<Slices>["config"]["labels"];
+	const labels = {} as NonNullable<
+		NonNullable<
+			prismicT.CustomTypeModelSliceZoneField<Slices>["config"]
+		>["labels"]
+	>;
 
 	for (const choiceId in config.choices) {
 		const choice = config.choices[choiceId];

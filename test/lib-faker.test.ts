@@ -13,7 +13,7 @@ test("randomElement", (t) => {
 	const faker = createFaker(t.title);
 
 	t.is(faker.randomElement([1, 2, 3]), 3);
-	t.is(faker.randomElement([]), undefined);
+	t.is(faker.randomElement([] as undefined[]), undefined);
 });
 
 test("range", (t) => {

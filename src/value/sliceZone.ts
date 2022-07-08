@@ -25,31 +25,33 @@ export const sliceZone = <
 	Model extends prismicT.CustomTypeModelSliceZoneField = prismicT.CustomTypeModelSliceZoneField,
 	State extends prismicT.FieldState = prismicT.FieldState,
 >(
-	config: MockSliceZoneValueConfig<Model, State> = {},
+	config: MockSliceZoneValueConfig<Model, State>,
 ): ModelValue<Model, State> => {
 	if (config.state === "empty") {
 		return [] as ModelValue<Model, State>;
 	} else {
-		const faker = createFaker(config.seed);
+		const faker = config.faker || createFaker(config.seed);
 
-		const model = config.model || modelGen.sliceZone({ seed: config.seed });
+		const model = config.model || modelGen.sliceZone({ faker });
 
-		if (Object.keys(model.config.choices).length > 0) {
+		if (model.config?.choices && Object.keys(model.config.choices).length > 0) {
 			const itemsCount = config.itemsCount ?? faker.range(1, 6);
 
 			return Array(itemsCount)
 				.fill(undefined)
 				.map(() => {
-					const choices = Object.entries(model.config.choices);
+					const choices =
+						(model.config?.choices && Object.entries(model.config.choices)) ||
+						[];
 					const [choiceType, choiceModel] = faker.randomElement(choices);
 
-					const choiceLabels = model.config.labels[choiceType] || [];
+					const choiceLabels = model.config?.labels?.[choiceType] || [];
 					const choiceLabel = faker.randomElement(choiceLabels);
 
 					switch (choiceModel.type) {
 						case prismicT.CustomTypeModelSliceType.Slice: {
 							return slice({
-								seed: config.seed,
+								faker,
 								model: choiceModel,
 								type: choiceType,
 								label: choiceLabel ? choiceLabel.name : null,
@@ -65,7 +67,7 @@ export const sliceZone = <
 
 							if (sharedSliceModel) {
 								return sharedSlice({
-									seed: config.seed,
+									faker,
 									model: sharedSliceModel,
 									primaryFieldConfigs: config.primaryFieldConfigs,
 									itemsFieldConfigs: config.itemsFieldConfigs,

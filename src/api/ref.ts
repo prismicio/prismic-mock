@@ -19,9 +19,9 @@ export type MockRestApiRefValue<IsScheduled extends boolean = false> = Omit<
 		: { scheduledAt?: never });
 
 export const ref = <IsScheduled extends boolean = false>(
-	config: MockRestApiRefConfig<IsScheduled> = {},
+	config: MockRestApiRefConfig<IsScheduled>,
 ): MockRestApiRefValue<IsScheduled> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	const value: prismicT.Ref = {
 		id: faker.hash(16),
@@ -34,7 +34,7 @@ export const ref = <IsScheduled extends boolean = false>(
 
 	if (config.isScheduled) {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		value.scheduledAt = timestamp({ seed: config.seed })!;
+		value.scheduledAt = timestamp({ faker })!;
 	}
 
 	return value as MockRestApiRefValue<IsScheduled>;

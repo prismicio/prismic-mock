@@ -5,15 +5,15 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
 
-type MockImageModelConfig<ThumbnailNames extends string = string> = {
+export type MockImageModelConfig<ThumbnailNames extends string = string> = {
 	withConstraint?: boolean;
 	thumbnailNames?: readonly ThumbnailNames[];
 } & MockModelConfig;
 
 export const image = <ThumbnailNames extends string = string>(
-	config: MockImageModelConfig<ThumbnailNames> = {},
+	config: MockImageModelConfig<ThumbnailNames>,
 ): prismicT.CustomTypeModelImageField<ThumbnailNames> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	const thumbnails = (config.thumbnailNames || []).map((name) => {
 		return {

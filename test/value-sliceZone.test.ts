@@ -5,12 +5,12 @@ import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 import * as value from "../src/value";
 import * as model from "../src/model";
 
-test("creates a mock Slice Zone field value", snapshotTwiceMacro, () =>
-	value.sliceZone(),
+test("creates a mock Slice Zone field value", snapshotTwiceMacro, (t) =>
+	value.sliceZone({ seed: t.title }),
 );
 
-test("supports custom seed", snapshotTwiceMacro, (t) =>
-	value.sliceZone({ seed: t.title }),
+test("supports number seed", snapshotTwiceMacro, () =>
+	value.sliceZone({ seed: 1 }),
 );
 
 test("can be customized with a specific number of Slices", (t) => {
@@ -30,20 +30,23 @@ test("can be customized with a specific number of Slices", (t) => {
 });
 
 test("can be provided with a list of Shared Slice models for Slice Zones containing Shared Slices", (t) => {
+	const seed = t.title;
+
 	const customModel = model.sliceZone({
-		seed: t.title,
+		seed,
 		choices: {
 			foo: model.sharedSliceChoice(),
 		},
 	});
 
 	const sharedSliceModel = model.sharedSlice({
-		seed: t.title,
+		seed,
 		id: "foo",
 		variations: [model.sharedSliceVariation({ seed: t.title })],
 	});
 
 	const actual = value.sliceZone({
+		seed,
 		model: customModel,
 		sharedSliceModels: [sharedSliceModel],
 	});
@@ -52,6 +55,8 @@ test("can be provided with a list of Shared Slice models for Slice Zones contain
 });
 
 test("Shared Slices not provided are omitted from the return value", (t) => {
+	const seed = t.title;
+
 	const customModel = model.sliceZone({
 		seed: t.title,
 		choices: {
@@ -66,6 +71,7 @@ test("Shared Slices not provided are omitted from the return value", (t) => {
 	});
 
 	const actual = value.sliceZone({
+		seed,
 		model: customModel,
 		sharedSliceModels: [sharedSliceModel],
 	});

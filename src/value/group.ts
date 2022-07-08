@@ -27,14 +27,14 @@ export const group = <
 	Model extends prismicT.CustomTypeModelGroupField = prismicT.CustomTypeModelGroupField,
 	State extends prismicT.FieldState = "filled",
 >(
-	config: MockGroupValueConfig<Model, State> = {},
+	config: MockGroupValueConfig<Model, State>,
 ): ModelValue<Model, State> => {
 	if (config.state === "empty") {
 		return [] as ModelValue<Model, State>;
 	} else {
-		const faker = createFaker(config.seed);
+		const faker = config.faker || createFaker(config.seed);
 
-		const model = config.model || modelGen.group({ seed: config.seed });
+		const model = config.model || modelGen.group({ faker });
 
 		const itemsCount = config.itemsCount ?? faker.range(1, 6);
 
@@ -42,8 +42,8 @@ export const group = <
 			.fill(undefined)
 			.map(() => {
 				return valueForModelMap({
-					seed: config.seed,
-					map: model.config.fields,
+					faker,
+					map: model.config?.fields || {},
 					configs: config.configs,
 				});
 			}) as ModelValue<Model, State>;

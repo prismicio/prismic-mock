@@ -5,7 +5,7 @@ import { createFaker } from "../lib/createFaker";
 
 import { GroupFieldModelMap, MockModelConfig } from "../types";
 
-type MockSliceModelConfig<
+export type MockSliceModelConfig<
 	NonRepeatFields extends GroupFieldModelMap = GroupFieldModelMap,
 	RepeatFields extends GroupFieldModelMap = GroupFieldModelMap,
 > = {
@@ -17,9 +17,9 @@ export const slice = <
 	NonRepeatFields extends GroupFieldModelMap,
 	RepeatFields extends GroupFieldModelMap,
 >(
-	config: MockSliceModelConfig<NonRepeatFields, RepeatFields> = {},
+	config: MockSliceModelConfig<NonRepeatFields, RepeatFields>,
 ): prismicT.CustomTypeModelSlice<NonRepeatFields, RepeatFields> => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	return {
 		type: prismicT.CustomTypeModelSliceType.Slice,

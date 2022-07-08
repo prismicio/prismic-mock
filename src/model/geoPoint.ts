@@ -8,9 +8,9 @@ import { MockModelConfig } from "../types";
 export type MockGeoPointModelConfig = MockModelConfig;
 
 export const geoPoint = (
-	config: MockGeoPointModelConfig = {},
+	config: MockGeoPointModelConfig,
 ): prismicT.CustomTypeModelGeoPointField => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	return {
 		type: prismicT.CustomTypeModelFieldType.GeoPoint,

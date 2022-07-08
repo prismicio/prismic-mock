@@ -8,9 +8,9 @@ import { MockModelConfig } from "../types";
 export type MockColorModelConfig = MockModelConfig;
 
 export const color = (
-	config: MockColorModelConfig = {},
+	config: MockColorModelConfig,
 ): prismicT.CustomTypeModelColorField => {
-	const faker = createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed);
 
 	return {
 		type: prismicT.CustomTypeModelFieldType.Color,
