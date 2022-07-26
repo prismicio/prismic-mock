@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/prismicio/prismic-mock/compare/v0.1.0...v0.1.1) (2022-07-26)
+
+
+### Bug Fixes
+
+* use Image field thumbnail names from model in higher-level value types ([#11](https://github.com/prismicio/prismic-mock/issues/11)) ([c0fdbb2](https://github.com/prismicio/prismic-mock/commit/c0fdbb25d80c396e1d2a43dfb5a1fbcb3685a612))
+* use Rich Text field type for Rich Text and Title field values ([#12](https://github.com/prismicio/prismic-mock/issues/12)) ([c13751c](https://github.com/prismicio/prismic-mock/commit/c13751c417d9a3953fc0dbfe7eb81df526bd3fcb))
+
 ## [0.1.0](https://github.com/prismicio/prismic-mock/compare/v0.0.10...v0.1.0) (2022-07-08)
 
 
