@@ -228,8 +228,8 @@ type CustomTypeModelFieldForGroupValue<
 	? prismicT.TitleField<State>
 	: T extends prismicT.CustomTypeModelRichTextField
 	? prismicT.RichTextField<State>
-	: T extends prismicT.CustomTypeModelImageField
-	? prismicT.ImageField<string | null, State>
+	: T extends prismicT.CustomTypeModelImageField<infer TThumbnailNames>
+	? prismicT.ImageField<TThumbnailNames, State>
 	: T extends prismicT.CustomTypeModelLinkField
 	? prismicT.LinkField<string, string, never, State>
 	: T extends prismicT.CustomTypeModelLinkToMediaField
