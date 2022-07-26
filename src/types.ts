@@ -224,10 +224,10 @@ type CustomTypeModelFieldForGroupValue<
 	? prismicT.BooleanField
 	: T extends prismicT.CustomTypeModelColorField
 	? prismicT.ColorField<State>
-	: T extends prismicT.CustomTypeModelTitleField
-	? prismicT.TitleField<State>
 	: T extends prismicT.CustomTypeModelRichTextField
 	? prismicT.RichTextField<State>
+	: T extends prismicT.CustomTypeModelTitleField
+	? prismicT.TitleField<State>
 	: T extends prismicT.CustomTypeModelImageField<infer TThumbnailNames>
 	? prismicT.ImageField<TThumbnailNames, State>
 	: T extends prismicT.CustomTypeModelLinkField
