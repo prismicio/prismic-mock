@@ -43,8 +43,8 @@
 		"src"
 	],
 	"scripts": {
-		"build": "siroc build",
-		"dev": "siroc build --watch",
+		"build": "vite build",
+		"dev": "vite build --watch",
 		"format": "prettier --write .",
 		"lint": "eslint --ext .js,.ts .",
 		"prepare": "npm run build",
@@ -57,28 +57,28 @@
 		"unit": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava"
 	},
 	"dependencies": {
-		"@prismicio/types": "^0.2.0",
-		"change-case": "^4.1.2",
-		"rand-seed": "^1.0.1"
+		"@prismicio/types": "^0.2.4",
+		"change-case": "^4.1.2"
 	},
 	"devDependencies": {
-		"@size-limit/preset-small-lib": "^7.0.8",
-		"@typescript-eslint/eslint-plugin": "^5.30.5",
-		"@typescript-eslint/parser": "^5.30.5",
-		"ava": "^4.3.0",
-		"esbuild": "^0.14.48",
-		"esbuild-register": "^3.3.3",
-		"eslint": "^8.19.0",
+		"@size-limit/preset-small-lib": "^8.1.0",
+		"@typescript-eslint/eslint-plugin": "^5.46.1",
+		"@typescript-eslint/parser": "^5.46.1",
+		"ava": "^5.1.0",
+		"esbuild": "^0.16.9",
+		"esbuild-register": "^3.4.2",
+		"eslint": "^8.30.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-prettier": "^4.2.1",
-		"eslint-plugin-tsdoc": "^0.2.16",
+		"eslint-plugin-tsdoc": "^0.2.17",
 		"nyc": "^15.1.0",
-		"prettier": "^2.7.1",
-		"prettier-plugin-jsdoc": "^0.3.38",
-		"siroc": "^0.16.0",
-		"size-limit": "^7.0.8",
+		"prettier": "^2.8.1",
+		"prettier-plugin-jsdoc": "^0.4.2",
+		"size-limit": "^8.1.0",
 		"standard-version": "^9.5.0",
-		"typescript": "^4.7.4"
+		"typescript": "^4.9.4",
+		"vite": "^4.0.2",
+		"vite-plugin-sdk": "^0.1.0"
 	},
 	"engines": {
 		"node": ">=12.7.0"

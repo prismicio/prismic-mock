@@ -1,8 +1,7 @@
-import Rand from "rand-seed";
-
 import { Seed } from "../types";
 
 import { lorem, loremWords } from "./lorem";
+import { PRNG } from "./PRNG";
 
 export const createFaker = (seed: Seed): Faker => {
 	return new Faker(seed);
@@ -15,20 +14,20 @@ const YEAR_2022_MS = 52 * (YEAR_MS + DAY_MS / 4);
 export class Faker {
 	seed: Seed;
 
-	private rand: Rand;
+	private prng: PRNG;
 
 	constructor(seed: Seed) {
 		this.seed = seed;
 
-		this.rand = new Rand(seed.toString());
+		this.prng = new PRNG(seed.toString());
+	}
+
+	random(): number {
+		return this.prng.next();
 	}
 
 	boolean(): boolean {
 		return this.random() >= 0.5;
-	}
-
-	random(): number {
-		return this.rand.next();
 	}
 
 	randomElement<T>(elements: readonly T[]): T {
