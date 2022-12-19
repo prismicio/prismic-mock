@@ -48,7 +48,7 @@ export class PRNG {
 	private _value: number;
 
 	/**
-	 * Generate a new Prando pseudo-random number generator.
+	 * Generate a new pseudo-random number generator.
 	 *
 	 * @param seed - A number or string seed that determines which pseudo-random
 	 *   number sequence will be created.
