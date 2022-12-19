@@ -88,8 +88,7 @@ export const lorem = (length: `${number}w` | `${number}c`, wordOffset = 0) => {
 			) {
 				sentence += wordsString.substring(startSpaceIndex + 1) + " ";
 
-				const wraparoundCounts =
-					Math.floor(count / lorem.spaceIndices.length) - 1;
+				const wraparoundCounts = Math.floor(count / lorem.spaceIndices.length);
 				for (let i = 0; i < wraparoundCounts; i++) {
 					sentence += wordsString + " ";
 				}
