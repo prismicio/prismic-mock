@@ -155,7 +155,7 @@ export class ValueMockFactory {
 	}
 
 	link<
-		LinkType extends typeof prismicT.LinkType[keyof typeof prismicT.LinkType] = typeof prismicT.LinkType[keyof typeof prismicT.LinkType],
+		LinkType extends (typeof prismicT.LinkType)[keyof typeof prismicT.LinkType] = (typeof prismicT.LinkType)[keyof typeof prismicT.LinkType],
 		Model extends prismicT.CustomTypeModelLinkField = prismicT.CustomTypeModelLinkField,
 		State extends prismicT.FieldState = "filled",
 	>(config?: WithoutFakerConfig<MockLinkValueConfig<LinkType, Model, State>>) {

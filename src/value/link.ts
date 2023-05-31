@@ -10,7 +10,7 @@ import { contentRelationship } from "./contentRelationship";
 import { linkToMedia } from "./linkToMedia";
 
 export type MockLinkValueConfig<
-	LinkType extends typeof prismicT.LinkType[keyof typeof prismicT.LinkType] = typeof prismicT.LinkType[keyof typeof prismicT.LinkType],
+	LinkType extends (typeof prismicT.LinkType)[keyof typeof prismicT.LinkType] = (typeof prismicT.LinkType)[keyof typeof prismicT.LinkType],
 	Model extends prismicT.CustomTypeModelLinkField = prismicT.CustomTypeModelLinkField,
 	State extends prismicT.FieldState = prismicT.FieldState,
 > = {
@@ -30,7 +30,7 @@ export type MockLinkValueConfig<
 	MockValueStateConfig<State>;
 
 type MockLinkValue<
-	LinkType extends typeof prismicT.LinkType[keyof typeof prismicT.LinkType] = typeof prismicT.LinkType[keyof typeof prismicT.LinkType],
+	LinkType extends (typeof prismicT.LinkType)[keyof typeof prismicT.LinkType] = (typeof prismicT.LinkType)[keyof typeof prismicT.LinkType],
 	State extends prismicT.FieldState = "filled",
 > = State extends "empty"
 	? prismicT.EmptyLinkField<LinkType>
@@ -43,7 +43,7 @@ type MockLinkValue<
 	: never;
 
 export const link = <
-	LinkType extends typeof prismicT.LinkType[keyof typeof prismicT.LinkType] = typeof prismicT.LinkType[keyof typeof prismicT.LinkType],
+	LinkType extends (typeof prismicT.LinkType)[keyof typeof prismicT.LinkType] = (typeof prismicT.LinkType)[keyof typeof prismicT.LinkType],
 	Model extends prismicT.CustomTypeModelLinkField = prismicT.CustomTypeModelLinkField,
 	State extends prismicT.FieldState = "filled",
 >(

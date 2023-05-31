@@ -119,7 +119,7 @@ export type MockValueConfigForModel<
 	? value.MockKeyTextValueConfig<Model, State>
 	: Model extends prismicT.CustomTypeModelLinkField
 	? value.MockLinkValueConfig<
-			typeof prismicT.LinkType[keyof typeof prismicT.LinkType],
+			(typeof prismicT.LinkType)[keyof typeof prismicT.LinkType],
 			Model,
 			State
 	  >
