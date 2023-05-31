@@ -250,8 +250,8 @@ type CustomTypeModelFieldForGroupValue<
 	? prismic.EmbedField<prismic.AnyOEmbed & prismic.OEmbedExtra, State>
 	: T extends prismic.CustomTypeModelGeoPointField
 	? prismic.GeoPointField<State>
-	: T extends prismic.CustomTypeModelIntegrationFieldsField
-	? prismic.IntegrationFields<Record<string, unknown>, State>
+	: T extends prismic.CustomTypeModelIntegrationField
+	? prismic.IntegrationField<Record<string, unknown>, State>
 	: never;
 
 type CustomTypeModelGroupFieldValue<

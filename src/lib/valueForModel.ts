@@ -158,8 +158,8 @@ export const valueForModel = <Model extends prismic.CustomTypeModelField>(
 			}
 		}
 
-		case prismic.CustomTypeModelFieldType.IntegrationFields: {
-			return value.integrationFields({
+		case prismic.CustomTypeModelFieldType.Integration: {
+			return value.integration({
 				faker,
 				model,
 				...config.config,

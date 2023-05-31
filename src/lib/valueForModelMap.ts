@@ -10,7 +10,7 @@ import {
 	MockGeoPointValueConfig,
 	MockGroupValueConfig,
 	MockImageValueConfig,
-	MockIntegrationFieldsValueConfig,
+	MockIntegrationFieldValueConfig,
 	MockKeyTextValueConfig,
 	MockLinkToMediaValueConfig,
 	MockLinkValueConfig,
@@ -92,8 +92,8 @@ const getValueConfigType = <Model extends prismic.CustomTypeModelField>(
 		case prismic.CustomTypeModelFieldType.UID:
 			return "uid";
 
-		case prismic.CustomTypeModelFieldType.IntegrationFields:
-			return "integrationFields";
+		case prismic.CustomTypeModelFieldType.IntegrationField:
+			return "integration";
 
 		case prismic.CustomTypeModelFieldType.Slices:
 			return "sliceZone";
@@ -115,7 +115,7 @@ export type ValueForModelMapConfigs = {
 	geoPoint?: MockGeoPointValueConfig;
 	group?: MockGroupValueConfig;
 	image?: MockImageValueConfig;
-	integrationFields?: MockIntegrationFieldsValueConfig;
+	integration?: MockIntegrationFieldValueConfig;
 	keyText?: MockKeyTextValueConfig;
 	link?: MockLinkValueConfig;
 	linkToMedia?: MockLinkToMediaValueConfig;

@@ -20,10 +20,7 @@ import { embed, MockEmbedModelConfig } from "./embed";
 import { geoPoint, MockGeoPointModelConfig } from "./geoPoint";
 import { group, MockGroupModelConfig } from "./group";
 import { image, MockImageModelConfig } from "./image";
-import {
-	integrationFields,
-	MockIntegrationFieldsModelConfig,
-} from "./integrationFields";
+import { integration, MockIntegrationFieldModelConfig } from "./integration";
 import { keyText, MockKeyTextModelConfig } from "./keyText";
 import { link, MockLinkModelConfig } from "./link";
 import { linkToMedia, MockLinkToMediaModelConfig } from "./linkToMedia";
@@ -121,10 +118,8 @@ export class ModelMockFactory {
 		return image({ ...config, faker: this.faker });
 	}
 
-	integrationFields(
-		config?: WithoutFakerConfig<MockIntegrationFieldsModelConfig>,
-	) {
-		return integrationFields({ ...config, faker: this.faker });
+	integration(config?: WithoutFakerConfig<MockIntegrationFieldModelConfig>) {
+		return integration({ ...config, faker: this.faker });
 	}
 
 	keyText(config?: WithoutFakerConfig<MockKeyTextModelConfig>) {

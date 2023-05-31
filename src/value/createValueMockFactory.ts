@@ -17,10 +17,7 @@ import { embed, MockEmbedValueConfig } from "./embed";
 import { geoPoint, MockGeoPointValueConfig } from "./geoPoint";
 import { group, MockGroupValueConfig } from "./group";
 import { image, MockImageValueConfig } from "./image";
-import {
-	integrationFields,
-	MockIntegrationFieldsValueConfig,
-} from "./integrationFields";
+import { integration, MockIntegrationFieldValueConfig } from "./integration";
 import { keyText, MockKeyTextValueConfig } from "./keyText";
 import { link, MockLinkValueConfig } from "./link";
 import { linkToMedia, MockLinkToMediaValueConfig } from "./linkToMedia";
@@ -135,16 +132,16 @@ export class ValueMockFactory {
 		return image({ ...config, faker: this.faker });
 	}
 
-	integrationFields<
-		Model extends prismic.CustomTypeModelIntegrationFieldsField = prismic.CustomTypeModelIntegrationFieldsField,
+	integration<
+		Model extends prismic.CustomTypeModelIntegrationField = prismic.CustomTypeModelIntegrationField,
 		Data extends Record<string, unknown> = Record<string, unknown>,
 		State extends prismic.FieldState = "filled",
 	>(
 		config?: WithoutFakerConfig<
-			MockIntegrationFieldsValueConfig<Model, Data, State>
+			MockIntegrationFieldValueConfig<Model, Data, State>
 		>,
 	) {
-		return integrationFields({ ...config, faker: this.faker });
+		return integration({ ...config, faker: this.faker });
 	}
 
 	keyText<
