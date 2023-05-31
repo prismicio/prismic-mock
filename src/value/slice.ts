@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 import * as changeCase from "change-case";
 
 import { MockValueConfig, ModelValue } from "../types";
@@ -13,7 +13,7 @@ import {
 import * as modelGen from "../model";
 
 export type MockSliceValueConfig<
-	Model extends prismicT.CustomTypeModelSlice = prismicT.CustomTypeModelSlice,
+	Model extends prismic.CustomTypeModelSlice = prismic.CustomTypeModelSlice,
 > = {
 	type?: string;
 	label?: string | null;
@@ -23,7 +23,7 @@ export type MockSliceValueConfig<
 } & MockValueConfig<Model>;
 
 export const slice = <
-	Model extends prismicT.CustomTypeModelSlice = prismicT.CustomTypeModelSlice,
+	Model extends prismic.CustomTypeModelSlice = prismic.CustomTypeModelSlice,
 >(
 	config: MockSliceValueConfig<Model>,
 ): ModelValue<Model> => {

@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { createFaker } from "../../lib/createFaker";
 
@@ -32,35 +32,35 @@ const patterns = {
 } as const;
 
 const generators = {
-	[prismicT.RichTextNodeType.heading1]: heading,
-	[prismicT.RichTextNodeType.heading2]: heading,
-	[prismicT.RichTextNodeType.heading3]: heading,
-	[prismicT.RichTextNodeType.heading4]: heading,
-	[prismicT.RichTextNodeType.heading5]: heading,
-	[prismicT.RichTextNodeType.heading6]: heading,
-	[prismicT.RichTextNodeType.paragraph]: paragraph,
-	[prismicT.RichTextNodeType.preformatted]: preformatted,
-	[prismicT.RichTextNodeType.listItem]: list,
-	[prismicT.RichTextNodeType.oListItem]: oList,
-	[prismicT.RichTextNodeType.image]: image,
-	[prismicT.RichTextNodeType.embed]: embed,
+	[prismic.RichTextNodeType.heading1]: heading,
+	[prismic.RichTextNodeType.heading2]: heading,
+	[prismic.RichTextNodeType.heading3]: heading,
+	[prismic.RichTextNodeType.heading4]: heading,
+	[prismic.RichTextNodeType.heading5]: heading,
+	[prismic.RichTextNodeType.heading6]: heading,
+	[prismic.RichTextNodeType.paragraph]: paragraph,
+	[prismic.RichTextNodeType.preformatted]: preformatted,
+	[prismic.RichTextNodeType.listItem]: list,
+	[prismic.RichTextNodeType.oListItem]: oList,
+	[prismic.RichTextNodeType.image]: image,
+	[prismic.RichTextNodeType.embed]: embed,
 };
 
 export type MockRichTextValueConfig<
-	Model extends prismicT.CustomTypeModelRichTextField = prismicT.CustomTypeModelRichTextField,
-	State extends prismicT.FieldState = prismicT.FieldState,
+	Model extends prismic.CustomTypeModelRichTextField = prismic.CustomTypeModelRichTextField,
+	State extends prismic.FieldState = prismic.FieldState,
 > = {
 	pattern?: keyof typeof patterns;
 } & BaseMockRichTextValueConfig<Model> &
 	MockValueStateConfig<State>;
 
 export type MockRichTextValue<
-	State extends prismicT.FieldState = prismicT.FieldState,
-> = prismicT.RichTextField<State>;
+	State extends prismic.FieldState = prismic.FieldState,
+> = prismic.RichTextField<State>;
 
 export const richText = <
-	Model extends prismicT.CustomTypeModelRichTextField = prismicT.CustomTypeModelRichTextField,
-	State extends prismicT.FieldState = prismicT.FieldState,
+	Model extends prismic.CustomTypeModelRichTextField = prismic.CustomTypeModelRichTextField,
+	State extends prismic.FieldState = prismic.FieldState,
 >(
 	config: MockRichTextValueConfig<Model, State>,
 ): MockRichTextValue<State> => {
@@ -77,18 +77,18 @@ export const richText = <
 			});
 		const supportsMultipleBlocks = model.config && "multi" in model.config;
 
-		let types: prismicT.RTNode["type"][] = [];
+		let types: prismic.RTNode["type"][] = [];
 		if (model.config) {
 			if ("multi" in model.config && model.config.multi) {
 				types = model.config.multi
 					.split(",")
-					.filter((type): type is prismicT.RTNode["type"] =>
+					.filter((type): type is prismic.RTNode["type"] =>
 						Object.keys(generators).includes(type),
 					);
 			} else if ("single" in model.config && model.config.single) {
 				types = model.config.single
 					.split(",")
-					.filter((type): type is prismicT.RTNode["type"] =>
+					.filter((type): type is prismic.RTNode["type"] =>
 						Object.keys(generators).includes(type),
 					);
 			}
@@ -113,7 +113,7 @@ export const richText = <
 					return generator({ faker, model });
 				})
 				.flat()
-				.filter((block): block is prismicT.RTNode => block !== undefined)
+				.filter((block): block is prismic.RTNode => block !== undefined)
 				.slice(0, blockCount) as MockRichTextValue<State>;
 		} else {
 			return [] as MockRichTextValue<State>;

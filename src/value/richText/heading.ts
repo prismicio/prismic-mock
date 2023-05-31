@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 import * as changeCase from "change-case";
 
 import { createFaker } from "../../lib/createFaker";
@@ -8,20 +8,20 @@ import { MockRichTextValueConfig } from "../../types";
 import * as modelGen from "../../model";
 
 type RichTextNodeTitleType =
-	| typeof prismicT.RichTextNodeType.heading1
-	| typeof prismicT.RichTextNodeType.heading2
-	| typeof prismicT.RichTextNodeType.heading3
-	| typeof prismicT.RichTextNodeType.heading4
-	| typeof prismicT.RichTextNodeType.heading5
-	| typeof prismicT.RichTextNodeType.heading6;
+	| typeof prismic.RichTextNodeType.heading1
+	| typeof prismic.RichTextNodeType.heading2
+	| typeof prismic.RichTextNodeType.heading3
+	| typeof prismic.RichTextNodeType.heading4
+	| typeof prismic.RichTextNodeType.heading5
+	| typeof prismic.RichTextNodeType.heading6;
 
 type RTHeadingNode =
-	| prismicT.RTHeading1Node
-	| prismicT.RTHeading2Node
-	| prismicT.RTHeading3Node
-	| prismicT.RTHeading4Node
-	| prismicT.RTHeading5Node
-	| prismicT.RTHeading6Node;
+	| prismic.RTHeading1Node
+	| prismic.RTHeading2Node
+	| prismic.RTHeading3Node
+	| prismic.RTHeading4Node
+	| prismic.RTHeading5Node
+	| prismic.RTHeading6Node;
 
 const patterns = {
 	short: {
@@ -43,12 +43,12 @@ export type MockRichTextHeadingValueConfig = {
 } & MockRichTextValueConfig;
 
 const headingNoteTypes = [
-	prismicT.RichTextNodeType.heading1,
-	prismicT.RichTextNodeType.heading2,
-	prismicT.RichTextNodeType.heading3,
-	prismicT.RichTextNodeType.heading4,
-	prismicT.RichTextNodeType.heading5,
-	prismicT.RichTextNodeType.heading6,
+	prismic.RichTextNodeType.heading1,
+	prismic.RichTextNodeType.heading2,
+	prismic.RichTextNodeType.heading3,
+	prismic.RichTextNodeType.heading4,
+	prismic.RichTextNodeType.heading5,
+	prismic.RichTextNodeType.heading6,
 ];
 
 export const heading = (

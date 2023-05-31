@@ -1,5 +1,5 @@
 import test from "ava";
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
@@ -21,10 +21,7 @@ test("can be configured for specific fields", (t) => {
 		},
 	});
 
-	t.is(
-		actual.json.Main.boolean.type,
-		prismicT.CustomTypeModelFieldType.Boolean,
-	);
+	t.is(actual.json.Main.boolean.type, prismic.CustomTypeModelFieldType.Boolean);
 });
 
 test("can be configured for specific tabs", (t) => {
@@ -37,8 +34,5 @@ test("can be configured for specific tabs", (t) => {
 		},
 	});
 
-	t.is(
-		actual.json.Main.boolean.type,
-		prismicT.CustomTypeModelFieldType.Boolean,
-	);
+	t.is(actual.json.Main.boolean.type, prismic.CustomTypeModelFieldType.Boolean);
 });

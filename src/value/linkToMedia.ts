@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
@@ -6,17 +6,17 @@ import { createFaker } from "../lib/createFaker";
 import { MockValueStateConfig, MockValueConfig } from "../types";
 
 export type MockLinkToMediaValueConfig<
-	Model extends prismicT.CustomTypeModelLinkToMediaField = prismicT.CustomTypeModelLinkToMediaField,
-	State extends prismicT.FieldState = prismicT.FieldState,
+	Model extends prismic.CustomTypeModelLinkToMediaField = prismic.CustomTypeModelLinkToMediaField,
+	State extends prismic.FieldState = prismic.FieldState,
 > = MockValueConfig<Model> & MockValueStateConfig<State>;
 
 type MockLinkToMediaValue<
-	State extends prismicT.FieldState = prismicT.FieldState,
-> = prismicT.LinkToMediaField<State>;
+	State extends prismic.FieldState = prismic.FieldState,
+> = prismic.LinkToMediaField<State>;
 
 export const linkToMedia = <
-	Model extends prismicT.CustomTypeModelLinkToMediaField = prismicT.CustomTypeModelLinkToMediaField,
-	State extends prismicT.FieldState = "filled",
+	Model extends prismic.CustomTypeModelLinkToMediaField = prismic.CustomTypeModelLinkToMediaField,
+	State extends prismic.FieldState = "filled",
 >(
 	config: MockLinkToMediaValueConfig<Model, State>,
 ): MockLinkToMediaValue<State> => {
@@ -24,11 +24,11 @@ export const linkToMedia = <
 
 	if (config.state === "empty") {
 		return {
-			link_type: prismicT.LinkType.Media,
+			link_type: prismic.LinkType.Media,
 		} as MockLinkToMediaValue<State>;
 	} else {
 		return {
-			link_type: prismicT.LinkType.Media,
+			link_type: prismic.LinkType.Media,
 			name: `${changeCase.snakeCase(faker.words(faker.range(1, 2)))}.example`,
 			kind: changeCase.snakeCase(faker.word()),
 			url: faker.url(),

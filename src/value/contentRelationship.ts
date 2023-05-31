@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { buildContentRelationshipField } from "../lib/buildContentRelationshipField";
 import { createFaker } from "../lib/createFaker";
@@ -16,20 +16,20 @@ import * as modelGen from "../model";
 import { document as documentGen } from "./document";
 
 export type MockContentRelationshipValueConfig<
-	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
-	State extends prismicT.FieldState = prismicT.FieldState,
+	Model extends prismic.CustomTypeModelContentRelationshipField = prismic.CustomTypeModelContentRelationshipField,
+	State extends prismic.FieldState = prismic.FieldState,
 > = {
 	/**
 	 * A list of potential documents to which the field can be linked.
 	 */
-	linkableDocuments?: prismicT.PrismicDocument[];
+	linkableDocuments?: prismic.PrismicDocument[];
 } & MockValueConfig<Model> &
 	MockValueStateConfig<State>;
 
 type MockContentRelationshipValue<
-	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
-	State extends prismicT.FieldState = prismicT.FieldState,
-> = prismicT.RelationField<
+	Model extends prismic.CustomTypeModelContentRelationshipField = prismic.CustomTypeModelContentRelationshipField,
+	State extends prismic.FieldState = prismic.FieldState,
+> = prismic.RelationField<
 	IterableElement<NonNullable<Model["config"]>["customtypes"]>,
 	string,
 	never,
@@ -37,8 +37,8 @@ type MockContentRelationshipValue<
 >;
 
 export const contentRelationship = <
-	Model extends prismicT.CustomTypeModelContentRelationshipField = prismicT.CustomTypeModelContentRelationshipField,
-	State extends prismicT.FieldState = "filled",
+	Model extends prismic.CustomTypeModelContentRelationshipField = prismic.CustomTypeModelContentRelationshipField,
+	State extends prismic.FieldState = "filled",
 >(
 	config: MockContentRelationshipValueConfig<Model, State>,
 ): MockContentRelationshipValue<Model, State> => {
@@ -46,7 +46,7 @@ export const contentRelationship = <
 
 	if (config.state === "empty") {
 		return {
-			link_type: prismicT.LinkType.Document,
+			link_type: prismic.LinkType.Document,
 		} as MockContentRelationshipValue<Model, State>;
 	} else {
 		const model = config.model || modelGen.contentRelationship({ faker });
@@ -55,7 +55,7 @@ export const contentRelationship = <
 			? config.linkableDocuments.filter(
 					(
 						document,
-					): document is prismicT.PrismicDocument<
+					): document is prismic.PrismicDocument<
 						never,
 						NonNullable<NonNullable<Model["config"]>["customtypes"]>[number]
 					> => {
@@ -84,7 +84,7 @@ export const contentRelationship = <
 						tags: model.config?.tags
 							? faker.randomElements(model.config.tags)
 							: generateTags({ faker }),
-					} as prismicT.PrismicDocument<
+					} as prismic.PrismicDocument<
 						never,
 						NonNullable<NonNullable<Model["config"]>["customtypes"]>[number]
 					>,

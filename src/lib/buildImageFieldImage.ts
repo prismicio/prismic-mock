@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 import * as changeCase from "change-case";
 
 import { createFaker, Faker } from "../lib/createFaker";
@@ -6,11 +6,11 @@ import { createFaker, Faker } from "../lib/createFaker";
 import { MockValueStateConfig, MockImageData, Seed } from "../types";
 
 type BuildImageFieldConfig<
-	State extends prismicT.FieldState = prismicT.FieldState,
+	State extends prismic.FieldState = prismic.FieldState,
 > = {
 	imageData: MockImageData;
 	constraint?: NonNullable<
-		prismicT.CustomTypeModelImageField["config"]
+		prismic.CustomTypeModelImageField["config"]
 	>["constraint"];
 } & (
 	| {
@@ -25,17 +25,17 @@ type BuildImageFieldConfig<
 	Pick<MockValueStateConfig<State>, "state">;
 
 export const buildImageFieldImage = <
-	State extends prismicT.FieldState = prismicT.FieldState,
+	State extends prismic.FieldState = prismic.FieldState,
 >(
 	config: BuildImageFieldConfig<State>,
-): prismicT.ImageFieldImage<State> => {
+): prismic.ImageFieldImage<State> => {
 	if (config.state === "empty") {
 		return {
 			url: null,
 			dimensions: null,
 			alt: null,
 			copyright: null,
-		} as prismicT.ImageFieldImage<State>;
+		} as prismic.ImageFieldImage<State>;
 	} else {
 		const faker = config.faker || createFaker(config.seed);
 
@@ -55,6 +55,6 @@ export const buildImageFieldImage = <
 			dimensions,
 			alt: changeCase.sentenceCase(faker.words(faker.range(5, 15))),
 			copyright: changeCase.sentenceCase(faker.words(faker.range(5, 15))),
-		} as prismicT.ImageFieldImage<State>;
+		} as prismic.ImageFieldImage<State>;
 	}
 };

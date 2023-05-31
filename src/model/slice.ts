@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
@@ -18,15 +18,15 @@ export const slice = <
 	RepeatFields extends GroupFieldModelMap,
 >(
 	config: MockSliceModelConfig<NonRepeatFields, RepeatFields>,
-): prismicT.CustomTypeModelSlice<NonRepeatFields, RepeatFields> => {
+): prismic.CustomTypeModelSlice<NonRepeatFields, RepeatFields> => {
 	const faker = config.faker || createFaker(config.seed);
 
 	return {
-		type: prismicT.CustomTypeModelSliceType.Slice,
+		type: prismic.CustomTypeModelSliceType.Slice,
 		icon: changeCase.snakeCase(faker.word()),
 		display: faker.boolean()
-			? prismicT.CustomTypeModelSliceDisplay.Grid
-			: prismicT.CustomTypeModelSliceDisplay.List,
+			? prismic.CustomTypeModelSliceDisplay.Grid
+			: prismic.CustomTypeModelSliceDisplay.List,
 		fieldset: changeCase.capitalCase(faker.words(2)),
 		description: changeCase.sentenceCase(faker.words(faker.range(5, 10))),
 		repeat: config.repeatFields || ({} as RepeatFields),

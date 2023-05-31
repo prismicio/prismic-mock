@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { createFaker } from "../lib/createFaker";
 import { ValueForModelMapConfigs } from "../lib/valueForModelMap";
@@ -11,10 +11,10 @@ import { slice } from "./slice";
 import { sharedSlice } from "./sharedSlice";
 
 export type MockSliceZoneValueConfig<
-	Model extends prismicT.CustomTypeModelSliceZoneField = prismicT.CustomTypeModelSliceZoneField,
-	State extends prismicT.FieldState = prismicT.FieldState,
+	Model extends prismic.CustomTypeModelSliceZoneField = prismic.CustomTypeModelSliceZoneField,
+	State extends prismic.FieldState = prismic.FieldState,
 > = {
-	sharedSliceModels?: prismicT.SharedSliceModel[];
+	sharedSliceModels?: prismic.SharedSliceModel[];
 	itemsCount?: State extends "empty" ? 0 : number;
 	primaryFieldConfigs?: ValueForModelMapConfigs;
 	itemsFieldConfigs?: ValueForModelMapConfigs;
@@ -22,8 +22,8 @@ export type MockSliceZoneValueConfig<
 	MockValueStateConfig<State>;
 
 export const sliceZone = <
-	Model extends prismicT.CustomTypeModelSliceZoneField = prismicT.CustomTypeModelSliceZoneField,
-	State extends prismicT.FieldState = prismicT.FieldState,
+	Model extends prismic.CustomTypeModelSliceZoneField = prismic.CustomTypeModelSliceZoneField,
+	State extends prismic.FieldState = prismic.FieldState,
 >(
 	config: MockSliceZoneValueConfig<Model, State>,
 ): ModelValue<Model, State> => {
@@ -49,7 +49,7 @@ export const sliceZone = <
 					const choiceLabel = faker.randomElement(choiceLabels);
 
 					switch (choiceModel.type) {
-						case prismicT.CustomTypeModelSliceType.Slice: {
+						case prismic.CustomTypeModelSliceType.Slice: {
 							return slice({
 								faker,
 								model: choiceModel,
@@ -60,7 +60,7 @@ export const sliceZone = <
 							});
 						}
 
-						case prismicT.CustomTypeModelSliceType.SharedSlice: {
+						case prismic.CustomTypeModelSliceType.SharedSlice: {
 							const sharedSliceModel = config.sharedSliceModels?.find(
 								(sharedSliceModel) => sharedSliceModel.id === choiceType,
 							);

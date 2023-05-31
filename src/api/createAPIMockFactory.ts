@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { createFaker, Faker } from "../lib/createFaker";
 
@@ -34,7 +34,7 @@ export class APIMockFactory {
 		return this.faker.seed;
 	}
 
-	query<Document extends prismicT.PrismicDocument = prismicT.PrismicDocument>(
+	query<Document extends prismic.PrismicDocument = prismic.PrismicDocument>(
 		config?: WithoutFakerConfig<MockRestApiQueryConfig<Document>>,
 	) {
 		return query({ ...config, faker: this.faker });

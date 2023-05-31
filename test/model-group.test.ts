@@ -1,5 +1,5 @@
 import test from "ava";
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
@@ -23,6 +23,6 @@ test("can be configured for specific fields", (t) => {
 
 	t.is(
 		actual.config.fields.boolean.type,
-		prismicT.CustomTypeModelFieldType.Boolean,
+		prismic.CustomTypeModelFieldType.Boolean,
 	);
 });

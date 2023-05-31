@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
@@ -16,15 +16,15 @@ import { timestamp } from "./timestamp";
 import { buildAlternativeLanguage } from "../lib/buildAlternativeLanguage";
 
 export type MockCustomTypeValueConfig<
-	Model extends prismicT.CustomTypeModel = prismicT.CustomTypeModel,
+	Model extends prismic.CustomTypeModel = prismic.CustomTypeModel,
 > = {
 	withURL?: boolean;
-	alternateLanguages?: prismicT.PrismicDocument[];
+	alternateLanguages?: prismic.PrismicDocument[];
 	configs?: ValueForModelMapConfigs;
 } & MockValueConfig<Model>;
 
 export const customType = <
-	Model extends prismicT.CustomTypeModel = prismicT.CustomTypeModel,
+	Model extends prismic.CustomTypeModel = prismic.CustomTypeModel,
 >(
 	config: MockCustomTypeValueConfig<Model>,
 ): ModelValue<Model> => {
@@ -35,21 +35,21 @@ export const customType = <
 	const fieldModelsMap = Object.assign(
 		{},
 		...Object.values(model.json),
-	) as prismicT.CustomTypeModelTab;
+	) as prismic.CustomTypeModelTab;
 
-	const dataFieldModelsMap: prismicT.CustomTypeModelTab = {};
+	const dataFieldModelsMap: prismic.CustomTypeModelTab = {};
 	for (const key in fieldModelsMap) {
 		const fieldModel = fieldModelsMap[key];
 
 		// UID fields must be filtered out since they are not represented in
 		// the document's `data` field.
-		if (fieldModel.type !== prismicT.CustomTypeModelFieldType.UID) {
+		if (fieldModel.type !== prismic.CustomTypeModelFieldType.UID) {
 			dataFieldModelsMap[key] = fieldModel;
 		}
 	}
 
 	const hasUID = Object.values(fieldModelsMap).some(
-		(fieldModel) => fieldModel.type === prismicT.CustomTypeModelFieldType.UID,
+		(fieldModel) => fieldModel.type === prismic.CustomTypeModelFieldType.UID,
 	);
 
 	const withURL = config.withURL ?? true;
@@ -69,8 +69,8 @@ export const customType = <
 		href: faker.url(),
 		lang: faker.word(),
 		tags: generateTags({ faker }),
-		slugs: [] as prismicT.PrismicDocument["slugs"],
-		linked_documents: [] as prismicT.PrismicDocument["linked_documents"],
+		slugs: [] as prismic.PrismicDocument["slugs"],
+		linked_documents: [] as prismic.PrismicDocument["linked_documents"],
 		alternate_languages: alternateLanguages,
 		first_publication_date: timestamp({ faker }),
 		last_publication_date: timestamp({ faker }),

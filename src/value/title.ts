@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { createFaker } from "../lib/createFaker";
 
@@ -7,20 +7,20 @@ import { MockValueConfig, MockValueStateConfig } from "../types";
 import { heading, MockRichTextHeadingValueConfig } from "./richText/heading";
 
 export type MockTitleValueConfig<
-	Model extends prismicT.CustomTypeModelTitleField = prismicT.CustomTypeModelTitleField,
-	State extends prismicT.FieldState = prismicT.FieldState,
+	Model extends prismic.CustomTypeModelTitleField = prismic.CustomTypeModelTitleField,
+	State extends prismic.FieldState = prismic.FieldState,
 > = {
 	pattern?: MockRichTextHeadingValueConfig["pattern"];
 } & MockValueConfig<Model> &
 	MockValueStateConfig<State>;
 
 export type MockTitleValue<
-	State extends prismicT.FieldState = prismicT.FieldState,
-> = prismicT.TitleField<State>;
+	State extends prismic.FieldState = prismic.FieldState,
+> = prismic.TitleField<State>;
 
 export const title = <
-	Model extends prismicT.CustomTypeModelTitleField = prismicT.CustomTypeModelTitleField,
-	State extends prismicT.FieldState = "filled",
+	Model extends prismic.CustomTypeModelTitleField = prismic.CustomTypeModelTitleField,
+	State extends prismic.FieldState = "filled",
 >(
 	config: MockTitleValueConfig<Model, State>,
 ): MockTitleValue<State> => {

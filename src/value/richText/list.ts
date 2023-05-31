@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 import * as changeCase from "change-case";
 
 import { createFaker } from "../../lib/createFaker";
@@ -26,7 +26,7 @@ type MockRichTextListValueConfig = {
 
 export const list = (
 	config: MockRichTextListValueConfig,
-): prismicT.RTListItemNode[] | undefined => {
+): prismic.RTListItemNode[] | undefined => {
 	const faker = config.faker || createFaker(config.seed);
 
 	const patternKey =
@@ -40,7 +40,7 @@ export const list = (
 		.fill(undefined)
 		.map(() => {
 			return {
-				type: prismicT.RichTextNodeType.listItem,
+				type: prismic.RichTextNodeType.listItem,
 				text: changeCase.sentenceCase(faker.words(faker.range(5, 15))),
 				spans: [],
 			};

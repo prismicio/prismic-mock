@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { createFaker } from "../lib/createFaker";
 
@@ -7,21 +7,21 @@ import { MockValueStateConfig, MockValueConfig } from "../types";
 import * as modelGen from "../model";
 
 export type MockSelectValueConfig<
-	Model extends prismicT.CustomTypeModelSelectField = prismicT.CustomTypeModelSelectField,
-	State extends prismicT.FieldState = prismicT.FieldState,
+	Model extends prismic.CustomTypeModelSelectField = prismic.CustomTypeModelSelectField,
+	State extends prismic.FieldState = prismic.FieldState,
 > = MockValueConfig<Model> & MockValueStateConfig<State>;
 
 export type MockSelectValue<
-	Model extends prismicT.CustomTypeModelSelectField = prismicT.CustomTypeModelSelectField,
-	State extends prismicT.FieldState = prismicT.FieldState,
-> = prismicT.SelectField<
+	Model extends prismic.CustomTypeModelSelectField = prismic.CustomTypeModelSelectField,
+	State extends prismic.FieldState = prismic.FieldState,
+> = prismic.SelectField<
 	NonNullable<NonNullable<Model["config"]>["options"]>[number],
 	State
 >;
 
 export const select = <
-	Model extends prismicT.CustomTypeModelSelectField = prismicT.CustomTypeModelSelectField,
-	State extends prismicT.FieldState = "filled",
+	Model extends prismic.CustomTypeModelSelectField = prismic.CustomTypeModelSelectField,
+	State extends prismic.FieldState = "filled",
 >(
 	config: MockSelectValueConfig<Model, State>,
 ): MockSelectValue<Model, State> => {

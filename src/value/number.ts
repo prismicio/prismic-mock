@@ -1,21 +1,21 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { createFaker } from "../lib/createFaker";
 
 import { MockValueStateConfig, MockValueConfig } from "../types";
 
 export type MockNumberValueConfig<
-	Model extends prismicT.CustomTypeModelNumberField = prismicT.CustomTypeModelNumberField,
-	State extends prismicT.FieldState = prismicT.FieldState,
+	Model extends prismic.CustomTypeModelNumberField = prismic.CustomTypeModelNumberField,
+	State extends prismic.FieldState = prismic.FieldState,
 > = MockValueConfig<Model> & MockValueStateConfig<State>;
 
 export type MockNumberValue<
-	State extends prismicT.FieldState = prismicT.FieldState,
-> = prismicT.NumberField<State>;
+	State extends prismic.FieldState = prismic.FieldState,
+> = prismic.NumberField<State>;
 
 export const number = <
-	Model extends prismicT.CustomTypeModelNumberField = prismicT.CustomTypeModelNumberField,
-	State extends prismicT.FieldState = "filled",
+	Model extends prismic.CustomTypeModelNumberField = prismic.CustomTypeModelNumberField,
+	State extends prismic.FieldState = "filled",
 >(
 	config: MockNumberValueConfig<Model, State>,
 ): MockNumberValue<State> => {

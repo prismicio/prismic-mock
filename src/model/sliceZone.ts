@@ -1,14 +1,14 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { MockModelConfig } from "../types";
 
 export type MockSliceZoneModelConfig<
 	Slices extends Record<
 		string,
-		prismicT.CustomTypeModelSlice | prismicT.CustomTypeModelSharedSlice
+		prismic.CustomTypeModelSlice | prismic.CustomTypeModelSharedSlice
 	> = Record<
 		string,
-		prismicT.CustomTypeModelSlice | prismicT.CustomTypeModelSharedSlice
+		prismic.CustomTypeModelSlice | prismic.CustomTypeModelSharedSlice
 	>,
 > = {
 	choices?: Slices;
@@ -17,27 +17,27 @@ export type MockSliceZoneModelConfig<
 export const sliceZone = <
 	Slices extends Record<
 		string,
-		prismicT.CustomTypeModelSlice | prismicT.CustomTypeModelSharedSlice
+		prismic.CustomTypeModelSlice | prismic.CustomTypeModelSharedSlice
 	>,
 >(
 	config: MockSliceZoneModelConfig<Slices>,
-): prismicT.CustomTypeModelSliceZoneField<Slices> => {
+): prismic.CustomTypeModelSliceZoneField<Slices> => {
 	const labels = {} as NonNullable<
 		NonNullable<
-			prismicT.CustomTypeModelSliceZoneField<Slices>["config"]
+			prismic.CustomTypeModelSliceZoneField<Slices>["config"]
 		>["labels"]
 	>;
 
 	for (const choiceId in config.choices) {
 		const choice = config.choices[choiceId];
 
-		if (choice.type === prismicT.CustomTypeModelSliceType.Slice) {
+		if (choice.type === prismic.CustomTypeModelSliceType.Slice) {
 			labels[choiceId as unknown as keyof typeof labels] = [];
 		}
 	}
 
 	return {
-		type: prismicT.CustomTypeModelFieldType.Slices,
+		type: prismic.CustomTypeModelFieldType.Slices,
 		fieldset: "Slice zone",
 		config: {
 			labels,

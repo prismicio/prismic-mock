@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
@@ -11,7 +11,7 @@ export type MockRestApiRefConfig<IsScheduled extends boolean = false> = {
 } & MockRestApiConfig;
 
 export type MockRestApiRefValue<IsScheduled extends boolean = false> = Omit<
-	prismicT.Ref,
+	prismic.Ref,
 	"scheduledAt"
 > &
 	(IsScheduled extends true
@@ -23,7 +23,7 @@ export const ref = <IsScheduled extends boolean = false>(
 ): MockRestApiRefValue<IsScheduled> => {
 	const faker = config.faker || createFaker(config.seed);
 
-	const value: prismicT.Ref = {
+	const value: prismic.Ref = {
 		id: faker.hash(16),
 		ref: faker.hash(16),
 		isMasterRef: config.isMasterRef ?? false,

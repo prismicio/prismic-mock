@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { createFaker } from "../lib/createFaker";
 
@@ -11,7 +11,7 @@ import {
 } from "./sharedSliceVariation";
 
 export type MockSharedSliceValueConfig<
-	Model extends prismicT.SharedSliceModel = prismicT.SharedSliceModel,
+	Model extends prismic.SharedSliceModel = prismic.SharedSliceModel,
 > = Pick<
 	MockSharedSliceVariationValueConfig,
 	"itemsCount" | "primaryFieldConfigs" | "itemsFieldConfigs"
@@ -19,7 +19,7 @@ export type MockSharedSliceValueConfig<
 	MockValueConfig<Model>;
 
 export const sharedSlice = <
-	Model extends prismicT.SharedSliceModel = prismicT.SharedSliceModel,
+	Model extends prismic.SharedSliceModel = prismic.SharedSliceModel,
 >(
 	config: MockSharedSliceValueConfig<Model>,
 ): ModelValue<Model> => {

@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { createFaker, Faker } from "../lib/createFaker";
 
@@ -91,8 +91,8 @@ export class ModelMockFactory {
 
 	customType<
 		Definition extends
-			| prismicT.CustomTypeModelTab
-			| prismicT.CustomTypeModelDefinition,
+			| prismic.CustomTypeModelTab
+			| prismic.CustomTypeModelDefinition,
 	>(config?: WithoutFakerConfig<MockCustomTypeModelConfig<Definition>>) {
 		return customType({ ...config, faker: this.faker });
 	}
@@ -157,7 +157,7 @@ export class ModelMockFactory {
 		return select({ ...config, faker: this.faker });
 	}
 
-	sharedSlice<Variation extends prismicT.SharedSliceModelVariation>(
+	sharedSlice<Variation extends prismic.SharedSliceModelVariation>(
 		config?: WithoutFakerConfig<MockSharedSliceModelConfig<Variation>>,
 	) {
 		return sharedSlice({ ...config, faker: this.faker });
@@ -193,7 +193,7 @@ export class ModelMockFactory {
 	sliceZone<
 		Slices extends Record<
 			string,
-			prismicT.CustomTypeModelSlice | prismicT.CustomTypeModelSharedSlice
+			prismic.CustomTypeModelSlice | prismic.CustomTypeModelSharedSlice
 		>,
 	>(config?: WithoutFakerConfig<MockSliceZoneModelConfig<Slices>>) {
 		return sliceZone({ ...config, faker: this.faker });

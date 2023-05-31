@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
@@ -9,11 +9,11 @@ export type MockGeoPointModelConfig = MockModelConfig;
 
 export const geoPoint = (
 	config: MockGeoPointModelConfig,
-): prismicT.CustomTypeModelGeoPointField => {
+): prismic.CustomTypeModelGeoPointField => {
 	const faker = config.faker || createFaker(config.seed);
 
 	return {
-		type: prismicT.CustomTypeModelFieldType.GeoPoint,
+		type: prismic.CustomTypeModelFieldType.GeoPoint,
 		config: {
 			label: changeCase.capitalCase(faker.word()),
 		},

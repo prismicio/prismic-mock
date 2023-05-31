@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
@@ -6,17 +6,17 @@ import { createFaker } from "../lib/createFaker";
 import { MockValueStateConfig, MockValueConfig } from "../types";
 
 export type MockKeyTextValueConfig<
-	Model extends prismicT.CustomTypeModelKeyTextField = prismicT.CustomTypeModelKeyTextField,
-	State extends prismicT.FieldState = prismicT.FieldState,
+	Model extends prismic.CustomTypeModelKeyTextField = prismic.CustomTypeModelKeyTextField,
+	State extends prismic.FieldState = prismic.FieldState,
 > = MockValueConfig<Model> & MockValueStateConfig<State>;
 
 export type MockKeyTextValue<
-	State extends prismicT.FieldState = prismicT.FieldState,
-> = prismicT.KeyTextField<State>;
+	State extends prismic.FieldState = prismic.FieldState,
+> = prismic.KeyTextField<State>;
 
 export const keyText = <
-	Model extends prismicT.CustomTypeModelKeyTextField = prismicT.CustomTypeModelKeyTextField,
-	State extends prismicT.FieldState = "filled",
+	Model extends prismic.CustomTypeModelKeyTextField = prismic.CustomTypeModelKeyTextField,
+	State extends prismic.FieldState = "filled",
 >(
 	config: MockKeyTextValueConfig<Model, State>,
 ): MockKeyTextValue<State> => {

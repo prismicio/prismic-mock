@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
@@ -6,7 +6,7 @@ import { createFaker } from "../lib/createFaker";
 import { MockModelConfig } from "../types";
 
 export type MockSharedSliceModelConfig<
-	Variation extends prismicT.SharedSliceModelVariation,
+	Variation extends prismic.SharedSliceModelVariation,
 > = {
 	id?: string;
 	name?: string;
@@ -14,10 +14,10 @@ export type MockSharedSliceModelConfig<
 } & MockModelConfig;
 
 export const sharedSlice = <
-	Variation extends prismicT.SharedSliceModelVariation,
+	Variation extends prismic.SharedSliceModelVariation,
 >(
 	config: MockSharedSliceModelConfig<Variation>,
-): prismicT.SharedSliceModel<string, Variation> => {
+): prismic.SharedSliceModel<string, Variation> => {
 	const faker = config.faker || createFaker(config.seed);
 
 	let name: string =
@@ -31,7 +31,7 @@ export const sharedSlice = <
 	}
 
 	return {
-		type: prismicT.CustomTypeModelSliceType.SharedSlice,
+		type: prismic.CustomTypeModelSliceType.SharedSlice,
 		id,
 		name,
 		description: changeCase.sentenceCase(faker.words(faker.range(5, 10))),
