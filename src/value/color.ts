@@ -1,21 +1,21 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { createFaker } from "../lib/createFaker";
 
 import { MockValueStateConfig, MockValueConfig } from "../types";
 
 export type MockColorValueConfig<
-	Model extends prismicT.CustomTypeModelColorField = prismicT.CustomTypeModelColorField,
-	State extends prismicT.FieldState = prismicT.FieldState,
+	Model extends prismic.CustomTypeModelColorField = prismic.CustomTypeModelColorField,
+	State extends prismic.FieldState = prismic.FieldState,
 > = MockValueConfig<Model> & MockValueStateConfig<State>;
 
 export type MockColorValue<
-	State extends prismicT.FieldState = prismicT.FieldState,
-> = prismicT.ColorField<State>;
+	State extends prismic.FieldState = prismic.FieldState,
+> = prismic.ColorField<State>;
 
 export const color = <
-	Model extends prismicT.CustomTypeModelColorField = prismicT.CustomTypeModelColorField,
-	State extends prismicT.FieldState = "filled",
+	Model extends prismic.CustomTypeModelColorField = prismic.CustomTypeModelColorField,
+	State extends prismic.FieldState = "filled",
 >(
 	config: MockColorValueConfig<Model, State>,
 ): MockColorValue<State> => {

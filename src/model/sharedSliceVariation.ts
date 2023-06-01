@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
@@ -23,7 +23,7 @@ export const sharedSliceVariation = <
 	ItemsFields extends GroupFieldModelMap,
 >(
 	config: MockSharedSliceVariationModelConfig<ID, PrimaryFields, ItemsFields>,
-): prismicT.SharedSliceModelVariation<ID, PrimaryFields, ItemsFields> => {
+): prismic.SharedSliceModelVariation<ID, PrimaryFields, ItemsFields> => {
 	const faker = config.faker || createFaker(config.seed);
 
 	let name: string =

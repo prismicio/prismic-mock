@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { MockValueConfig, ModelValue } from "../types";
 
@@ -12,7 +12,7 @@ import {
 import * as modelGen from "../model";
 
 export type MockSharedSliceVariationValueConfig<
-	Model extends prismicT.SharedSliceModelVariation = prismicT.SharedSliceModelVariation,
+	Model extends prismic.SharedSliceModelVariation = prismic.SharedSliceModelVariation,
 > = {
 	type?: string;
 	label?: string;
@@ -22,7 +22,7 @@ export type MockSharedSliceVariationValueConfig<
 } & MockValueConfig<Model>;
 
 export const sharedSliceVariation = <
-	Model extends prismicT.SharedSliceModelVariation = prismicT.SharedSliceModelVariation,
+	Model extends prismic.SharedSliceModelVariation = prismic.SharedSliceModelVariation,
 >(
 	config: MockSharedSliceVariationValueConfig<Model>,
 ): ModelValue<Model> => {

@@ -7,7 +7,7 @@ import { date } from "../model/date";
 import { embed } from "../model/embed";
 import { geoPoint } from "../model/geoPoint";
 import { image } from "../model/image";
-import { integrationFields } from "../model/integrationFields";
+import { integration } from "../model/integration";
 import { keyText } from "../model/keyText";
 import { link } from "../model/link";
 import { linkToMedia } from "../model/linkToMedia";
@@ -28,7 +28,7 @@ const mockModelFns = {
 	embed,
 	geoPoint,
 	image,
-	integrationFields,
+	integration,
 	keyText,
 	link,
 	linkToMedia,

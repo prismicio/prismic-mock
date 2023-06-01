@@ -1,21 +1,21 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { createFaker } from "../lib/createFaker";
 
 import { MockValueStateConfig, MockValueConfig } from "../types";
 
 export type MockGeoPointValueConfig<
-	Model extends prismicT.CustomTypeModelGeoPointField = prismicT.CustomTypeModelGeoPointField,
-	State extends prismicT.FieldState = prismicT.FieldState,
+	Model extends prismic.CustomTypeModelGeoPointField = prismic.CustomTypeModelGeoPointField,
+	State extends prismic.FieldState = prismic.FieldState,
 > = MockValueConfig<Model> & MockValueStateConfig<State>;
 
 export type MockGeoPointValue<
-	State extends prismicT.FieldState = prismicT.FieldState,
-> = prismicT.GeoPointField<State>;
+	State extends prismic.FieldState = prismic.FieldState,
+> = prismic.GeoPointField<State>;
 
 export const geoPoint = <
-	Model extends prismicT.CustomTypeModelGeoPointField = prismicT.CustomTypeModelGeoPointField,
-	State extends prismicT.FieldState = "filled",
+	Model extends prismic.CustomTypeModelGeoPointField = prismic.CustomTypeModelGeoPointField,
+	State extends prismic.FieldState = "filled",
 >(
 	config: MockGeoPointValueConfig<Model, State>,
 ): MockGeoPointValue<State> => {

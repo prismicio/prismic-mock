@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 import { Faker } from "./lib/createFaker";
 
 import * as value from "./value";
@@ -40,8 +40,8 @@ export interface MockImageData {
 	height: number;
 }
 
-export type MockEmbedData = prismicT.AnyOEmbed &
-	prismicT.OEmbedExtra & {
+export type MockEmbedData = prismic.AnyOEmbed &
+	prismic.OEmbedExtra & {
 		embed_url: string;
 		html: string;
 	};
@@ -68,15 +68,15 @@ export type MockModelConfig =
 
 // TODO: Add to @prismicio/types
 export type PrismicModel =
-	| prismicT.CustomTypeModel
-	| prismicT.CustomTypeModelField
-	| prismicT.CustomTypeModelSlice
-	| prismicT.SharedSliceModel
-	| prismicT.SharedSliceModelVariation;
+	| prismic.CustomTypeModel
+	| prismic.CustomTypeModelField
+	| prismic.CustomTypeModelSlice
+	| prismic.SharedSliceModel
+	| prismic.SharedSliceModelVariation;
 
 export type GroupFieldModelMap = Record<
 	string,
-	prismicT.CustomTypeModelFieldForGroup
+	prismic.CustomTypeModelFieldForGroup
 >;
 
 export type MockValueConfig<Model extends PrismicModel = PrismicModel> = {
@@ -93,55 +93,55 @@ export type MockValueConfig<Model extends PrismicModel = PrismicModel> = {
 );
 
 export type MockValueStateConfig<
-	State extends prismicT.FieldState = prismicT.FieldState,
+	State extends prismic.FieldState = prismic.FieldState,
 > = {
 	state?: State;
 };
 
 export type MockValueConfigForModel<
 	Model extends PrismicModel,
-	State extends prismicT.FieldState = prismicT.FieldState,
-> = Model extends prismicT.CustomTypeModelBooleanField
+	State extends prismic.FieldState = prismic.FieldState,
+> = Model extends prismic.CustomTypeModelBooleanField
 	? value.MockBooleanValueConfig<Model>
-	: Model extends prismicT.CustomTypeModelColorField
+	: Model extends prismic.CustomTypeModelColorField
 	? value.MockColorValueConfig<Model, State>
-	: Model extends prismicT.CustomTypeModelContentRelationshipField
+	: Model extends prismic.CustomTypeModelContentRelationshipField
 	? value.MockContentRelationshipValueConfig<Model, State>
-	: Model extends prismicT.CustomTypeModelDateField
+	: Model extends prismic.CustomTypeModelDateField
 	? value.MockDateValueConfig<Model, State>
-	: Model extends prismicT.CustomTypeModelEmbedField
-	? value.MockEmbedValueConfig<Model, prismicT.AnyOEmbed, State>
-	: Model extends prismicT.CustomTypeModelGeoPointField
+	: Model extends prismic.CustomTypeModelEmbedField
+	? value.MockEmbedValueConfig<Model, prismic.AnyOEmbed, State>
+	: Model extends prismic.CustomTypeModelGeoPointField
 	? value.MockGeoPointValueConfig<Model, State>
-	: Model extends prismicT.CustomTypeModelImageField
+	: Model extends prismic.CustomTypeModelImageField
 	? value.MockImageValueConfig<Model, State>
-	: Model extends prismicT.CustomTypeModelKeyTextField
+	: Model extends prismic.CustomTypeModelKeyTextField
 	? value.MockKeyTextValueConfig<Model, State>
-	: Model extends prismicT.CustomTypeModelLinkField
+	: Model extends prismic.CustomTypeModelLinkField
 	? value.MockLinkValueConfig<
-			typeof prismicT.LinkType[keyof typeof prismicT.LinkType],
+			(typeof prismic.LinkType)[keyof typeof prismic.LinkType],
 			Model,
 			State
 	  >
-	: Model extends prismicT.CustomTypeModelLinkToMediaField
+	: Model extends prismic.CustomTypeModelLinkToMediaField
 	? value.MockLinkToMediaValueConfig<Model, State>
-	: Model extends prismicT.CustomTypeModelNumberField
+	: Model extends prismic.CustomTypeModelNumberField
 	? value.MockNumberValueConfig<Model, State>
-	: Model extends prismicT.CustomTypeModelRichTextField
+	: Model extends prismic.CustomTypeModelRichTextField
 	? value.MockRichTextValueConfig
-	: Model extends prismicT.CustomTypeModelSelectField
+	: Model extends prismic.CustomTypeModelSelectField
 	? value.MockSelectValueConfig<Model, State>
-	: Model extends prismicT.CustomTypeModelTimestampField
+	: Model extends prismic.CustomTypeModelTimestampField
 	? value.MockTimestampValueConfig<Model, State>
-	: Model extends prismicT.CustomTypeModelTitleField
+	: Model extends prismic.CustomTypeModelTitleField
 	? value.MockTitleValueConfig<Model, State>
-	: Model extends prismicT.CustomTypeModelUIDField
+	: Model extends prismic.CustomTypeModelUIDField
 	? value.MockUIDValueConfig<Model>
 	: never;
 
 type CustomTypeModelStructuredTextField =
-	| prismicT.CustomTypeModelRichTextField
-	| prismicT.CustomTypeModelTitleField;
+	| prismic.CustomTypeModelRichTextField
+	| prismic.CustomTypeModelTitleField;
 
 export type MockRichTextValueConfig<
 	Model extends CustomTypeModelStructuredTextField = CustomTypeModelStructuredTextField,
@@ -159,120 +159,120 @@ export type MockRichTextValueConfig<
 );
 
 export type ModelValueMap<
-	T extends Record<string, prismicT.CustomTypeModelField>,
+	T extends Record<string, prismic.CustomTypeModelField>,
 > = {
 	[P in keyof T]: ModelValue<T[P]>;
 };
 
 export type ModelValue<
 	T extends PrismicModel,
-	State extends prismicT.FieldState = prismicT.FieldState,
-> = T extends prismicT.CustomTypeModel
+	State extends prismic.FieldState = prismic.FieldState,
+> = T extends prismic.CustomTypeModel
 	? CustomTypeModelValue<T>
-	: T extends prismicT.CustomTypeModelUIDField
-	? prismicT.PrismicDocument["uid"]
-	: T extends prismicT.CustomTypeModelFieldForGroup
+	: T extends prismic.CustomTypeModelUIDField
+	? prismic.PrismicDocument["uid"]
+	: T extends prismic.CustomTypeModelFieldForGroup
 	? CustomTypeModelFieldForGroupValue<T, State>
-	: T extends prismicT.CustomTypeModelGroupField
+	: T extends prismic.CustomTypeModelGroupField
 	? CustomTypeModelGroupFieldValue<T, State>
-	: T extends prismicT.CustomTypeModelSliceZoneField
-	? prismicT.SliceZone<
+	: T extends prismic.CustomTypeModelSliceZoneField
+	? prismic.SliceZone<
 			ValueOf<{
 				[P in keyof NonNullable<T["config"]>["choices"] as P extends string
 					? P
 					: never]: NonNullable<
 					T["config"]
-				>["choices"][P] extends prismicT.CustomTypeModelSlice
+				>["choices"][P] extends prismic.CustomTypeModelSlice
 					? CustomTypeModelSliceValue<
 							NonNullable<T["config"]>["choices"][P],
 							P extends string ? P : string
 					  >
 					: NonNullable<
 							T["config"]
-					  >["choices"][P] extends prismicT.CustomTypeModelSharedSlice
-					? prismicT.SharedSlice<P extends string ? P : string>
+					  >["choices"][P] extends prismic.CustomTypeModelSharedSlice
+					? prismic.SharedSlice<P extends string ? P : string>
 					: never;
 			}>,
 			State
 	  >
-	: T extends prismicT.CustomTypeModelSlice
+	: T extends prismic.CustomTypeModelSlice
 	? CustomTypeModelSliceValue<T>
-	: T extends prismicT.CustomTypeModelSharedSlice
+	: T extends prismic.CustomTypeModelSharedSlice
 	? // TODO: Allow providing a union of of Shared Slices
-	  prismicT.SharedSlice
-	: T extends prismicT.SharedSliceModel
+	  prismic.SharedSlice
+	: T extends prismic.SharedSliceModel
 	? SharedSliceModelValue<T>
-	: T extends prismicT.SharedSliceModelVariation
+	: T extends prismic.SharedSliceModelVariation
 	? SharedSliceModelVariationValue<T>
 	: never;
 
-type CustomTypeModelValue<T extends prismicT.CustomTypeModel> =
-	prismicT.PrismicDocument<
+type CustomTypeModelValue<T extends prismic.CustomTypeModel> =
+	prismic.PrismicDocument<
 		ModelValueMap<{
 			[P in keyof ValueOf<T["json"]> as ValueOf<
 				T["json"]
-			>[P]["type"] extends typeof prismicT.CustomTypeModelFieldType.UID
+			>[P]["type"] extends typeof prismic.CustomTypeModelFieldType.UID
 				? never
 				: P]: ValueOf<T["json"]>[P];
 		}>
 	>;
 
 type CustomTypeModelFieldForGroupValue<
-	T extends prismicT.CustomTypeModelFieldForGroup,
-	State extends prismicT.FieldState = prismicT.FieldState,
-> = T extends prismicT.CustomTypeModelBooleanField
-	? prismicT.BooleanField
-	: T extends prismicT.CustomTypeModelColorField
-	? prismicT.ColorField<State>
-	: T extends prismicT.CustomTypeModelRichTextField
-	? prismicT.RichTextField<State>
-	: T extends prismicT.CustomTypeModelTitleField
-	? prismicT.TitleField<State>
-	: T extends prismicT.CustomTypeModelImageField<infer TThumbnailNames>
-	? prismicT.ImageField<TThumbnailNames, State>
-	: T extends prismicT.CustomTypeModelLinkField
-	? prismicT.LinkField<string, string, never, State>
-	: T extends prismicT.CustomTypeModelLinkToMediaField
-	? prismicT.LinkToMediaField<State>
-	: T extends prismicT.CustomTypeModelContentRelationshipField
-	? prismicT.RelationField<string, string, never, State>
-	: T extends prismicT.CustomTypeModelDateField
-	? prismicT.DateField<State>
-	: T extends prismicT.CustomTypeModelTimestampField
-	? prismicT.TimestampField<State>
-	: T extends prismicT.CustomTypeModelNumberField
-	? prismicT.NumberField<State>
-	: T extends prismicT.CustomTypeModelKeyTextField
-	? prismicT.KeyTextField<State>
-	: T extends prismicT.CustomTypeModelSelectField
-	? prismicT.SelectField<string, State>
-	: T extends prismicT.CustomTypeModelEmbedField
-	? prismicT.EmbedField<prismicT.AnyOEmbed & prismicT.OEmbedExtra, State>
-	: T extends prismicT.CustomTypeModelGeoPointField
-	? prismicT.GeoPointField<State>
-	: T extends prismicT.CustomTypeModelIntegrationFieldsField
-	? prismicT.IntegrationFields<Record<string, unknown>, State>
+	T extends prismic.CustomTypeModelFieldForGroup,
+	State extends prismic.FieldState = prismic.FieldState,
+> = T extends prismic.CustomTypeModelBooleanField
+	? prismic.BooleanField
+	: T extends prismic.CustomTypeModelColorField
+	? prismic.ColorField<State>
+	: T extends prismic.CustomTypeModelRichTextField
+	? prismic.RichTextField<State>
+	: T extends prismic.CustomTypeModelTitleField
+	? prismic.TitleField<State>
+	: T extends prismic.CustomTypeModelImageField<infer TThumbnailNames>
+	? prismic.ImageField<TThumbnailNames, State>
+	: T extends prismic.CustomTypeModelLinkField
+	? prismic.LinkField<string, string, never, State>
+	: T extends prismic.CustomTypeModelLinkToMediaField
+	? prismic.LinkToMediaField<State>
+	: T extends prismic.CustomTypeModelContentRelationshipField
+	? prismic.ContentRelationshipField<string, string, never, State>
+	: T extends prismic.CustomTypeModelDateField
+	? prismic.DateField<State>
+	: T extends prismic.CustomTypeModelTimestampField
+	? prismic.TimestampField<State>
+	: T extends prismic.CustomTypeModelNumberField
+	? prismic.NumberField<State>
+	: T extends prismic.CustomTypeModelKeyTextField
+	? prismic.KeyTextField<State>
+	: T extends prismic.CustomTypeModelSelectField
+	? prismic.SelectField<string, State>
+	: T extends prismic.CustomTypeModelEmbedField
+	? prismic.EmbedField<prismic.AnyOEmbed & prismic.OEmbedExtra, State>
+	: T extends prismic.CustomTypeModelGeoPointField
+	? prismic.GeoPointField<State>
+	: T extends prismic.CustomTypeModelIntegrationField
+	? prismic.IntegrationField<Record<string, unknown>, State>
 	: never;
 
 type CustomTypeModelGroupFieldValue<
-	T extends prismicT.CustomTypeModelGroupField,
-	State extends prismicT.FieldState = prismicT.FieldState,
-> = prismicT.GroupField<
+	T extends prismic.CustomTypeModelGroupField,
+	State extends prismic.FieldState = prismic.FieldState,
+> = prismic.GroupField<
 	ModelValueMap<NonNullable<NonNullable<T["config"]>["fields"]>>,
 	State
 >;
 
 type CustomTypeModelSliceValue<
-	T extends prismicT.CustomTypeModelSlice,
+	T extends prismic.CustomTypeModelSlice,
 	SliceType = string,
-> = prismicT.Slice<
+> = prismic.Slice<
 	SliceType,
 	ModelValueMap<NonNullable<T["non-repeat"]>>,
 	ModelValueMap<NonNullable<T["repeat"]>>
 >;
 
-type SharedSliceModelValue<T extends prismicT.SharedSliceModel> =
-	prismicT.SharedSlice<
+type SharedSliceModelValue<T extends prismic.SharedSliceModel> =
+	prismic.SharedSlice<
 		T["id"],
 		SharedSliceModelVariationValue<
 			IterableElement<NonNullable<T["variations"]>>
@@ -280,10 +280,10 @@ type SharedSliceModelValue<T extends prismicT.SharedSliceModel> =
 	>;
 
 type SharedSliceModelVariationValue<
-	T extends prismicT.SharedSliceModelVariation,
-> = prismicT.SharedSlice<
+	T extends prismic.SharedSliceModelVariation,
+> = prismic.SharedSlice<
 	string,
-	prismicT.SharedSliceVariation<
+	prismic.SharedSliceVariation<
 		T["id"],
 		ModelValueMap<NonNullable<T["primary"]>>,
 		ModelValueMap<NonNullable<T["items"]>>

@@ -17,7 +17,7 @@ Generate mock [Prismic][prismic] data for development and testing environments.
 ## Install
 
 ```bash
-npm install @prismicio/mock
+npm install @prismicio/mock @prismicio/client
 ```
 
 ## Documentation

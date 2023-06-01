@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
@@ -7,10 +7,10 @@ import { MockModelConfig } from "../types";
 
 export type MockCustomTypeModelConfig<
 	Definition extends
-		| prismicT.CustomTypeModelTab
-		| prismicT.CustomTypeModelDefinition =
-		| prismicT.CustomTypeModelTab
-		| prismicT.CustomTypeModelDefinition,
+		| prismic.CustomTypeModelTab
+		| prismic.CustomTypeModelDefinition =
+		| prismic.CustomTypeModelTab
+		| prismic.CustomTypeModelDefinition,
 > = {
 	id?: string;
 	label?: string;
@@ -30,18 +30,18 @@ export type MockCustomTypeModelConfig<
 
 type MockCustomTypeModel<
 	Definition extends
-		| prismicT.CustomTypeModelTab
-		| prismicT.CustomTypeModelDefinition,
-> = Definition extends prismicT.CustomTypeModelTab
-	? prismicT.CustomTypeModel<string, Record<"Main", Definition>>
-	: Definition extends prismicT.CustomTypeModelDefinition
-	? prismicT.CustomTypeModel<string, Definition>
+		| prismic.CustomTypeModelTab
+		| prismic.CustomTypeModelDefinition,
+> = Definition extends prismic.CustomTypeModelTab
+	? prismic.CustomTypeModel<string, Record<"Main", Definition>>
+	: Definition extends prismic.CustomTypeModelDefinition
+	? prismic.CustomTypeModel<string, Definition>
 	: never;
 
 export const customType = <
 	Definition extends
-		| prismicT.CustomTypeModelTab
-		| prismicT.CustomTypeModelDefinition,
+		| prismic.CustomTypeModelTab
+		| prismic.CustomTypeModelDefinition,
 >(
 	config: MockCustomTypeModelConfig<Definition>,
 ): MockCustomTypeModel<Definition> => {

@@ -1,5 +1,5 @@
 import test from "ava";
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
@@ -26,7 +26,7 @@ test("supports custom model", (t) => {
 		// This specific seed ensures `target` will be "_blank".
 		seed: 10000,
 		model: customModel,
-		type: prismicT.LinkType.Web,
+		type: prismic.LinkType.Web,
 	});
 
 	t.is(actual.target, "_blank");
@@ -35,7 +35,7 @@ test("supports custom model", (t) => {
 test("can be configured to return an empty link value", (t) => {
 	const actual = value.link({
 		seed: t.title,
-		type: prismicT.LinkType.Web,
+		type: prismic.LinkType.Web,
 		state: "empty",
 	});
 
@@ -45,14 +45,14 @@ test("can be configured to return an empty link value", (t) => {
 test("can be configured to return a value with `_blank` target", (t) => {
 	const actualTrue = value.link({
 		seed: t.title,
-		type: prismicT.LinkType.Web,
+		type: prismic.LinkType.Web,
 		withTargetBlank: true,
 	});
 	t.is(actualTrue.target, "_blank");
 
 	const actualFalse = value.link({
 		seed: t.title,
-		type: prismicT.LinkType.Web,
+		type: prismic.LinkType.Web,
 		withTargetBlank: false,
 	});
 	t.is(actualFalse.target, undefined);

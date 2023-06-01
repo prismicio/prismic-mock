@@ -1,7 +1,7 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
-export const sharedSliceChoice = (): prismicT.CustomTypeModelSharedSlice => {
+export const sharedSliceChoice = (): prismic.CustomTypeModelSharedSlice => {
 	return {
-		type: prismicT.CustomTypeModelSliceType.SharedSlice,
+		type: prismic.CustomTypeModelSliceType.SharedSlice,
 	};
 };

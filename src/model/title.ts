@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
@@ -9,7 +9,7 @@ export type MockTitleModelConfig = MockModelConfig;
 
 export const title = (
 	config: MockTitleModelConfig,
-): prismicT.CustomTypeModelTitleField => {
+): prismic.CustomTypeModelTitleField => {
 	const faker = config.faker || createFaker(config.seed);
 
 	const single = faker
@@ -24,7 +24,7 @@ export const title = (
 		.join(",");
 
 	return {
-		type: prismicT.CustomTypeModelFieldType.StructuredText,
+		type: prismic.CustomTypeModelFieldType.StructuredText,
 		config: {
 			label: changeCase.capitalCase(faker.word()),
 			placeholder: changeCase.sentenceCase(faker.words(3)),

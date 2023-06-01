@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 import * as changeCase from "change-case";
 
 import { createFaker } from "../../lib/createFaker";
@@ -23,7 +23,7 @@ type MockRichTextParagraphValueConfig = {
 
 export const paragraph = (
 	config: MockRichTextParagraphValueConfig,
-): prismicT.RTParagraphNode | undefined => {
+): prismic.RTParagraphNode | undefined => {
 	const faker = config.faker || createFaker(config.seed);
 
 	const patternKey =
@@ -37,7 +37,7 @@ export const paragraph = (
 	).join(" ");
 
 	return {
-		type: prismicT.RichTextNodeType.paragraph,
+		type: prismic.RichTextNodeType.paragraph,
 		text,
 		spans: [],
 	};

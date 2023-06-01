@@ -1,5 +1,5 @@
 import test from "ava";
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
@@ -26,7 +26,7 @@ test("can be configured for specific non-repeat and repeat fields", (t) => {
 
 	t.is(
 		actual["non-repeat"].boolean.type,
-		prismicT.CustomTypeModelFieldType.Boolean,
+		prismic.CustomTypeModelFieldType.Boolean,
 	);
-	t.is(actual.repeat.keyText.type, prismicT.CustomTypeModelFieldType.Text);
+	t.is(actual.repeat.keyText.type, prismic.CustomTypeModelFieldType.Text);
 });

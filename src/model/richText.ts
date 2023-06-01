@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
@@ -14,27 +14,27 @@ export type MockRichTextModelConfig<
 export const richText = <WithMultipleBlocks extends boolean = boolean>(
 	config: MockRichTextModelConfig<WithMultipleBlocks>,
 ): WithMultipleBlocks extends true
-	? prismicT.CustomTypeModelRichTextMultiField
-	: prismicT.CustomTypeModelRichTextSingleField => {
+	? prismic.CustomTypeModelRichTextMultiField
+	: prismic.CustomTypeModelRichTextSingleField => {
 	const faker = config.faker || createFaker(config.seed);
 
 	const blockTypes = faker
 		.randomElements([
-			prismicT.RichTextNodeType.heading1,
-			prismicT.RichTextNodeType.heading2,
-			prismicT.RichTextNodeType.heading3,
-			prismicT.RichTextNodeType.heading4,
-			prismicT.RichTextNodeType.heading5,
-			prismicT.RichTextNodeType.heading6,
-			prismicT.RichTextNodeType.paragraph,
-			prismicT.RichTextNodeType.preformatted,
-			prismicT.RichTextNodeType.strong,
-			prismicT.RichTextNodeType.em,
-			prismicT.RichTextNodeType.listItem,
-			prismicT.RichTextNodeType.oListItem,
-			prismicT.RichTextNodeType.image,
-			prismicT.RichTextNodeType.embed,
-			prismicT.RichTextNodeType.hyperlink,
+			prismic.RichTextNodeType.heading1,
+			prismic.RichTextNodeType.heading2,
+			prismic.RichTextNodeType.heading3,
+			prismic.RichTextNodeType.heading4,
+			prismic.RichTextNodeType.heading5,
+			prismic.RichTextNodeType.heading6,
+			prismic.RichTextNodeType.paragraph,
+			prismic.RichTextNodeType.preformatted,
+			prismic.RichTextNodeType.strong,
+			prismic.RichTextNodeType.em,
+			prismic.RichTextNodeType.listItem,
+			prismic.RichTextNodeType.oListItem,
+			prismic.RichTextNodeType.image,
+			prismic.RichTextNodeType.embed,
+			prismic.RichTextNodeType.hyperlink,
 		])
 		.join(",");
 
@@ -44,7 +44,7 @@ export const richText = <WithMultipleBlocks extends boolean = boolean>(
 			: { single: blockTypes };
 
 	return {
-		type: prismicT.CustomTypeModelFieldType.StructuredText,
+		type: prismic.CustomTypeModelFieldType.StructuredText,
 		config: {
 			label: changeCase.capitalCase(faker.word()),
 			placeholder: changeCase.sentenceCase(faker.words(3)),
@@ -52,6 +52,6 @@ export const richText = <WithMultipleBlocks extends boolean = boolean>(
 			...blockTypeConfig,
 		},
 	} as WithMultipleBlocks extends true
-		? prismicT.CustomTypeModelRichTextMultiField
-		: prismicT.CustomTypeModelRichTextSingleField;
+		? prismic.CustomTypeModelRichTextMultiField
+		: prismic.CustomTypeModelRichTextSingleField;
 };

@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { createFaker } from "../lib/createFaker";
 import {
@@ -11,8 +11,8 @@ import { MockValueConfig, MockValueStateConfig, ModelValue } from "../types";
 import * as modelGen from "../model";
 
 export type MockGroupValueConfig<
-	Model extends prismicT.CustomTypeModelGroupField = prismicT.CustomTypeModelGroupField,
-	State extends prismicT.FieldState = prismicT.FieldState,
+	Model extends prismic.CustomTypeModelGroupField = prismic.CustomTypeModelGroupField,
+	State extends prismic.FieldState = prismic.FieldState,
 > = {
 	itemsCount?: State extends "empty" ? 0 : number;
 	configs?: ValueForModelMapConfigs;
@@ -20,12 +20,12 @@ export type MockGroupValueConfig<
 	MockValueStateConfig<State>;
 
 export type MockGroupValue<
-	State extends prismicT.FieldState = prismicT.FieldState,
-> = prismicT.DateField<State>;
+	State extends prismic.FieldState = prismic.FieldState,
+> = prismic.DateField<State>;
 
 export const group = <
-	Model extends prismicT.CustomTypeModelGroupField = prismicT.CustomTypeModelGroupField,
-	State extends prismicT.FieldState = "filled",
+	Model extends prismic.CustomTypeModelGroupField = prismic.CustomTypeModelGroupField,
+	State extends prismic.FieldState = "filled",
 >(
 	config: MockGroupValueConfig<Model, State>,
 ): ModelValue<Model, State> => {

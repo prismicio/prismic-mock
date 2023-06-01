@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
@@ -8,20 +8,20 @@ import { MockRestApiConfig } from "../types";
 import { ref } from "./ref";
 
 export type MockRestApiRepositoryConfig = {
-	customTypeModels?: prismicT.CustomTypeModel[];
+	customTypeModels?: prismic.CustomTypeModel[];
 	withReleases?: boolean;
 } & MockRestApiConfig;
 
 export const repository = (
 	config: MockRestApiRepositoryConfig,
-): prismicT.Repository => {
+): prismic.Repository => {
 	const faker = config.faker || createFaker(config.seed);
 
 	const types = (config.customTypeModels || []).reduce((acc, model) => {
 		acc[model.id] = model.label || model.id;
 
 		return acc;
-	}, {} as prismicT.Repository["types"]);
+	}, {} as prismic.Repository["types"]);
 
 	return {
 		refs: [

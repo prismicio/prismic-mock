@@ -1,5 +1,5 @@
 import test from "ava";
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
@@ -57,6 +57,6 @@ test("can be configured for specific primary and items fields", (t) => {
 		},
 	});
 
-	t.is(actual.primary.boolean.type, prismicT.CustomTypeModelFieldType.Boolean);
-	t.is(actual.items.keyText.type, prismicT.CustomTypeModelFieldType.Text);
+	t.is(actual.primary.boolean.type, prismic.CustomTypeModelFieldType.Boolean);
+	t.is(actual.items.keyText.type, prismic.CustomTypeModelFieldType.Text);
 });

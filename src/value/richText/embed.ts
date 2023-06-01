@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { buildEmbedField } from "../../lib/buildEmbedField";
 import { createFaker } from "../../lib/createFaker";
@@ -10,14 +10,14 @@ type MockRichTextEmbedValueConfig = MockRichTextValueConfig;
 
 export const embed = (
 	config: MockRichTextEmbedValueConfig,
-): prismicT.RTEmbedNode | undefined => {
+): prismic.RTEmbedNode | undefined => {
 	const faker = config.faker || createFaker(config.seed);
 
 	const data = getMockEmbedData({ faker });
 	const embedField = buildEmbedField({ faker, data });
 
 	return {
-		type: prismicT.RichTextNodeType.embed,
+		type: prismic.RichTextNodeType.embed,
 		oembed: embedField,
 	};
 };

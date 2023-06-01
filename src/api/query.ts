@@ -1,11 +1,11 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { createFaker } from "../lib/createFaker";
 
 import { MockRestApiConfig } from "../types";
 
 export type MockRestApiQueryConfig<
-	Document extends prismicT.PrismicDocument = prismicT.PrismicDocument,
+	Document extends prismic.PrismicDocument = prismic.PrismicDocument,
 > = {
 	documents?: Document[];
 	page?: number;
@@ -13,10 +13,10 @@ export type MockRestApiQueryConfig<
 } & MockRestApiConfig;
 
 export const query = <
-	Document extends prismicT.PrismicDocument = prismicT.PrismicDocument,
+	Document extends prismic.PrismicDocument = prismic.PrismicDocument,
 >(
 	config: MockRestApiQueryConfig<Document>,
-): prismicT.Query<Document> => {
+): prismic.Query<Document> => {
 	const faker = config.faker || createFaker(config.seed);
 
 	const documents = config.documents || [];

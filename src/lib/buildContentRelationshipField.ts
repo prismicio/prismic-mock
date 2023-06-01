@@ -1,21 +1,21 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
-type BuildEmbedFieldConfig<Document extends prismicT.PrismicDocument> = {
+type BuildEmbedFieldConfig<Document extends prismic.PrismicDocument> = {
 	document: Document;
 };
 
 export const buildContentRelationshipField = <
-	Document extends prismicT.PrismicDocument,
+	Document extends prismic.PrismicDocument,
 >(
 	config: BuildEmbedFieldConfig<Document>,
-): prismicT.RelationField<
+): prismic.ContentRelationshipField<
 	Document["type"],
 	Document["lang"],
 	never,
 	"filled"
 > => {
 	return {
-		link_type: prismicT.LinkType.Document,
+		link_type: prismic.LinkType.Document,
 		id: config.document.id,
 		uid: config.document.uid || undefined,
 		type: config.document.type,

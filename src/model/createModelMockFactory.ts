@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { createFaker, Faker } from "../lib/createFaker";
 
@@ -20,10 +20,7 @@ import { embed, MockEmbedModelConfig } from "./embed";
 import { geoPoint, MockGeoPointModelConfig } from "./geoPoint";
 import { group, MockGroupModelConfig } from "./group";
 import { image, MockImageModelConfig } from "./image";
-import {
-	integrationFields,
-	MockIntegrationFieldsModelConfig,
-} from "./integrationFields";
+import { integration, MockIntegrationFieldModelConfig } from "./integration";
 import { keyText, MockKeyTextModelConfig } from "./keyText";
 import { link, MockLinkModelConfig } from "./link";
 import { linkToMedia, MockLinkToMediaModelConfig } from "./linkToMedia";
@@ -91,8 +88,8 @@ export class ModelMockFactory {
 
 	customType<
 		Definition extends
-			| prismicT.CustomTypeModelTab
-			| prismicT.CustomTypeModelDefinition,
+			| prismic.CustomTypeModelTab
+			| prismic.CustomTypeModelDefinition,
 	>(config?: WithoutFakerConfig<MockCustomTypeModelConfig<Definition>>) {
 		return customType({ ...config, faker: this.faker });
 	}
@@ -121,10 +118,8 @@ export class ModelMockFactory {
 		return image({ ...config, faker: this.faker });
 	}
 
-	integrationFields(
-		config?: WithoutFakerConfig<MockIntegrationFieldsModelConfig>,
-	) {
-		return integrationFields({ ...config, faker: this.faker });
+	integration(config?: WithoutFakerConfig<MockIntegrationFieldModelConfig>) {
+		return integration({ ...config, faker: this.faker });
 	}
 
 	keyText(config?: WithoutFakerConfig<MockKeyTextModelConfig>) {
@@ -157,7 +152,7 @@ export class ModelMockFactory {
 		return select({ ...config, faker: this.faker });
 	}
 
-	sharedSlice<Variation extends prismicT.SharedSliceModelVariation>(
+	sharedSlice<Variation extends prismic.SharedSliceModelVariation>(
 		config?: WithoutFakerConfig<MockSharedSliceModelConfig<Variation>>,
 	) {
 		return sharedSlice({ ...config, faker: this.faker });
@@ -193,7 +188,7 @@ export class ModelMockFactory {
 	sliceZone<
 		Slices extends Record<
 			string,
-			prismicT.CustomTypeModelSlice | prismicT.CustomTypeModelSharedSlice
+			prismic.CustomTypeModelSlice | prismic.CustomTypeModelSharedSlice
 		>,
 	>(config?: WithoutFakerConfig<MockSliceZoneModelConfig<Slices>>) {
 		return sliceZone({ ...config, faker: this.faker });

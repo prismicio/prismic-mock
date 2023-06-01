@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { buildEmbedField } from "../lib/buildEmbedField";
 import { createFaker } from "../lib/createFaker";
@@ -7,9 +7,9 @@ import { getMockEmbedData } from "../lib/getMockEmbedData";
 import { MockValueStateConfig, MockValueConfig } from "../types";
 
 export type MockEmbedValueConfig<
-	Model extends prismicT.CustomTypeModelEmbedField = prismicT.CustomTypeModelEmbedField,
-	Data extends prismicT.AnyOEmbed = prismicT.AnyOEmbed,
-	State extends prismicT.FieldState = prismicT.FieldState,
+	Model extends prismic.CustomTypeModelEmbedField = prismic.CustomTypeModelEmbedField,
+	Data extends prismic.AnyOEmbed = prismic.AnyOEmbed,
+	State extends prismic.FieldState = prismic.FieldState,
 > = {
 	url?: string;
 	html?: string;
@@ -18,14 +18,14 @@ export type MockEmbedValueConfig<
 	MockValueStateConfig<State>;
 
 export type MockEmbedValue<
-	Data extends prismicT.AnyOEmbed = prismicT.AnyOEmbed,
-	State extends prismicT.FieldState = prismicT.FieldState,
-> = prismicT.EmbedField<Data, State>;
+	Data extends prismic.AnyOEmbed = prismic.AnyOEmbed,
+	State extends prismic.FieldState = prismic.FieldState,
+> = prismic.EmbedField<Data, State>;
 
 export const embed = <
-	Model extends prismicT.CustomTypeModelEmbedField = prismicT.CustomTypeModelEmbedField,
-	Data extends prismicT.AnyOEmbed = prismicT.AnyOEmbed,
-	State extends prismicT.FieldState = "filled",
+	Model extends prismic.CustomTypeModelEmbedField = prismic.CustomTypeModelEmbedField,
+	Data extends prismic.AnyOEmbed = prismic.AnyOEmbed,
+	State extends prismic.FieldState = "filled",
 >(
 	config: MockEmbedValueConfig<Model, Data, State>,
 ): MockEmbedValue<Data, State> => {

@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { ModelValue, ModelValueMap, Seed } from "../types";
 import {
@@ -10,7 +10,7 @@ import {
 	MockGeoPointValueConfig,
 	MockGroupValueConfig,
 	MockImageValueConfig,
-	MockIntegrationFieldsValueConfig,
+	MockIntegrationFieldValueConfig,
 	MockKeyTextValueConfig,
 	MockLinkToMediaValueConfig,
 	MockLinkValueConfig,
@@ -26,49 +26,49 @@ import {
 import { valueForModel } from "./valueForModel";
 import { createFaker, Faker } from "./createFaker";
 
-const getValueConfigType = <Model extends prismicT.CustomTypeModelField>(
+const getValueConfigType = <Model extends prismic.CustomTypeModelField>(
 	model: Model,
 ): keyof ValueForModelMapConfigs => {
 	switch (model.type) {
-		case prismicT.CustomTypeModelFieldType.Boolean:
+		case prismic.CustomTypeModelFieldType.Boolean:
 			return "boolean";
 
-		case prismicT.CustomTypeModelFieldType.Color:
+		case prismic.CustomTypeModelFieldType.Color:
 			return "color";
 
-		case prismicT.CustomTypeModelFieldType.Date:
+		case prismic.CustomTypeModelFieldType.Date:
 			return "date";
 
-		case prismicT.CustomTypeModelFieldType.Embed:
+		case prismic.CustomTypeModelFieldType.Embed:
 			return "embed";
 
-		case prismicT.CustomTypeModelFieldType.GeoPoint:
+		case prismic.CustomTypeModelFieldType.GeoPoint:
 			return "geoPoint";
 
-		case prismicT.CustomTypeModelFieldType.Group:
+		case prismic.CustomTypeModelFieldType.Group:
 			return "group";
 
-		case prismicT.CustomTypeModelFieldType.Image:
+		case prismic.CustomTypeModelFieldType.Image:
 			return "image";
 
-		case prismicT.CustomTypeModelFieldType.Link: {
+		case prismic.CustomTypeModelFieldType.Link: {
 			switch (model.config?.select) {
-				case prismicT.CustomTypeModelLinkSelectType.Document:
+				case prismic.CustomTypeModelLinkSelectType.Document:
 					return "contentRelationship";
-				case prismicT.CustomTypeModelLinkSelectType.Media:
+				case prismic.CustomTypeModelLinkSelectType.Media:
 					return "linkToMedia";
 				default:
 					return "link";
 			}
 		}
 
-		case prismicT.CustomTypeModelFieldType.Number:
+		case prismic.CustomTypeModelFieldType.Number:
 			return "number";
 
-		case prismicT.CustomTypeModelFieldType.Select:
+		case prismic.CustomTypeModelFieldType.Select:
 			return "select";
 
-		case prismicT.CustomTypeModelFieldType.StructuredText: {
+		case prismic.CustomTypeModelFieldType.StructuredText: {
 			if (
 				model.config &&
 				"single" in model.config &&
@@ -83,19 +83,19 @@ const getValueConfigType = <Model extends prismicT.CustomTypeModelField>(
 			}
 		}
 
-		case prismicT.CustomTypeModelFieldType.Text:
+		case prismic.CustomTypeModelFieldType.Text:
 			return "keyText";
 
-		case prismicT.CustomTypeModelFieldType.Timestamp:
+		case prismic.CustomTypeModelFieldType.Timestamp:
 			return "timestamp";
 
-		case prismicT.CustomTypeModelFieldType.UID:
+		case prismic.CustomTypeModelFieldType.UID:
 			return "uid";
 
-		case prismicT.CustomTypeModelFieldType.IntegrationFields:
-			return "integrationFields";
+		case prismic.CustomTypeModelFieldType.IntegrationField:
+			return "integration";
 
-		case prismicT.CustomTypeModelFieldType.Slices:
+		case prismic.CustomTypeModelFieldType.Slices:
 			return "sliceZone";
 
 		default: {
@@ -115,7 +115,7 @@ export type ValueForModelMapConfigs = {
 	geoPoint?: MockGeoPointValueConfig;
 	group?: MockGroupValueConfig;
 	image?: MockImageValueConfig;
-	integrationFields?: MockIntegrationFieldsValueConfig;
+	integration?: MockIntegrationFieldValueConfig;
 	keyText?: MockKeyTextValueConfig;
 	link?: MockLinkValueConfig;
 	linkToMedia?: MockLinkToMediaValueConfig;
@@ -129,7 +129,7 @@ export type ValueForModelMapConfigs = {
 };
 
 type ValueForModelMapConfig<
-	ModelMap extends Record<string, prismicT.CustomTypeModelField>,
+	ModelMap extends Record<string, prismic.CustomTypeModelField>,
 > = {
 	map: ModelMap;
 	configs?: ValueForModelMapConfigs;
@@ -145,7 +145,7 @@ type ValueForModelMapConfig<
 );
 
 export const valueForModelMap = <
-	ModelMap extends Record<string, prismicT.CustomTypeModelField>,
+	ModelMap extends Record<string, prismic.CustomTypeModelField>,
 >(
 	config: ValueForModelMapConfig<ModelMap>,
 ): ModelValueMap<ModelMap> => {
@@ -160,7 +160,7 @@ export const valueForModelMap = <
 
 		result[fieldId] = valueForModel({
 			faker,
-			model: fieldModel as prismicT.CustomTypeModelField,
+			model: fieldModel as prismic.CustomTypeModelField,
 			config: fieldConfig,
 		}) as ModelValue<typeof fieldModel>;
 	}

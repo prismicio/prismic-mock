@@ -1,14 +1,14 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
-type BuildEmbedFieldConfig<Document extends prismicT.PrismicDocument> = {
+type BuildEmbedFieldConfig<Document extends prismic.PrismicDocument> = {
 	document: Document;
 };
 
 export const buildAlternativeLanguage = <
-	Document extends prismicT.PrismicDocument,
+	Document extends prismic.PrismicDocument,
 >(
 	config: BuildEmbedFieldConfig<Document>,
-): prismicT.AlternateLanguage<Document["type"], Document["lang"]> => {
+): prismic.AlternateLanguage<Document["type"], Document["lang"]> => {
 	return {
 		id: config.document.id,
 		type: config.document.type,

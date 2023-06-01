@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 import * as changeCase from "change-case";
 
 import { createFaker } from "../../lib/createFaker";
@@ -23,7 +23,7 @@ type MockRichTextPreformattedValueConfig = {
 
 export const preformatted = (
 	config: MockRichTextPreformattedValueConfig,
-): prismicT.RTPreformattedNode | undefined => {
+): prismic.RTPreformattedNode | undefined => {
 	const faker = config.faker || createFaker(config.seed);
 
 	const patternKey =
@@ -38,7 +38,7 @@ export const preformatted = (
 	).join(" ");
 
 	return {
-		type: prismicT.RichTextNodeType.preformatted,
+		type: prismic.RichTextNodeType.preformatted,
 		text,
 		spans: [],
 	};

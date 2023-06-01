@@ -1,4 +1,4 @@
-import * as prismicT from "@prismicio/types";
+import * as prismic from "@prismicio/client";
 
 import { createFaker } from "../lib/createFaker";
 
@@ -10,9 +10,9 @@ import { contentRelationship } from "./contentRelationship";
 import { linkToMedia } from "./linkToMedia";
 
 export type MockLinkValueConfig<
-	LinkType extends typeof prismicT.LinkType[keyof typeof prismicT.LinkType] = typeof prismicT.LinkType[keyof typeof prismicT.LinkType],
-	Model extends prismicT.CustomTypeModelLinkField = prismicT.CustomTypeModelLinkField,
-	State extends prismicT.FieldState = prismicT.FieldState,
+	LinkType extends (typeof prismic.LinkType)[keyof typeof prismic.LinkType] = (typeof prismic.LinkType)[keyof typeof prismic.LinkType],
+	Model extends prismic.CustomTypeModelLinkField = prismic.CustomTypeModelLinkField,
+	State extends prismic.FieldState = prismic.FieldState,
 > = {
 	type?: LinkType;
 	withTargetBlank?: NonNullable<
@@ -23,29 +23,29 @@ export type MockLinkValueConfig<
 	/**
 	 * A list of potential documents to which the field can be linked.
 	 */
-	linkableDocuments?: LinkType extends typeof prismicT.LinkType.Document
-		? prismicT.PrismicDocument[]
+	linkableDocuments?: LinkType extends typeof prismic.LinkType.Document
+		? prismic.PrismicDocument[]
 		: never;
 } & MockValueConfig<Model> &
 	MockValueStateConfig<State>;
 
 type MockLinkValue<
-	LinkType extends typeof prismicT.LinkType[keyof typeof prismicT.LinkType] = typeof prismicT.LinkType[keyof typeof prismicT.LinkType],
-	State extends prismicT.FieldState = "filled",
+	LinkType extends (typeof prismic.LinkType)[keyof typeof prismic.LinkType] = (typeof prismic.LinkType)[keyof typeof prismic.LinkType],
+	State extends prismic.FieldState = "filled",
 > = State extends "empty"
-	? prismicT.EmptyLinkField<LinkType>
-	: LinkType extends typeof prismicT.LinkType.Web
-	? prismicT.FilledLinkToWebField
-	: LinkType extends typeof prismicT.LinkType.Media
-	? prismicT.FilledLinkToMediaField
-	: LinkType extends typeof prismicT.LinkType.Document
-	? prismicT.FilledLinkToDocumentField
+	? prismic.EmptyLinkField<LinkType>
+	: LinkType extends typeof prismic.LinkType.Web
+	? prismic.FilledLinkToWebField
+	: LinkType extends typeof prismic.LinkType.Media
+	? prismic.FilledLinkToMediaField
+	: LinkType extends typeof prismic.LinkType.Document
+	? prismic.FilledLinkToDocumentField
 	: never;
 
 export const link = <
-	LinkType extends typeof prismicT.LinkType[keyof typeof prismicT.LinkType] = typeof prismicT.LinkType[keyof typeof prismicT.LinkType],
-	Model extends prismicT.CustomTypeModelLinkField = prismicT.CustomTypeModelLinkField,
-	State extends prismicT.FieldState = "filled",
+	LinkType extends (typeof prismic.LinkType)[keyof typeof prismic.LinkType] = (typeof prismic.LinkType)[keyof typeof prismic.LinkType],
+	Model extends prismic.CustomTypeModelLinkField = prismic.CustomTypeModelLinkField,
+	State extends prismic.FieldState = "filled",
 >(
 	config: MockLinkValueConfig<LinkType, Model, State>,
 ): MockLinkValue<LinkType, State> => {
@@ -54,9 +54,9 @@ export const link = <
 	const type =
 		config.type ||
 		faker.randomElement([
-			prismicT.LinkType.Web,
-			prismicT.LinkType.Document,
-			prismicT.LinkType.Media,
+			prismic.LinkType.Web,
+			prismic.LinkType.Document,
+			prismic.LinkType.Media,
 		]);
 
 	if (config.state === "empty") {
@@ -65,7 +65,7 @@ export const link = <
 		} as MockLinkValue<LinkType, State>;
 	} else {
 		switch (type) {
-			case prismicT.LinkType.Document: {
+			case prismic.LinkType.Document: {
 				return contentRelationship({
 					faker,
 					state: config.state,
@@ -73,19 +73,19 @@ export const link = <
 				}) as unknown as MockLinkValue<LinkType, State>;
 			}
 
-			case prismicT.LinkType.Media: {
+			case prismic.LinkType.Media: {
 				return linkToMedia({
 					faker,
 					state: config.state,
 				}) as MockLinkValue<LinkType, State>;
 			}
 
-			case prismicT.LinkType.Web:
+			case prismic.LinkType.Web:
 			default: {
 				const model = config.model || modelGen.link({ faker });
 
 				return {
-					link_type: prismicT.LinkType.Web,
+					link_type: prismic.LinkType.Web,
 					url: faker.url(),
 					target:
 						config.withTargetBlank ??
