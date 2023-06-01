@@ -8,7 +8,7 @@ export const buildContentRelationshipField = <
 	Document extends prismic.PrismicDocument,
 >(
 	config: BuildEmbedFieldConfig<Document>,
-): prismic.RelationField<
+): prismic.ContentRelationshipField<
 	Document["type"],
 	Document["lang"],
 	never,

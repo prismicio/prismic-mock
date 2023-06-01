@@ -29,7 +29,7 @@ export type MockContentRelationshipValueConfig<
 type MockContentRelationshipValue<
 	Model extends prismic.CustomTypeModelContentRelationshipField = prismic.CustomTypeModelContentRelationshipField,
 	State extends prismic.FieldState = prismic.FieldState,
-> = prismic.RelationField<
+> = prismic.ContentRelationshipField<
 	IterableElement<NonNullable<Model["config"]>["customtypes"]>,
 	string,
 	never,

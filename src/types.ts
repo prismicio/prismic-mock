@@ -235,7 +235,7 @@ type CustomTypeModelFieldForGroupValue<
 	: T extends prismic.CustomTypeModelLinkToMediaField
 	? prismic.LinkToMediaField<State>
 	: T extends prismic.CustomTypeModelContentRelationshipField
-	? prismic.RelationField<string, string, never, State>
+	? prismic.ContentRelationshipField<string, string, never, State>
 	: T extends prismic.CustomTypeModelDateField
 	? prismic.DateField<State>
 	: T extends prismic.CustomTypeModelTimestampField
