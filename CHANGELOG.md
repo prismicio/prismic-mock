@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/prismicio/prismic-mock/compare/v0.2.0...v0.3.0) (2023-06-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* replace `@prismicio/types` with `@prismicio/client` (#14)
+
+### Features
+
+* replace `@prismicio/types` with `@prismicio/client` ([#14](https://github.com/prismicio/prismic-mock/issues/14)) ([72340a7](https://github.com/prismicio/prismic-mock/commit/72340a74100d53a045ba6e1960c8da28913ec220))
+
+
+### Chore
+
+* update `package-lock.json` ([18e4054](https://github.com/prismicio/prismic-mock/commit/18e4054851a24da5f9af9b8fb116c5ae672bd999))
+
 ## [0.2.0](https://github.com/prismicio/prismic-mock/compare/v0.1.1...v0.2.0) (2022-12-19)
 
 
