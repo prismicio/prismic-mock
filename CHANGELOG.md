@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/prismicio/prismic-mock/compare/v0.3.0...v0.3.1) (2023-06-13)
+
+
+### Bug Fixes
+
+* restore types ([#15](https://github.com/prismicio/prismic-mock/issues/15)) ([bd7620f](https://github.com/prismicio/prismic-mock/commit/bd7620f7f86bd73969ab7e844bc90e1852a0e3df))
+
 ## [0.3.0](https://github.com/prismicio/prismic-mock/compare/v0.2.0...v0.3.0) (2023-06-01)
 
 
