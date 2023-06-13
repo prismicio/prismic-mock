@@ -32,5 +32,5 @@ test("supports custom model", (t) => {
 
 	const actual = value.select({ seed, model: customModel });
 
-	t.true(customModel.config.options.includes(actual));
+	t.true(customModel.config?.options?.includes(actual));
 });

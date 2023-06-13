@@ -18,14 +18,19 @@ test("supports custom model", (t) => {
 		seed: t.title,
 		withMultipleBlocks: false,
 	});
-	customModel.config.single = "paragraph";
+	if (customModel.config) {
+		customModel.config.single = "paragraph";
+	}
 
 	const actual = value.richText({
 		seed: t.title,
 		model: customModel,
 	});
 
-	t.is(actual[0].type, customModel.config.single);
+	t.is(
+		actual[0]?.type,
+		customModel.config?.single as (typeof actual)[number]["type"],
+	);
 });
 
 test("models without multiple blocks returns one block", (t) => {
@@ -33,7 +38,9 @@ test("models without multiple blocks returns one block", (t) => {
 		seed: t.title,
 		withMultipleBlocks: false,
 	});
-	customModel.config.single = "paragraph";
+	if (customModel.config) {
+		customModel.config.single = "paragraph";
+	}
 
 	const actual = value.richText({
 		seed: t.title,

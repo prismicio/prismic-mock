@@ -22,7 +22,7 @@ test("can be configured for specific fields", (t) => {
 	});
 
 	t.is(
-		actual.config.fields.boolean.type,
+		actual.config?.fields?.boolean.type,
 		prismic.CustomTypeModelFieldType.Boolean,
 	);
 });

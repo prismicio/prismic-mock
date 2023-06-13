@@ -19,7 +19,7 @@ test("can be configured for a specific options", (t) => {
 		options,
 	});
 
-	t.is(actual.config.options, options);
+	t.is(actual.config?.options, options);
 });
 
 test("can be configured for a specific default value", (t) => {
@@ -29,5 +29,5 @@ test("can be configured for a specific default value", (t) => {
 		defaultValue: "foo",
 	});
 
-	t.is(actual.config.default_value, "foo");
+	t.is(actual.config?.default_value, "foo");
 });

@@ -23,5 +23,5 @@ test("can be configured to use specific choices", (t) => {
 		choices,
 	});
 
-	t.deepEqual(actual.config.choices, choices);
+	t.deepEqual(actual.config?.choices, choices);
 });

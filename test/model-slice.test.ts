@@ -25,8 +25,8 @@ test("can be configured for specific non-repeat and repeat fields", (t) => {
 	});
 
 	t.is(
-		actual["non-repeat"].boolean.type,
+		actual["non-repeat"]?.boolean.type,
 		prismic.CustomTypeModelFieldType.Boolean,
 	);
-	t.is(actual.repeat.keyText.type, prismic.CustomTypeModelFieldType.Text);
+	t.is(actual.repeat?.keyText.type, prismic.CustomTypeModelFieldType.Text);
 });

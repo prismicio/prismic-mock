@@ -178,18 +178,18 @@ export type ModelValue<
 	: T extends prismic.CustomTypeModelSliceZoneField
 	? prismic.SliceZone<
 			ValueOf<{
-				[P in keyof NonNullable<T["config"]>["choices"] as P extends string
-					? P
-					: never]: NonNullable<
-					T["config"]
-				>["choices"][P] extends prismic.CustomTypeModelSlice
+				[P in keyof NonNullable<
+					NonNullable<T["config"]>["choices"]
+				> as P extends string ? P : never]: NonNullable<
+					NonNullable<T["config"]>["choices"]
+				>[P] extends prismic.CustomTypeModelSlice
 					? CustomTypeModelSliceValue<
-							NonNullable<T["config"]>["choices"][P],
+							NonNullable<NonNullable<T["config"]>["choices"]>[P],
 							P extends string ? P : string
 					  >
 					: NonNullable<
-							T["config"]
-					  >["choices"][P] extends prismic.CustomTypeModelSharedSlice
+							NonNullable<T["config"]>["choices"]
+					  >[P] extends prismic.CustomTypeModelSharedSlice
 					? prismic.SharedSlice<P extends string ? P : string>
 					: never;
 			}>,
