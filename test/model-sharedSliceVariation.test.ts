@@ -57,6 +57,6 @@ test("can be configured for specific primary and items fields", (t) => {
 		},
 	});
 
-	t.is(actual.primary.boolean.type, prismic.CustomTypeModelFieldType.Boolean);
-	t.is(actual.items.keyText.type, prismic.CustomTypeModelFieldType.Text);
+	t.is(actual.primary?.boolean.type, prismic.CustomTypeModelFieldType.Boolean);
+	t.is(actual.items?.keyText.type, prismic.CustomTypeModelFieldType.Text);
 });

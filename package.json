@@ -53,7 +53,8 @@
 		"release:alpha:dry": "standard-version --release-as major --prerelease alpha --dry-run",
 		"release:dry": "standard-version --dry-run",
 		"size": "size-limit",
-		"test": "npm run lint && npm run unit && npm run build && npm run size",
+		"test": "npm run lint && npm run types && npm run unit && npm run build && npm run size",
+		"types": "tsc --noEmit",
 		"unit": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava"
 	},
 	"dependencies": {
@@ -62,6 +63,7 @@
 	"devDependencies": {
 		"@prismicio/client": "^7.0.1",
 		"@size-limit/preset-small-lib": "^8.2.4",
+		"@types/node": "^20.3.0",
 		"@typescript-eslint/eslint-plugin": "^5.59.8",
 		"@typescript-eslint/parser": "^5.59.8",
 		"ava": "^5.3.0",

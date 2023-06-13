@@ -39,7 +39,7 @@ type MockLinkValue<
 	: LinkType extends typeof prismic.LinkType.Media
 	? prismic.FilledLinkToMediaField
 	: LinkType extends typeof prismic.LinkType.Document
-	? prismic.FilledLinkToDocumentField
+	? prismic.FilledContentRelationshipField
 	: never;
 
 export const link = <

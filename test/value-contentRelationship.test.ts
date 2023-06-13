@@ -28,10 +28,10 @@ test("supports custom model", (t) => {
 	});
 
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	t.true(customModel.config.customtypes!.includes(actual.type));
+	t.true(customModel.config?.customtypes!.includes(actual.type));
 
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	t.true(customModel.config.tags!.every((tag) => actual.tags.includes(tag)));
+	t.true(customModel.config?.tags!.every((tag) => actual.tags.includes(tag)));
 });
 
 test("can be configured to return an empty value", (t) => {
@@ -67,8 +67,10 @@ test("can be configured to return a link from a given list of documents with con
 	];
 
 	const customModel = model.contentRelationship({ seed: t.title });
-	customModel.config.customtypes = ["foo"];
-	customModel.config.tags = ["bar"];
+	if (customModel.config) {
+		customModel.config.customtypes = ["foo"];
+		customModel.config.tags = ["bar"];
+	}
 
 	const actual = value.contentRelationship({
 		seed: t.title,
@@ -89,8 +91,10 @@ test("throws if a linkable document cannot be found within constraints", (t) => 
 	];
 
 	const customModel = model.contentRelationship({ seed: t.title });
-	customModel.config.customtypes = ["foo"];
-	customModel.config.tags = ["bar"];
+	if (customModel.config) {
+		customModel.config.customtypes = ["foo"];
+		customModel.config.tags = ["bar"];
+	}
 
 	t.throws(
 		() =>

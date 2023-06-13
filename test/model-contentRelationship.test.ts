@@ -21,7 +21,7 @@ test("can be configured to constrain by custom type", (t) => {
 		customTypeIDs,
 	});
 
-	t.is(actual.config.customtypes, customTypeIDs);
+	t.is(actual.config?.customtypes, customTypeIDs);
 });
 
 test("can be configured to constrain by tags", (t) => {
@@ -31,5 +31,5 @@ test("can be configured to constrain by tags", (t) => {
 		tags,
 	});
 
-	t.is(actual.config.tags, tags);
+	t.is(actual.config?.tags, tags);
 });

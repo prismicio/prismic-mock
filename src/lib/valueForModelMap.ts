@@ -92,7 +92,7 @@ const getValueConfigType = <Model extends prismic.CustomTypeModelField>(
 		case prismic.CustomTypeModelFieldType.UID:
 			return "uid";
 
-		case prismic.CustomTypeModelFieldType.IntegrationField:
+		case prismic.CustomTypeModelFieldType.Integration:
 			return "integration";
 
 		case prismic.CustomTypeModelFieldType.Slices:
