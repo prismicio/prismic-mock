@@ -61,7 +61,7 @@
 		"change-case": "^4.1.2"
 	},
 	"devDependencies": {
-		"@prismicio/client": "^7.0.1",
+		"@prismicio/client": "^7.4.0",
 		"@size-limit/preset-small-lib": "^8.2.4",
 		"@types/node": "^20.3.0",
 		"@typescript-eslint/eslint-plugin": "^5.59.8",

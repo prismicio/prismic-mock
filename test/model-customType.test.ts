@@ -36,3 +36,12 @@ test("can be configured for specific tabs", (t) => {
 
 	t.is(actual.json.Main.boolean.type, prismic.CustomTypeModelFieldType.Boolean);
 });
+
+test("can be configured for a specific format", (t) => {
+	const actual = prismicM.model.customType({
+		seed: t.title,
+		format: "page",
+	});
+
+	t.is(actual.format, "page");
+});
