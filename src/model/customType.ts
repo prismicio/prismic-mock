@@ -16,6 +16,7 @@ export type MockCustomTypeModelConfig<
 	label?: string;
 	status?: boolean;
 	repeatable?: boolean;
+	format?: prismic.CustomTypeModel["format"];
 } & (
 	| {
 			fields?: Definition;
@@ -57,6 +58,8 @@ export const customType = <
 		id = changeCase.snakeCase(config.label);
 	}
 
+	const format = config.format ?? faker.randomElement(["page", "custom"]);
+
 	let json = {} as MockCustomTypeModel<Definition>["json"];
 
 	if ("fields" in config && config.fields) {
@@ -70,6 +73,7 @@ export const customType = <
 		label,
 		status: config.status ?? faker.boolean(),
 		repeatable: config.repeatable ?? faker.boolean(),
+		format,
 		json,
 	} as MockCustomTypeModel<Definition>;
 };
