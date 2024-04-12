@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.2](https://github.com/prismicio/prismic-mock/compare/v0.3.1...v0.3.2) (2024-04-12)
+
+
+### Features
+
+* support `format` option in custom type models ([#16](https://github.com/prismicio/prismic-mock/issues/16)) ([3b72c7f](https://github.com/prismicio/prismic-mock/commit/3b72c7f9883aedd98cc7f7631d699ec1c8330857))
+
+
+### Chore
+
+* **deps:** update dependencies ([#17](https://github.com/prismicio/prismic-mock/issues/17)) ([ca0b3da](https://github.com/prismicio/prismic-mock/commit/ca0b3da5d4188bde0d2ec7311890e63b48763b53))
+
 ### [0.3.1](https://github.com/prismicio/prismic-mock/compare/v0.3.0...v0.3.1) (2023-06-13)
 
 
