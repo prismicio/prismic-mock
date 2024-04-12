@@ -47,7 +47,8 @@ const generators = {
 };
 
 export type MockRichTextValueConfig<
-	Model extends prismic.CustomTypeModelRichTextField = prismic.CustomTypeModelRichTextField,
+	Model extends
+		prismic.CustomTypeModelRichTextField = prismic.CustomTypeModelRichTextField,
 	State extends prismic.FieldState = prismic.FieldState,
 > = {
 	pattern?: keyof typeof patterns;
@@ -59,7 +60,8 @@ export type MockRichTextValue<
 > = prismic.RichTextField<State>;
 
 export const richText = <
-	Model extends prismic.CustomTypeModelRichTextField = prismic.CustomTypeModelRichTextField,
+	Model extends
+		prismic.CustomTypeModelRichTextField = prismic.CustomTypeModelRichTextField,
 	State extends prismic.FieldState = prismic.FieldState,
 >(
 	config: MockRichTextValueConfig<Model, State>,

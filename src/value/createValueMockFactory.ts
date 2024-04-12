@@ -67,14 +67,16 @@ export class ValueMockFactory {
 	}
 
 	color<
-		Model extends prismic.CustomTypeModelColorField = prismic.CustomTypeModelColorField,
+		Model extends
+			prismic.CustomTypeModelColorField = prismic.CustomTypeModelColorField,
 		State extends prismic.FieldState = "filled",
 	>(config?: WithoutFakerConfig<MockColorValueConfig<Model, State>>) {
 		return color({ ...config, faker: this.faker });
 	}
 
 	contentRelationship<
-		Model extends prismic.CustomTypeModelContentRelationshipField = prismic.CustomTypeModelContentRelationshipField,
+		Model extends
+			prismic.CustomTypeModelContentRelationshipField = prismic.CustomTypeModelContentRelationshipField,
 		State extends prismic.FieldState = "filled",
 	>(
 		config?: WithoutFakerConfig<
@@ -91,7 +93,8 @@ export class ValueMockFactory {
 	}
 
 	date<
-		Model extends prismic.CustomTypeModelDateField = prismic.CustomTypeModelDateField,
+		Model extends
+			prismic.CustomTypeModelDateField = prismic.CustomTypeModelDateField,
 		State extends prismic.FieldState = "filled",
 	>(config?: WithoutFakerConfig<MockDateValueConfig<Model, State>>) {
 		return date({ ...config, faker: this.faker });
@@ -104,7 +107,8 @@ export class ValueMockFactory {
 	}
 
 	embed<
-		Model extends prismic.CustomTypeModelEmbedField = prismic.CustomTypeModelEmbedField,
+		Model extends
+			prismic.CustomTypeModelEmbedField = prismic.CustomTypeModelEmbedField,
 		Data extends prismic.AnyOEmbed = prismic.AnyOEmbed,
 		State extends prismic.FieldState = "filled",
 	>(config?: WithoutFakerConfig<MockEmbedValueConfig<Model, Data, State>>) {
@@ -112,28 +116,32 @@ export class ValueMockFactory {
 	}
 
 	geoPoint<
-		Model extends prismic.CustomTypeModelGeoPointField = prismic.CustomTypeModelGeoPointField,
+		Model extends
+			prismic.CustomTypeModelGeoPointField = prismic.CustomTypeModelGeoPointField,
 		State extends prismic.FieldState = "filled",
 	>(config?: WithoutFakerConfig<MockGeoPointValueConfig<Model, State>>) {
 		return geoPoint({ ...config, faker: this.faker });
 	}
 
 	group<
-		Model extends prismic.CustomTypeModelGroupField = prismic.CustomTypeModelGroupField,
+		Model extends
+			prismic.CustomTypeModelGroupField = prismic.CustomTypeModelGroupField,
 		State extends prismic.FieldState = "filled",
 	>(config?: WithoutFakerConfig<MockGroupValueConfig<Model, State>>) {
 		return group({ ...config, faker: this.faker });
 	}
 
 	image<
-		Model extends prismic.CustomTypeModelImageField = prismic.CustomTypeModelImageField,
+		Model extends
+			prismic.CustomTypeModelImageField = prismic.CustomTypeModelImageField,
 		State extends prismic.FieldState = "filled",
 	>(config?: WithoutFakerConfig<MockImageValueConfig<Model, State>>) {
 		return image({ ...config, faker: this.faker });
 	}
 
 	integration<
-		Model extends prismic.CustomTypeModelIntegrationField = prismic.CustomTypeModelIntegrationField,
+		Model extends
+			prismic.CustomTypeModelIntegrationField = prismic.CustomTypeModelIntegrationField,
 		Data extends Record<string, unknown> = Record<string, unknown>,
 		State extends prismic.FieldState = "filled",
 	>(
@@ -145,36 +153,42 @@ export class ValueMockFactory {
 	}
 
 	keyText<
-		Model extends prismic.CustomTypeModelKeyTextField = prismic.CustomTypeModelKeyTextField,
+		Model extends
+			prismic.CustomTypeModelKeyTextField = prismic.CustomTypeModelKeyTextField,
 		State extends prismic.FieldState = "filled",
 	>(config?: WithoutFakerConfig<MockKeyTextValueConfig<Model, State>>) {
 		return keyText({ ...config, faker: this.faker });
 	}
 
 	link<
-		LinkType extends (typeof prismic.LinkType)[keyof typeof prismic.LinkType] = (typeof prismic.LinkType)[keyof typeof prismic.LinkType],
-		Model extends prismic.CustomTypeModelLinkField = prismic.CustomTypeModelLinkField,
+		LinkType extends
+			(typeof prismic.LinkType)[keyof typeof prismic.LinkType] = (typeof prismic.LinkType)[keyof typeof prismic.LinkType],
+		Model extends
+			prismic.CustomTypeModelLinkField = prismic.CustomTypeModelLinkField,
 		State extends prismic.FieldState = "filled",
 	>(config?: WithoutFakerConfig<MockLinkValueConfig<LinkType, Model, State>>) {
 		return link({ ...config, faker: this.faker });
 	}
 
 	linkToMedia<
-		Model extends prismic.CustomTypeModelLinkToMediaField = prismic.CustomTypeModelLinkToMediaField,
+		Model extends
+			prismic.CustomTypeModelLinkToMediaField = prismic.CustomTypeModelLinkToMediaField,
 		State extends prismic.FieldState = "filled",
 	>(config?: WithoutFakerConfig<MockLinkToMediaValueConfig<Model, State>>) {
 		return linkToMedia({ ...config, faker: this.faker });
 	}
 
 	number<
-		Model extends prismic.CustomTypeModelNumberField = prismic.CustomTypeModelNumberField,
+		Model extends
+			prismic.CustomTypeModelNumberField = prismic.CustomTypeModelNumberField,
 		State extends prismic.FieldState = "filled",
 	>(config?: WithoutFakerConfig<MockNumberValueConfig<Model, State>>) {
 		return number({ ...config, faker: this.faker });
 	}
 
 	select<
-		Model extends prismic.CustomTypeModelSelectField = prismic.CustomTypeModelSelectField,
+		Model extends
+			prismic.CustomTypeModelSelectField = prismic.CustomTypeModelSelectField,
 		State extends prismic.FieldState = "filled",
 	>(config?: WithoutFakerConfig<MockSelectValueConfig<Model, State>>) {
 		return select({ ...config, faker: this.faker });
@@ -187,7 +201,8 @@ export class ValueMockFactory {
 	}
 
 	sharedSliceVariation<
-		Model extends prismic.SharedSliceModelVariation = prismic.SharedSliceModelVariation,
+		Model extends
+			prismic.SharedSliceModelVariation = prismic.SharedSliceModelVariation,
 	>(config?: WithoutFakerConfig<MockSharedSliceVariationValueConfig<Model>>) {
 		return sharedSliceVariation({ ...config, faker: this.faker });
 	}
@@ -199,34 +214,39 @@ export class ValueMockFactory {
 	}
 
 	sliceZone<
-		Model extends prismic.CustomTypeModelSliceZoneField = prismic.CustomTypeModelSliceZoneField,
+		Model extends
+			prismic.CustomTypeModelSliceZoneField = prismic.CustomTypeModelSliceZoneField,
 		State extends prismic.FieldState = "filled",
 	>(config?: WithoutFakerConfig<MockSliceZoneValueConfig<Model, State>>) {
 		return sliceZone({ ...config, faker: this.faker });
 	}
 
 	timestamp<
-		Model extends prismic.CustomTypeModelTimestampField = prismic.CustomTypeModelTimestampField,
+		Model extends
+			prismic.CustomTypeModelTimestampField = prismic.CustomTypeModelTimestampField,
 		State extends prismic.FieldState = "filled",
 	>(config?: WithoutFakerConfig<MockTimestampValueConfig<Model, State>>) {
 		return timestamp({ ...config, faker: this.faker });
 	}
 
 	title<
-		Model extends prismic.CustomTypeModelTitleField = prismic.CustomTypeModelTitleField,
+		Model extends
+			prismic.CustomTypeModelTitleField = prismic.CustomTypeModelTitleField,
 		State extends prismic.FieldState = "filled",
 	>(config?: WithoutFakerConfig<MockTitleValueConfig<Model, State>>) {
 		return title({ ...config, faker: this.faker });
 	}
 
 	uid<
-		Model extends prismic.CustomTypeModelUIDField = prismic.CustomTypeModelUIDField,
+		Model extends
+			prismic.CustomTypeModelUIDField = prismic.CustomTypeModelUIDField,
 	>(config?: WithoutFakerConfig<MockUIDValueConfig<Model>>) {
 		return uid({ ...config, faker: this.faker });
 	}
 
 	richText<
-		Model extends prismic.CustomTypeModelRichTextField = prismic.CustomTypeModelRichTextField,
+		Model extends
+			prismic.CustomTypeModelRichTextField = prismic.CustomTypeModelRichTextField,
 	>(config?: WithoutFakerConfig<MockRichTextValueConfig<Model>>) {
 		return richText({ ...config, faker: this.faker });
 	}

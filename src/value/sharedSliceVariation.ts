@@ -12,7 +12,8 @@ import {
 import * as modelGen from "../model";
 
 export type MockSharedSliceVariationValueConfig<
-	Model extends prismic.SharedSliceModelVariation = prismic.SharedSliceModelVariation,
+	Model extends
+		prismic.SharedSliceModelVariation = prismic.SharedSliceModelVariation,
 > = {
 	type?: string;
 	label?: string;
@@ -22,7 +23,8 @@ export type MockSharedSliceVariationValueConfig<
 } & MockValueConfig<Model>;
 
 export const sharedSliceVariation = <
-	Model extends prismic.SharedSliceModelVariation = prismic.SharedSliceModelVariation,
+	Model extends
+		prismic.SharedSliceModelVariation = prismic.SharedSliceModelVariation,
 >(
 	config: MockSharedSliceVariationValueConfig<Model>,
 ): ModelValue<Model> => {

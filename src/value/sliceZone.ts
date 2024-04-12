@@ -11,7 +11,8 @@ import { slice } from "./slice";
 import { sharedSlice } from "./sharedSlice";
 
 export type MockSliceZoneValueConfig<
-	Model extends prismic.CustomTypeModelSliceZoneField = prismic.CustomTypeModelSliceZoneField,
+	Model extends
+		prismic.CustomTypeModelSliceZoneField = prismic.CustomTypeModelSliceZoneField,
 	State extends prismic.FieldState = prismic.FieldState,
 > = {
 	sharedSliceModels?: prismic.SharedSliceModel[];
@@ -22,7 +23,8 @@ export type MockSliceZoneValueConfig<
 	MockValueStateConfig<State>;
 
 export const sliceZone = <
-	Model extends prismic.CustomTypeModelSliceZoneField = prismic.CustomTypeModelSliceZoneField,
+	Model extends
+		prismic.CustomTypeModelSliceZoneField = prismic.CustomTypeModelSliceZoneField,
 	State extends prismic.FieldState = prismic.FieldState,
 >(
 	config: MockSliceZoneValueConfig<Model, State>,

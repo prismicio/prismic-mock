@@ -7,7 +7,8 @@ import { MockValueConfig, MockValueStateConfig } from "../types";
 import { heading, MockRichTextHeadingValueConfig } from "./richText/heading";
 
 export type MockTitleValueConfig<
-	Model extends prismic.CustomTypeModelTitleField = prismic.CustomTypeModelTitleField,
+	Model extends
+		prismic.CustomTypeModelTitleField = prismic.CustomTypeModelTitleField,
 	State extends prismic.FieldState = prismic.FieldState,
 > = {
 	pattern?: MockRichTextHeadingValueConfig["pattern"];
@@ -19,7 +20,8 @@ export type MockTitleValue<
 > = prismic.TitleField<State>;
 
 export const title = <
-	Model extends prismic.CustomTypeModelTitleField = prismic.CustomTypeModelTitleField,
+	Model extends
+		prismic.CustomTypeModelTitleField = prismic.CustomTypeModelTitleField,
 	State extends prismic.FieldState = "filled",
 >(
 	config: MockTitleValueConfig<Model, State>,

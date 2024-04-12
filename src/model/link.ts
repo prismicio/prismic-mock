@@ -10,10 +10,10 @@ export type MockLinkModel<AllowTargetBlank extends boolean = boolean> =
 		config: AllowTargetBlank extends true
 			? {
 					allowTargetBlank: true;
-			  }
+				}
 			: {
 					allowTargetBlank?: undefined;
-			  };
+				};
 	};
 
 export type MockLinkModelConfig<AllowTargetBlank extends boolean = boolean> = {

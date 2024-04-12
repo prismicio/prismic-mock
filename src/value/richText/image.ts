@@ -21,10 +21,12 @@ export const image = (
 	});
 
 	return {
+		id: faker.hash(7),
 		type: prismic.RichTextNodeType.image,
 		alt: imageField.alt,
 		url: imageField.url,
 		copyright: imageField.copyright,
 		dimensions: imageField.dimensions,
+		edit: imageField.edit,
 	};
 };

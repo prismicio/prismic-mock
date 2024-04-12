@@ -36,8 +36,8 @@ type MockCustomTypeModel<
 > = Definition extends prismic.CustomTypeModelTab
 	? prismic.CustomTypeModel<string, Record<"Main", Definition>>
 	: Definition extends prismic.CustomTypeModelDefinition
-	? prismic.CustomTypeModel<string, Definition>
-	: never;
+		? prismic.CustomTypeModel<string, Definition>
+		: never;
 
 export const customType = <
 	Definition extends

@@ -10,8 +10,10 @@ import { contentRelationship } from "./contentRelationship";
 import { linkToMedia } from "./linkToMedia";
 
 export type MockLinkValueConfig<
-	LinkType extends (typeof prismic.LinkType)[keyof typeof prismic.LinkType] = (typeof prismic.LinkType)[keyof typeof prismic.LinkType],
-	Model extends prismic.CustomTypeModelLinkField = prismic.CustomTypeModelLinkField,
+	LinkType extends
+		(typeof prismic.LinkType)[keyof typeof prismic.LinkType] = (typeof prismic.LinkType)[keyof typeof prismic.LinkType],
+	Model extends
+		prismic.CustomTypeModelLinkField = prismic.CustomTypeModelLinkField,
 	State extends prismic.FieldState = prismic.FieldState,
 > = {
 	type?: LinkType;
@@ -30,21 +32,24 @@ export type MockLinkValueConfig<
 	MockValueStateConfig<State>;
 
 type MockLinkValue<
-	LinkType extends (typeof prismic.LinkType)[keyof typeof prismic.LinkType] = (typeof prismic.LinkType)[keyof typeof prismic.LinkType],
+	LinkType extends
+		(typeof prismic.LinkType)[keyof typeof prismic.LinkType] = (typeof prismic.LinkType)[keyof typeof prismic.LinkType],
 	State extends prismic.FieldState = "filled",
 > = State extends "empty"
 	? prismic.EmptyLinkField<LinkType>
 	: LinkType extends typeof prismic.LinkType.Web
-	? prismic.FilledLinkToWebField
-	: LinkType extends typeof prismic.LinkType.Media
-	? prismic.FilledLinkToMediaField
-	: LinkType extends typeof prismic.LinkType.Document
-	? prismic.FilledContentRelationshipField
-	: never;
+		? prismic.FilledLinkToWebField
+		: LinkType extends typeof prismic.LinkType.Media
+			? prismic.FilledLinkToMediaField
+			: LinkType extends typeof prismic.LinkType.Document
+				? prismic.FilledContentRelationshipField
+				: never;
 
 export const link = <
-	LinkType extends (typeof prismic.LinkType)[keyof typeof prismic.LinkType] = (typeof prismic.LinkType)[keyof typeof prismic.LinkType],
-	Model extends prismic.CustomTypeModelLinkField = prismic.CustomTypeModelLinkField,
+	LinkType extends
+		(typeof prismic.LinkType)[keyof typeof prismic.LinkType] = (typeof prismic.LinkType)[keyof typeof prismic.LinkType],
+	Model extends
+		prismic.CustomTypeModelLinkField = prismic.CustomTypeModelLinkField,
 	State extends prismic.FieldState = "filled",
 >(
 	config: MockLinkValueConfig<LinkType, Model, State>,

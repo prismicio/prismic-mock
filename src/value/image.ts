@@ -1,4 +1,5 @@
-import * as prismic from "@prismicio/client";
+import type * as prismic from "@prismicio/client";
+import { type ImageField } from "@prismicio/client";
 
 import { buildImageFieldImage } from "../lib/buildImageFieldImage";
 import { createFaker } from "../lib/createFaker";
@@ -9,12 +10,14 @@ import { MockValueStateConfig, MockValueConfig } from "../types";
 import * as modelGen from "../model";
 
 export type MockImageValueConfig<
-	Model extends prismic.CustomTypeModelImageField = prismic.CustomTypeModelImageField,
+	Model extends
+		prismic.CustomTypeModelImageField = prismic.CustomTypeModelImageField,
 	State extends prismic.FieldState = prismic.FieldState,
 > = MockValueConfig<Model> & MockValueStateConfig<State>;
 
 export type MockImageValue<
-	Model extends prismic.CustomTypeModelImageField = prismic.CustomTypeModelImageField,
+	Model extends
+		prismic.CustomTypeModelImageField = prismic.CustomTypeModelImageField,
 	State extends prismic.FieldState = prismic.FieldState,
 > = prismic.ImageField<
 	NonNullable<NonNullable<Model["config"]>["thumbnails"]>[number]["name"],
@@ -22,11 +25,15 @@ export type MockImageValue<
 >;
 
 export const image = <
-	Model extends prismic.CustomTypeModelImageField = prismic.CustomTypeModelImageField,
+	Model extends
+		prismic.CustomTypeModelImageField = prismic.CustomTypeModelImageField,
 	State extends prismic.FieldState = "filled",
 >(
 	config: MockImageValueConfig<Model, State>,
-): MockImageValue<Model, State> => {
+): ImageField<
+	NonNullable<NonNullable<Model["config"]>["thumbnails"]>[number]["name"],
+	State
+> => {
 	const faker = config.faker || createFaker(config.seed);
 
 	const model = config.model || modelGen.image({ faker });

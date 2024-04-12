@@ -1,7 +1,7 @@
 {
 	"plugins": ["prettier-plugin-jsdoc"],
 	"jsdocSeparateReturnsFromParam": true,
-	"jsdocSingleLineComment": false,
+	"jsdocCommentLineStrategy": "multiline",
 	"tsdoc": true,
 	"printWidth": 80,
 	"useTabs": true,

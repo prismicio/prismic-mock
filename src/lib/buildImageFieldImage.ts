@@ -55,6 +55,12 @@ export const buildImageFieldImage = <
 			dimensions,
 			alt: changeCase.sentenceCase(faker.words(faker.range(5, 15))),
 			copyright: changeCase.sentenceCase(faker.words(faker.range(5, 15))),
+			edit: {
+				x: faker.range(-dimensions.width / 2, dimensions.width / 2),
+				y: faker.range(-dimensions.width / 2, dimensions.height / 2),
+				zoom: faker.rangeFloat(1, 2),
+				background: faker.hexColor(),
+			},
 		} as prismic.ImageFieldImage<State>;
 	}
 };

@@ -5,7 +5,8 @@ import { createFaker } from "../lib/createFaker";
 import { MockValueStateConfig, MockValueConfig } from "../types";
 
 export type MockColorValueConfig<
-	Model extends prismic.CustomTypeModelColorField = prismic.CustomTypeModelColorField,
+	Model extends
+		prismic.CustomTypeModelColorField = prismic.CustomTypeModelColorField,
 	State extends prismic.FieldState = prismic.FieldState,
 > = MockValueConfig<Model> & MockValueStateConfig<State>;
 
@@ -14,7 +15,8 @@ export type MockColorValue<
 > = prismic.ColorField<State>;
 
 export const color = <
-	Model extends prismic.CustomTypeModelColorField = prismic.CustomTypeModelColorField,
+	Model extends
+		prismic.CustomTypeModelColorField = prismic.CustomTypeModelColorField,
 	State extends prismic.FieldState = "filled",
 >(
 	config: MockColorValueConfig<Model, State>,

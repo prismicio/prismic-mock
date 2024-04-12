@@ -7,7 +7,8 @@ import { getMockEmbedData } from "../lib/getMockEmbedData";
 import { MockValueStateConfig, MockValueConfig } from "../types";
 
 export type MockEmbedValueConfig<
-	Model extends prismic.CustomTypeModelEmbedField = prismic.CustomTypeModelEmbedField,
+	Model extends
+		prismic.CustomTypeModelEmbedField = prismic.CustomTypeModelEmbedField,
 	Data extends prismic.AnyOEmbed = prismic.AnyOEmbed,
 	State extends prismic.FieldState = prismic.FieldState,
 > = {
@@ -23,7 +24,8 @@ export type MockEmbedValue<
 > = prismic.EmbedField<Data, State>;
 
 export const embed = <
-	Model extends prismic.CustomTypeModelEmbedField = prismic.CustomTypeModelEmbedField,
+	Model extends
+		prismic.CustomTypeModelEmbedField = prismic.CustomTypeModelEmbedField,
 	Data extends prismic.AnyOEmbed = prismic.AnyOEmbed,
 	State extends prismic.FieldState = "filled",
 >(
@@ -41,6 +43,6 @@ export const embed = <
 					url: config.url ?? ("embed_url" in data ? data.embed_url : undefined),
 					html: config.html ?? ("html" in data ? data.html : undefined),
 					data,
-			  })
+				})
 	) as MockEmbedValue<Data, State>;
 };
