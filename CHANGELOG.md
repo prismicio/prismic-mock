@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.3](https://github.com/prismicio/prismic-mock/compare/v0.3.2...v0.3.3) (2024-04-12)
+
+
+### Bug Fixes
+
+* prevent erroneous `d.ts` files ([b150d95](https://github.com/prismicio/prismic-mock/commit/b150d95a91457b819b0b170a2eb29afd8a14fdca))
+
 ### [0.3.2](https://github.com/prismicio/prismic-mock/compare/v0.3.1...v0.3.2) (2024-04-12)
 
 
