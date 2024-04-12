@@ -5,7 +5,8 @@ import { createFaker } from "../lib/createFaker";
 import { MockValueStateConfig, MockValueConfig } from "../types";
 
 export type MockNumberValueConfig<
-	Model extends prismic.CustomTypeModelNumberField = prismic.CustomTypeModelNumberField,
+	Model extends
+		prismic.CustomTypeModelNumberField = prismic.CustomTypeModelNumberField,
 	State extends prismic.FieldState = prismic.FieldState,
 > = MockValueConfig<Model> & MockValueStateConfig<State>;
 
@@ -14,7 +15,8 @@ export type MockNumberValue<
 > = prismic.NumberField<State>;
 
 export const number = <
-	Model extends prismic.CustomTypeModelNumberField = prismic.CustomTypeModelNumberField,
+	Model extends
+		prismic.CustomTypeModelNumberField = prismic.CustomTypeModelNumberField,
 	State extends prismic.FieldState = "filled",
 >(
 	config: MockNumberValueConfig<Model, State>,

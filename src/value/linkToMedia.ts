@@ -6,7 +6,8 @@ import { createFaker } from "../lib/createFaker";
 import { MockValueStateConfig, MockValueConfig } from "../types";
 
 export type MockLinkToMediaValueConfig<
-	Model extends prismic.CustomTypeModelLinkToMediaField = prismic.CustomTypeModelLinkToMediaField,
+	Model extends
+		prismic.CustomTypeModelLinkToMediaField = prismic.CustomTypeModelLinkToMediaField,
 	State extends prismic.FieldState = prismic.FieldState,
 > = MockValueConfig<Model> & MockValueStateConfig<State>;
 
@@ -15,7 +16,8 @@ type MockLinkToMediaValue<
 > = prismic.LinkToMediaField<State>;
 
 export const linkToMedia = <
-	Model extends prismic.CustomTypeModelLinkToMediaField = prismic.CustomTypeModelLinkToMediaField,
+	Model extends
+		prismic.CustomTypeModelLinkToMediaField = prismic.CustomTypeModelLinkToMediaField,
 	State extends prismic.FieldState = "filled",
 >(
 	config: MockLinkToMediaValueConfig<Model, State>,

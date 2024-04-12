@@ -11,7 +11,8 @@ import { MockValueConfig, MockValueStateConfig, ModelValue } from "../types";
 import * as modelGen from "../model";
 
 export type MockGroupValueConfig<
-	Model extends prismic.CustomTypeModelGroupField = prismic.CustomTypeModelGroupField,
+	Model extends
+		prismic.CustomTypeModelGroupField = prismic.CustomTypeModelGroupField,
 	State extends prismic.FieldState = prismic.FieldState,
 > = {
 	itemsCount?: State extends "empty" ? 0 : number;
@@ -24,7 +25,8 @@ export type MockGroupValue<
 > = prismic.DateField<State>;
 
 export const group = <
-	Model extends prismic.CustomTypeModelGroupField = prismic.CustomTypeModelGroupField,
+	Model extends
+		prismic.CustomTypeModelGroupField = prismic.CustomTypeModelGroupField,
 	State extends prismic.FieldState = "filled",
 >(
 	config: MockGroupValueConfig<Model, State>,

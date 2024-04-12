@@ -3,7 +3,8 @@ import * as prismic from "@prismicio/client";
 import { MockValueStateConfig, MockValueConfig } from "../types";
 
 export type MockIntegrationFieldValueConfig<
-	Model extends prismic.CustomTypeModelIntegrationField = prismic.CustomTypeModelIntegrationField,
+	Model extends
+		prismic.CustomTypeModelIntegrationField = prismic.CustomTypeModelIntegrationField,
 	Data extends Record<string, unknown> = Record<string, unknown>,
 	State extends prismic.FieldState = prismic.FieldState,
 > = {
@@ -17,7 +18,8 @@ export type MockIntegrationFieldValue<
 > = prismic.IntegrationField<Data, State>;
 
 export const integration = <
-	Model extends prismic.CustomTypeModelIntegrationField = prismic.CustomTypeModelIntegrationField,
+	Model extends
+		prismic.CustomTypeModelIntegrationField = prismic.CustomTypeModelIntegrationField,
 	Data extends Record<string, unknown> = Record<string, unknown>,
 	State extends prismic.FieldState = "filled",
 >(

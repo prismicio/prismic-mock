@@ -6,7 +6,8 @@ import { createFaker } from "../lib/createFaker";
 import { MockValueStateConfig, MockValueConfig } from "../types";
 
 export type MockKeyTextValueConfig<
-	Model extends prismic.CustomTypeModelKeyTextField = prismic.CustomTypeModelKeyTextField,
+	Model extends
+		prismic.CustomTypeModelKeyTextField = prismic.CustomTypeModelKeyTextField,
 	State extends prismic.FieldState = prismic.FieldState,
 > = MockValueConfig<Model> & MockValueStateConfig<State>;
 
@@ -15,7 +16,8 @@ export type MockKeyTextValue<
 > = prismic.KeyTextField<State>;
 
 export const keyText = <
-	Model extends prismic.CustomTypeModelKeyTextField = prismic.CustomTypeModelKeyTextField,
+	Model extends
+		prismic.CustomTypeModelKeyTextField = prismic.CustomTypeModelKeyTextField,
 	State extends prismic.FieldState = "filled",
 >(
 	config: MockKeyTextValueConfig<Model, State>,

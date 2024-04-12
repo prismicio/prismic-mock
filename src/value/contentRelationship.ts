@@ -16,7 +16,8 @@ import * as modelGen from "../model";
 import { document as documentGen } from "./document";
 
 export type MockContentRelationshipValueConfig<
-	Model extends prismic.CustomTypeModelContentRelationshipField = prismic.CustomTypeModelContentRelationshipField,
+	Model extends
+		prismic.CustomTypeModelContentRelationshipField = prismic.CustomTypeModelContentRelationshipField,
 	State extends prismic.FieldState = prismic.FieldState,
 > = {
 	/**
@@ -27,7 +28,8 @@ export type MockContentRelationshipValueConfig<
 	MockValueStateConfig<State>;
 
 type MockContentRelationshipValue<
-	Model extends prismic.CustomTypeModelContentRelationshipField = prismic.CustomTypeModelContentRelationshipField,
+	Model extends
+		prismic.CustomTypeModelContentRelationshipField = prismic.CustomTypeModelContentRelationshipField,
 	State extends prismic.FieldState = prismic.FieldState,
 > = prismic.ContentRelationshipField<
 	IterableElement<NonNullable<Model["config"]>["customtypes"]>,
@@ -37,7 +39,8 @@ type MockContentRelationshipValue<
 >;
 
 export const contentRelationship = <
-	Model extends prismic.CustomTypeModelContentRelationshipField = prismic.CustomTypeModelContentRelationshipField,
+	Model extends
+		prismic.CustomTypeModelContentRelationshipField = prismic.CustomTypeModelContentRelationshipField,
 	State extends prismic.FieldState = "filled",
 >(
 	config: MockContentRelationshipValueConfig<Model, State>,
@@ -74,7 +77,7 @@ export const contentRelationship = <
 
 						return shouldKeep;
 					},
-			  )
+				)
 			: [
 					{
 						...documentGen({ faker }),
@@ -88,7 +91,7 @@ export const contentRelationship = <
 						never,
 						NonNullable<NonNullable<Model["config"]>["customtypes"]>[number]
 					>,
-			  ];
+				];
 
 		const document = faker.randomElement(linkableDocuments);
 

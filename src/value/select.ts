@@ -7,12 +7,14 @@ import { MockValueStateConfig, MockValueConfig } from "../types";
 import * as modelGen from "../model";
 
 export type MockSelectValueConfig<
-	Model extends prismic.CustomTypeModelSelectField = prismic.CustomTypeModelSelectField,
+	Model extends
+		prismic.CustomTypeModelSelectField = prismic.CustomTypeModelSelectField,
 	State extends prismic.FieldState = prismic.FieldState,
 > = MockValueConfig<Model> & MockValueStateConfig<State>;
 
 export type MockSelectValue<
-	Model extends prismic.CustomTypeModelSelectField = prismic.CustomTypeModelSelectField,
+	Model extends
+		prismic.CustomTypeModelSelectField = prismic.CustomTypeModelSelectField,
 	State extends prismic.FieldState = prismic.FieldState,
 > = prismic.SelectField<
 	NonNullable<NonNullable<Model["config"]>["options"]>[number],
@@ -20,7 +22,8 @@ export type MockSelectValue<
 >;
 
 export const select = <
-	Model extends prismic.CustomTypeModelSelectField = prismic.CustomTypeModelSelectField,
+	Model extends
+		prismic.CustomTypeModelSelectField = prismic.CustomTypeModelSelectField,
 	State extends prismic.FieldState = "filled",
 >(
 	config: MockSelectValueConfig<Model, State>,

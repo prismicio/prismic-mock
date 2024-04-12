@@ -5,7 +5,8 @@ import { createFaker } from "../lib/createFaker";
 import { MockValueStateConfig, MockValueConfig } from "../types";
 
 export type MockTimestampValueConfig<
-	Model extends prismic.CustomTypeModelTimestampField = prismic.CustomTypeModelTimestampField,
+	Model extends
+		prismic.CustomTypeModelTimestampField = prismic.CustomTypeModelTimestampField,
 	State extends prismic.FieldState = prismic.FieldState,
 > = {
 	after?: Date;
@@ -18,7 +19,8 @@ export type MockTimestampValue<
 > = prismic.TimestampField<State>;
 
 export const timestamp = <
-	Model extends prismic.CustomTypeModelTimestampField = prismic.CustomTypeModelTimestampField,
+	Model extends
+		prismic.CustomTypeModelTimestampField = prismic.CustomTypeModelTimestampField,
 	State extends prismic.FieldState = "filled",
 >(
 	config: MockTimestampValueConfig<Model, State>,

@@ -17,11 +17,14 @@ export const repository = (
 ): prismic.Repository => {
 	const faker = config.faker || createFaker(config.seed);
 
-	const types = (config.customTypeModels || []).reduce((acc, model) => {
-		acc[model.id] = model.label || model.id;
+	const types = (config.customTypeModels || []).reduce(
+		(acc, model) => {
+			acc[model.id] = model.label || model.id;
 
-		return acc;
-	}, {} as prismic.Repository["types"]);
+			return acc;
+		},
+		{} as prismic.Repository["types"],
+	);
 
 	return {
 		refs: [
