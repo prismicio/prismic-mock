@@ -16,7 +16,7 @@ import { document, MockDocumentValueConfig } from "./document";
 import { embed, MockEmbedValueConfig } from "./embed";
 import { geoPoint, MockGeoPointValueConfig } from "./geoPoint";
 import { group, MockGroupValueConfig } from "./group";
-import { image, MockImageValueConfig } from "./image";
+import { image, MockImageValue, MockImageValueConfig } from "./image";
 import { integration, MockIntegrationFieldValueConfig } from "./integration";
 import { keyText, MockKeyTextValueConfig } from "./keyText";
 import { link, MockLinkValueConfig } from "./link";
@@ -135,7 +135,9 @@ export class ValueMockFactory {
 		Model extends
 			prismic.CustomTypeModelImageField = prismic.CustomTypeModelImageField,
 		State extends prismic.FieldState = "filled",
-	>(config?: WithoutFakerConfig<MockImageValueConfig<Model, State>>) {
+	>(
+		config?: WithoutFakerConfig<MockImageValueConfig<Model, State>>,
+	): MockImageValue<Model, State> {
 		return image({ ...config, faker: this.faker });
 	}
 
