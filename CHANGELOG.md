@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.4](https://github.com/prismicio/prismic-mock/compare/v0.3.3...v0.3.4) (2024-04-13)
+
+
+### Bug Fixes
+
+* bundle `change-case` ([#18](https://github.com/prismicio/prismic-mock/issues/18)) ([269dc79](https://github.com/prismicio/prismic-mock/commit/269dc794ed213db201f32a2befff4b24a2c2ffe8))
+
 ### [0.3.3](https://github.com/prismicio/prismic-mock/compare/v0.3.2...v0.3.3) (2024-04-12)
 
 
