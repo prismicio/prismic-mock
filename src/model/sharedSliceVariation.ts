@@ -4,11 +4,15 @@ import * as changeCase from "change-case";
 import { createFaker } from "../lib/createFaker";
 import { getMockImageData } from "../lib/getMockImageData";
 
-import { GroupFieldModelMap, MockModelConfig } from "../types";
+import {
+	GroupFieldModelMap,
+	MockModelConfig,
+	SlicePrimaryFieldModelMap,
+} from "../types";
 
 export type MockSharedSliceVariationModelConfig<
 	ID extends string = string,
-	PrimaryFields extends GroupFieldModelMap = GroupFieldModelMap,
+	PrimaryFields extends SlicePrimaryFieldModelMap = SlicePrimaryFieldModelMap,
 	ItemsFields extends GroupFieldModelMap = GroupFieldModelMap,
 > = {
 	id?: ID;
@@ -19,7 +23,7 @@ export type MockSharedSliceVariationModelConfig<
 
 export const sharedSliceVariation = <
 	ID extends string,
-	PrimaryFields extends GroupFieldModelMap,
+	PrimaryFields extends SlicePrimaryFieldModelMap,
 	ItemsFields extends GroupFieldModelMap,
 >(
 	config: MockSharedSliceVariationModelConfig<ID, PrimaryFields, ItemsFields>,

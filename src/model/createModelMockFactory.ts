@@ -2,7 +2,12 @@ import * as prismic from "@prismicio/client";
 
 import { createFaker, Faker } from "../lib/createFaker";
 
-import { GroupFieldModelMap, Seed, WithoutFakerConfig } from "../types";
+import {
+	GroupFieldModelMap,
+	Seed,
+	SlicePrimaryFieldModelMap,
+	WithoutFakerConfig,
+} from "../types";
 
 import { boolean, MockBooleanModelConfig } from "./boolean";
 import {
@@ -164,7 +169,7 @@ export class ModelMockFactory {
 
 	sharedSliceVariation<
 		ID extends string,
-		PrimaryFields extends GroupFieldModelMap,
+		PrimaryFields extends SlicePrimaryFieldModelMap,
 		ItemsFields extends GroupFieldModelMap,
 	>(
 		config?: WithoutFakerConfig<
