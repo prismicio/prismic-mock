@@ -78,6 +78,11 @@ export type GroupFieldModelMap = Record<
 	prismic.CustomTypeModelFieldForGroup
 >;
 
+export type SlicePrimaryFieldModelMap = Record<
+	string,
+	prismic.CustomTypeModelFieldForSlicePrimary
+>;
+
 export type MockValueConfig<Model extends PrismicModel = PrismicModel> = {
 	model?: Model;
 } & (

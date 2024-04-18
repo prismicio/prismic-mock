@@ -20,6 +20,12 @@ test("supports custom model", (t) => {
 		seed: t.title,
 		primaryFields: {
 			boolean: model.boolean({ seed: t.title }),
+			group: model.group({
+				seed: t.title,
+				fields: {
+					boolean: model.boolean({ seed: t.title }),
+				},
+			}),
 		},
 		itemsFields: {
 			keyText: model.keyText({ seed: t.title }),
@@ -32,6 +38,10 @@ test("supports custom model", (t) => {
 	});
 
 	t.is(typeof actual.primary.boolean, "boolean");
+	t.is(Array.isArray(actual.primary.group), true);
+	for (const item of actual.primary.group) {
+		t.is(typeof item.boolean, "boolean");
+	}
 
 	for (const item of actual.items) {
 		t.is(typeof item.keyText, "string");

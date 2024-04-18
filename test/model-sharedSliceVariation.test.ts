@@ -51,6 +51,12 @@ test("can be configured for specific primary and items fields", (t) => {
 		seed: t.title,
 		primaryFields: {
 			boolean: prismicM.model.boolean({ seed: t.title }),
+			group: prismicM.model.group({
+				seed: t.title,
+				fields: {
+					boolean: prismicM.model.boolean({ seed: t.title }),
+				},
+			}),
 		},
 		itemsFields: {
 			keyText: prismicM.model.keyText({ seed: t.title }),
@@ -58,5 +64,10 @@ test("can be configured for specific primary and items fields", (t) => {
 	});
 
 	t.is(actual.primary?.boolean.type, prismic.CustomTypeModelFieldType.Boolean);
+	t.is(actual.primary?.group.type, prismic.CustomTypeModelFieldType.Group);
+	t.is(
+		actual.primary?.group.config?.fields?.boolean.type,
+		prismic.CustomTypeModelFieldType.Boolean,
+	);
 	t.is(actual.items?.keyText.type, prismic.CustomTypeModelFieldType.Text);
 });
