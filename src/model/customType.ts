@@ -33,11 +33,13 @@ type MockCustomTypeModel<
 	Definition extends
 		| prismic.CustomTypeModelTab
 		| prismic.CustomTypeModelDefinition,
-> = Definition extends prismic.CustomTypeModelTab
+> = (Definition extends prismic.CustomTypeModelTab
 	? prismic.CustomTypeModel<string, Record<"Main", Definition>>
 	: Definition extends prismic.CustomTypeModelDefinition
 		? prismic.CustomTypeModel<string, Definition>
-		: never;
+		: never) & {
+	label: NonNullable<prismic.CustomTypeModel["label"]>;
+};
 
 export const customType = <
 	Definition extends
@@ -60,7 +62,7 @@ export const customType = <
 
 	const format = config.format ?? faker.randomElement(["page", "custom"]);
 
-	let json = {} as MockCustomTypeModel<Definition>["json"];
+	let json = {} as prismic.CustomTypeModelDefinition;
 
 	if ("fields" in config && config.fields) {
 		json = { Main: config.fields } as typeof json;
