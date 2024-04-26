@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.6](https://github.com/prismicio/prismic-mock/compare/v0.3.5...v0.3.6) (2024-04-26)
+
+
+### Bug Fixes
+
+* treat a custom type model's `label` property as non-nullable ([#20](https://github.com/prismicio/prismic-mock/issues/20)) ([4f7fddd](https://github.com/prismicio/prismic-mock/commit/4f7fdddf908b338d77441d3676df85f43761531c))
+
 ### [0.3.5](https://github.com/prismicio/prismic-mock/compare/v0.3.4...v0.3.5) (2024-04-18)
 
 
