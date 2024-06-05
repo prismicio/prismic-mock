@@ -32,6 +32,31 @@ test("supports custom model", (t) => {
 	}
 });
 
+test("supports nested groups", (t) => {
+	const customModel = model.group({
+		seed: t.title,
+		fields: {
+			group: model.group({
+				seed: t.title,
+				fields: {
+					boolean: model.boolean({ seed: t.title }),
+				},
+			}),
+		},
+	});
+
+	const actual = value.group({
+		seed: t.title,
+		model: customModel,
+	});
+
+	for (const item of actual) {
+		for (const nestedItem of item.group) {
+			t.is(typeof nestedItem.boolean, "boolean");
+		}
+	}
+});
+
 test("can be customized with a specific number of items", (t) => {
 	const actual = value.group({
 		seed: t.title,
