@@ -5,15 +5,15 @@ import { createFaker } from "../lib/createFaker";
 import { getMockImageData } from "../lib/getMockImageData";
 
 import {
-	GroupFieldModelMap,
 	MockModelConfig,
+	NestedGroupFieldModelMap,
 	SlicePrimaryFieldModelMap,
 } from "../types";
 
 export type MockSharedSliceVariationModelConfig<
 	ID extends string = string,
 	PrimaryFields extends SlicePrimaryFieldModelMap = SlicePrimaryFieldModelMap,
-	ItemsFields extends GroupFieldModelMap = GroupFieldModelMap,
+	ItemsFields extends NestedGroupFieldModelMap = NestedGroupFieldModelMap,
 > = {
 	id?: ID;
 	name?: string;
@@ -24,7 +24,7 @@ export type MockSharedSliceVariationModelConfig<
 export const sharedSliceVariation = <
 	ID extends string,
 	PrimaryFields extends SlicePrimaryFieldModelMap,
-	ItemsFields extends GroupFieldModelMap,
+	ItemsFields extends NestedGroupFieldModelMap,
 >(
 	config: MockSharedSliceVariationModelConfig<ID, PrimaryFields, ItemsFields>,
 ): prismic.SharedSliceModelVariation<ID, PrimaryFields, ItemsFields> => {

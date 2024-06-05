@@ -3,19 +3,19 @@ import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
 
-import { GroupFieldModelMap, MockModelConfig } from "../types";
+import { MockModelConfig, NestedGroupFieldModelMap } from "../types";
 
 export type MockSliceModelConfig<
-	NonRepeatFields extends GroupFieldModelMap = GroupFieldModelMap,
-	RepeatFields extends GroupFieldModelMap = GroupFieldModelMap,
+	NonRepeatFields extends NestedGroupFieldModelMap = NestedGroupFieldModelMap,
+	RepeatFields extends NestedGroupFieldModelMap = NestedGroupFieldModelMap,
 > = {
 	nonRepeatFields?: NonRepeatFields;
 	repeatFields?: RepeatFields;
 } & MockModelConfig;
 
 export const slice = <
-	NonRepeatFields extends GroupFieldModelMap,
-	RepeatFields extends GroupFieldModelMap,
+	NonRepeatFields extends NestedGroupFieldModelMap,
+	RepeatFields extends NestedGroupFieldModelMap,
 >(
 	config: MockSliceModelConfig<NonRepeatFields, RepeatFields>,
 ): prismic.CustomTypeModelSlice<NonRepeatFields, RepeatFields> => {

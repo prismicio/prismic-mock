@@ -78,6 +78,11 @@ export type GroupFieldModelMap = Record<
 	prismic.CustomTypeModelFieldForGroup
 >;
 
+export type NestedGroupFieldModelMap = Record<
+	string,
+	prismic.CustomTypeModelFieldForNestedGroup
+>;
+
 export type SlicePrimaryFieldModelMap = Record<
 	string,
 	prismic.CustomTypeModelFieldForSlicePrimary
