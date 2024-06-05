@@ -1,4 +1,4 @@
-import { GroupFieldModelMap, MockModelConfig, ValueOf } from "../types";
+import { MockModelConfig, NestedGroupFieldModelMap, ValueOf } from "../types";
 
 import { boolean } from "../model/boolean";
 import { color } from "../model/color";
@@ -43,10 +43,10 @@ export type BuildMockGroupFieldMapConfig = MockModelConfig;
 
 export const buildMockGroupFieldMap = (
 	config: BuildMockGroupFieldMapConfig,
-): GroupFieldModelMap => {
+): NestedGroupFieldModelMap => {
 	const faker = config.faker || createFaker(config.seed);
 
-	const fields: GroupFieldModelMap = {};
+	const fields: NestedGroupFieldModelMap = {};
 
 	const fieldTypes = faker.randomElements(
 		Object.keys(mockModelFns) as (keyof typeof mockModelFns)[],
@@ -56,7 +56,7 @@ export const buildMockGroupFieldMap = (
 		const fieldId = generateFieldId({ faker });
 		const mockModelFn = mockModelFns[fieldType] as (
 			config: MockModelConfig,
-		) => ValueOf<GroupFieldModelMap>;
+		) => ValueOf<NestedGroupFieldModelMap>;
 
 		fields[fieldId] = mockModelFn({ faker });
 	}
