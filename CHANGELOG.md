@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.7-alpha.0](https://github.com/prismicio/prismic-mock/compare/v0.3.6...v0.3.7-alpha.0) (2024-06-05)
+
+
+### Features
+
+* support groups in groups ([42b0811](https://github.com/prismicio/prismic-mock/commit/42b081195a1e56d0cdaaa9b29958d27401aa300d))
+
+
+### Bug Fixes
+
+* use correct group type ([72b9a39](https://github.com/prismicio/prismic-mock/commit/72b9a3975c87ad1f9ca845a40f4a27d9e81e3b9c))
+
+
+### Chore
+
+* relese alpha as patch ([c7cb3d8](https://github.com/prismicio/prismic-mock/commit/c7cb3d8c1af9347cb8482d47a09a423880fca09a))
+
 ### [0.3.6](https://github.com/prismicio/prismic-mock/compare/v0.3.5...v0.3.6) (2024-04-26)
 
 
