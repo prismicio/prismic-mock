@@ -26,6 +26,6 @@ test("can be configured to return a date after and before given dates", (t) => {
 		before: new Date("1984-01-01T00:00:00.000Z"),
 	});
 
-	// Interval is [after, before]
+	// Interval is [before, after]
 	t.is(actual, "1984-01-01");
 });
