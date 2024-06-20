@@ -4,6 +4,7 @@ import { createFaker, Faker } from "../lib/createFaker";
 
 import {
 	GroupFieldModelMap,
+	NestedGroupFieldModelMap,
 	Seed,
 	SlicePrimaryFieldModelMap,
 	WithoutFakerConfig,
@@ -170,7 +171,7 @@ export class ModelMockFactory {
 	sharedSliceVariation<
 		ID extends string,
 		PrimaryFields extends SlicePrimaryFieldModelMap,
-		ItemsFields extends GroupFieldModelMap,
+		ItemsFields extends NestedGroupFieldModelMap,
 	>(
 		config?: WithoutFakerConfig<
 			MockSharedSliceVariationModelConfig<ID, PrimaryFields, ItemsFields>
@@ -180,8 +181,8 @@ export class ModelMockFactory {
 	}
 
 	slice<
-		NonRepeatFields extends GroupFieldModelMap,
-		RepeatFields extends GroupFieldModelMap,
+		NonRepeatFields extends NestedGroupFieldModelMap,
+		RepeatFields extends NestedGroupFieldModelMap,
 	>(
 		config?: WithoutFakerConfig<
 			MockSliceModelConfig<NonRepeatFields, RepeatFields>

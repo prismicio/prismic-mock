@@ -78,6 +78,11 @@ export type GroupFieldModelMap = Record<
 	prismic.CustomTypeModelFieldForGroup
 >;
 
+export type NestedGroupFieldModelMap = Record<
+	string,
+	prismic.CustomTypeModelFieldForNestedGroup
+>;
+
 export type SlicePrimaryFieldModelMap = Record<
 	string,
 	prismic.CustomTypeModelFieldForSlicePrimary
@@ -225,50 +230,65 @@ type CustomTypeModelValue<T extends prismic.CustomTypeModel> =
 type CustomTypeModelFieldForGroupValue<
 	T extends prismic.CustomTypeModelFieldForGroup,
 	State extends prismic.FieldState = prismic.FieldState,
-> = T extends prismic.CustomTypeModelBooleanField
-	? prismic.BooleanField
-	: T extends prismic.CustomTypeModelColorField
-		? prismic.ColorField<State>
-		: T extends prismic.CustomTypeModelRichTextField
-			? prismic.RichTextField<State>
-			: T extends prismic.CustomTypeModelTitleField
-				? prismic.TitleField<State>
-				: T extends prismic.CustomTypeModelImageField<infer TThumbnailNames>
-					? prismic.ImageField<TThumbnailNames, State>
-					: T extends prismic.CustomTypeModelLinkField
-						? prismic.LinkField<string, string, never, State>
-						: T extends prismic.CustomTypeModelLinkToMediaField
-							? prismic.LinkToMediaField<State>
-							: T extends prismic.CustomTypeModelContentRelationshipField
-								? prismic.ContentRelationshipField<string, string, never, State>
-								: T extends prismic.CustomTypeModelDateField
-									? prismic.DateField<State>
-									: T extends prismic.CustomTypeModelTimestampField
-										? prismic.TimestampField<State>
-										: T extends prismic.CustomTypeModelNumberField
-											? prismic.NumberField<State>
-											: T extends prismic.CustomTypeModelKeyTextField
-												? prismic.KeyTextField<State>
-												: T extends prismic.CustomTypeModelSelectField
-													? prismic.SelectField<string, State>
-													: T extends prismic.CustomTypeModelEmbedField
-														? prismic.EmbedField<
-																prismic.AnyOEmbed & prismic.OEmbedExtra,
-																State
-															>
-														: T extends prismic.CustomTypeModelGeoPointField
-															? prismic.GeoPointField<State>
-															: T extends prismic.CustomTypeModelIntegrationField
-																? prismic.IntegrationField<
-																		Record<string, unknown>,
-																		State
-																	>
-																: never;
+> = T extends prismic.CustomTypeModelNestedGroupField
+	? CustomTypeModelNestedGroupFieldValue<T, State>
+	: T extends prismic.CustomTypeModelBooleanField
+		? prismic.BooleanField
+		: T extends prismic.CustomTypeModelColorField
+			? prismic.ColorField<State>
+			: T extends prismic.CustomTypeModelRichTextField
+				? prismic.RichTextField<State>
+				: T extends prismic.CustomTypeModelTitleField
+					? prismic.TitleField<State>
+					: T extends prismic.CustomTypeModelImageField<infer TThumbnailNames>
+						? prismic.ImageField<TThumbnailNames, State>
+						: T extends prismic.CustomTypeModelLinkField
+							? prismic.LinkField<string, string, never, State>
+							: T extends prismic.CustomTypeModelLinkToMediaField
+								? prismic.LinkToMediaField<State>
+								: T extends prismic.CustomTypeModelContentRelationshipField
+									? prismic.ContentRelationshipField<
+											string,
+											string,
+											never,
+											State
+										>
+									: T extends prismic.CustomTypeModelDateField
+										? prismic.DateField<State>
+										: T extends prismic.CustomTypeModelTimestampField
+											? prismic.TimestampField<State>
+											: T extends prismic.CustomTypeModelNumberField
+												? prismic.NumberField<State>
+												: T extends prismic.CustomTypeModelKeyTextField
+													? prismic.KeyTextField<State>
+													: T extends prismic.CustomTypeModelSelectField
+														? prismic.SelectField<string, State>
+														: T extends prismic.CustomTypeModelEmbedField
+															? prismic.EmbedField<
+																	prismic.AnyOEmbed & prismic.OEmbedExtra,
+																	State
+																>
+															: T extends prismic.CustomTypeModelGeoPointField
+																? prismic.GeoPointField<State>
+																: T extends prismic.CustomTypeModelIntegrationField
+																	? prismic.IntegrationField<
+																			Record<string, unknown>,
+																			State
+																		>
+																	: never;
 
 type CustomTypeModelGroupFieldValue<
 	T extends prismic.CustomTypeModelGroupField,
 	State extends prismic.FieldState = prismic.FieldState,
 > = prismic.GroupField<
+	ModelValueMap<NonNullable<NonNullable<T["config"]>["fields"]>>,
+	State
+>;
+
+type CustomTypeModelNestedGroupFieldValue<
+	T extends prismic.CustomTypeModelNestedGroupField,
+	State extends prismic.FieldState = prismic.FieldState,
+> = prismic.NestedGroupField<
 	ModelValueMap<NonNullable<NonNullable<T["config"]>["fields"]>>,
 	State
 >;

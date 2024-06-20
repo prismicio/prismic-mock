@@ -26,3 +26,26 @@ test("can be configured for specific fields", (t) => {
 		prismic.CustomTypeModelFieldType.Boolean,
 	);
 });
+
+test("supports nested groups", (t) => {
+	const actual = model.group({
+		seed: t.title,
+		fields: {
+			group: model.group({
+				seed: t.title,
+				fields: {
+					boolean: model.boolean({ seed: t.title }),
+				},
+			}),
+		},
+	});
+
+	t.is(
+		actual.config?.fields?.group.type,
+		prismic.CustomTypeModelFieldType.Group,
+	);
+	t.is(
+		actual.config?.fields?.group.config?.fields?.boolean.type,
+		prismic.CustomTypeModelFieldType.Boolean,
+	);
+});
