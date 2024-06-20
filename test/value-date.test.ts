@@ -22,9 +22,10 @@ test("can be configured to return an empty value", (t) => {
 test("can be configured to return a date after and before given dates", (t) => {
 	const actual = value.date({
 		seed: t.title,
-		after: new Date(1984, 0, 1),
-		before: new Date(1984, 0, 3),
+		after: new Date("1984-01-01T00:00:00.000Z"),
+		before: new Date("1984-01-01T00:00:00.000Z"),
 	});
 
+	// Interval is [after, before]
 	t.is(actual, "1984-01-01");
 });
