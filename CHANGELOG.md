@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.7](https://github.com/prismicio/prismic-mock/compare/v0.3.6...v0.3.7) (2024-06-20)
+
+
+### Features
+
+* support groups in groups ([#21](https://github.com/prismicio/prismic-mock/issues/21)) ([301f0dd](https://github.com/prismicio/prismic-mock/commit/301f0ddfdb24d7b572f65b3d6551d49f0d9854e1))
+
+
+### Documentation
+
+* update `CONTRIBUTING.md` ([#22](https://github.com/prismicio/prismic-mock/issues/22)) ([2a7f0cb](https://github.com/prismicio/prismic-mock/commit/2a7f0cb97a7826875a4b0fc99314042a979a3b7e))
+
 ### [0.3.7-alpha.1](https://github.com/prismicio/prismic-mock/compare/v0.3.7-alpha.0...v0.3.7-alpha.1) (2024-06-05)
 
 
