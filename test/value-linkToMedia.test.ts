@@ -20,3 +20,17 @@ test("can be configured to return an empty value", (t) => {
 
 	t.false("url" in actual);
 });
+
+test("can be configured to return a value with display text", (t) => {
+	const actualTrue = value.linkToMedia({
+		seed: t.title,
+		withText: true,
+	});
+	t.is(actualTrue.text, "Tincidunt vitae");
+
+	const actualFalse = value.linkToMedia({
+		seed: t.title,
+		withText: false,
+	});
+	t.is(actualFalse.text, undefined);
+});
