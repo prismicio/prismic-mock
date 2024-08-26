@@ -33,3 +33,17 @@ test("can be configured to constrain by tags", (t) => {
 
 	t.is(actual.config?.tags, tags);
 });
+
+test("can be configured to explicitly support the text property", (t) => {
+	const actualTrue = model.contentRelationship({
+		seed: t.title,
+		text: true,
+	});
+	t.is(actualTrue.config?.text?.type, "Text");
+
+	const actualFalse = model.contentRelationship({
+		seed: t.title,
+		text: false,
+	});
+	t.is(actualFalse.config.text, undefined);
+});
