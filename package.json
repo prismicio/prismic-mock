@@ -56,8 +56,7 @@
 		"test": "npm run lint && npm run types && npm run unit && npm run build && npm run size",
 		"types": "tsc --noEmit",
 		"unit": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava",
-		"unit:watch": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava --watch",
-		"unit:update-1": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava --update-snapshots --match='creates mock field models for group field'"
+		"unit:watch": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava --watch"
 	},
 	"dependencies": {
 		"change-case": "^5.4.4"
