@@ -20,6 +20,7 @@ test("supports custom model", (t) => {
 		seed: t.title,
 		customTypeIDs: ["type"],
 		tags: ["tag"],
+		text: true,
 	});
 
 	const actual = value.contentRelationship({
@@ -32,6 +33,7 @@ test("supports custom model", (t) => {
 
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	t.true(customModel.config?.tags!.every((tag) => actual.tags.includes(tag)));
+	t.is(actual.text, "Aliquam etiam");
 });
 
 test("can be configured to return an empty value", (t) => {
@@ -105,4 +107,25 @@ test("throws if a linkable document cannot be found within constraints", (t) => 
 			}),
 		{ message: /could not be found/ },
 	);
+});
+
+test("can be configured to return a value with display text", (t) => {
+	const linkableDocuments = [
+		value.document({ seed: t.title }),
+		value.document({ seed: t.title }),
+	];
+
+	const actualTrue = value.contentRelationship({
+		seed: t.title,
+		linkableDocuments,
+		withText: true,
+	});
+	t.is(actualTrue.text, "Neque laoreet");
+
+	const actualFalse = value.contentRelationship({
+		seed: t.title,
+		linkableDocuments,
+		withText: false,
+	});
+	t.is(actualFalse.text, undefined);
 });

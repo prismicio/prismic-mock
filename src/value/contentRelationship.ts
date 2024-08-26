@@ -1,4 +1,5 @@
 import * as prismic from "@prismicio/client";
+import * as changeCase from "change-case";
 
 import { buildContentRelationshipField } from "../lib/buildContentRelationshipField";
 import { createFaker } from "../lib/createFaker";
@@ -20,6 +21,9 @@ export type MockContentRelationshipValueConfig<
 		prismic.CustomTypeModelContentRelationshipField = prismic.CustomTypeModelContentRelationshipField,
 	State extends prismic.FieldState = prismic.FieldState,
 > = {
+	withText?: NonNullable<Model["config"]>["text"] extends undefined
+		? false
+		: boolean;
 	/**
 	 * A list of potential documents to which the field can be linked.
 	 */
@@ -101,6 +105,10 @@ export const contentRelationship = <
 
 		return buildContentRelationshipField({
 			document,
+			text:
+				config.withText ?? model.config?.text
+					? changeCase.sentenceCase(faker.words(2))
+					: undefined,
 		}) as unknown as MockContentRelationshipValue<Model, State>;
 	}
 };
