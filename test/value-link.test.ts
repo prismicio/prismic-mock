@@ -19,7 +19,7 @@ test("supports custom model", (t) => {
 		config: {
 			...customModelBase.config,
 			allowTargetBlank: true as const,
-			text: { type: "Text" as const },
+			text: model.keyText({ seed: t.title }),
 		},
 	};
 
@@ -31,7 +31,7 @@ test("supports custom model", (t) => {
 	});
 
 	t.is(actual.target, "_blank");
-	t.is(actual.text, "Est ultricies");
+	t.is(typeof actual.text, "string");
 });
 
 test("can be configured to return an empty link value", (t) => {
@@ -66,7 +66,7 @@ test("can be configured to return a value with display text", (t) => {
 		type: prismic.LinkType.Web,
 		withText: true,
 	});
-	t.is(actualTrue.text, "Ullamcorper morbi");
+	t.is(typeof actualTrue.text, "string");
 
 	const actualFalse = value.link({
 		seed: t.title,

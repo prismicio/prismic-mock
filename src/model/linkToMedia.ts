@@ -3,27 +3,22 @@ import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
 
-import { LinkText } from "./link";
 import { MockModelConfig } from "../types";
 
-type MockLinkToMediaModel<Text extends boolean = boolean> =
+type MockLinkToMediaModel<WithText extends boolean = boolean> =
 	prismic.CustomTypeModelLinkToMediaField & {
-		config: Text extends true
-			? {
-					text: LinkText;
-				}
-			: {
-					text?: undefined;
-				};
+		config: WithText extends true
+			? { text: prismic.CustomTypeModelKeyTextField }
+			: { text?: undefined };
 	};
 
-export type MockLinkToMediaModelConfig<Text extends boolean = boolean> = {
-	text?: Text;
+export type MockLinkToMediaModelConfig<WithText extends boolean = boolean> = {
+	withText?: WithText;
 } & MockModelConfig;
 
-export const linkToMedia = <Text extends boolean = boolean>(
-	config: MockLinkToMediaModelConfig<Text>,
-): MockLinkToMediaModel<Text> => {
+export const linkToMedia = <WithText extends boolean = boolean>(
+	config: MockLinkToMediaModelConfig<WithText>,
+): MockLinkToMediaModel<WithText> => {
 	const faker = config.faker || createFaker(config.seed);
 
 	return {
@@ -32,11 +27,11 @@ export const linkToMedia = <Text extends boolean = boolean>(
 			label: changeCase.capitalCase(faker.word()),
 			placeholder: changeCase.sentenceCase(faker.words(3)),
 			select: prismic.CustomTypeModelLinkSelectType.Media,
-			text: config.text
+			text: config.withText
 				? {
 						type: prismic.CustomTypeModelFieldType.Text,
 					}
 				: undefined,
 		},
-	} as MockLinkToMediaModel<Text>;
+	} as MockLinkToMediaModel<WithText>;
 };

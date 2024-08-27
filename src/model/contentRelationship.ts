@@ -3,40 +3,35 @@ import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
 
-import { LinkText } from "./link";
 import { MockModelConfig } from "../types";
 
 type MockContentRelationshipModel<
 	CustomTypeIDs extends string = string,
 	Tags extends string = string,
-	Text extends boolean = boolean,
+	WithText extends boolean = boolean,
 > = prismic.CustomTypeModelContentRelationshipField<CustomTypeIDs, Tags> & {
-	config: Text extends true
-		? {
-				text: LinkText;
-			}
-		: {
-				text?: undefined;
-			};
+	config: WithText extends true
+		? { text: prismic.CustomTypeModelKeyTextField }
+		: { text?: undefined };
 };
 
 export type MockContentRelationshipModelConfig<
 	CustomTypeIDs extends string = string,
 	Tags extends string = string,
-	Text extends boolean = boolean,
+	WithText extends boolean = boolean,
 > = {
 	customTypeIDs?: readonly CustomTypeIDs[];
 	tags?: readonly Tags[];
-	text?: Text;
+	withText?: WithText;
 } & MockModelConfig;
 
 export const contentRelationship = <
 	CustomTypeIDs extends string,
 	Tags extends string,
-	Text extends boolean = boolean,
+	WithText extends boolean = boolean,
 >(
-	config: MockContentRelationshipModelConfig<CustomTypeIDs, Tags, Text>,
-): MockContentRelationshipModel<CustomTypeIDs, Tags, Text> => {
+	config: MockContentRelationshipModelConfig<CustomTypeIDs, Tags, WithText>,
+): MockContentRelationshipModel<CustomTypeIDs, Tags, WithText> => {
 	const faker = config.faker || createFaker(config.seed);
 
 	return {
@@ -47,11 +42,9 @@ export const contentRelationship = <
 			select: prismic.CustomTypeModelLinkSelectType.Document,
 			customtypes: config.customTypeIDs,
 			tags: config.tags,
-			text: config.text
-				? {
-						type: prismic.CustomTypeModelFieldType.Text,
-					}
+			text: config.withText
+				? { type: prismic.CustomTypeModelFieldType.Text }
 				: undefined,
 		},
-	} as MockContentRelationshipModel<CustomTypeIDs, Tags, Text>;
+	} as MockContentRelationshipModel<CustomTypeIDs, Tags, WithText>;
 };

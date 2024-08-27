@@ -79,6 +79,7 @@ export const link = <
 					faker,
 					state: config.state,
 					linkableDocuments: config.linkableDocuments,
+					withText: config.withText,
 				}) as unknown as MockLinkValue<LinkType, State>;
 			}
 
@@ -86,6 +87,7 @@ export const link = <
 				return linkToMedia({
 					faker,
 					state: config.state,
+					withText: config.withText,
 				}) as MockLinkValue<LinkType, State>;
 			}
 

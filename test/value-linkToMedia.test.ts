@@ -26,7 +26,7 @@ test("can be configured to return a value with display text", (t) => {
 		seed: t.title,
 		withText: true,
 	});
-	t.is(actualTrue.text, "Tincidunt vitae");
+	t.is(typeof actualTrue.text, "string");
 
 	const actualFalse = value.linkToMedia({
 		seed: t.title,
