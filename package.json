@@ -56,13 +56,14 @@
 		"test": "npm run lint && npm run types && npm run unit && npm run build && npm run size",
 		"types": "tsc --noEmit",
 		"unit": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava",
-		"unit:watch": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava --watch"
+		"unit:watch": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava --watch",
+		"unit:update-1": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava --update-snapshots --match='creates mock field models for group field'"
 	},
 	"dependencies": {
 		"change-case": "^5.4.4"
 	},
 	"devDependencies": {
-		"@prismicio/client": "^7.9.0-alpha.0",
+		"@prismicio/client": "^7.9.0-alpha.1",
 		"@size-limit/preset-small-lib": "^11.1.2",
 		"@types/node": "^20.12.7",
 		"@typescript-eslint/eslint-plugin": "^7.6.0",
