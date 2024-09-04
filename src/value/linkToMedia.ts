@@ -31,6 +31,7 @@ export const linkToMedia = <
 	} else {
 		return {
 			link_type: prismic.LinkType.Media,
+			id: faker.hash(11),
 			name: `${changeCase.snakeCase(faker.words(faker.range(1, 2)))}.example`,
 			kind: changeCase.snakeCase(faker.word()),
 			url: faker.url(),

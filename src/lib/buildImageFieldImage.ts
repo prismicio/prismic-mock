@@ -31,6 +31,7 @@ export const buildImageFieldImage = <
 ): prismic.ImageFieldImage<State> => {
 	if (config.state === "empty") {
 		return {
+			id: null,
 			url: null,
 			dimensions: null,
 			alt: null,
@@ -51,6 +52,7 @@ export const buildImageFieldImage = <
 		url.searchParams.set("fit", "crop");
 
 		return {
+			id: faker.hash(11),
 			url: url.toString(),
 			dimensions,
 			alt: changeCase.sentenceCase(faker.words(faker.range(5, 15))),
