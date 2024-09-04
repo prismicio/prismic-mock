@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.8](https://github.com/prismicio/prismic-mock/compare/v0.3.7...v0.3.8) (2024-09-04)
+
+
+### Bug Fixes
+
+* add new missing properties mocks (`id`, `is_master`) ([#24](https://github.com/prismicio/prismic-mock/issues/24)) ([162a348](https://github.com/prismicio/prismic-mock/commit/162a3485f5bab2dfe93997cd9a5b0927ac300063))
+
+
+### Documentation
+
+* typo ([554157d](https://github.com/prismicio/prismic-mock/commit/554157d03bc82a87836f49c61228454bb0ac4b1b))
+
 ### [0.3.7](https://github.com/prismicio/prismic-mock/compare/v0.3.6...v0.3.7) (2024-06-20)
 
 
