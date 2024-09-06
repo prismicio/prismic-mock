@@ -43,6 +43,7 @@ export const slice = <
 			: 0;
 
 	return {
+		id: faker.hash(11),
 		slice_type: sliceType,
 		slice_label: sliceLabel,
 		primary: valueForModelMap({
