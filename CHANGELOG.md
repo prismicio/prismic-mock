@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.9](https://github.com/prismicio/prismic-mock/compare/v0.3.8...v0.3.9) (2024-09-06)
+
+
+### Bug Fixes
+
+* add missing slice IDs ([#25](https://github.com/prismicio/prismic-mock/issues/25)) ([513e92f](https://github.com/prismicio/prismic-mock/commit/513e92f1d031c414966953e5a9cc6404c162b090))
+
 ### [0.3.8](https://github.com/prismicio/prismic-mock/compare/v0.3.7...v0.3.8) (2024-09-04)
 
 
