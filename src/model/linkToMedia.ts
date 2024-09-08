@@ -5,20 +5,20 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
 
-type MockLinkToMediaModel<WithText extends boolean = boolean> =
+type MockLinkToMediaModel<AllowText extends boolean = boolean> =
 	prismic.CustomTypeModelLinkToMediaField & {
-		config: WithText extends true
-			? { text: prismic.CustomTypeModelKeyTextField }
-			: { text?: undefined };
+		config: AllowText extends true
+			? { allowText: true }
+			: { allowText?: undefined };
 	};
 
-export type MockLinkToMediaModelConfig<WithText extends boolean = boolean> = {
-	withText?: WithText;
+export type MockLinkToMediaModelConfig<AllowText extends boolean = boolean> = {
+	allowText?: AllowText;
 } & MockModelConfig;
 
-export const linkToMedia = <WithText extends boolean = boolean>(
-	config: MockLinkToMediaModelConfig<WithText>,
-): MockLinkToMediaModel<WithText> => {
+export const linkToMedia = <AllowText extends boolean = boolean>(
+	config: MockLinkToMediaModelConfig<AllowText>,
+): MockLinkToMediaModel<AllowText> => {
 	const faker = config.faker || createFaker(config.seed);
 
 	return {
@@ -27,11 +27,9 @@ export const linkToMedia = <WithText extends boolean = boolean>(
 			label: changeCase.capitalCase(faker.word()),
 			placeholder: changeCase.sentenceCase(faker.words(3)),
 			select: prismic.CustomTypeModelLinkSelectType.Media,
-			text: config.withText
-				? {
-						type: prismic.CustomTypeModelFieldType.Text,
-					}
-				: undefined,
+			allowText:
+				("allowText" in config ? config.allowText : faker.boolean()) ||
+				undefined,
 		},
-	} as MockLinkToMediaModel<WithText>;
+	} as MockLinkToMediaModel<AllowText>;
 };

@@ -19,7 +19,7 @@ test("supports custom model", (t) => {
 		config: {
 			...customModelBase.config,
 			allowTargetBlank: true as const,
-			text: model.keyText({ seed: t.title }),
+			allowText: true as const,
 		},
 	};
 

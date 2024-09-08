@@ -15,13 +15,13 @@ test("supports number seed", snapshotTwiceMacro, () =>
 test("can be configured to explicitly support the text property", (t) => {
 	const actualTrue = model.linkToMedia({
 		seed: t.title,
-		withText: true,
+		allowText: true,
 	});
-	t.is(actualTrue.config.text.type, "Text");
+	t.is(actualTrue.config.allowText, true);
 
 	const actualFalse = model.linkToMedia({
 		seed: t.title,
-		withText: false,
+		allowText: false,
 	});
-	t.is(actualFalse.config.text, undefined);
+	t.is(actualFalse.config.allowText, undefined);
 });

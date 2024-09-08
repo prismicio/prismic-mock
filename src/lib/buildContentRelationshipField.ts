@@ -4,7 +4,6 @@ type BuildContentRelationshipFieldConfig<
 	Document extends prismic.PrismicDocument,
 > = {
 	document: Document;
-	text?: string;
 };
 
 export const buildContentRelationshipField = <
@@ -27,6 +26,5 @@ export const buildContentRelationshipField = <
 		url: config.document.url || undefined,
 		slug: config.document.slugs[0],
 		isBroken: false,
-		text: config.text,
 	};
 };
