@@ -23,7 +23,7 @@ export type MockLinkValueConfig<
 	>["allowTargetBlank"] extends undefined
 		? false
 		: boolean;
-	withText?: NonNullable<Model["config"]>["text"] extends undefined
+	withText?: NonNullable<Model["config"]>["allowText"] extends undefined
 		? false
 		: boolean;
 	/**
@@ -79,7 +79,6 @@ export const link = <
 					faker,
 					state: config.state,
 					linkableDocuments: config.linkableDocuments,
-					withText: config.withText,
 				}) as unknown as MockLinkValue<LinkType, State>;
 			}
 
@@ -104,7 +103,7 @@ export const link = <
 							? "_blank"
 							: undefined,
 					text:
-						config.withText ?? model.config?.text
+						config.withText ?? (model.config?.allowText && faker.boolean())
 							? changeCase.sentenceCase(faker.words(2))
 							: undefined,
 				} as MockLinkValue<LinkType, State>;

@@ -12,7 +12,7 @@ export type MockLinkToMediaValueConfig<
 		prismic.CustomTypeModelLinkToMediaField = prismic.CustomTypeModelLinkToMediaField,
 	State extends prismic.FieldState = prismic.FieldState,
 > = {
-	withText?: NonNullable<Model["config"]>["text"] extends undefined
+	withText?: NonNullable<Model["config"]>["allowText"] extends undefined
 		? false
 		: boolean;
 } & MockValueConfig<Model> &
@@ -47,7 +47,7 @@ export const linkToMedia = <
 			height: faker.range(500, 3000).toString(),
 			width: faker.range(500, 3000).toString(),
 			text:
-				config.withText ?? model.config?.text
+				config.withText ?? (model.config?.allowText && faker.boolean())
 					? changeCase.sentenceCase(faker.words(2))
 					: undefined,
 		} as MockLinkToMediaValue<State>;

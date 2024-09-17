@@ -1,6 +1,6 @@
 {
 	"name": "@prismicio/mock",
-	"version": "0.3.8-alpha.1",
+	"version": "0.3.8-alpha.2",
 	"description": "Generate mock Prismic documents, fields, Slices, and models for development and testing environments",
 	"keywords": [
 		"typescript",
@@ -62,7 +62,7 @@
 		"change-case": "^5.4.4"
 	},
 	"devDependencies": {
-		"@prismicio/client": "^7.9.0-alpha.1",
+		"@prismicio/client": "^7.9.0-alpha.3",
 		"@size-limit/preset-small-lib": "^11.1.2",
 		"@types/node": "^20.12.7",
 		"@typescript-eslint/eslint-plugin": "^7.6.0",

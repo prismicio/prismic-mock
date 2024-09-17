@@ -27,13 +27,13 @@ test("can be configured to explicitly support blank target", (t) => {
 test("can be configured to explicitly support the text property", (t) => {
 	const actualTrue = model.link({
 		seed: t.title,
-		withText: true,
+		allowText: true,
 	});
-	t.is(actualTrue.config.text.type, "Text");
+	t.is(actualTrue.config.allowText, true);
 
 	const actualFalse = model.link({
 		seed: t.title,
-		withText: false,
+		allowText: false,
 	});
-	t.is(actualFalse.config.text, undefined);
+	t.is(actualFalse.config.allowText, undefined);
 });

@@ -37,6 +37,7 @@ export const repository = (
 			{
 				id: faker.word(),
 				name: changeCase.capitalCase(faker.word()),
+				is_master: true,
 			},
 		],
 		tags: generateTags({

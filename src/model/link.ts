@@ -7,31 +7,31 @@ import { MockModelConfig } from "../types";
 
 type MockLinkModel<
 	AllowTargetBlank extends boolean = boolean,
-	WithText extends boolean = boolean,
+	AllowText extends boolean = boolean,
 > = prismic.CustomTypeModelLinkField & {
 	config: AllowTargetBlank extends true
 		? { allowTargetBlank: true }
 		: { allowTargetBlank?: undefined };
 } & {
-	config: WithText extends true
-		? { text: prismic.CustomTypeModelKeyTextField }
-		: { text?: undefined };
+	config: AllowText extends true
+		? { allowText: true }
+		: { allowText?: undefined };
 };
 
 export type MockLinkModelConfig<
 	AllowTargetBlank extends boolean = boolean,
-	WithText extends boolean = boolean,
+	AllowText extends boolean = boolean,
 > = {
 	allowTargetBlank?: AllowTargetBlank;
-	withText?: WithText;
+	allowText?: AllowText;
 } & MockModelConfig;
 
 export const link = <
 	AllowTargetBlank extends boolean = boolean,
-	WithText extends boolean = boolean,
+	AllowText extends boolean = boolean,
 >(
-	config: MockLinkModelConfig<AllowTargetBlank, WithText>,
-): MockLinkModel<AllowTargetBlank, WithText> => {
+	config: MockLinkModelConfig<AllowTargetBlank, AllowText>,
+): MockLinkModel<AllowTargetBlank, AllowText> => {
 	const faker = config.faker || createFaker(config.seed);
 
 	return {
@@ -44,9 +44,9 @@ export const link = <
 				("allowTargetBlank" in config
 					? config.allowTargetBlank
 					: faker.boolean()) || undefined,
-			text: config.withText
-				? { type: prismic.CustomTypeModelFieldType.Text }
-				: undefined,
+			allowText:
+				("allowText" in config ? config.allowText : faker.boolean()) ||
+				undefined,
 		},
-	} as MockLinkModel<AllowTargetBlank, WithText>;
+	} as MockLinkModel<AllowTargetBlank, AllowText>;
 };
