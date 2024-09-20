@@ -40,6 +40,7 @@ export const sharedSliceVariation = <
 			: 0;
 
 	return {
+		id: faker.hash(11),
 		slice_type: sliceType,
 		slice_label: null,
 		variation: model.id,

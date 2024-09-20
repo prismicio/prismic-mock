@@ -32,11 +32,13 @@ test("can be configured to return an empty value", (t) => {
 	});
 
 	t.deepEqual(actual, {
+		id: null,
 		url: null,
 		alt: null,
 		copyright: null,
 		dimensions: null,
 		Foo: {
+			id: null,
 			url: null,
 			alt: null,
 			copyright: null,
