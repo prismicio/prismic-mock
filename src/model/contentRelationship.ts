@@ -1,5 +1,6 @@
 import * as prismic from "@prismicio/client";
 import * as changeCase from "change-case";
+
 import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
