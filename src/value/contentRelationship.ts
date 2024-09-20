@@ -27,7 +27,7 @@ export type MockContentRelationshipValueConfig<
 } & MockValueConfig<Model> &
 	MockValueStateConfig<State>;
 
-	type MockContentRelationshipValue<
+type MockContentRelationshipValue<
 	Model extends
 		prismic.CustomTypeModelContentRelationshipField = prismic.CustomTypeModelContentRelationshipField,
 	State extends prismic.FieldState = prismic.FieldState,
@@ -93,7 +93,7 @@ export const contentRelationship = <
 					>,
 				];
 
-				const document = faker.randomElement(linkableDocuments);
+		const document = faker.randomElement(linkableDocuments);
 
 		if (!document) {
 			throw new Error("A linkable document could not be found.");
