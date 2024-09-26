@@ -1,13 +1,15 @@
 import * as prismic from "@prismicio/client";
 
-type BuildEmbedFieldConfig<Document extends prismic.PrismicDocument> = {
+type BuildContentRelationshipFieldConfig<
+	Document extends prismic.PrismicDocument,
+> = {
 	document: Document;
 };
 
 export const buildContentRelationshipField = <
 	Document extends prismic.PrismicDocument,
 >(
-	config: BuildEmbedFieldConfig<Document>,
+	config: BuildContentRelationshipFieldConfig<Document>,
 ): prismic.ContentRelationshipField<
 	Document["type"],
 	Document["lang"],

@@ -1,4 +1,5 @@
 import * as prismic from "@prismicio/client";
+import * as changeCase from "change-case";
 
 import { createFaker } from "../lib/createFaker";
 
@@ -20,6 +21,9 @@ export type MockLinkValueConfig<
 	withTargetBlank?: NonNullable<
 		Model["config"]
 	>["allowTargetBlank"] extends undefined
+		? false
+		: boolean;
+	withText?: NonNullable<Model["config"]>["allowText"] extends undefined
 		? false
 		: boolean;
 	/**
@@ -82,6 +86,7 @@ export const link = <
 				return linkToMedia({
 					faker,
 					state: config.state,
+					withText: config.withText,
 				}) as MockLinkValue<LinkType, State>;
 			}
 
@@ -96,6 +101,10 @@ export const link = <
 						config.withTargetBlank ??
 						(model.config?.allowTargetBlank && faker.boolean())
 							? "_blank"
+							: undefined,
+					text:
+						config.withText ?? (model.config?.allowText && faker.boolean())
+							? changeCase.sentenceCase(faker.words(2))
 							: undefined,
 				} as MockLinkValue<LinkType, State>;
 			}

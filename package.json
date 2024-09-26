@@ -1,6 +1,6 @@
 {
 	"name": "@prismicio/mock",
-	"version": "0.3.9",
+	"version": "0.4.0",
 	"description": "Generate mock Prismic documents, fields, Slices, and models for development and testing environments",
 	"keywords": [
 		"typescript",
@@ -55,13 +55,14 @@
 		"size": "size-limit",
 		"test": "npm run lint && npm run types && npm run unit && npm run build && npm run size",
 		"types": "tsc --noEmit",
-		"unit": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava"
+		"unit": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava",
+		"unit:watch": "npm run unit -- --watch"
 	},
 	"dependencies": {
 		"change-case": "^5.4.4"
 	},
 	"devDependencies": {
-		"@prismicio/client": "^7.8.1",
+		"@prismicio/client": "7.11.0",
 		"@size-limit/preset-small-lib": "^11.1.2",
 		"@types/node": "^20.12.7",
 		"@typescript-eslint/eslint-plugin": "^7.6.0",

@@ -5,11 +5,18 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockValueStateConfig, MockValueConfig } from "../types";
 
+import * as modelGen from "../model";
+
 export type MockLinkToMediaValueConfig<
 	Model extends
 		prismic.CustomTypeModelLinkToMediaField = prismic.CustomTypeModelLinkToMediaField,
 	State extends prismic.FieldState = prismic.FieldState,
-> = MockValueConfig<Model> & MockValueStateConfig<State>;
+> = {
+	withText?: NonNullable<Model["config"]>["allowText"] extends undefined
+		? false
+		: boolean;
+} & MockValueConfig<Model> &
+	MockValueStateConfig<State>;
 
 type MockLinkToMediaValue<
 	State extends prismic.FieldState = prismic.FieldState,
@@ -29,6 +36,8 @@ export const linkToMedia = <
 			link_type: prismic.LinkType.Media,
 		} as MockLinkToMediaValue<State>;
 	} else {
+		const model = config.model || modelGen.link({ faker });
+
 		return {
 			link_type: prismic.LinkType.Media,
 			id: faker.hash(11),
@@ -38,6 +47,10 @@ export const linkToMedia = <
 			size: faker.range(500, 3000).toString(),
 			height: faker.range(500, 3000).toString(),
 			width: faker.range(500, 3000).toString(),
+			text:
+				config.withText ?? (model.config?.allowText && faker.boolean())
+					? changeCase.sentenceCase(faker.words(2))
+					: undefined,
 		} as MockLinkToMediaValue<State>;
 	}
 };
