@@ -5,16 +5,24 @@ import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
 
-type MockLinkToMediaModel<AllowText extends boolean = boolean> =
-	prismic.CustomTypeModelLinkToMediaField & {
-		config: AllowText extends true
-			? { allowText: true }
-			: { allowText?: undefined };
-	};
+type MockLinkToMediaModel<
+	AllowText extends boolean = boolean,
+	Repeat extends boolean = boolean,
+> = prismic.CustomTypeModelLinkToMediaField & {
+	config: AllowText extends true
+		? { allowText: true }
+		: { allowText?: undefined };
+} & {
+	config: Repeat extends true ? { repeat: true } : { repeat?: undefined };
+};
 
-export type MockLinkToMediaModelConfig<AllowText extends boolean = boolean> = {
+export type MockLinkToMediaModelConfig<
+	AllowText extends boolean = boolean,
+	Repeat extends boolean = boolean,
+> = MockModelConfig & {
 	allowText?: AllowText;
-} & MockModelConfig;
+	repeat?: Repeat;
+};
 
 export const linkToMedia = <AllowText extends boolean = boolean>(
 	config: MockLinkToMediaModelConfig<AllowText>,
@@ -30,6 +38,8 @@ export const linkToMedia = <AllowText extends boolean = boolean>(
 			allowText:
 				("allowText" in config ? config.allowText : faker.boolean()) ||
 				undefined,
+			repeat:
+				("repeat" in config ? config.repeat : faker.boolean()) || undefined,
 		},
 	} as MockLinkToMediaModel<AllowText>;
 };
