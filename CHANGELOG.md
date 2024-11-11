@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0-alpha.0](https://github.com/prismicio/prismic-mock/compare/v0.4.0...v0.5.0-alpha.0) (2024-11-11)
+
 ## [0.4.0](https://github.com/prismicio/prismic-mock/compare/v0.3.9...v0.4.0) (2024-09-26)
 
 ### [0.3.8-alpha.1](https://github.com/prismicio/prismic-mock/compare/v0.3.7...v0.3.8-alpha.1) (2024-08-29)

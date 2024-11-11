@@ -1,6 +1,6 @@
 {
 	"name": "@prismicio/mock",
-	"version": "0.4.0",
+	"version": "0.5.0-alpha.0",
 	"description": "Generate mock Prismic documents, fields, Slices, and models for development and testing environments",
 	"keywords": [
 		"typescript",
