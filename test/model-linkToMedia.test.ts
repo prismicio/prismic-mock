@@ -25,17 +25,3 @@ test("can be configured to explicitly support the text property", (t) => {
 	});
 	t.is(actualFalse.config.allowText, undefined);
 });
-
-test("can be configured to be repeatable", (t) => {
-	const actualTrue = model.linkToMedia({
-		seed: t.title,
-		repeat: true,
-	});
-	t.is(actualTrue.config.repeat, true);
-
-	const actualFalse = model.linkToMedia({
-		seed: t.title,
-		repeat: false,
-	});
-	t.is(actualFalse.config.repeat, undefined);
-});
