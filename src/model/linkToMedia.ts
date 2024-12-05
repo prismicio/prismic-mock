@@ -12,9 +12,8 @@ type MockLinkToMediaModel<AllowText extends boolean = boolean> =
 			: { allowText?: undefined };
 	};
 
-export type MockLinkToMediaModelConfig<AllowText extends boolean = boolean> = {
-	allowText?: AllowText;
-} & MockModelConfig;
+export type MockLinkToMediaModelConfig<AllowText extends boolean = boolean> =
+	MockModelConfig & { allowText?: AllowText };
 
 export const linkToMedia = <AllowText extends boolean = boolean>(
 	config: MockLinkToMediaModelConfig<AllowText>,
