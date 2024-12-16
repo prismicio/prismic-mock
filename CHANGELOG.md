@@ -2,6 +2,51 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0-alpha.0](https://github.com/prismicio/prismic-mock/compare/v0.3.9...v0.6.0-alpha.0) (2024-12-16)
+
+
+### Chore
+
+* **release:** 0.4.0 ([aa0e1cc](https://github.com/prismicio/prismic-mock/commit/aa0e1cc1fdbc9ae3f5ca77f8c0ee9ffa9d39582c))
+* **release:** 0.5.0 ([0c626e3](https://github.com/prismicio/prismic-mock/commit/0c626e34010a7c0c8898fa37a41813b7d6ad220d))
+* **release:** 0.5.0-alpha.0 ([01f4523](https://github.com/prismicio/prismic-mock/commit/01f4523ca69dc4f2ff6758ceb9318566bb4d1789))
+* **release:** 0.5.0-alpha.1 ([b918770](https://github.com/prismicio/prismic-mock/commit/b91877083e0c7dfab1b6e972bbdf6abb835f6907))
+* update build output format ([8bf2fb3](https://github.com/prismicio/prismic-mock/commit/8bf2fb305e3617a3c68a51b273cce9af70044666))
+
+### [0.3.8-alpha.1](https://github.com/prismicio/prismic-mock/compare/v0.3.7...v0.3.8-alpha.1) (2024-08-29)
+
+
+### Features
+
+* add text to content relationship value ([a50ac3d](https://github.com/prismicio/prismic-mock/commit/a50ac3d974201e46e67fbcb79bd03356126e3c04))
+* add text to link model ([649b6af](https://github.com/prismicio/prismic-mock/commit/649b6af91af18520ab267cab700e4ffc059688f6))
+* add text to link to media model ([6d730f3](https://github.com/prismicio/prismic-mock/commit/6d730f366bd0c0ea99ef622b7163d7a01ea72fef))
+* add text to link to media value ([73bcab4](https://github.com/prismicio/prismic-mock/commit/73bcab49b0cf35b23464fb2192c3b48e54e9f1e3))
+* add text to link value ([253515f](https://github.com/prismicio/prismic-mock/commit/253515fa285d1e3a116347845d4023ab3e77f231))
+* text to content relationship model ([82f9b29](https://github.com/prismicio/prismic-mock/commit/82f9b2975e8efab2f9b158abdb214fff56f40a50))
+
+
+### Bug Fixes
+
+* remove unneeded script ([642528c](https://github.com/prismicio/prismic-mock/commit/642528c3c533e11174abe1f0ecb60b0e877bafa2))
+
+
+### Refactor
+
+* simplify the new script ([01f7cb0](https://github.com/prismicio/prismic-mock/commit/01f7cb008bcd8c5c27a1e368fcdfdf57d555d1e5))
+* update with review suggestions ([7fcafdc](https://github.com/prismicio/prismic-mock/commit/7fcafdc88c3d1e35e9b2a1e1e5459af324106880))
+
+
+### Chore
+
+* add unit test watch script ([53b9cac](https://github.com/prismicio/prismic-mock/commit/53b9cac354f7f8373df9eb53fd1752bbc8330563))
+* **release:** 0.3.8-alpha.0 ([ff1a750](https://github.com/prismicio/prismic-mock/commit/ff1a750c294ff0ad57f6cc08e20b403c31723091))
+* **release:** 0.3.8-alpha.0 ([988a644](https://github.com/prismicio/prismic-mock/commit/988a644519fb64712739833e3338a46ffee9d8ee))
+* **release:** 0.3.8-alpha.1 ([558c535](https://github.com/prismicio/prismic-mock/commit/558c53595af38e6fa07b84c9a71d2a91d3d4cc9d))
+* remove script ([20c870c](https://github.com/prismicio/prismic-mock/commit/20c870ca19deac7147cec69dd1493d24b8ce9018))
+* update alpha dep ([a018931](https://github.com/prismicio/prismic-mock/commit/a018931393b4ceb0d7c46841534a31d2c12658dc))
+* update deps ([a26d51b](https://github.com/prismicio/prismic-mock/commit/a26d51b08a8e5baa4db61d3d13d821ac220c4c5c))
+
 ## [0.5.0](https://github.com/prismicio/prismic-mock/compare/v0.5.0-alpha.1...v0.5.0) (2024-12-05)
 
 ## [0.5.0-alpha.1](https://github.com/prismicio/prismic-mock/compare/v0.5.0-alpha.0...v0.5.0-alpha.1) (2024-11-28)
