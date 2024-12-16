@@ -1,6 +1,6 @@
 import * as prismic from "@prismicio/client";
-import * as changeCase from "change-case";
 
+import { capitalCase, snakeCase } from "../lib/changeCase";
 import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
@@ -17,8 +17,8 @@ export const integration = (
 	return {
 		type: prismic.CustomTypeModelFieldType.Integration,
 		config: {
-			label: changeCase.capitalCase(faker.word()),
-			catalog: config.catalog || changeCase.snakeCase(faker.words(2)),
+			label: capitalCase(faker.word()),
+			catalog: config.catalog || snakeCase(faker.words(2)),
 		},
 	};
 };

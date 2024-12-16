@@ -1,6 +1,6 @@
 import * as prismic from "@prismicio/client";
-import * as changeCase from "change-case";
 
+import { sentenceCase } from "../../lib/changeCase";
 import { createFaker } from "../../lib/createFaker";
 
 import { MockRichTextValueConfig } from "../../types";
@@ -41,7 +41,7 @@ export const oList = (
 		.map(() => {
 			return {
 				type: prismic.RichTextNodeType.oListItem,
-				text: changeCase.sentenceCase(faker.words(faker.range(5, 15))),
+				text: sentenceCase(faker.words(faker.range(5, 15))),
 				spans: [],
 			};
 		});

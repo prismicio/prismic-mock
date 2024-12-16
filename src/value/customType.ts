@@ -1,6 +1,6 @@
 import * as prismic from "@prismicio/client";
-import * as changeCase from "change-case";
 
+import { snakeCase } from "../lib/changeCase";
 import { createFaker } from "../lib/createFaker";
 import { generateTags } from "../lib/generateTags";
 import {
@@ -64,7 +64,7 @@ export const customType = <
 	return {
 		type: model.id,
 		id: faker.hash(7),
-		uid: hasUID ? changeCase.snakeCase(faker.words(faker.range(1, 3))) : null,
+		uid: hasUID ? snakeCase(faker.words(faker.range(1, 3))) : null,
 		url: withURL ? faker.url() : null,
 		href: faker.url(),
 		lang: faker.word(),

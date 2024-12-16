@@ -1,6 +1,6 @@
 import * as prismic from "@prismicio/client";
-import * as changeCase from "change-case";
 
+import { capitalCase } from "../lib/changeCase";
 import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
@@ -26,7 +26,7 @@ export const image = <ThumbnailNames extends string = string>(
 	return {
 		type: prismic.CustomTypeModelFieldType.Image,
 		config: {
-			label: changeCase.capitalCase(faker.word()),
+			label: capitalCase(faker.word()),
 			constraint: {
 				width: config.withConstraint ? faker.range(500, 2000) : null,
 				height: config.withConstraint ? faker.range(500, 2000) : null,

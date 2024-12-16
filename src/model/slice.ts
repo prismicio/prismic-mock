@@ -1,6 +1,6 @@
 import * as prismic from "@prismicio/client";
-import * as changeCase from "change-case";
 
+import { capitalCase, sentenceCase, snakeCase } from "../lib/changeCase";
 import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig, NestedGroupFieldModelMap } from "../types";
@@ -23,12 +23,12 @@ export const slice = <
 
 	return {
 		type: prismic.CustomTypeModelSliceType.Slice,
-		icon: changeCase.snakeCase(faker.word()),
+		icon: snakeCase(faker.word()),
 		display: faker.boolean()
 			? prismic.CustomTypeModelSliceDisplay.Grid
 			: prismic.CustomTypeModelSliceDisplay.List,
-		fieldset: changeCase.capitalCase(faker.words(2)),
-		description: changeCase.sentenceCase(faker.words(faker.range(5, 10))),
+		fieldset: capitalCase(faker.words(2)),
+		description: sentenceCase(faker.words(faker.range(5, 10))),
 		repeat: config.repeatFields || ({} as RepeatFields),
 		"non-repeat": config.nonRepeatFields || ({} as NonRepeatFields),
 	};

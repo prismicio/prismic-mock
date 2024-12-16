@@ -1,6 +1,6 @@
 import * as prismic from "@prismicio/client";
-import * as changeCase from "change-case";
 
+import { sentenceCase } from "../lib/changeCase";
 import { createFaker } from "../lib/createFaker";
 
 import { MockValueStateConfig, MockValueConfig } from "../types";
@@ -25,6 +25,6 @@ export const keyText = <
 	const faker = config.faker || createFaker(config.seed);
 
 	return (
-		config.state === "empty" ? null : changeCase.sentenceCase(faker.words(3))
+		config.state === "empty" ? null : sentenceCase(faker.words(3))
 	) as MockKeyTextValue<State>;
 };

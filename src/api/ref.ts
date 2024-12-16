@@ -1,6 +1,6 @@
 import * as prismic from "@prismicio/client";
-import * as changeCase from "change-case";
 
+import { capitalCase } from "../lib/changeCase";
 import { createFaker } from "../lib/createFaker";
 import { MockRestApiConfig } from "../types";
 import { timestamp } from "../value";
@@ -29,7 +29,7 @@ export const ref = <IsScheduled extends boolean = false>(
 		isMasterRef: config.isMasterRef ?? false,
 		label: config.isMasterRef
 			? "Master"
-			: changeCase.capitalCase(faker.words(faker.range(1, 3))),
+			: capitalCase(faker.words(faker.range(1, 3))),
 	};
 
 	if (config.isScheduled) {

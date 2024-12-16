@@ -1,6 +1,6 @@
 import * as prismic from "@prismicio/client";
-import * as changeCase from "change-case";
 
+import { capitalCase, sentenceCase } from "../lib/changeCase";
 import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
@@ -15,8 +15,8 @@ export const embed = (
 	return {
 		type: prismic.CustomTypeModelFieldType.Embed,
 		config: {
-			label: changeCase.capitalCase(faker.word()),
-			placeholder: changeCase.sentenceCase(faker.words(3)),
+			label: capitalCase(faker.word()),
+			placeholder: sentenceCase(faker.words(3)),
 		},
 	};
 };
