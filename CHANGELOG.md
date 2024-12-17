@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/prismicio/prismic-mock/compare/v0.5.0...v0.6.0) (2024-12-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* change to ESM (#29)
+
+### Features
+
+* change to ESM ([#29](https://github.com/prismicio/prismic-mock/issues/29)) ([77800c3](https://github.com/prismicio/prismic-mock/commit/77800c3a8c978f47d3f8331a54e156d2d5a6ef73))
+
 ## [0.6.0-alpha.1](https://github.com/prismicio/prismic-mock/compare/v0.5.0...v0.6.0-alpha.1) (2024-12-16)
 
 
