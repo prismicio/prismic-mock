@@ -1,6 +1,11 @@
 import * as prismic from "@prismicio/client";
-import * as changeCase from "change-case";
 
+import {
+	capitalCase,
+	pascalCase,
+	sentenceCase,
+	snakeCase,
+} from "../lib/changeCase";
 import { createFaker } from "../lib/createFaker";
 import { getMockImageData } from "../lib/getMockImageData";
 
@@ -30,14 +35,13 @@ export const sharedSliceVariation = <
 ): prismic.SharedSliceModelVariation<ID, PrimaryFields, ItemsFields> => {
 	const faker = config.faker || createFaker(config.seed);
 
-	let name: string =
-		config.name || changeCase.capitalCase(faker.words(faker.range(1, 2)));
-	let id: ID = config.id || (changeCase.snakeCase(name) as ID);
+	let name: string = config.name || capitalCase(faker.words(faker.range(1, 2)));
+	let id: ID = config.id || (snakeCase(name) as ID);
 
 	if (config.id && !config.name) {
-		name = changeCase.pascalCase(config.id);
+		name = pascalCase(config.id);
 	} else if (config.name && !config.name) {
-		id = changeCase.snakeCase(config.name) as ID;
+		id = snakeCase(config.name) as ID;
 	}
 
 	const imageData = getMockImageData({ faker });
@@ -45,7 +49,7 @@ export const sharedSliceVariation = <
 	return {
 		id,
 		name,
-		description: changeCase.sentenceCase(faker.words(faker.range(5, 10))),
+		description: sentenceCase(faker.words(faker.range(5, 10))),
 		docURL: faker.url(),
 		version: faker.hash(7),
 		primary: config.primaryFields || ({} as PrimaryFields),

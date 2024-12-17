@@ -1,6 +1,6 @@
 import * as prismic from "@prismicio/client";
-import * as changeCase from "change-case";
 
+import { capitalCase, snakeCase } from "../lib/changeCase";
 import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
@@ -51,13 +51,13 @@ export const customType = <
 	const faker = config.faker || createFaker(config.seed);
 
 	let label: string =
-		config.label || changeCase.capitalCase(faker.words(faker.range(1, 2)));
-	let id: string = config.id || changeCase.snakeCase(label);
+		config.label || capitalCase(faker.words(faker.range(1, 2)));
+	let id: string = config.id || snakeCase(label);
 
 	if (config.id && !config.label) {
-		label = changeCase.capitalCase(config.id);
+		label = capitalCase(config.id);
 	} else if (config.label && !config.label) {
-		id = changeCase.snakeCase(config.label);
+		id = snakeCase(config.label);
 	}
 
 	const format = config.format ?? faker.randomElement(["page", "custom"]);

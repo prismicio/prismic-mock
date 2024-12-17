@@ -1,6 +1,6 @@
 import * as prismic from "@prismicio/client";
-import * as changeCase from "change-case";
 
+import { sentenceCase } from "../lib/changeCase";
 import { createFaker, Faker } from "../lib/createFaker";
 
 import { MockValueStateConfig, MockImageData, Seed } from "../types";
@@ -55,8 +55,8 @@ export const buildImageFieldImage = <
 			id: faker.hash(11),
 			url: url.toString(),
 			dimensions,
-			alt: changeCase.sentenceCase(faker.words(faker.range(5, 15))),
-			copyright: changeCase.sentenceCase(faker.words(faker.range(5, 15))),
+			alt: sentenceCase(faker.words(faker.range(5, 15))),
+			copyright: sentenceCase(faker.words(faker.range(5, 15))),
 			edit: {
 				x: faker.range(-dimensions.width / 2, dimensions.width / 2),
 				y: faker.range(-dimensions.width / 2, dimensions.height / 2),

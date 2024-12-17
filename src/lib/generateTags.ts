@@ -1,5 +1,4 @@
-import * as changeCase from "change-case";
-
+import { capitalCase } from "../lib/changeCase";
 import { createFaker, Faker } from "../lib/createFaker";
 
 import { Seed } from "../types";
@@ -23,6 +22,6 @@ export const generateTags = (config: GenerateTagsConfig): string[] => {
 
 	return Array.from(
 		{ length: faker.range(config.min ?? 0, config.max ?? 2) },
-		() => changeCase.capitalCase(faker.words(faker.range(1, 3))),
+		() => capitalCase(faker.words(faker.range(1, 3))),
 	);
 };

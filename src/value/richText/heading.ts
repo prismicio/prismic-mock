@@ -1,6 +1,6 @@
 import * as prismic from "@prismicio/client";
-import * as changeCase from "change-case";
 
+import { capitalCase } from "../../lib/changeCase";
 import { createFaker } from "../../lib/createFaker";
 
 import { MockRichTextValueConfig } from "../../types";
@@ -85,7 +85,7 @@ export const heading = (
 
 		return {
 			type,
-			text: changeCase.capitalCase(
+			text: capitalCase(
 				faker.words(faker.range(pattern.minWords, pattern.maxWords)),
 			),
 			spans: [],

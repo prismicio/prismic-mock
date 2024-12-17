@@ -1,6 +1,6 @@
 import * as prismic from "@prismicio/client";
-import * as changeCase from "change-case";
 
+import { sentenceCase } from "../../lib/changeCase";
 import { createFaker } from "../../lib/createFaker";
 
 import { MockRichTextValueConfig } from "../../types";
@@ -33,7 +33,7 @@ export const paragraph = (
 
 	const text = Array.from(
 		{ length: pattern.sentenceCount },
-		() => changeCase.sentenceCase(faker.words(faker.range(5, 15))) + ".",
+		() => sentenceCase(faker.words(faker.range(5, 15))) + ".",
 	).join(" ");
 
 	return {

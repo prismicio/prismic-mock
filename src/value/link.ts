@@ -1,6 +1,6 @@
 import * as prismic from "@prismicio/client";
-import * as changeCase from "change-case";
 
+import { sentenceCase } from "../lib/changeCase";
 import { createFaker } from "../lib/createFaker";
 
 import { MockValueStateConfig, MockValueConfig } from "../types";
@@ -104,7 +104,7 @@ export const link = <
 							: undefined,
 					text:
 						config.withText ?? (model.config?.allowText && faker.boolean())
-							? changeCase.sentenceCase(faker.words(2))
+							? sentenceCase(faker.words(2))
 							: undefined,
 				} as MockLinkValue<LinkType, State>;
 			}

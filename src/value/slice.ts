@@ -1,8 +1,8 @@
 import * as prismic from "@prismicio/client";
-import * as changeCase from "change-case";
 
 import { MockValueConfig, ModelValue } from "../types";
 
+import { capitalCase } from "../lib/changeCase";
 import { createFaker } from "../lib/createFaker";
 import { generateFieldId } from "../lib/generateFieldId";
 import {
@@ -35,7 +35,7 @@ export const slice = <
 	const sliceLabel =
 		config.label !== undefined
 			? config.label
-			: changeCase.capitalCase(faker.words(faker.range(1, 2)));
+			: capitalCase(faker.words(faker.range(1, 2)));
 
 	const itemsCount =
 		model.repeat && Object.keys(model.repeat).length > 0

@@ -1,6 +1,6 @@
 {
 	"name": "@prismicio/mock",
-	"version": "0.5.0",
+	"version": "0.6.0-alpha.1",
 	"description": "Generate mock Prismic documents, fields, Slices, and models for development and testing environments",
 	"keywords": [
 		"typescript",
@@ -16,6 +16,7 @@
 	"license": "Apache-2.0",
 	"author": "Prismic <contact@prismic.io> (https://prismic.io)",
 	"sideEffects": false,
+	"type": "module",
 	"exports": {
 		".": {
 			"require": "./dist/index.cjs",
@@ -57,9 +58,6 @@
 		"types": "tsc --noEmit",
 		"unit": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava",
 		"unit:watch": "npm run unit -- --watch"
-	},
-	"dependencies": {
-		"change-case": "^5.4.4"
 	},
 	"devDependencies": {
 		"@prismicio/client": "7.11.0",

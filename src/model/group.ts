@@ -1,6 +1,6 @@
 import * as prismic from "@prismicio/client";
-import * as changeCase from "change-case";
 
+import { capitalCase } from "../lib/changeCase";
 import { createFaker } from "../lib/createFaker";
 
 import { GroupFieldModelMap, MockModelConfig } from "../types";
@@ -17,7 +17,7 @@ export function group<Fields extends GroupFieldModelMap>(
 	return {
 		type: prismic.CustomTypeModelFieldType.Group,
 		config: {
-			label: changeCase.capitalCase(faker.word()),
+			label: capitalCase(faker.word()),
 			fields: config.fields || ({} as Fields),
 		},
 	};

@@ -1,6 +1,6 @@
 import * as prismic from "@prismicio/client";
-import * as changeCase from "change-case";
 
+import { sentenceCase, snakeCase } from "../lib/changeCase";
 import { createFaker } from "../lib/createFaker";
 
 import { MockValueStateConfig, MockValueConfig } from "../types";
@@ -41,15 +41,15 @@ export const linkToMedia = <
 		return {
 			link_type: prismic.LinkType.Media,
 			id: faker.hash(11),
-			name: `${changeCase.snakeCase(faker.words(faker.range(1, 2)))}.example`,
-			kind: changeCase.snakeCase(faker.word()),
+			name: `${snakeCase(faker.words(faker.range(1, 2)))}.example`,
+			kind: snakeCase(faker.word()),
 			url: faker.url(),
 			size: faker.range(500, 3000).toString(),
 			height: faker.range(500, 3000).toString(),
 			width: faker.range(500, 3000).toString(),
 			text:
 				config.withText ?? (model.config?.allowText && faker.boolean())
-					? changeCase.sentenceCase(faker.words(2))
+					? sentenceCase(faker.words(2))
 					: undefined,
 		} as MockLinkToMediaValue<State>;
 	}

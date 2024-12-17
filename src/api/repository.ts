@@ -1,6 +1,6 @@
 import * as prismic from "@prismicio/client";
-import * as changeCase from "change-case";
 
+import { capitalCase } from "../lib/changeCase";
 import { createFaker } from "../lib/createFaker";
 import { generateTags } from "../lib/generateTags";
 
@@ -36,7 +36,7 @@ export const repository = (
 		languages: [
 			{
 				id: faker.word(),
-				name: changeCase.capitalCase(faker.word()),
+				name: capitalCase(faker.word()),
 				is_master: true,
 			},
 		],

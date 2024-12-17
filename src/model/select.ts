@@ -1,6 +1,6 @@
 import * as prismic from "@prismicio/client";
-import * as changeCase from "change-case";
 
+import { capitalCase, sentenceCase } from "../lib/changeCase";
 import { createFaker } from "../lib/createFaker";
 
 import { MockModelConfig } from "../types";
@@ -21,8 +21,8 @@ export const select = <Option extends string, DefaultOption extends Option>(
 	return {
 		type: prismic.CustomTypeModelFieldType.Select,
 		config: {
-			label: changeCase.capitalCase(faker.word()),
-			placeholder: changeCase.sentenceCase(faker.words(3)),
+			label: capitalCase(faker.word()),
+			placeholder: sentenceCase(faker.words(3)),
 			options: config.options || [],
 			default_value: config.defaultValue || undefined,
 		},

@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0-alpha.1](https://github.com/prismicio/prismic-mock/compare/v0.5.0...v0.6.0-alpha.1) (2024-12-16)
+
+
+### Features
+
+* add `"type": "module"` ([62ccfe5](https://github.com/prismicio/prismic-mock/commit/62ccfe50239fc3581dd0c729c42e39908c39512e))
+
+
+### Refactor
+
+* remove `change-case` dependency ([10fb86b](https://github.com/prismicio/prismic-mock/commit/10fb86b8031f617339cc03e5ab41c43d879cd584))
+
+
+### Chore
+
+* update version to latest alpha ([ba3fdc6](https://github.com/prismicio/prismic-mock/commit/ba3fdc672cd7a0716db0da1041362412be102f8e))
+
 ## [0.5.0](https://github.com/prismicio/prismic-mock/compare/v0.5.0-alpha.1...v0.5.0) (2024-12-05)
 
 ## [0.5.0-alpha.1](https://github.com/prismicio/prismic-mock/compare/v0.5.0-alpha.0...v0.5.0-alpha.1) (2024-11-28)

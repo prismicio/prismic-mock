@@ -1,6 +1,6 @@
 import * as prismic from "@prismicio/client";
-import * as changeCase from "change-case";
 
+import { snakeCase } from "../lib/changeCase";
 import { createFaker } from "../lib/createFaker";
 
 import { MockValueConfig } from "../types";
@@ -18,5 +18,5 @@ export const uid = <
 ): NonNullable<prismic.PrismicDocument["uid"]> => {
 	const faker = config.faker || createFaker(config.seed);
 
-	return changeCase.snakeCase(faker.words(faker.range(1, 3)));
+	return snakeCase(faker.words(faker.range(1, 3)));
 };
