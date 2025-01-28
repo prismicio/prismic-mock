@@ -69,3 +69,6 @@ export type { MockTitleValueConfig } from "./title";
 
 export { uid } from "./uid";
 export type { MockUIDValueConfig } from "./uid";
+
+export { table } from "./table";
+export type { MockTableValueConfig } from "./table";
