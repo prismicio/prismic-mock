@@ -47,10 +47,9 @@ export const linkToMedia = <
 			size: faker.range(500, 3000).toString(),
 			height: faker.range(500, 3000).toString(),
 			width: faker.range(500, 3000).toString(),
-			text:
-				config.withText ?? (model.config?.allowText && faker.boolean())
-					? sentenceCase(faker.words(2))
-					: undefined,
+			...(config.withText ?? (model.config?.allowText && faker.boolean())
+				? { text: sentenceCase(faker.words(2)) }
+				: {}),
 		} as MockLinkToMediaValue<State>;
 	}
 };

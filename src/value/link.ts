@@ -102,10 +102,9 @@ export const link = <
 						(model.config?.allowTargetBlank && faker.boolean())
 							? "_blank"
 							: undefined,
-					text:
-						config.withText ?? (model.config?.allowText && faker.boolean())
-							? sentenceCase(faker.words(2))
-							: undefined,
+					...(config.withText ?? (model.config?.allowText && faker.boolean())
+						? { text: sentenceCase(faker.words(2)) }
+						: {}),
 				} as MockLinkValue<LinkType, State>;
 			}
 		}
