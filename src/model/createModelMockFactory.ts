@@ -44,6 +44,7 @@ import { sliceZone, MockSliceZoneModelConfig } from "./sliceZone";
 import { timestamp, MockTimestampModelConfig } from "./timestamp";
 import { title, MockTitleModelConfig } from "./title";
 import { uid, MockUIDModelConfig } from "./uid";
+import { MockTableModelConfig, table } from "./table";
 
 export const createModelMockFactory = (
 	...args: ConstructorParameters<typeof ModelMockFactory>
@@ -198,6 +199,10 @@ export class ModelMockFactory {
 		>,
 	>(config?: WithoutFakerConfig<MockSliceZoneModelConfig<Slices>>) {
 		return sliceZone({ ...config, faker: this.faker });
+	}
+
+	table(config?: WithoutFakerConfig<MockTableModelConfig>) {
+		return table({ ...config, faker: this.faker });
 	}
 
 	timestamp(config?: WithoutFakerConfig<MockTimestampModelConfig>) {
