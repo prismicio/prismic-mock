@@ -107,7 +107,7 @@ export class Faker {
 	}
 
 	words(length: number, wordOffset = this.range(0, loremWords.length)): string {
-		return lorem(`${length}w`, wordOffset);
+		return length === 1 ? this.word() : lorem(`${length}w`, wordOffset);
 	}
 
 	word({ allowReserved = false }: { allowReserved?: boolean } = {}): string {
