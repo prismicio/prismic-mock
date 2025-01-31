@@ -11,6 +11,62 @@ const DAY_MS = 1000 * 60 * 60 * 24;
 const YEAR_MS = DAY_MS * 365;
 const YEAR_2022_MS = 52 * (YEAR_MS + DAY_MS / 4);
 
+// JavaScript reserved words
+// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#reserved_words
+// Date: 2025-01-31
+const RESERVED_WORDS = new Set([
+	"break",
+	"case",
+	"catch",
+	"class",
+	"const",
+	"continue",
+	"debugger",
+	"default",
+	"delete",
+	"do",
+	"else",
+	"export",
+	"extends",
+	"false",
+	"finally",
+	"for",
+	"function",
+	"if",
+	"import",
+	"in",
+	"instanceof",
+	"new",
+	"null",
+	"return",
+	"super",
+	"switch",
+	"this",
+	"throw",
+	"true",
+	"try",
+	"typeof",
+	"var",
+	"void",
+	"while",
+	"with",
+	"let",
+	"static",
+	"yield",
+	"await",
+	"enum",
+	"implements",
+	"interface",
+	"package",
+	"private",
+	"protected",
+	"public",
+]);
+
+const NO_RESERVED_LOREM_WORDS = loremWords.filter(
+	(word) => !RESERVED_WORDS.has(word),
+);
+
 export class Faker {
 	seed: Seed;
 
@@ -51,11 +107,13 @@ export class Faker {
 	}
 
 	words(length: number, wordOffset = this.range(0, loremWords.length)): string {
-		return lorem(`${length}w`, wordOffset);
+		return length === 1 ? this.word() : lorem(`${length}w`, wordOffset);
 	}
 
-	word(): string {
-		return this.randomElement(loremWords);
+	word({ allowReserved = false }: { allowReserved?: boolean } = {}): string {
+		const words = allowReserved ? loremWords : NO_RESERVED_LOREM_WORDS;
+
+		return this.randomElement(words);
 	}
 
 	lorem(
@@ -66,7 +124,7 @@ export class Faker {
 	}
 
 	url(): string {
-		return `https://${this.word()}.example`;
+		return `https://${this.word({ allowReserved: true })}.example`;
 	}
 
 	hexColor(): string {

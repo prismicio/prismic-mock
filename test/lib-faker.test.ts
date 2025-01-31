@@ -52,6 +52,6 @@ test("lorem", (t) => {
 test("word", (t) => {
 	const faker = createFaker(t.title);
 
-	t.is(faker.word(), "amet,");
-	t.is(faker.word(), "diam");
+	t.is(faker.word(), "porttitor");
+	t.is(faker.word(), "ut");
 });
