@@ -51,7 +51,7 @@ export class Faker {
 	}
 
 	words(length: number, wordOffset = this.range(0, loremWords.length)): string {
-		return length === 1 ? this.word() : lorem(`${length}w`, wordOffset);
+		return lorem(`${length}w`, wordOffset);
 	}
 
 	word(): string {
