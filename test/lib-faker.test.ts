@@ -35,15 +35,15 @@ test("lorem", (t) => {
 
 	t.is(
 		faker.lorem("10w"),
-		"orci porta non pulvinar neque laoreet suspendisse interdum consectetur libero",
+		"vel orci porta non pulvinar neque laoreet suspendisse interdum consectetur",
 	);
 	t.is(
 		faker.lorem("10w", 0),
-		"lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam",
+		"lorem ipsum dolor sit amet consectetur adipiscing elit ut aliquam",
 	);
 	t.is(
 		faker.lorem("10w", 1),
-		"ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus",
+		"ipsum dolor sit amet consectetur adipiscing elit ut aliquam purus",
 	);
 	t.is(faker.lorem("20000w").split(" ").length, 20000);
 	t.is(faker.lorem("10c"), "lorem ipsu");
@@ -52,6 +52,6 @@ test("lorem", (t) => {
 test("word", (t) => {
 	const faker = createFaker(t.title);
 
-	t.is(faker.word(), "amet,");
-	t.is(faker.word(), "diam");
+	t.is(faker.word(), "porttitor");
+	t.is(faker.word(), "ut");
 });
