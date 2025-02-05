@@ -54,6 +54,19 @@ export const table = <
 	) as MockTableValue<State>;
 };
 
+// Only exported for testing purposes, to ensure the model used is in sync with the internal one.
+export const TableCell = {
+	type: "StructuredText",
+	config: {
+		multi: [
+			prismic.RichTextNodeType.paragraph,
+			prismic.RichTextNodeType.strong,
+			prismic.RichTextNodeType.em,
+			prismic.RichTextNodeType.hyperlink,
+		].join(","),
+	},
+} as const;
+
 const mockTableCell = ({
 	type,
 	faker,
@@ -64,16 +77,6 @@ const mockTableCell = ({
 	type,
 	content: richText({
 		faker,
-		model: {
-			type: "StructuredText",
-			config: {
-				multi: [
-					prismic.RichTextNodeType.paragraph,
-					prismic.RichTextNodeType.strong,
-					prismic.RichTextNodeType.em,
-					prismic.RichTextNodeType.hyperlink,
-				].join(","),
-			},
-		},
+		model: TableCell,
 	}),
 });

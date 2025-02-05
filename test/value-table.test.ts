@@ -1,8 +1,10 @@
 import test from "ava";
+import { TableCell as TableCellInternal } from "@prismicio/types-internal/lib/customtypes";
 
 import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
 
 import * as value from "../src/value";
+import { TableCell } from "../src/value/table";
 
 test("creates a mock Table field value", snapshotTwiceMacro, (t) =>
 	value.table({ seed: t.title }),
@@ -38,4 +40,8 @@ test("provides a non empty Table head and body with rich text content", (t) => {
 			t.truthy(cell.content.length);
 		});
 	});
+});
+
+test("ensures the correct table cell model is used", (t) => {
+	t.deepEqual(TableCell, TableCellInternal);
 });
