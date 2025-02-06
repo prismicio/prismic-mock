@@ -2,6 +2,58 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0-alpha.7](https://github.com/prismicio/prismic-mock/compare/v0.6.1...v0.7.0-alpha.7) (2025-02-04)
+
+## [0.7.0-alpha.6](https://github.com/prismicio/prismic-mock/compare/v0.7.0-alpha.5...v0.7.0-alpha.6) (2025-01-31)
+
+
+### Chore
+
+* **release:** 0.7.0-alpha.6 ([74ed61b](https://github.com/prismicio/prismic-mock/commit/74ed61b20dbb48db1a069d87b68faeae3558feba))
+
+## [0.7.0-alpha.5](https://github.com/prismicio/prismic-mock/compare/v0.7.0-alpha.4...v0.7.0-alpha.5) (2025-01-31)
+
+
+### Chore
+
+* **release:** 0.7.0-alpha.5 ([5044cad](https://github.com/prismicio/prismic-mock/commit/5044cad67f95c09e29f67390eddacf430196837e))
+
+## [0.7.0-alpha.4](https://github.com/prismicio/prismic-mock/compare/v0.7.0-alpha.3...v0.7.0-alpha.4) (2025-01-30)
+
+
+### Chore
+
+* **release:** 0.7.0-alpha.4 ([b6118f8](https://github.com/prismicio/prismic-mock/commit/b6118f8462bad165232f873d9c3719904572f6db))
+
+## [0.7.0-alpha.3](https://github.com/prismicio/prismic-mock/compare/v0.7.0-alpha.2...v0.7.0-alpha.3) (2025-01-29)
+
+
+### Chore
+
+* **release:** 0.7.0-alpha.3 ([c5d23e8](https://github.com/prismicio/prismic-mock/commit/c5d23e8ad016d61e18f9a38a81161f2627be0755))
+
+## [0.7.0-alpha.2](https://github.com/prismicio/prismic-mock/compare/v0.7.0-alpha.1...v0.7.0-alpha.2) (2025-01-28)
+
+
+### Chore
+
+* **release:** 0.7.0-alpha.2 ([e42485f](https://github.com/prismicio/prismic-mock/commit/e42485ff006ca6cb6d80903bc5a71e147a27eb5d))
+
+## [0.7.0-alpha.1](https://github.com/prismicio/prismic-mock/compare/v0.7.0-alpha.0...v0.7.0-alpha.1) (2025-01-28)
+
+
+### Chore
+
+* **release:** 0.7.0-alpha.1 ([1d9964d](https://github.com/prismicio/prismic-mock/commit/1d9964dd4716e866e16431b1f4deb54b77b962a7))
+
+## [0.7.0-alpha.0](https://github.com/prismicio/prismic-mock/compare/v0.6.0...v0.7.0-alpha.0) (2025-01-21)
+
+
+### Chore
+
+* **release:** 0.7.0-alpha.0 ([11663e8](https://github.com/prismicio/prismic-mock/commit/11663e844ec6d700f2cbae4ce8801a3eee027e75))
+* update prismic-client dep ([58aa2ba](https://github.com/prismicio/prismic-mock/commit/58aa2baa329f0f13d8a7f83fe97dcf1bf627e89a))
+
 ### [0.6.1](https://github.com/prismicio/prismic-mock/compare/v0.6.0...v0.6.1) (2025-02-04)
 
 

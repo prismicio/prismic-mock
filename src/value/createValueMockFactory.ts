@@ -34,6 +34,7 @@ import { sliceZone, MockSliceZoneValueConfig } from "./sliceZone";
 import { timestamp, MockTimestampValueConfig } from "./timestamp";
 import { title, MockTitleValueConfig } from "./title";
 import { uid, MockUIDValueConfig } from "./uid";
+import { MockTableValueConfig, table } from "./table";
 
 export const createValueMockFactory = (
 	...args: ConstructorParameters<typeof ValueMockFactory>
@@ -188,6 +189,13 @@ export class ValueMockFactory {
 		return number({ ...config, faker: this.faker });
 	}
 
+	richText<
+		Model extends
+			prismic.CustomTypeModelRichTextField = prismic.CustomTypeModelRichTextField,
+	>(config?: WithoutFakerConfig<MockRichTextValueConfig<Model>>) {
+		return richText({ ...config, faker: this.faker });
+	}
+
 	select<
 		Model extends
 			prismic.CustomTypeModelSelectField = prismic.CustomTypeModelSelectField,
@@ -223,6 +231,13 @@ export class ValueMockFactory {
 		return sliceZone({ ...config, faker: this.faker });
 	}
 
+	table<
+		Model extends
+			prismic.CustomTypeModelTableField = prismic.CustomTypeModelTableField,
+	>(config?: WithoutFakerConfig<MockTableValueConfig<Model>>) {
+		return table({ ...config, faker: this.faker });
+	}
+
 	timestamp<
 		Model extends
 			prismic.CustomTypeModelTimestampField = prismic.CustomTypeModelTimestampField,
@@ -244,12 +259,5 @@ export class ValueMockFactory {
 			prismic.CustomTypeModelUIDField = prismic.CustomTypeModelUIDField,
 	>(config?: WithoutFakerConfig<MockUIDValueConfig<Model>>) {
 		return uid({ ...config, faker: this.faker });
-	}
-
-	richText<
-		Model extends
-			prismic.CustomTypeModelRichTextField = prismic.CustomTypeModelRichTextField,
-	>(config?: WithoutFakerConfig<MockRichTextValueConfig<Model>>) {
-		return richText({ ...config, faker: this.faker });
 	}
 }
