@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0](https://github.com/prismicio/prismic-mock/compare/v0.6.1...v0.7.0) (2025-02-06)
+
+
+### Features
+
+* support table field ([#30](https://github.com/prismicio/prismic-mock/issues/30)) ([83b4320](https://github.com/prismicio/prismic-mock/commit/83b4320b5992a640619b7cefe780dba6470e5f0d))
+
 ## [0.7.0-alpha.7](https://github.com/prismicio/prismic-mock/compare/v0.6.1...v0.7.0-alpha.7) (2025-02-04)
 
 ## [0.7.0-alpha.6](https://github.com/prismicio/prismic-mock/compare/v0.7.0-alpha.5...v0.7.0-alpha.6) (2025-01-31)
