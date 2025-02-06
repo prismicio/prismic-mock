@@ -14,33 +14,12 @@ test("supports number seed", snapshotTwiceMacro, () =>
 	value.table({ seed: 1 }),
 );
 
-test("can be configured to return an empty value", (t) => {
-	const actual = value.table({
+test("can be configured to return an empty value", snapshotTwiceMacro, (t) =>
+	value.table({
 		seed: t.title,
 		state: "empty",
-	});
-
-	t.is(actual, null);
-});
-
-test("provides a non empty Table head and body with rich text content", (t) => {
-	const actual = value.table({ seed: t.title });
-
-	t.is(actual.head?.rows.length, 1);
-	t.is(actual.head?.rows[0].cells.length, 3);
-	actual.head?.rows[0].cells.forEach((cell) => {
-		t.is(cell.type, "header");
-		t.truthy(cell.content.length);
-	});
-	t.is(actual.body.rows.length, 3);
-	actual.body.rows.forEach((row) => {
-		t.is(row.cells.length, 3);
-		row.cells.forEach((cell) => {
-			t.is(cell.type, "data");
-			t.truthy(cell.content.length);
-		});
-	});
-});
+	}),
+);
 
 test("ensures the correct table cell model is used", (t) => {
 	t.deepEqual(TableCell, TableCellInternal);

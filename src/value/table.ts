@@ -24,6 +24,9 @@ export const table = <
 ): MockTableValue<State> => {
 	const faker = config.faker || createFaker(config.seed);
 
+	const cells = faker.range(1, 10);
+	const bodyRows = faker.range(1, 10);
+
 	return (
 		config.state === "empty"
 			? null
@@ -31,7 +34,7 @@ export const table = <
 					head: {
 						rows: [
 							{
-								cells: Array.from({ length: 3 }, () =>
+								cells: Array.from({ length: cells }, () =>
 									mockTableCell({
 										type: "header",
 										faker,
@@ -41,8 +44,8 @@ export const table = <
 						],
 					},
 					body: {
-						rows: Array.from({ length: 3 }, () => ({
-							cells: Array.from({ length: 3 }, () =>
+						rows: Array.from({ length: bodyRows }, () => ({
+							cells: Array.from({ length: cells }, () =>
 								mockTableCell({
 									type: "data",
 									faker,
