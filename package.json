@@ -1,6 +1,6 @@
 {
 	"name": "@prismicio/mock",
-	"version": "0.7.0",
+	"version": "0.7.1",
 	"description": "Generate mock Prismic documents, fields, Slices, and models for development and testing environments",
 	"keywords": [
 		"typescript",
@@ -60,7 +60,7 @@
 		"unit:watch": "npm run unit -- --watch"
 	},
 	"devDependencies": {
-		"@prismicio/client": "^7.16.0",
+		"@prismicio/client": "^7.16.1",
 		"@prismicio/types-internal": "^3.5.0",
 		"@size-limit/preset-small-lib": "^11.1.2",
 		"@types/node": "^20.12.7",
