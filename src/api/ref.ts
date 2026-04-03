@@ -1,4 +1,4 @@
-import * as prismic from "@prismicio/client"
+import type * as prismic from "@prismicio/client"
 
 import { capitalCase } from "../lib/changeCase"
 import { createFaker } from "../lib/createFaker"

@@ -1,4 +1,4 @@
-import * as prismic from "@prismicio/client"
+import type * as prismic from "@prismicio/client"
 
 import { buildImageFieldImage } from "../lib/buildImageFieldImage"
 import { createFaker } from "../lib/createFaker"

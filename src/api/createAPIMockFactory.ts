@@ -1,4 +1,4 @@
-import * as prismic from "@prismicio/client"
+import type * as prismic from "@prismicio/client"
 
 import { createFaker, type Faker } from "../lib/createFaker"
 import type { Seed, WithoutFakerConfig } from "../types"
@@ -28,27 +28,27 @@ export class APIMockFactory {
 		this.faker = "faker" in config ? config.faker : createFaker(config.seed)
 	}
 
-	get seed() {
+	get seed(): Seed {
 		return this.faker.seed
 	}
 
 	query<Document extends prismic.PrismicDocument = prismic.PrismicDocument>(
 		config?: WithoutFakerConfig<MockRestApiQueryConfig<Document>>,
-	) {
+	): prismic.Query<Document> {
 		return query({ ...config, faker: this.faker })
 	}
 
 	ref<IsScheduled extends boolean = false>(
 		config?: WithoutFakerConfig<MockRestApiRefConfig<IsScheduled>>,
-	) {
+	): ReturnType<typeof ref<IsScheduled>> {
 		return ref({ ...config, faker: this.faker })
 	}
 
-	repository(config?: WithoutFakerConfig<MockRestApiRepositoryConfig>) {
+	repository(config?: WithoutFakerConfig<MockRestApiRepositoryConfig>): prismic.Repository {
 		return repository({ ...config, faker: this.faker })
 	}
 
-	tags(config?: WithoutFakerConfig<MockRestApiTagsConfig>) {
+	tags(config?: WithoutFakerConfig<MockRestApiTagsConfig>): prismic.Tags {
 		return tags({ ...config, faker: this.faker })
 	}
 }

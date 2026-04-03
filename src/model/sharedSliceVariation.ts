@@ -1,4 +1,4 @@
-import * as prismic from "@prismicio/client"
+import type * as prismic from "@prismicio/client"
 
 import { capitalCase, pascalCase, sentenceCase, snakeCase } from "../lib/changeCase"
 import { createFaker } from "../lib/createFaker"
@@ -30,7 +30,7 @@ export const sharedSliceVariation = <
 
 	if (config.id && !config.name) {
 		name = pascalCase(config.id)
-	} else if (config.name && !config.name) {
+	} else if (config.name && !config.id) {
 		id = snakeCase(config.name) as ID
 	}
 

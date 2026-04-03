@@ -20,7 +20,7 @@ export const sharedSlice = <Variation extends prismic.SharedSliceModelVariation>
 
 	if (config.id && !config.name) {
 		name = pascalCase(config.id)
-	} else if (config.name && !config.name) {
+	} else if (config.name && !config.id) {
 		id = snakeCase(config.name)
 	}
 

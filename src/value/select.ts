@@ -1,4 +1,4 @@
-import * as prismic from "@prismicio/client"
+import type * as prismic from "@prismicio/client"
 
 import { createFaker } from "../lib/createFaker"
 import * as modelGen from "../model"

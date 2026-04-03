@@ -1,4 +1,4 @@
-import * as prismic from "@prismicio/client"
+import type * as prismic from "@prismicio/client"
 
 type BuildEmbedFieldConfig<Document extends prismic.PrismicDocument> = {
 	document: Document

@@ -1,4 +1,4 @@
-import * as prismic from "@prismicio/client"
+import type * as prismic from "@prismicio/client"
 
 import { capitalCase, snakeCase } from "../lib/changeCase"
 import { createFaker } from "../lib/createFaker"
@@ -48,7 +48,7 @@ export const customType = <
 
 	if (config.id && !config.label) {
 		label = capitalCase(config.id)
-	} else if (config.label && !config.label) {
+	} else if (config.label && !config.id) {
 		id = snakeCase(config.label)
 	}
 
