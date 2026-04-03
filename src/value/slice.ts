@@ -1,46 +1,37 @@
-import * as prismic from "@prismicio/client";
+import * as prismic from "@prismicio/client"
 
-import { MockValueConfig, ModelValue } from "../types";
-
-import { capitalCase } from "../lib/changeCase";
-import { createFaker } from "../lib/createFaker";
-import { generateFieldId } from "../lib/generateFieldId";
-import {
-	valueForModelMap,
-	ValueForModelMapConfigs,
-} from "../lib/valueForModelMap";
-
-import * as modelGen from "../model";
+import { capitalCase } from "../lib/changeCase"
+import { createFaker } from "../lib/createFaker"
+import { generateFieldId } from "../lib/generateFieldId"
+import { valueForModelMap, ValueForModelMapConfigs } from "../lib/valueForModelMap"
+import * as modelGen from "../model"
+import { MockValueConfig, ModelValue } from "../types"
 
 export type MockSliceValueConfig<
 	Model extends prismic.CustomTypeModelSlice = prismic.CustomTypeModelSlice,
 > = {
-	type?: string;
-	label?: string | null;
-	itemsCount?: number;
-	primaryFieldConfigs?: ValueForModelMapConfigs;
-	itemsFieldConfigs?: ValueForModelMapConfigs;
-} & MockValueConfig<Model>;
+	type?: string
+	label?: string | null
+	itemsCount?: number
+	primaryFieldConfigs?: ValueForModelMapConfigs
+	itemsFieldConfigs?: ValueForModelMapConfigs
+} & MockValueConfig<Model>
 
-export const slice = <
-	Model extends prismic.CustomTypeModelSlice = prismic.CustomTypeModelSlice,
->(
+export const slice = <Model extends prismic.CustomTypeModelSlice = prismic.CustomTypeModelSlice>(
 	config: MockSliceValueConfig<Model>,
 ): ModelValue<Model> => {
-	const faker = config.faker || createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed)
 
-	const model = config.model || modelGen.slice({ faker });
+	const model = config.model || modelGen.slice({ faker })
 
-	const sliceType = config.type ?? generateFieldId({ faker });
+	const sliceType = config.type ?? generateFieldId({ faker })
 	const sliceLabel =
-		config.label !== undefined
-			? config.label
-			: capitalCase(faker.words(faker.range(1, 2)));
+		config.label !== undefined ? config.label : capitalCase(faker.words(faker.range(1, 2)))
 
 	const itemsCount =
 		model.repeat && Object.keys(model.repeat).length > 0
-			? config.itemsCount ?? faker.range(1, 6)
-			: 0;
+			? (config.itemsCount ?? faker.range(1, 6))
+			: 0
 
 	return {
 		id: faker.hash(11),
@@ -58,7 +49,7 @@ export const slice = <
 					faker,
 					map: model.repeat || {},
 					configs: config.itemsFieldConfigs,
-				});
+				})
 			}),
-	} as ModelValue<Model>;
-};
+	} as ModelValue<Model>
+}

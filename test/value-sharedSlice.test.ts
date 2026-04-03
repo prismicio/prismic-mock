@@ -1,80 +1,75 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import * as value from "../src/value"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as value from "../src/value";
-import * as model from "../src/model";
+it("creates a mock Shared Slice field value", ({ task }) => {
+	snapshotTwice((name) => value.sharedSlice({ seed: name }), task.name)
+})
 
-test("creates a mock Shared Slice field value", snapshotTwiceMacro, (t) =>
-	value.sharedSlice({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => value.sharedSlice({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	value.sharedSlice({ seed: 1 }),
-);
-
-test("supports custom model", (t) => {
+it("supports custom model", ({ task }) => {
 	const customModel = model.sharedSlice({
-		seed: t.title,
+		seed: task.name,
 		variations: [
 			model.sharedSliceVariation({
-				seed: t.title,
+				seed: task.name,
 				primaryFields: {
-					boolean: model.boolean({ seed: t.title }),
+					boolean: model.boolean({ seed: task.name }),
 				},
 				itemsFields: {
-					boolean: model.boolean({ seed: t.title }),
+					boolean: model.boolean({ seed: task.name }),
 				},
 			}),
 		],
-	});
+	})
 
 	const actual = value.sharedSlice({
-		seed: t.title,
+		seed: task.name,
 		model: customModel,
-	});
+	})
 
-	t.true(
-		Object.values(actual.primary).every((field) => typeof field === "boolean"),
-	);
+	expect(Object.values(actual.primary).every((field) => typeof field === "boolean")).toBe(true)
 
-	t.true(
-		actual.items.every((item) =>
-			Object.values(item).every((field) => typeof field === "boolean"),
-		),
-	);
-});
+	expect(
+		actual.items.every((item) => Object.values(item).every((field) => typeof field === "boolean")),
+	).toBe(true)
+})
 
-test("returns no items if model does not include items model", (t) => {
-	const seed = t.title;
+it("returns no items if model does not include items model", ({ task }) => {
+	const seed = task.name
 
 	const customModel = model.sharedSlice({
 		seed,
-		variations: [model.sharedSliceVariation({ seed: t.title })],
-	});
+		variations: [model.sharedSliceVariation({ seed: task.name })],
+	})
 
-	const actual = value.sharedSlice({ seed, model: customModel });
+	const actual = value.sharedSlice({ seed, model: customModel })
 
-	t.is(actual.items.length, 0);
-});
+	expect(actual.items.length).toBe(0)
+})
 
-test("can be customized with a specific number of items", (t) => {
+it("can be customized with a specific number of items", ({ task }) => {
 	const customModel = model.sharedSlice({
-		seed: t.title,
+		seed: task.name,
 		variations: [
 			model.sharedSliceVariation({
-				seed: t.title,
+				seed: task.name,
 				itemsFields: {
-					boolean: model.boolean({ seed: t.title }),
+					boolean: model.boolean({ seed: task.name }),
 				},
 			}),
 		],
-	});
+	})
 
 	const actual = value.sharedSlice({
-		seed: t.title,
+		seed: task.name,
 		model: customModel,
 		itemsCount: 5,
-	});
-	t.is(actual.items.length, 5);
-});
+	})
+	expect(actual.items.length).toBe(5)
+})

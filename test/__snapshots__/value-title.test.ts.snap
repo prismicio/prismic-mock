@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Title field value 1`] = `
+[
+  [
+    {
+      "spans": [],
+      "text": "Vivamus Arcu",
+      "type": "heading2",
+    },
+  ],
+  [
+    {
+      "spans": [],
+      "text": "Vivamus Arcu",
+      "type": "heading2",
+    },
+  ],
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  [
+    {
+      "spans": [],
+      "text": "Senectus Et Netus Et Malesuada Fames",
+      "type": "heading6",
+    },
+  ],
+  [
+    {
+      "spans": [],
+      "text": "Senectus Et Netus Et Malesuada Fames",
+      "type": "heading6",
+    },
+  ],
+]
+`;

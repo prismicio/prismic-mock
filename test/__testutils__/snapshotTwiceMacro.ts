@@ -1,8 +1,8 @@
-import * as ava from "ava";
+import { expect } from "vitest"
 
-export const snapshotTwiceMacro = <MockReturnType>(
-	t: ava.ExecutionContext,
-	mockFn: (t: ava.ExecutionContext) => MockReturnType,
+export const snapshotTwice = <MockReturnType>(
+	mockFn: (testName: string) => MockReturnType,
+	testName: string,
 ): void => {
-	t.snapshot([mockFn(t), mockFn(t)]);
-};
+	expect([mockFn(testName), mockFn(testName)]).toMatchSnapshot()
+}

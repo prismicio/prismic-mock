@@ -1,7 +1,7 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import * as value from "../src/value";
+import * as value from "../src/value"
 
-test("document is an alias for custom type", (t) => {
-	t.is(value.document, value.customType);
-});
+it("document is an alias for custom type", () => {
+	expect(value.document).toBe(value.customType)
+})

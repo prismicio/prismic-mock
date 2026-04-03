@@ -1,9 +1,8 @@
-import * as prismic from "@prismicio/client";
+import * as prismic from "@prismicio/client"
 
-import { sentenceCase } from "../../lib/changeCase";
-import { createFaker } from "../../lib/createFaker";
-
-import { MockRichTextValueConfig } from "../../types";
+import { sentenceCase } from "../../lib/changeCase"
+import { createFaker } from "../../lib/createFaker"
+import { MockRichTextValueConfig } from "../../types"
 
 const patterns = {
 	short: {
@@ -18,23 +17,20 @@ const patterns = {
 		minItems: 6,
 		maxItems: 12,
 	},
-} as const;
+} as const
 
 type MockRichTextListValueConfig = {
-	pattern?: keyof typeof patterns;
-} & MockRichTextValueConfig;
+	pattern?: keyof typeof patterns
+} & MockRichTextValueConfig
 
-export const list = (
-	config: MockRichTextListValueConfig,
-): prismic.RTListItemNode[] | undefined => {
-	const faker = config.faker || createFaker(config.seed);
+export const list = (config: MockRichTextListValueConfig): prismic.RTListItemNode[] | undefined => {
+	const faker = config.faker || createFaker(config.seed)
 
 	const patternKey =
-		config.pattern ||
-		faker.randomElement(Object.keys(patterns) as (keyof typeof patterns)[]);
-	const pattern = patterns[patternKey];
+		config.pattern || faker.randomElement(Object.keys(patterns) as (keyof typeof patterns)[])
+	const pattern = patterns[patternKey]
 
-	const itemsCount = faker.range(pattern.minItems, pattern.maxItems);
+	const itemsCount = faker.range(pattern.minItems, pattern.maxItems)
 
 	return Array(itemsCount)
 		.fill(undefined)
@@ -43,6 +39,6 @@ export const list = (
 				type: prismic.RichTextNodeType.listItem,
 				text: sentenceCase(faker.words(faker.range(5, 15))),
 				spans: [],
-			};
-		});
-};
+			}
+		})
+}

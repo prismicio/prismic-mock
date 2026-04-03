@@ -1,0 +1,35 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Table field model 1`] = `
+[
+  {
+    "config": {
+      "label": "Eu",
+    },
+    "type": "Table",
+  },
+  {
+    "config": {
+      "label": "Eu",
+    },
+    "type": "Table",
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "config": {
+      "label": "Egestas",
+    },
+    "type": "Table",
+  },
+  {
+    "config": {
+      "label": "Egestas",
+    },
+    "type": "Table",
+  },
+]
+`;

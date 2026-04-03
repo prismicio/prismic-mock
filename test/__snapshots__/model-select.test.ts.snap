@@ -1,0 +1,47 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Select field model 1`] = `
+[
+  {
+    "config": {
+      "default_value": undefined,
+      "label": "Enim",
+      "options": [],
+      "placeholder": "Nisl nunc mi",
+    },
+    "type": "Select",
+  },
+  {
+    "config": {
+      "default_value": undefined,
+      "label": "Enim",
+      "options": [],
+      "placeholder": "Nisl nunc mi",
+    },
+    "type": "Select",
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "config": {
+      "default_value": undefined,
+      "label": "Egestas",
+      "options": [],
+      "placeholder": "Aliquam ut porttitor",
+    },
+    "type": "Select",
+  },
+  {
+    "config": {
+      "default_value": undefined,
+      "label": "Egestas",
+      "options": [],
+      "placeholder": "Aliquam ut porttitor",
+    },
+    "type": "Select",
+  },
+]
+`;

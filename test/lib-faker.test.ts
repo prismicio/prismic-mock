@@ -1,57 +1,54 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { createFaker } from "../src/lib/createFaker";
+import { createFaker } from "../src/lib/createFaker"
 
-test("random", (t) => {
-	const faker = createFaker(t.title);
+it("random", ({ task }) => {
+	const faker = createFaker(task.name)
 
-	t.is(faker.random(), 0.2936111260889124);
-	t.is(faker.random(), 0.03282859386709253);
-});
+	expect(faker.random()).toBe(0.2936111260889124)
+	expect(faker.random()).toBe(0.03282859386709253)
+})
 
-test("randomElement", (t) => {
-	const faker = createFaker(t.title);
+it("randomElement", ({ task }) => {
+	const faker = createFaker(task.name)
 
-	t.is(faker.randomElement([1, 2, 3]), 1);
-	t.is(faker.randomElement([] as undefined[]), undefined);
-});
+	expect(faker.randomElement([1, 2, 3])).toBe(1)
+	expect(faker.randomElement([] as undefined[])).toBe(undefined)
+})
 
-test("range", (t) => {
-	const faker = createFaker(t.title);
+it("range", ({ task }) => {
+	const faker = createFaker(task.name)
 
-	t.is(faker.range(0, 100), 44);
-	t.is(faker.range(10, 20), 19);
-});
+	expect(faker.range(0, 100)).toBe(44)
+	expect(faker.range(10, 20)).toBe(19)
+})
 
-test("rangeFloat", (t) => {
-	const faker = createFaker(t.title);
+it("rangeFloat", ({ task }) => {
+	const faker = createFaker(task.name)
 
-	t.is(faker.rangeFloat(0, 100), 32.577370417438765);
-	t.is(faker.rangeFloat(10, 20), 11.09656356999105);
-});
+	expect(faker.rangeFloat(0, 100)).toBe(32.577370417438765)
+	expect(faker.rangeFloat(10, 20)).toBe(11.09656356999105)
+})
 
-test("lorem", (t) => {
-	const faker = createFaker(t.title);
+it("lorem", ({ task }) => {
+	const faker = createFaker(task.name)
 
-	t.is(
-		faker.lorem("10w"),
+	expect(faker.lorem("10w")).toBe(
 		"vel orci porta non pulvinar neque laoreet suspendisse interdum consectetur",
-	);
-	t.is(
-		faker.lorem("10w", 0),
+	)
+	expect(faker.lorem("10w", 0)).toBe(
 		"lorem ipsum dolor sit amet consectetur adipiscing elit ut aliquam",
-	);
-	t.is(
-		faker.lorem("10w", 1),
+	)
+	expect(faker.lorem("10w", 1)).toBe(
 		"ipsum dolor sit amet consectetur adipiscing elit ut aliquam purus",
-	);
-	t.is(faker.lorem("20000w").split(" ").length, 20000);
-	t.is(faker.lorem("10c"), "lorem ipsu");
-});
+	)
+	expect(faker.lorem("20000w").split(" ").length).toBe(20000)
+	expect(faker.lorem("10c")).toBe("lorem ipsu")
+})
 
-test("word", (t) => {
-	const faker = createFaker(t.title);
+it("word", ({ task }) => {
+	const faker = createFaker(task.name)
 
-	t.is(faker.word(), "porttitor");
-	t.is(faker.word(), "ut");
-});
+	expect(faker.word()).toBe("porttitor")
+	expect(faker.word()).toBe("ut")
+})

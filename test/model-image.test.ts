@@ -1,33 +1,32 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as model from "../src/model";
+it("creates a mock Image field model", ({ task }) => {
+	snapshotTwice((name) => model.image({ seed: name }), task.name)
+})
 
-test("creates a mock Image field model", snapshotTwiceMacro, (t) =>
-	model.image({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => model.image({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	model.image({ seed: 1 }),
-);
-
-test("can be configured to include constraints", (t) => {
+it("can be configured to include constraints", ({ task }) => {
 	const actual = model.image({
-		seed: t.title,
+		seed: task.name,
 		withConstraint: true,
-	});
+	})
 
-	t.is(typeof actual.config?.constraint?.width, "number");
-	t.is(typeof actual.config?.constraint?.height, "number");
-});
+	expect(typeof actual.config?.constraint?.width).toBe("number")
+	expect(typeof actual.config?.constraint?.height).toBe("number")
+})
 
-test("can be configured for a specific thumbnails", (t) => {
+it("can be configured for a specific thumbnails", ({ task }) => {
 	const actual = model.image({
-		seed: t.title,
+		seed: task.name,
 		thumbnailNames: ["Foo"],
-	});
+	})
 
-	t.is(actual.config?.thumbnails?.length, 1);
-	t.is(actual.config?.thumbnails?.[0].name, "Foo");
-});
+	expect(actual.config?.thumbnails?.length).toBe(1)
+	expect(actual.config?.thumbnails?.[0].name).toBe("Foo")
+})

@@ -1,46 +1,41 @@
-import * as prismic from "@prismicio/client";
+import * as prismic from "@prismicio/client"
 
-import { buildImageFieldImage } from "../lib/buildImageFieldImage";
-import { createFaker } from "../lib/createFaker";
-import { getMockImageData } from "../lib/getMockImageData";
-
-import { MockValueStateConfig, MockValueConfig } from "../types";
-
-import * as modelGen from "../model";
+import { buildImageFieldImage } from "../lib/buildImageFieldImage"
+import { createFaker } from "../lib/createFaker"
+import { getMockImageData } from "../lib/getMockImageData"
+import * as modelGen from "../model"
+import { MockValueStateConfig, MockValueConfig } from "../types"
 
 export type MockImageValueConfig<
-	Model extends
-		prismic.CustomTypeModelImageField = prismic.CustomTypeModelImageField,
+	Model extends prismic.CustomTypeModelImageField = prismic.CustomTypeModelImageField,
 	State extends prismic.FieldState = prismic.FieldState,
-> = MockValueConfig<Model> & MockValueStateConfig<State>;
+> = MockValueConfig<Model> & MockValueStateConfig<State>
 
 export type MockImageValue<
-	Model extends
-		prismic.CustomTypeModelImageField = prismic.CustomTypeModelImageField,
+	Model extends prismic.CustomTypeModelImageField = prismic.CustomTypeModelImageField,
 	State extends prismic.FieldState = prismic.FieldState,
 > = prismic.ImageField<
 	NonNullable<NonNullable<Model["config"]>["thumbnails"]>[number]["name"],
 	State
->;
+>
 
 export const image = <
-	Model extends
-		prismic.CustomTypeModelImageField = prismic.CustomTypeModelImageField,
+	Model extends prismic.CustomTypeModelImageField = prismic.CustomTypeModelImageField,
 	State extends prismic.FieldState = "filled",
 >(
 	config: MockImageValueConfig<Model, State>,
 ): MockImageValue<Model, State> => {
-	const faker = config.faker || createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed)
 
-	const model = config.model || modelGen.image({ faker });
-	const imageData = getMockImageData({ faker });
+	const model = config.model || modelGen.image({ faker })
+	const imageData = getMockImageData({ faker })
 
 	const value = buildImageFieldImage({
 		faker,
 		imageData,
 		constraint: model.config?.constraint,
 		state: config.state,
-	}) as MockImageValue<Model, State>;
+	}) as MockImageValue<Model, State>
 
 	if (model.config?.thumbnails) {
 		for (const thumbnail of model.config.thumbnails) {
@@ -54,9 +49,9 @@ export const image = <
 					height: thumbnail.height,
 				},
 				state: config.state,
-			});
+			})
 		}
 	}
 
-	return value;
-};
+	return value
+}

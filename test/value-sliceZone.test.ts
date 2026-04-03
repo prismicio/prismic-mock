@@ -1,80 +1,81 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import * as value from "../src/value"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as value from "../src/value";
-import * as model from "../src/model";
+it("creates a mock Slice Zone field value", ({ task }) => {
+	snapshotTwice((name) => value.sliceZone({ seed: name }), task.name)
+})
 
-test("creates a mock Slice Zone field value", snapshotTwiceMacro, (t) =>
-	value.sliceZone({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => value.sliceZone({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	value.sliceZone({ seed: 1 }),
-);
-
-test("can be customized with a specific number of Slices", (t) => {
+it("can be customized with a specific number of Slices", ({ task }) => {
 	const customModel = model.sliceZone({
-		seed: t.title,
+		seed: task.name,
 		choices: {
-			foo: model.slice({ seed: t.title }),
+			foo: model.slice({ seed: task.name }),
 		},
-	});
+	})
 
 	const actual = value.sliceZone({
-		seed: t.title,
+		seed: task.name,
 		model: customModel,
 		itemsCount: 5,
-	});
-	t.is(actual.length, 5);
-});
+	})
+	expect(actual.length).toBe(5)
+})
 
-test("can be provided with a list of Shared Slice models for Slice Zones containing Shared Slices", (t) => {
-	const seed = t.title;
+it("can be provided with a list of Shared Slice models for Slice Zones containing Shared Slices", ({
+	task,
+}) => {
+	const seed = task.name
 
 	const customModel = model.sliceZone({
 		seed,
 		choices: {
 			foo: model.sharedSliceChoice(),
 		},
-	});
+	})
 
 	const sharedSliceModel = model.sharedSlice({
 		seed,
 		id: "foo",
-		variations: [model.sharedSliceVariation({ seed: t.title })],
-	});
+		variations: [model.sharedSliceVariation({ seed: task.name })],
+	})
 
 	const actual = value.sliceZone({
 		seed,
 		model: customModel,
 		sharedSliceModels: [sharedSliceModel],
-	});
+	})
 
-	t.true(actual.every((slice) => slice.slice_type === sharedSliceModel.id));
-});
+	expect(actual.every((slice) => slice.slice_type === sharedSliceModel.id)).toBe(true)
+})
 
-test("Shared Slices not provided are omitted from the return value", (t) => {
-	const seed = t.title;
+it("Shared Slices not provided are omitted from the return value", ({ task }) => {
+	const seed = task.name
 
 	const customModel = model.sliceZone({
-		seed: t.title,
+		seed: task.name,
 		choices: {
 			foo: model.sharedSliceChoice(),
 			bar: model.sharedSliceChoice(),
 		},
-	});
+	})
 	const sharedSliceModel = model.sharedSlice({
-		seed: t.title,
+		seed: task.name,
 		id: "foo",
-		variations: [model.sharedSliceVariation({ seed: t.title })],
-	});
+		variations: [model.sharedSliceVariation({ seed: task.name })],
+	})
 
 	const actual = value.sliceZone({
 		seed,
 		model: customModel,
 		sharedSliceModels: [sharedSliceModel],
-	});
+	})
 
-	t.true(actual.every((slice) => slice.slice_type === sharedSliceModel.id));
-});
+	expect(actual.every((slice) => slice.slice_type === sharedSliceModel.id)).toBe(true)
+})

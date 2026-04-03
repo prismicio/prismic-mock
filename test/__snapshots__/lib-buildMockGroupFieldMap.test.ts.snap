@@ -1,0 +1,347 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates mock field models for group field 1`] = `
+[
+  {
+    "dignissim": {
+      "config": {
+        "allowText": true,
+        "label": "Pellentesque",
+        "placeholder": "Elit duis tristique",
+        "select": "media",
+      },
+      "type": "Link",
+    },
+    "facilisis_mauris": {
+      "config": {
+        "customtypes": undefined,
+        "label": "Duis",
+        "placeholder": "Elit at imperdiet",
+        "select": "document",
+        "tags": undefined,
+      },
+      "type": "Link",
+    },
+    "fames": {
+      "config": {
+        "constraint": {
+          "height": null,
+          "width": null,
+        },
+        "label": "Pellentesque",
+        "thumbnails": [],
+      },
+      "type": "Image",
+    },
+    "felis": {
+      "config": {
+        "label": "Pharetra",
+        "placeholder": "Ut enim blandit",
+      },
+      "type": "Text",
+    },
+    "ipsum_faucibus": {
+      "config": {
+        "label": "Viverra",
+        "placeholder": "Non pulvinar neque",
+      },
+      "type": "Number",
+    },
+    "placerat": {
+      "config": {
+        "allowTargetBlank": undefined,
+        "label": "Mus",
+        "placeholder": "Venenatis tellus metus",
+        "single": "heading2,heading3,heading5,heading6",
+      },
+      "type": "StructuredText",
+    },
+    "quis_auctor": {
+      "config": {
+        "allowTargetBlank": true,
+        "allowText": true,
+        "label": "Et",
+        "placeholder": "Lectus magna fringilla",
+        "repeat": true,
+        "select": null,
+      },
+      "type": "Link",
+    },
+    "turpis_cursus": {
+      "config": {
+        "label": "Nunc",
+        "placeholder": "At imperdiet dui",
+      },
+      "type": "Color",
+    },
+    "urna": {
+      "config": {
+        "catalog": "ac_tortor",
+        "label": "Elit",
+      },
+      "type": "IntegrationFields",
+    },
+    "vitae": {
+      "config": {
+        "label": "Faucibus",
+      },
+      "type": "Boolean",
+    },
+  },
+  {
+    "dignissim": {
+      "config": {
+        "allowText": true,
+        "label": "Pellentesque",
+        "placeholder": "Elit duis tristique",
+        "select": "media",
+      },
+      "type": "Link",
+    },
+    "facilisis_mauris": {
+      "config": {
+        "customtypes": undefined,
+        "label": "Duis",
+        "placeholder": "Elit at imperdiet",
+        "select": "document",
+        "tags": undefined,
+      },
+      "type": "Link",
+    },
+    "fames": {
+      "config": {
+        "constraint": {
+          "height": null,
+          "width": null,
+        },
+        "label": "Pellentesque",
+        "thumbnails": [],
+      },
+      "type": "Image",
+    },
+    "felis": {
+      "config": {
+        "label": "Pharetra",
+        "placeholder": "Ut enim blandit",
+      },
+      "type": "Text",
+    },
+    "ipsum_faucibus": {
+      "config": {
+        "label": "Viverra",
+        "placeholder": "Non pulvinar neque",
+      },
+      "type": "Number",
+    },
+    "placerat": {
+      "config": {
+        "allowTargetBlank": undefined,
+        "label": "Mus",
+        "placeholder": "Venenatis tellus metus",
+        "single": "heading2,heading3,heading5,heading6",
+      },
+      "type": "StructuredText",
+    },
+    "quis_auctor": {
+      "config": {
+        "allowTargetBlank": true,
+        "allowText": true,
+        "label": "Et",
+        "placeholder": "Lectus magna fringilla",
+        "repeat": true,
+        "select": null,
+      },
+      "type": "Link",
+    },
+    "turpis_cursus": {
+      "config": {
+        "label": "Nunc",
+        "placeholder": "At imperdiet dui",
+      },
+      "type": "Color",
+    },
+    "urna": {
+      "config": {
+        "catalog": "ac_tortor",
+        "label": "Elit",
+      },
+      "type": "IntegrationFields",
+    },
+    "vitae": {
+      "config": {
+        "label": "Faucibus",
+      },
+      "type": "Boolean",
+    },
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "aliquam": {
+      "config": {
+        "label": "Gravida",
+        "placeholder": "Laoreet non curabitur",
+      },
+      "type": "Timestamp",
+    },
+    "at": {
+      "config": {
+        "catalog": "gravida_cum",
+        "label": "Elementum",
+      },
+      "type": "IntegrationFields",
+    },
+    "diam": {
+      "config": {
+        "label": "Interdum",
+        "placeholder": "Vitae et leo",
+      },
+      "type": "Date",
+    },
+    "ipsum_dolor": {
+      "config": {
+        "customtypes": undefined,
+        "label": "Senectus",
+        "placeholder": "Sed augue lacus",
+        "select": "document",
+        "tags": undefined,
+      },
+      "type": "Link",
+    },
+    "lacus_sed": {
+      "config": {
+        "label": "Nisl",
+        "placeholder": "Sit amet risus",
+      },
+      "type": "Embed",
+    },
+    "pellentesque": {
+      "config": {
+        "label": "Elementum",
+        "placeholder": "Aliquam nulla facilisi",
+      },
+      "type": "Color",
+    },
+    "suspendisse": {
+      "config": {
+        "allowText": undefined,
+        "label": "Sed",
+        "placeholder": "Ultricies mi eget",
+        "select": "media",
+      },
+      "type": "Link",
+    },
+    "ut": {
+      "config": {
+        "default_value": undefined,
+        "label": "Proin",
+        "options": [],
+        "placeholder": "Pretium nibh ipsum",
+      },
+      "type": "Select",
+    },
+    "ut_tellus": {
+      "config": {
+        "label": "Mattis",
+      },
+      "type": "GeoPoint",
+    },
+    "vulputate_odio": {
+      "config": {
+        "allowTargetBlank": true,
+        "allowText": true,
+        "label": "Mi",
+        "placeholder": "Massa tempor nec",
+        "repeat": undefined,
+        "select": null,
+      },
+      "type": "Link",
+    },
+  },
+  {
+    "aliquam": {
+      "config": {
+        "label": "Gravida",
+        "placeholder": "Laoreet non curabitur",
+      },
+      "type": "Timestamp",
+    },
+    "at": {
+      "config": {
+        "catalog": "gravida_cum",
+        "label": "Elementum",
+      },
+      "type": "IntegrationFields",
+    },
+    "diam": {
+      "config": {
+        "label": "Interdum",
+        "placeholder": "Vitae et leo",
+      },
+      "type": "Date",
+    },
+    "ipsum_dolor": {
+      "config": {
+        "customtypes": undefined,
+        "label": "Senectus",
+        "placeholder": "Sed augue lacus",
+        "select": "document",
+        "tags": undefined,
+      },
+      "type": "Link",
+    },
+    "lacus_sed": {
+      "config": {
+        "label": "Nisl",
+        "placeholder": "Sit amet risus",
+      },
+      "type": "Embed",
+    },
+    "pellentesque": {
+      "config": {
+        "label": "Elementum",
+        "placeholder": "Aliquam nulla facilisi",
+      },
+      "type": "Color",
+    },
+    "suspendisse": {
+      "config": {
+        "allowText": undefined,
+        "label": "Sed",
+        "placeholder": "Ultricies mi eget",
+        "select": "media",
+      },
+      "type": "Link",
+    },
+    "ut": {
+      "config": {
+        "default_value": undefined,
+        "label": "Proin",
+        "options": [],
+        "placeholder": "Pretium nibh ipsum",
+      },
+      "type": "Select",
+    },
+    "ut_tellus": {
+      "config": {
+        "label": "Mattis",
+      },
+      "type": "GeoPoint",
+    },
+    "vulputate_odio": {
+      "config": {
+        "allowTargetBlank": true,
+        "allowText": true,
+        "label": "Mi",
+        "placeholder": "Massa tempor nec",
+        "repeat": undefined,
+        "select": null,
+      },
+      "type": "Link",
+    },
+  },
+]
+`;

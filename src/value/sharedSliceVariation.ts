@@ -1,43 +1,36 @@
-import * as prismic from "@prismicio/client";
+import * as prismic from "@prismicio/client"
 
-import { MockValueConfig, ModelValue } from "../types";
-
-import { createFaker } from "../lib/createFaker";
-import { generateFieldId } from "../lib/generateFieldId";
-import {
-	valueForModelMap,
-	ValueForModelMapConfigs,
-} from "../lib/valueForModelMap";
-
-import * as modelGen from "../model";
+import { createFaker } from "../lib/createFaker"
+import { generateFieldId } from "../lib/generateFieldId"
+import { valueForModelMap, ValueForModelMapConfigs } from "../lib/valueForModelMap"
+import * as modelGen from "../model"
+import { MockValueConfig, ModelValue } from "../types"
 
 export type MockSharedSliceVariationValueConfig<
-	Model extends
-		prismic.SharedSliceModelVariation = prismic.SharedSliceModelVariation,
+	Model extends prismic.SharedSliceModelVariation = prismic.SharedSliceModelVariation,
 > = {
-	type?: string;
-	label?: string;
-	itemsCount?: number;
-	primaryFieldConfigs?: ValueForModelMapConfigs;
-	itemsFieldConfigs?: ValueForModelMapConfigs;
-} & MockValueConfig<Model>;
+	type?: string
+	label?: string
+	itemsCount?: number
+	primaryFieldConfigs?: ValueForModelMapConfigs
+	itemsFieldConfigs?: ValueForModelMapConfigs
+} & MockValueConfig<Model>
 
 export const sharedSliceVariation = <
-	Model extends
-		prismic.SharedSliceModelVariation = prismic.SharedSliceModelVariation,
+	Model extends prismic.SharedSliceModelVariation = prismic.SharedSliceModelVariation,
 >(
 	config: MockSharedSliceVariationValueConfig<Model>,
 ): ModelValue<Model> => {
-	const faker = config.faker || createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed)
 
-	const model = config.model || modelGen.sharedSliceVariation({ faker });
+	const model = config.model || modelGen.sharedSliceVariation({ faker })
 
-	const sliceType = config.type ?? generateFieldId({ faker });
+	const sliceType = config.type ?? generateFieldId({ faker })
 
 	const itemsCount =
 		model.items && Object.keys(model.items).length > 0
-			? config.itemsCount ?? faker.range(1, 6)
-			: 0;
+			? (config.itemsCount ?? faker.range(1, 6))
+			: 0
 
 	return {
 		id: faker.hash(11),
@@ -57,7 +50,7 @@ export const sharedSliceVariation = <
 					faker,
 					map: model.items || {},
 					configs: config.itemsFieldConfigs,
-				});
+				})
 			}),
-	} as ModelValue<Model>;
-};
+	} as ModelValue<Model>
+}

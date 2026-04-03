@@ -1,82 +1,78 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import * as value from "../src/value"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as value from "../src/value";
-import * as model from "../src/model";
+it("creates a mock RichText field value", ({ task }) => {
+	snapshotTwice((name) => value.richText({ seed: name }), task.name)
+})
 
-test("creates a mock RichText field value", snapshotTwiceMacro, (t) =>
-	value.richText({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => value.richText({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	value.richText({ seed: 1 }),
-);
-
-test("supports custom model", (t) => {
+it("supports custom model", ({ task }) => {
 	const customModel = model.richText({
-		seed: t.title,
+		seed: task.name,
 		withMultipleBlocks: false,
-	});
+	})
 	if (customModel.config) {
-		customModel.config.single = "paragraph";
+		customModel.config.single = "paragraph"
 	}
 
 	const actual = value.richText({
-		seed: t.title,
+		seed: task.name,
 		model: customModel,
-	});
+	})
 
-	t.is(
-		actual[0]?.type,
-		customModel.config?.single as (typeof actual)[number]["type"],
-	);
-});
+	expect(actual[0]?.type).toBe(customModel.config?.single as (typeof actual)[number]["type"])
+})
 
-test("models without multiple blocks returns one block", (t) => {
+it("models without multiple blocks returns one block", ({ task }) => {
 	const customModel = model.richText({
-		seed: t.title,
+		seed: task.name,
 		withMultipleBlocks: false,
-	});
+	})
 	if (customModel.config) {
-		customModel.config.single = "paragraph";
+		customModel.config.single = "paragraph"
 	}
 
 	const actual = value.richText({
-		seed: t.title,
+		seed: task.name,
 		model: customModel,
-	});
+	})
 
-	t.is(actual.length, 1);
-});
+	expect(actual.length).toBe(1)
+})
 
-test("can be customized with a pattern to determine richText length", (t) => {
+it("can be customized with a pattern to determine richText length", ({ task }) => {
 	const customModel = model.richText({
-		seed: t.title,
+		seed: task.name,
 		withMultipleBlocks: true,
-	});
+	})
 
 	const actualShort = value.richText({
-		seed: t.title,
+		seed: task.name,
 		pattern: "short",
 		model: customModel,
-	});
-	t.true(actualShort.length >= 1);
-	t.true(actualShort.length <= 2);
+	})
+	expect(actualShort.length >= 1).toBe(true)
+	expect(actualShort.length <= 2).toBe(true)
 
 	const actualMedium = value.richText({
-		seed: t.title,
+		seed: task.name,
 		pattern: "medium",
 		model: customModel,
-	});
-	t.true(actualMedium.length >= 2);
-	t.true(actualMedium.length <= 4);
+	})
+	expect(actualMedium.length >= 2).toBe(true)
+	expect(actualMedium.length <= 4).toBe(true)
 
 	const actualLong = value.richText({
-		seed: t.title,
+		seed: task.name,
 		pattern: "long",
 		model: customModel,
-	});
-	t.true(actualLong.length >= 4);
-	t.true(actualLong.length <= 8);
-});
+	})
+	expect(actualLong.length >= 4).toBe(true)
+	expect(actualLong.length <= 8).toBe(true)
+})

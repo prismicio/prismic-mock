@@ -1,108 +1,101 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import * as value from "../src/value"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as value from "../src/value";
-import * as model from "../src/model";
+it("creates a mock Content Relationship field value", ({ task }) => {
+	snapshotTwice((name) => value.contentRelationship({ seed: name }), task.name)
+})
 
-test(
-	"creates a mock Content Relationship field value",
-	snapshotTwiceMacro,
-	(t) => value.contentRelationship({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => value.contentRelationship({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	value.contentRelationship({ seed: 1 }),
-);
-
-test("supports custom model", (t) => {
+it("supports custom model", ({ task }) => {
 	const customModel = model.contentRelationship({
-		seed: t.title,
+		seed: task.name,
 		customTypeIDs: ["type"],
 		tags: ["tag"],
-	});
+	})
 
 	const actual = value.contentRelationship({
-		seed: t.title,
+		seed: task.name,
 		model: customModel,
-	});
+	})
 
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	t.true(customModel.config?.customtypes!.includes(actual.type));
+	expect(customModel.config?.customtypes!.includes(actual.type)).toBe(true)
 
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	t.true(customModel.config?.tags!.every((tag) => actual.tags.includes(tag)));
-});
+	expect(customModel.config?.tags!.every((tag) => actual.tags.includes(tag))).toBe(true)
+})
 
-test("can be configured to return an empty value", (t) => {
+it("can be configured to return an empty value", ({ task }) => {
 	const actual = value.contentRelationship({
-		seed: t.title,
+		seed: task.name,
 		state: "empty",
-	});
+	})
 
-	t.false("url" in actual);
-});
+	expect("url" in actual).toBe(false)
+})
 
-test("can be configured to return a link from a given list of documents", (t) => {
+it("can be configured to return a link from a given list of documents", ({ task }) => {
 	const linkableDocuments = [
-		value.document({ seed: t.title }),
-		value.document({ seed: t.title }),
-	];
+		value.document({ seed: task.name }),
+		value.document({ seed: task.name }),
+	]
 	const actual = value.contentRelationship({
-		seed: t.title,
+		seed: task.name,
 		linkableDocuments,
-	});
+	})
 
-	t.true(
-		linkableDocuments.some(
-			(linkableDocument) => actual.id === linkableDocument.id,
-		),
-	);
-});
+	expect(linkableDocuments.some((linkableDocument) => actual.id === linkableDocument.id)).toBe(true)
+})
 
-test("can be configured to return a link from a given list of documents with constraints", (t) => {
+it("can be configured to return a link from a given list of documents with constraints", ({
+	task,
+}) => {
 	const linkableDocuments = [
-		{ ...value.document({ seed: t.title }), type: "foo", tags: ["bar"] },
-		value.document({ seed: t.title }),
-	];
+		{ ...value.document({ seed: task.name }), type: "foo", tags: ["bar"] },
+		value.document({ seed: task.name }),
+	]
 
-	const customModel = model.contentRelationship({ seed: t.title });
+	const customModel = model.contentRelationship({ seed: task.name })
 	if (customModel.config) {
-		customModel.config.customtypes = ["foo"];
-		customModel.config.tags = ["bar"];
+		customModel.config.customtypes = ["foo"]
+		customModel.config.tags = ["bar"]
 	}
 
 	const actual = value.contentRelationship({
-		seed: t.title,
+		seed: task.name,
 		model: customModel,
 		linkableDocuments,
-	});
+	})
 
-	t.is(actual.id, linkableDocuments[0].id);
-});
+	expect(actual.id).toBe(linkableDocuments[0].id)
+})
 
-test("throws if a linkable document cannot be found within constraints", (t) => {
+it("throws if a linkable document cannot be found within constraints", ({ task }) => {
 	const linkableDocuments = [
 		{
-			...value.document({ seed: t.title }),
+			...value.document({ seed: task.name }),
 			type: "not-foo",
 			tags: ["not-bar"],
 		},
-	];
+	]
 
-	const customModel = model.contentRelationship({ seed: t.title });
+	const customModel = model.contentRelationship({ seed: task.name })
 	if (customModel.config) {
-		customModel.config.customtypes = ["foo"];
-		customModel.config.tags = ["bar"];
+		customModel.config.customtypes = ["foo"]
+		customModel.config.tags = ["bar"]
 	}
 
-	t.throws(
-		() =>
-			value.contentRelationship({
-				seed: t.title,
-				model: customModel,
-				linkableDocuments,
-			}),
-		{ message: /could not be found/ },
-	);
-});
+	expect(() =>
+		value.contentRelationship({
+			seed: task.name,
+			model: customModel,
+			linkableDocuments,
+		}),
+	).toThrow(/could not be found/)
+})

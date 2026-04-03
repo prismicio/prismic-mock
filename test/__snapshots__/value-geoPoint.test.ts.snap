@@ -1,0 +1,27 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock GeoPoint field value 1`] = `
+[
+  {
+    "latitude": 64.28159254469946,
+    "longitude": 166.39306096043276,
+  },
+  {
+    "latitude": 64.28159254469946,
+    "longitude": 166.39306096043276,
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "latitude": -39.66347990782547,
+    "longitude": -82.2392974193765,
+  },
+  {
+    "latitude": -39.66347990782547,
+    "longitude": -82.2392974193765,
+  },
+]
+`;

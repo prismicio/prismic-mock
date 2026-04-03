@@ -1,35 +1,32 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as model from "../src/model";
+it("creates a mock Content Relationship field model", ({ task }) => {
+	snapshotTwice((name) => model.contentRelationship({ seed: name }), task.name)
+})
 
-test(
-	"creates a mock Content Relationship field model",
-	snapshotTwiceMacro,
-	(t) => model.contentRelationship({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => model.contentRelationship({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	model.contentRelationship({ seed: 1 }),
-);
-
-test("can be configured to constrain by custom type", (t) => {
-	const customTypeIDs = ["foo", "bar"];
+it("can be configured to constrain by custom type", ({ task }) => {
+	const customTypeIDs = ["foo", "bar"]
 	const actual = model.contentRelationship({
-		seed: t.title,
+		seed: task.name,
 		customTypeIDs,
-	});
+	})
 
-	t.is(actual.config?.customtypes, customTypeIDs);
-});
+	expect(actual.config?.customtypes).toBe(customTypeIDs)
+})
 
-test("can be configured to constrain by tags", (t) => {
-	const tags = ["foo", "bar"];
+it("can be configured to constrain by tags", ({ task }) => {
+	const tags = ["foo", "bar"]
 	const actual = model.contentRelationship({
-		seed: t.title,
+		seed: task.name,
 		tags,
-	});
+	})
 
-	t.is(actual.config?.tags, tags);
-});
+	expect(actual.config?.tags).toBe(tags)
+})

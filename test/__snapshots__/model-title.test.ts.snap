@@ -1,0 +1,47 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Title field model 1`] = `
+[
+  {
+    "config": {
+      "allowTargetBlank": undefined,
+      "label": "Dui",
+      "placeholder": "Magna fermentum iaculis",
+      "single": "heading1,heading2,heading3,heading4,heading6",
+    },
+    "type": "StructuredText",
+  },
+  {
+    "config": {
+      "allowTargetBlank": undefined,
+      "label": "Dui",
+      "placeholder": "Magna fermentum iaculis",
+      "single": "heading1,heading2,heading3,heading4,heading6",
+    },
+    "type": "StructuredText",
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "config": {
+      "allowTargetBlank": undefined,
+      "label": "Purus",
+      "placeholder": "Id diam vel",
+      "single": "heading2,heading3,heading4,heading5,heading6",
+    },
+    "type": "StructuredText",
+  },
+  {
+    "config": {
+      "allowTargetBlank": undefined,
+      "label": "Purus",
+      "placeholder": "Id diam vel",
+      "single": "heading2,heading3,heading4,heading5,heading6",
+    },
+    "type": "StructuredText",
+  },
+]
+`;

@@ -1,27 +1,26 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as model from "../src/model";
+it("creates a mock Link To Media field model", ({ task }) => {
+	snapshotTwice((name) => model.linkToMedia({ seed: name }), task.name)
+})
 
-test("creates a mock Link To Media field model", snapshotTwiceMacro, (t) =>
-	model.linkToMedia({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => model.linkToMedia({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	model.linkToMedia({ seed: 1 }),
-);
-
-test("can be configured to explicitly support the text property", (t) => {
+it("can be configured to explicitly support the text property", ({ task }) => {
 	const actualTrue = model.linkToMedia({
-		seed: t.title,
+		seed: task.name,
 		allowText: true,
-	});
-	t.is(actualTrue.config.allowText, true);
+	})
+	expect(actualTrue.config.allowText).toBe(true)
 
 	const actualFalse = model.linkToMedia({
-		seed: t.title,
+		seed: task.name,
 		allowText: false,
-	});
-	t.is(actualFalse.config.allowText, undefined);
-});
+	})
+	expect(actualFalse.config.allowText).toBe(undefined)
+})

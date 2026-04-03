@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Select field value 1`] = `
+[
+  undefined,
+  undefined,
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  undefined,
+  undefined,
+]
+`;

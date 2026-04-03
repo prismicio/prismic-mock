@@ -1,27 +1,26 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as model from "../src/model";
+it("creates a mock Slice Zone field model", ({ task }) => {
+	snapshotTwice((name) => model.sliceZone({ seed: name }), task.name)
+})
 
-test("creates a mock Slice Zone field model", snapshotTwiceMacro, (t) =>
-	model.sliceZone({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => model.sliceZone({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	model.sliceZone({ seed: 1 }),
-);
-
-test("can be configured to use specific choices", (t) => {
+it("can be configured to use specific choices", ({ task }) => {
 	const choices = {
-		foo: model.slice({ seed: t.title }),
-		bar: model.slice({ seed: t.title }),
-	};
+		foo: model.slice({ seed: task.name }),
+		bar: model.slice({ seed: task.name }),
+	}
 
 	const actual = model.sliceZone({
-		seed: t.title,
+		seed: task.name,
 		choices,
-	});
+	})
 
-	t.deepEqual(actual.config?.choices, choices);
-});
+	expect(actual.config?.choices).toEqual(choices)
+})

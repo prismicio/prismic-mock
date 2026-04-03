@@ -1,0 +1,47 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Shared Slice field value 1`] = `
+[
+  {
+    "id": "38dfdcdbb26",
+    "items": [],
+    "primary": {},
+    "slice_label": null,
+    "slice_type": "nulla",
+    "variation": "eu",
+    "version": "272c6fa",
+  },
+  {
+    "id": "38dfdcdbb26",
+    "items": [],
+    "primary": {},
+    "slice_label": null,
+    "slice_type": "nulla",
+    "variation": "eu",
+    "version": "272c6fa",
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "id": "7716385ebd0",
+    "items": [],
+    "primary": {},
+    "slice_label": null,
+    "slice_type": "aliquam",
+    "variation": "purus",
+    "version": "2c4e7ff",
+  },
+  {
+    "id": "7716385ebd0",
+    "items": [],
+    "primary": {},
+    "slice_label": null,
+    "slice_type": "aliquam",
+    "variation": "purus",
+    "version": "2c4e7ff",
+  },
+]
+`;

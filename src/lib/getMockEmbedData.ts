@@ -1,6 +1,5 @@
-import { createFaker, Faker } from "../lib/createFaker";
-
-import { MockEmbedData, Seed } from "../types";
+import { createFaker, Faker } from "../lib/createFaker"
+import { MockEmbedData, Seed } from "../types"
 
 const dataSet: MockEmbedData[] = [
 	{
@@ -80,21 +79,19 @@ const dataSet: MockEmbedData[] = [
 		width: 200,
 		height: 113,
 	},
-];
+]
 type GetMockEmbedDataConfig =
 	| {
-			seed: Seed;
-			faker?: never;
+			seed: Seed
+			faker?: never
 	  }
 	| {
-			faker: Faker;
-			seed?: never;
-	  };
+			faker: Faker
+			seed?: never
+	  }
 
-export const getMockEmbedData = (
-	config: GetMockEmbedDataConfig,
-): MockEmbedData => {
-	const faker = config.faker || createFaker(config.seed);
+export const getMockEmbedData = (config: GetMockEmbedDataConfig): MockEmbedData => {
+	const faker = config.faker || createFaker(config.seed)
 
-	return faker.randomElement(dataSet);
-};
+	return faker.randomElement(dataSet)
+}

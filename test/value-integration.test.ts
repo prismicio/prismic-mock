@@ -1,32 +1,31 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as value from "../src/value"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as value from "../src/value";
+it("creates a mock Integration Fields field value", ({ task }) => {
+	snapshotTwice((name) => value.integration({ seed: name }), task.name)
+})
 
-test("creates a mock Integration Fields field value", snapshotTwiceMacro, (t) =>
-	value.integration({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => value.integration({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	value.integration({ seed: 1 }),
-);
-
-test("can be configured to return an empty value", (t) => {
+it("can be configured to return an empty value", ({ task }) => {
 	const actual = value.integration({
-		seed: t.title,
+		seed: task.name,
 		state: "empty",
-	});
+	})
 
-	t.is(actual, null);
-});
+	expect(actual).toBe(null)
+})
 
-test("can be configured to return provided data", (t) => {
-	const data = { foo: "bar" };
+it("can be configured to return provided data", ({ task }) => {
+	const data = { foo: "bar" }
 	const actual = value.integration({
-		seed: t.title,
+		seed: task.name,
 		data,
-	});
+	})
 
-	t.is(actual, data);
-});
+	expect(actual).toBe(data)
+})

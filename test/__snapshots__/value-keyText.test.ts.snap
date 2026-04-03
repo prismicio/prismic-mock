@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Key Text field value 1`] = `
+[
+  "Diam sollicitudin tempor",
+  "Diam sollicitudin tempor",
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  "Egestas erat imperdiet",
+  "Egestas erat imperdiet",
+]
+`;

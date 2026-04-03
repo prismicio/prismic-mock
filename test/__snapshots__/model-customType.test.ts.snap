@@ -1,0 +1,43 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Custom Type field model 1`] = `
+[
+  {
+    "format": "page",
+    "id": "tortor",
+    "json": {},
+    "label": "Tortor",
+    "repeatable": true,
+    "status": true,
+  },
+  {
+    "format": "page",
+    "id": "tortor",
+    "json": {},
+    "label": "Tortor",
+    "repeatable": true,
+    "status": true,
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "format": "custom",
+    "id": "aliquam",
+    "json": {},
+    "label": "Aliquam",
+    "repeatable": true,
+    "status": true,
+  },
+  {
+    "format": "custom",
+    "id": "aliquam",
+    "json": {},
+    "label": "Aliquam",
+    "repeatable": true,
+    "status": true,
+  },
+]
+`;

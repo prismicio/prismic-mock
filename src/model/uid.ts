@@ -1,16 +1,13 @@
-import * as prismic from "@prismicio/client";
+import * as prismic from "@prismicio/client"
 
-import { capitalCase, sentenceCase } from "../lib/changeCase";
-import { createFaker } from "../lib/createFaker";
+import { capitalCase, sentenceCase } from "../lib/changeCase"
+import { createFaker } from "../lib/createFaker"
+import { MockModelConfig } from "../types"
 
-import { MockModelConfig } from "../types";
+export type MockUIDModelConfig = MockModelConfig
 
-export type MockUIDModelConfig = MockModelConfig;
-
-export const uid = (
-	config: MockUIDModelConfig,
-): prismic.CustomTypeModelUIDField => {
-	const faker = config.faker || createFaker(config.seed);
+export const uid = (config: MockUIDModelConfig): prismic.CustomTypeModelUIDField => {
+	const faker = config.faker || createFaker(config.seed)
 
 	return {
 		type: prismic.CustomTypeModelFieldType.UID,
@@ -18,5 +15,5 @@ export const uid = (
 			label: capitalCase(faker.word()),
 			placeholder: sentenceCase(faker.words(3)),
 		},
-	};
-};
+	}
+}

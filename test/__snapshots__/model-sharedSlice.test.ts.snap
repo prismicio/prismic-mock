@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Shared Slice model 1`] = `
+[
+  {
+    "description": "Ultrices mi tempus imperdiet nulla malesuada pellentesque elit",
+    "id": "ultricies",
+    "name": "Ultricies",
+    "type": "SharedSlice",
+    "variations": [],
+  },
+  {
+    "description": "Ultrices mi tempus imperdiet nulla malesuada pellentesque elit",
+    "id": "ultricies",
+    "name": "Ultricies",
+    "type": "SharedSlice",
+    "variations": [],
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "description": "Neque ornare aenean euismod elementum nisi quis eleifend",
+    "id": "aliquam",
+    "name": "Aliquam",
+    "type": "SharedSlice",
+    "variations": [],
+  },
+  {
+    "description": "Neque ornare aenean euismod elementum nisi quis eleifend",
+    "id": "aliquam",
+    "name": "Aliquam",
+    "type": "SharedSlice",
+    "variations": [],
+  },
+]
+`;

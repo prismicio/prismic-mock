@@ -1,0 +1,47 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Link To Media field model 1`] = `
+[
+  {
+    "config": {
+      "allowText": true,
+      "label": "Pharetra",
+      "placeholder": "Tempor id eu",
+      "select": "media",
+    },
+    "type": "Link",
+  },
+  {
+    "config": {
+      "allowText": true,
+      "label": "Pharetra",
+      "placeholder": "Tempor id eu",
+      "select": "media",
+    },
+    "type": "Link",
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "config": {
+      "allowText": true,
+      "label": "Egestas",
+      "placeholder": "Aliquam ut porttitor",
+      "select": "media",
+    },
+    "type": "Link",
+  },
+  {
+    "config": {
+      "allowText": true,
+      "label": "Egestas",
+      "placeholder": "Aliquam ut porttitor",
+      "select": "media",
+    },
+    "type": "Link",
+  },
+]
+`;

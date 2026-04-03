@@ -1,47 +1,46 @@
-import test from "ava";
-import * as prismic from "@prismicio/client";
+import * as prismic from "@prismicio/client"
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as prismicM from "../src"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as prismicM from "../src";
+it("creates a mock Custom Type field model", ({ task }) => {
+	snapshotTwice((name) => prismicM.model.customType({ seed: name }), task.name)
+})
 
-test("creates a mock Custom Type field model", snapshotTwiceMacro, (t) =>
-	prismicM.model.customType({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => prismicM.model.customType({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	prismicM.model.customType({ seed: 1 }),
-);
-
-test("can be configured for specific fields", (t) => {
+it("can be configured for specific fields", ({ task }) => {
 	const actual = prismicM.model.customType({
-		seed: t.title,
+		seed: task.name,
 		fields: {
-			boolean: prismicM.model.boolean({ seed: t.title }),
+			boolean: prismicM.model.boolean({ seed: task.name }),
 		},
-	});
+	})
 
-	t.is(actual.json.Main.boolean.type, prismic.CustomTypeModelFieldType.Boolean);
-});
+	expect(actual.json.Main.boolean.type).toBe(prismic.CustomTypeModelFieldType.Boolean)
+})
 
-test("can be configured for specific tabs", (t) => {
+it("can be configured for specific tabs", ({ task }) => {
 	const actual = prismicM.model.customType({
-		seed: t.title,
+		seed: task.name,
 		tabs: {
 			Main: {
-				boolean: prismicM.model.boolean({ seed: t.title }),
+				boolean: prismicM.model.boolean({ seed: task.name }),
 			},
 		},
-	});
+	})
 
-	t.is(actual.json.Main.boolean.type, prismic.CustomTypeModelFieldType.Boolean);
-});
+	expect(actual.json.Main.boolean.type).toBe(prismic.CustomTypeModelFieldType.Boolean)
+})
 
-test("can be configured for a specific format", (t) => {
+it("can be configured for a specific format", ({ task }) => {
 	const actual = prismicM.model.customType({
-		seed: t.title,
+		seed: task.name,
 		format: "page",
-	});
+	})
 
-	t.is(actual.format, "page");
-});
+	expect(actual.format).toBe("page")
+})

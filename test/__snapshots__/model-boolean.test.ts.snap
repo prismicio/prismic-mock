@@ -1,0 +1,35 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Boolean field model 1`] = `
+[
+  {
+    "config": {
+      "label": "Netus",
+    },
+    "type": "Boolean",
+  },
+  {
+    "config": {
+      "label": "Netus",
+    },
+    "type": "Boolean",
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "config": {
+      "label": "Egestas",
+    },
+    "type": "Boolean",
+  },
+  {
+    "config": {
+      "label": "Egestas",
+    },
+    "type": "Boolean",
+  },
+]
+`;

@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock UID field model 1`] = `
+[
+  {
+    "config": {
+      "label": "Tempor",
+      "placeholder": "Eget nulla facilisi",
+    },
+    "type": "UID",
+  },
+  {
+    "config": {
+      "label": "Tempor",
+      "placeholder": "Eget nulla facilisi",
+    },
+    "type": "UID",
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "config": {
+      "label": "Egestas",
+      "placeholder": "Aliquam ut porttitor",
+    },
+    "type": "UID",
+  },
+  {
+    "config": {
+      "label": "Egestas",
+      "placeholder": "Aliquam ut porttitor",
+    },
+    "type": "UID",
+  },
+]
+`;

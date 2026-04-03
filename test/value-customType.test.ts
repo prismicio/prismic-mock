@@ -1,73 +1,72 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as prismicM from "../src"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as prismicM from "../src";
+it("creates a mock CustomType field value", ({ task }) => {
+	snapshotTwice((name) => prismicM.value.customType({ seed: name }), task.name)
+})
 
-test("creates a mock CustomType field value", snapshotTwiceMacro, (t) =>
-	prismicM.value.customType({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => prismicM.value.customType({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	prismicM.value.customType({ seed: 1 }),
-);
-
-test("supports custom model", (t) => {
+it("supports custom model", ({ task }) => {
 	const customModel = prismicM.model.customType({
-		seed: t.title,
+		seed: task.name,
 		fields: {
-			uid: prismicM.model.uid({ seed: t.title }),
-			boolean: prismicM.model.boolean({ seed: t.title }),
+			uid: prismicM.model.uid({ seed: task.name }),
+			boolean: prismicM.model.boolean({ seed: task.name }),
 		},
-	});
+	})
 
 	const actual = prismicM.value.customType({
-		seed: t.title,
+		seed: task.name,
 		model: customModel,
-	});
+	})
 
-	t.is(typeof actual.uid, "string");
-	t.is(typeof actual.data.boolean, "boolean");
-});
+	expect(typeof actual.uid).toBe("string")
+	expect(typeof actual.data.boolean).toBe("boolean")
+})
 
-test("uid field is not included in data field", (t) => {
+it("uid field is not included in data field", ({ task }) => {
 	const customModel = prismicM.model.customType({
-		seed: t.title,
+		seed: task.name,
 		fields: {
-			uid: prismicM.model.uid({ seed: t.title }),
+			uid: prismicM.model.uid({ seed: task.name }),
 		},
-	});
+	})
 
 	const actual = prismicM.value.customType({
-		seed: t.title,
+		seed: task.name,
 		model: customModel,
-	});
+	})
 
-	t.is(typeof actual.uid, "string");
-	t.false("uid" in actual.data);
-});
+	expect(typeof actual.uid).toBe("string")
+	expect("uid" in actual.data).toBe(false)
+})
 
-test("uid field is null if not UID field is not in model", (t) => {
+it("uid field is null if not UID field is not in model", ({ task }) => {
 	const customModel = prismicM.model.customType({
-		seed: t.title,
+		seed: task.name,
 		fields: {
-			boolean: prismicM.model.boolean({ seed: t.title }),
+			boolean: prismicM.model.boolean({ seed: task.name }),
 		},
-	});
+	})
 
 	const actual = prismicM.value.customType({
-		seed: t.title,
+		seed: task.name,
 		model: customModel,
-	});
+	})
 
-	t.is(actual.uid, null);
-	t.false("uid" in actual.data);
-});
+	expect(actual.uid).toBe(null)
+	expect("uid" in actual.data).toBe(false)
+})
 
-test("can be configured to return value with alternative languages", (t) => {
-	const seed = t.title;
+it("can be configured to return value with alternative languages", ({ task }) => {
+	const seed = task.name
 
-	const customModel = prismicM.model.customType({ seed });
+	const customModel = prismicM.model.customType({ seed })
 
 	const alternateLanguages = [
 		prismicM.value.customType({
@@ -78,30 +77,29 @@ test("can be configured to return value with alternative languages", (t) => {
 			seed,
 			model: customModel,
 		}),
-	];
+	]
 
 	const actual = prismicM.value.customType({
 		seed,
 		model: customModel,
 		alternateLanguages,
-	});
+	})
 
-	t.deepEqual(
-		actual.alternate_languages.map((item) => item.id),
+	expect(actual.alternate_languages.map((item) => item.id)).toEqual(
 		alternateLanguages.map((alternateLanguage) => alternateLanguage.id),
-	);
-});
+	)
+})
 
-test("can be configured to explicitly return value with a URL", (t) => {
+it("can be configured to explicitly return value with a URL", ({ task }) => {
 	const actualTrue = prismicM.value.customType({
-		seed: t.title,
+		seed: task.name,
 		withURL: true,
-	});
-	t.is(typeof actualTrue.url, "string");
+	})
+	expect(typeof actualTrue.url).toBe("string")
 
 	const actualFalse = prismicM.value.customType({
-		seed: t.title,
+		seed: task.name,
 		withURL: false,
-	});
-	t.is(actualFalse.url, null);
-});
+	})
+	expect(actualFalse.url).toBe(null)
+})

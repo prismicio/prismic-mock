@@ -1,23 +1,23 @@
-import test from "ava";
+import { it } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as model from "../src/model";
+it("creates a mock Rich Text field model", ({ task }) => {
+	snapshotTwice((name) => model.richText({ seed: name }), task.name)
+})
 
-test("creates a mock Rich Text field model", snapshotTwiceMacro, (t) =>
-	model.richText({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => model.richText({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	model.richText({ seed: 1 }),
-);
-
-test(
-	"can be configured to always allow multiple blocks",
-	snapshotTwiceMacro,
-	(t) =>
-		model.richText({
-			seed: t.title,
-			withMultipleBlocks: true,
-		}),
-);
+it("can be configured to always allow multiple blocks", ({ task }) => {
+	snapshotTwice(
+		(name) =>
+			model.richText({
+				seed: name,
+				withMultipleBlocks: true,
+			}),
+		task.name,
+	)
+})

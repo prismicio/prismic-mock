@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Embed field model 1`] = `
+[
+  {
+    "config": {
+      "label": "Nulla",
+      "placeholder": "Sit amet venenatis",
+    },
+    "type": "Embed",
+  },
+  {
+    "config": {
+      "label": "Nulla",
+      "placeholder": "Sit amet venenatis",
+    },
+    "type": "Embed",
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "config": {
+      "label": "Egestas",
+      "placeholder": "Aliquam ut porttitor",
+    },
+    "type": "Embed",
+  },
+  {
+    "config": {
+      "label": "Egestas",
+      "placeholder": "Aliquam ut porttitor",
+    },
+    "type": "Embed",
+  },
+]
+`;

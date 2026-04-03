@@ -1,13 +1,12 @@
-import test from "ava";
+import { it } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as prismicM from "../src"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as prismicM from "../src";
+it("creates mock field models for group field", ({ task }) => {
+	snapshotTwice((name) => prismicM.model.buildMockGroupFieldMap({ seed: name }), task.name)
+})
 
-test("creates mock field models for group field", snapshotTwiceMacro, (t) =>
-	prismicM.model.buildMockGroupFieldMap({ seed: t.title }),
-);
-
-test("supports number seed", snapshotTwiceMacro, () =>
-	prismicM.model.buildMockGroupFieldMap({ seed: 1 }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => prismicM.model.buildMockGroupFieldMap({ seed: 1 }), task.name)
+})

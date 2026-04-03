@@ -1,32 +1,25 @@
-import * as prismic from "@prismicio/client";
+import * as prismic from "@prismicio/client"
 
-import { sentenceCase } from "../lib/changeCase";
-import { createFaker, Faker } from "../lib/createFaker";
+import { sentenceCase } from "../lib/changeCase"
+import { createFaker, Faker } from "../lib/createFaker"
+import { MockValueStateConfig, MockImageData, Seed } from "../types"
 
-import { MockValueStateConfig, MockImageData, Seed } from "../types";
-
-type BuildImageFieldConfig<
-	State extends prismic.FieldState = prismic.FieldState,
-> = {
-	imageData: MockImageData;
-	constraint?: NonNullable<
-		prismic.CustomTypeModelImageField["config"]
-	>["constraint"];
+type BuildImageFieldConfig<State extends prismic.FieldState = prismic.FieldState> = {
+	imageData: MockImageData
+	constraint?: NonNullable<prismic.CustomTypeModelImageField["config"]>["constraint"]
 } & (
 	| {
-			seed: Seed;
-			faker?: never;
+			seed: Seed
+			faker?: never
 	  }
 	| {
-			faker: Faker;
-			seed?: never;
+			faker: Faker
+			seed?: never
 	  }
 ) &
-	Pick<MockValueStateConfig<State>, "state">;
+	Pick<MockValueStateConfig<State>, "state">
 
-export const buildImageFieldImage = <
-	State extends prismic.FieldState = prismic.FieldState,
->(
+export const buildImageFieldImage = <State extends prismic.FieldState = prismic.FieldState>(
 	config: BuildImageFieldConfig<State>,
 ): prismic.ImageFieldImage<State> => {
 	if (config.state === "empty") {
@@ -36,20 +29,20 @@ export const buildImageFieldImage = <
 			dimensions: null,
 			alt: null,
 			copyright: null,
-		} as prismic.ImageFieldImage<State>;
+		} as prismic.ImageFieldImage<State>
 	} else {
-		const faker = config.faker || createFaker(config.seed);
+		const faker = config.faker || createFaker(config.seed)
 
-		const url = new URL(config.imageData.url);
+		const url = new URL(config.imageData.url)
 
 		const dimensions = {
 			width: config.constraint?.width ?? config.imageData.width,
 			height: config.constraint?.height ?? config.imageData.height,
-		};
+		}
 
-		url.searchParams.set("w", dimensions.width.toString());
-		url.searchParams.set("h", dimensions.height.toString());
-		url.searchParams.set("fit", "crop");
+		url.searchParams.set("w", dimensions.width.toString())
+		url.searchParams.set("h", dimensions.height.toString())
+		url.searchParams.set("fit", "crop")
 
 		return {
 			id: faker.hash(11),
@@ -63,6 +56,6 @@ export const buildImageFieldImage = <
 				zoom: faker.rangeFloat(1, 2),
 				background: faker.hexColor(),
 			},
-		} as prismic.ImageFieldImage<State>;
+		} as prismic.ImageFieldImage<State>
 	}
-};
+}

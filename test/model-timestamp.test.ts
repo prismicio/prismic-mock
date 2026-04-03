@@ -1,13 +1,12 @@
-import test from "ava";
+import { it } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as model from "../src/model";
+it("creates a mock Timestamp field model", ({ task }) => {
+	snapshotTwice((name) => model.timestamp({ seed: name }), task.name)
+})
 
-test("creates a mock Timestamp field model", snapshotTwiceMacro, (t) =>
-	model.timestamp({ seed: t.title }),
-);
-
-test("supports number seed", snapshotTwiceMacro, () =>
-	model.timestamp({ seed: 1 }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => model.timestamp({ seed: 1 }), task.name)
+})

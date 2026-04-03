@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Color field value 1`] = `
+[
+  "#51A3D4",
+  "#51A3D4",
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  "#2DD98A",
+  "#2DD98A",
+]
+`;

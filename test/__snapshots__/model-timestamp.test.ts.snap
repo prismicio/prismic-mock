@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Timestamp field model 1`] = `
+[
+  {
+    "config": {
+      "label": "Tempor",
+      "placeholder": "Libero nunc consequat",
+    },
+    "type": "Timestamp",
+  },
+  {
+    "config": {
+      "label": "Tempor",
+      "placeholder": "Libero nunc consequat",
+    },
+    "type": "Timestamp",
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "config": {
+      "label": "Egestas",
+      "placeholder": "Aliquam ut porttitor",
+    },
+    "type": "Timestamp",
+  },
+  {
+    "config": {
+      "label": "Egestas",
+      "placeholder": "Aliquam ut porttitor",
+    },
+    "type": "Timestamp",
+  },
+]
+`;

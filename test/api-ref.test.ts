@@ -1,32 +1,31 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as mock from "../src"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as mock from "../src";
+it("creates a mock ref value", ({ task }) => {
+	snapshotTwice((name) => mock.api.ref({ seed: name }), task.name)
+})
 
-test("creates a mock ref value", snapshotTwiceMacro, (t) =>
-	mock.api.ref({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => mock.api.ref({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	mock.api.ref({ seed: 1 }),
-);
-
-test("can be configured to return a master ref", (t) => {
+it("can be configured to return a master ref", ({ task }) => {
 	const actual = mock.api.ref({
-		seed: t.title,
+		seed: task.name,
 		isMasterRef: true,
-	});
+	})
 
-	t.is(actual.isMasterRef, true);
-	t.is(actual.label, "Master");
-});
+	expect(actual.isMasterRef).toBe(true)
+	expect(actual.label).toBe("Master")
+})
 
-test("can be configured to return a scheduled ref", (t) => {
+it("can be configured to return a scheduled ref", ({ task }) => {
 	const actual = mock.api.ref({
-		seed: t.title,
+		seed: task.name,
 		isScheduled: true,
-	});
+	})
 
-	t.is(typeof actual.scheduledAt, "string");
-});
+	expect(typeof actual.scheduledAt).toBe("string")
+})

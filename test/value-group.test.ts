@@ -1,67 +1,65 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import * as value from "../src/value"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as value from "../src/value";
-import * as model from "../src/model";
+it("creates a mock Group field value", ({ task }) => {
+	snapshotTwice((name) => value.group({ seed: name }), task.name)
+})
 
-test("creates a mock Group field value", snapshotTwiceMacro, (t) =>
-	value.group({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => value.group({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	value.group({ seed: 1 }),
-);
-
-test("supports custom model", (t) => {
+it("supports custom model", ({ task }) => {
 	const customModel = model.group({
-		seed: t.title,
+		seed: task.name,
 		fields: {
-			boolean: model.boolean({ seed: t.title }),
+			boolean: model.boolean({ seed: task.name }),
 		},
-	});
+	})
 
 	const actual = value.group({
-		seed: t.title,
+		seed: task.name,
 		model: customModel,
-	});
+	})
 
-	t.plan(actual.length);
 	for (const item of actual) {
-		t.is(typeof item.boolean, "boolean");
+		expect(typeof item.boolean).toBe("boolean")
 	}
-});
+})
 
-test("supports nested groups", (t) => {
+it("supports nested groups", ({ task }) => {
 	const customModel = model.group({
-		seed: t.title,
+		seed: task.name,
 		fields: {
 			group: model.group({
-				seed: t.title,
+				seed: task.name,
 				fields: {
-					boolean: model.boolean({ seed: t.title }),
+					boolean: model.boolean({ seed: task.name }),
 				},
 			}),
 		},
-	});
+	})
 
 	const actual = value.group({
-		seed: t.title,
+		seed: task.name,
 		model: customModel,
-	});
+	})
 
 	for (const item of actual) {
 		for (const nestedItem of item.group) {
-			t.is(typeof nestedItem.boolean, "boolean");
+			expect(typeof nestedItem.boolean).toBe("boolean")
 		}
 	}
-});
+})
 
-test("can be customized with a specific number of items", (t) => {
+it("can be customized with a specific number of items", ({ task }) => {
 	const actual = value.group({
-		seed: t.title,
+		seed: task.name,
 		itemsCount: 5,
-	});
+	})
 
-	t.is(actual.length, 5);
-});
+	expect(actual.length).toBe(5)
+})

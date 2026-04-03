@@ -1,11 +1,10 @@
-import * as ava from "ava";
+import { expect } from "vitest"
 
-export const executeTwiceMacro = <MockReturnType>(
-	t: ava.ExecutionContext,
+export const executeTwice = <MockReturnType>(
 	mockFn: () => MockReturnType,
 	expected: [MockReturnType, MockReturnType],
 ): void => {
-	const actual = [mockFn(), mockFn()];
+	const actual = [mockFn(), mockFn()]
 
-	t.deepEqual(actual, expected);
-};
+	expect(actual).toEqual(expected)
+}

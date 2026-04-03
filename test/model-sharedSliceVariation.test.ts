@@ -1,73 +1,69 @@
-import test from "ava";
-import * as prismic from "@prismicio/client";
+import * as prismic from "@prismicio/client"
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as prismicM from "../src"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as prismicM from "../src";
+it("creates a mock Shared Slice variation field model", ({ task }) => {
+	snapshotTwice((name) => prismicM.model.sharedSliceVariation({ seed: name }), task.name)
+})
 
-test(
-	"creates a mock Shared Slice variation field model",
-	snapshotTwiceMacro,
-	(t) => prismicM.model.sharedSliceVariation({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => prismicM.model.sharedSliceVariation({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	prismicM.model.sharedSliceVariation({ seed: 1 }),
-);
-
-test("can be configured with a specific id", (t) => {
+it("can be configured with a specific id", ({ task }) => {
 	const actual = prismicM.model.sharedSliceVariation({
-		seed: t.title,
+		seed: task.name,
 		id: "custom_id",
-	});
+	})
 
-	t.is(actual.id, "custom_id");
-	t.is(actual.name, "CustomId");
-});
+	expect(actual.id).toBe("custom_id")
+	expect(actual.name).toBe("CustomId")
+})
 
-test("can be configured with a specific name", (t) => {
+it("can be configured with a specific name", ({ task }) => {
 	const actual = prismicM.model.sharedSliceVariation({
-		seed: t.title,
+		seed: task.name,
 		name: "Custom Name",
-	});
+	})
 
-	t.is(actual.id, "custom_name");
-	t.is(actual.name, "Custom Name");
-});
+	expect(actual.id).toBe("custom_name")
+	expect(actual.name).toBe("Custom Name")
+})
 
-test("can be configured with a specific id and name", (t) => {
+it("can be configured with a specific id and name", ({ task }) => {
 	const actual = prismicM.model.sharedSliceVariation({
-		seed: t.title,
+		seed: task.name,
 		id: "custom_id",
 		name: "Custom Name",
-	});
+	})
 
-	t.is(actual.id, "custom_id");
-	t.is(actual.name, "Custom Name");
-});
+	expect(actual.id).toBe("custom_id")
+	expect(actual.name).toBe("Custom Name")
+})
 
-test("can be configured for specific primary and items fields", (t) => {
+it("can be configured for specific primary and items fields", ({ task }) => {
 	const actual = prismicM.model.sharedSliceVariation({
-		seed: t.title,
+		seed: task.name,
 		primaryFields: {
-			boolean: prismicM.model.boolean({ seed: t.title }),
+			boolean: prismicM.model.boolean({ seed: task.name }),
 			group: prismicM.model.group({
-				seed: t.title,
+				seed: task.name,
 				fields: {
-					boolean: prismicM.model.boolean({ seed: t.title }),
+					boolean: prismicM.model.boolean({ seed: task.name }),
 				},
 			}),
 		},
 		itemsFields: {
-			keyText: prismicM.model.keyText({ seed: t.title }),
+			keyText: prismicM.model.keyText({ seed: task.name }),
 		},
-	});
+	})
 
-	t.is(actual.primary?.boolean.type, prismic.CustomTypeModelFieldType.Boolean);
-	t.is(actual.primary?.group.type, prismic.CustomTypeModelFieldType.Group);
-	t.is(
-		actual.primary?.group.config?.fields?.boolean.type,
+	expect(actual.primary?.boolean.type).toBe(prismic.CustomTypeModelFieldType.Boolean)
+	expect(actual.primary?.group.type).toBe(prismic.CustomTypeModelFieldType.Group)
+	expect(actual.primary?.group.config?.fields?.boolean.type).toBe(
 		prismic.CustomTypeModelFieldType.Boolean,
-	);
-	t.is(actual.items?.keyText.type, prismic.CustomTypeModelFieldType.Text);
-});
+	)
+	expect(actual.items?.keyText.type).toBe(prismic.CustomTypeModelFieldType.Text)
+})

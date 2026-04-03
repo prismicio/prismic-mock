@@ -1,11 +1,12 @@
-import test from "ava";
+import { it } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as model from "../src/model";
+it("creates a mock UID field model", ({ task }) => {
+	snapshotTwice((name) => model.uid({ seed: name }), task.name)
+})
 
-test("creates a mock UID field model", snapshotTwiceMacro, (t) =>
-	model.uid({ seed: t.title }),
-);
-
-test("supports number seed", snapshotTwiceMacro, () => model.uid({ seed: 1 }));
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => model.uid({ seed: 1 }), task.name)
+})

@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Group field model 1`] = `
+[
+  {
+    "config": {
+      "fields": {},
+      "label": "Auctor",
+    },
+    "type": "Group",
+  },
+  {
+    "config": {
+      "fields": {},
+      "label": "Auctor",
+    },
+    "type": "Group",
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "config": {
+      "fields": {},
+      "label": "Egestas",
+    },
+    "type": "Group",
+  },
+  {
+    "config": {
+      "fields": {},
+      "label": "Egestas",
+    },
+    "type": "Group",
+  },
+]
+`;

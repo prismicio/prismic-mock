@@ -1,93 +1,90 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import * as value from "../src/value"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as value from "../src/value";
-import * as model from "../src/model";
+it("creates a mock Shared Slice Variation field value", ({ task }) => {
+	snapshotTwice((name) => value.sharedSliceVariation({ seed: name }), task.name)
+})
 
-test(
-	"creates a mock Shared Slice Variation field value",
-	snapshotTwiceMacro,
-	(t) => value.sharedSliceVariation({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => value.sharedSliceVariation({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	value.sharedSliceVariation({ seed: 1 }),
-);
-
-test("supports custom model", (t) => {
+it("supports custom model", ({ task }) => {
 	const customModel = model.sharedSliceVariation({
-		seed: t.title,
+		seed: task.name,
 		primaryFields: {
-			boolean: model.boolean({ seed: t.title }),
+			boolean: model.boolean({ seed: task.name }),
 			group: model.group({
-				seed: t.title,
+				seed: task.name,
 				fields: {
-					boolean: model.boolean({ seed: t.title }),
+					boolean: model.boolean({ seed: task.name }),
 				},
 			}),
 		},
 		itemsFields: {
-			keyText: model.keyText({ seed: t.title }),
+			keyText: model.keyText({ seed: task.name }),
 		},
-	});
+	})
 
 	const actual = value.sharedSliceVariation({
-		seed: t.title,
+		seed: task.name,
 		model: customModel,
-	});
+	})
 
-	t.is(typeof actual.primary.boolean, "boolean");
-	t.is(Array.isArray(actual.primary.group), true);
+	expect(typeof actual.primary.boolean).toBe("boolean")
+	expect(Array.isArray(actual.primary.group)).toBe(true)
 	for (const item of actual.primary.group) {
-		t.is(typeof item.boolean, "boolean");
+		expect(typeof item.boolean).toBe("boolean")
 	}
 
 	for (const item of actual.items) {
-		t.is(typeof item.keyText, "string");
+		expect(typeof item.keyText).toBe("string")
 	}
-});
+})
 
-test("returns no items if model does not include items model", (t) => {
-	const customModel = model.sharedSliceVariation({ seed: t.title });
+it("returns no items if model does not include items model", ({ task }) => {
+	const customModel = model.sharedSliceVariation({ seed: task.name })
 
 	const actual = value.sharedSliceVariation({
-		seed: t.title,
+		seed: task.name,
 		model: customModel,
-	});
+	})
 
-	t.is(actual.items.length, 0);
-});
+	expect(actual.items.length).toBe(0)
+})
 
-test("can be customized with a specific number of items", (t) => {
+it("can be customized with a specific number of items", ({ task }) => {
 	const customModel = model.sharedSliceVariation({
-		seed: t.title,
+		seed: task.name,
 		itemsFields: {
-			boolean: model.boolean({ seed: t.title }),
+			boolean: model.boolean({ seed: task.name }),
 		},
-	});
+	})
 
 	const actualNone = value.sharedSliceVariation({
-		seed: t.title,
+		seed: task.name,
 		model: customModel,
 		itemsCount: 5,
-	});
-	t.is(actualNone.items.length, 5);
-});
+	})
+	expect(actualNone.items.length).toBe(5)
+})
 
-test("can be customized to return a specific type", (t) => {
+it("can be customized to return a specific type", ({ task }) => {
 	const actual = value.sharedSliceVariation({
-		seed: t.title,
+		seed: task.name,
 		type: "type",
-	});
+	})
 
-	t.is(actual.slice_type, "type");
-});
+	expect(actual.slice_type).toBe("type")
+})
 
-test("slice_label is null", (t) => {
+it("slice_label is null", ({ task }) => {
 	const actual = value.sharedSliceVariation({
-		seed: t.title,
-	});
+		seed: task.name,
+	})
 
-	t.is(actual.slice_label, null);
-});
+	expect(actual.slice_label).toBe(null)
+})

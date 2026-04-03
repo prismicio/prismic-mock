@@ -1,21 +1,12 @@
-import * as prismic from "@prismicio/client";
+import * as prismic from "@prismicio/client"
 
-type BuildContentRelationshipFieldConfig<
-	Document extends prismic.PrismicDocument,
-> = {
-	document: Document;
-};
+type BuildContentRelationshipFieldConfig<Document extends prismic.PrismicDocument> = {
+	document: Document
+}
 
-export const buildContentRelationshipField = <
-	Document extends prismic.PrismicDocument,
->(
+export const buildContentRelationshipField = <Document extends prismic.PrismicDocument>(
 	config: BuildContentRelationshipFieldConfig<Document>,
-): prismic.ContentRelationshipField<
-	Document["type"],
-	Document["lang"],
-	never,
-	"filled"
-> => {
+): prismic.ContentRelationshipField<Document["type"], Document["lang"], never, "filled"> => {
 	return {
 		link_type: prismic.LinkType.Document,
 		id: config.document.id,
@@ -26,5 +17,5 @@ export const buildContentRelationshipField = <
 		url: config.document.url || undefined,
 		slug: config.document.slugs[0],
 		isBroken: false,
-	};
-};
+	}
+}
