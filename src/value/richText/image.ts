@@ -3,7 +3,7 @@ import * as prismic from "@prismicio/client"
 import { buildImageFieldImage } from "../../lib/buildImageFieldImage"
 import { createFaker } from "../../lib/createFaker"
 import { getMockImageData } from "../../lib/getMockImageData"
-import { MockRichTextValueConfig } from "../../types"
+import type { MockRichTextValueConfig } from "../../types"
 
 type MockRichTextImageValueConfig = MockRichTextValueConfig
 

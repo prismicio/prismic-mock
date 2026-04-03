@@ -2,7 +2,7 @@ import * as prismic from "@prismicio/client"
 
 import { capitalCase } from "../lib/changeCase"
 import { createFaker } from "../lib/createFaker"
-import { GroupFieldModelMap, MockModelConfig } from "../types"
+import type { GroupFieldModelMap, MockModelConfig } from "../types"
 
 export type MockGroupModelConfig<Fields extends GroupFieldModelMap> = {
 	fields?: Fields

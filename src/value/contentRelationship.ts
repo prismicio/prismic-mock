@@ -5,7 +5,7 @@ import { createFaker } from "../lib/createFaker"
 import { generateCustomTypeId } from "../lib/generateCustomTypeId"
 import { generateTags } from "../lib/generateTags"
 import * as modelGen from "../model"
-import { MockValueStateConfig, MockValueConfig, IterableElement } from "../types"
+import type { MockValueStateConfig, MockValueConfig, IterableElement } from "../types"
 import { document as documentGen } from "./document"
 
 export type MockContentRelationshipValueConfig<
@@ -18,7 +18,7 @@ export type MockContentRelationshipValueConfig<
 } & MockValueConfig<Model> &
 	MockValueStateConfig<State>
 
-type MockContentRelationshipValue<
+export type MockContentRelationshipValue<
 	Model extends prismic.CustomTypeModelContentRelationshipField =
 		prismic.CustomTypeModelContentRelationshipField,
 	State extends prismic.FieldState = prismic.FieldState,
@@ -46,22 +46,19 @@ export const contentRelationship = <
 		const model = config.model || modelGen.contentRelationship({ faker })
 
 		const linkableDocuments = config.linkableDocuments
-			? config.linkableDocuments.filter(
-					(document) => {
-						let shouldKeep = true
+			? config.linkableDocuments.filter((document) => {
+					let shouldKeep = true
 
-						if (model.config?.customtypes) {
-							shouldKeep = shouldKeep && model.config.customtypes.includes(document.type)
-						}
+					if (model.config?.customtypes) {
+						shouldKeep = shouldKeep && model.config.customtypes.includes(document.type)
+					}
 
-						if (model.config?.tags) {
-							shouldKeep =
-								shouldKeep && model.config.tags.some((tag) => document.tags.includes(tag))
-						}
+					if (model.config?.tags) {
+						shouldKeep = shouldKeep && model.config.tags.some((tag) => document.tags.includes(tag))
+					}
 
-						return shouldKeep
-					},
-				)
+					return shouldKeep
+				})
 			: [
 					{
 						...documentGen({ faker }),
@@ -74,9 +71,7 @@ export const contentRelationship = <
 					} as prismic.PrismicDocument,
 				]
 
-		const document = faker.randomElement(
-			linkableDocuments as prismic.PrismicDocument[],
-		)
+		const document = faker.randomElement(linkableDocuments as prismic.PrismicDocument[])
 
 		if (!document) {
 			throw new Error("A linkable document could not be found.")

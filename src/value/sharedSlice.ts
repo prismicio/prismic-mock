@@ -2,8 +2,11 @@ import * as prismic from "@prismicio/client"
 
 import { createFaker } from "../lib/createFaker"
 import * as modelGen from "../model"
-import { MockValueConfig, ModelValue } from "../types"
-import { sharedSliceVariation, MockSharedSliceVariationValueConfig } from "./sharedSliceVariation"
+import type { MockValueConfig, ModelValue } from "../types"
+import {
+	sharedSliceVariation,
+	type MockSharedSliceVariationValueConfig,
+} from "./sharedSliceVariation"
 
 export type MockSharedSliceValueConfig<
 	Model extends prismic.SharedSliceModel = prismic.SharedSliceModel,

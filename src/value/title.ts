@@ -1,8 +1,8 @@
 import * as prismic from "@prismicio/client"
 
 import { createFaker } from "../lib/createFaker"
-import { MockValueConfig, MockValueStateConfig } from "../types"
-import { heading, MockRichTextHeadingValueConfig } from "./richText/heading"
+import type { MockValueConfig, MockValueStateConfig } from "../types"
+import { heading, type MockRichTextHeadingValueConfig } from "./richText/heading"
 
 export type MockTitleValueConfig<
 	Model extends prismic.CustomTypeModelTitleField = prismic.CustomTypeModelTitleField,

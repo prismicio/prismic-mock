@@ -1,6 +1,6 @@
 import * as prismic from "@prismicio/client"
 
-import { MockModelConfig } from "../types"
+import type { MockModelConfig } from "../types"
 
 export type MockSliceZoneModelConfig<
 	Slices extends Record<string, prismic.CustomTypeModelSlice | prismic.CustomTypeModelSharedSlice> =

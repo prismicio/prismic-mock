@@ -1,9 +1,9 @@
 import * as prismic from "@prismicio/client"
 
 import { createFaker } from "../lib/createFaker"
-import { valueForModelMap, ValueForModelMapConfigs } from "../lib/valueForModelMap"
+import { valueForModelMap, type ValueForModelMapConfigs } from "../lib/valueForModelMap"
 import * as modelGen from "../model"
-import { MockValueConfig, MockValueStateConfig, ModelValue } from "../types"
+import type { MockValueConfig, MockValueStateConfig, ModelValue } from "../types"
 
 export type MockGroupValueConfig<
 	Model extends prismic.CustomTypeModelGroupField = prismic.CustomTypeModelGroupField,

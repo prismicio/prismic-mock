@@ -1,11 +1,11 @@
 import * as prismic from "@prismicio/client"
 
-import { createFaker, Faker } from "../lib/createFaker"
-import { Seed, WithoutFakerConfig } from "../types"
-import { query, MockRestApiQueryConfig } from "./query"
-import { ref, MockRestApiRefConfig } from "./ref"
-import { repository, MockRestApiRepositoryConfig } from "./repository"
-import { tags, MockRestApiTagsConfig } from "./tags"
+import { createFaker, type Faker } from "../lib/createFaker"
+import type { Seed, WithoutFakerConfig } from "../types"
+import { query, type MockRestApiQueryConfig } from "./query"
+import { ref, type MockRestApiRefConfig } from "./ref"
+import { repository, type MockRestApiRepositoryConfig } from "./repository"
+import { tags, type MockRestApiTagsConfig } from "./tags"
 
 export const createAPIMockFactory = (
 	...args: ConstructorParameters<typeof APIMockFactory>

@@ -2,7 +2,7 @@ import * as prismic from "@prismicio/client"
 
 import { sentenceCase } from "../../lib/changeCase"
 import { createFaker } from "../../lib/createFaker"
-import { MockRichTextValueConfig } from "../../types"
+import type { MockRichTextValueConfig } from "../../types"
 
 const patterns = {
 	short: {

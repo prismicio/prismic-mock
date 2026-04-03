@@ -1,7 +1,7 @@
 import * as prismic from "@prismicio/client"
 
-import { createFaker, Faker } from "../lib/createFaker"
-import { MockValueStateConfig, MockValueConfig } from "../types"
+import { createFaker, type Faker } from "../lib/createFaker"
+import type { MockValueStateConfig, MockValueConfig } from "../types"
 import { richText } from "./richText"
 
 export type MockTableValueConfig<

@@ -2,7 +2,7 @@ import * as prismic from "@prismicio/client"
 
 import { snakeCase } from "../lib/changeCase"
 import { createFaker } from "../lib/createFaker"
-import { MockValueConfig } from "../types"
+import type { MockValueConfig } from "../types"
 
 export type MockUIDValueConfig<
 	Model extends prismic.CustomTypeModelUIDField = prismic.CustomTypeModelUIDField,

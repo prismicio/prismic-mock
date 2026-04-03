@@ -2,7 +2,7 @@ import * as prismic from "@prismicio/client"
 
 import { createFaker } from "../../lib/createFaker"
 import * as modelGen from "../../model"
-import {
+import type {
 	MockRichTextValueConfig as BaseMockRichTextValueConfig,
 	MockValueStateConfig,
 } from "../../types"

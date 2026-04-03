@@ -3,7 +3,7 @@ import * as prismic from "@prismicio/client"
 import { buildEmbedField } from "../lib/buildEmbedField"
 import { createFaker } from "../lib/createFaker"
 import { getMockEmbedData } from "../lib/getMockEmbedData"
-import { MockValueStateConfig, MockValueConfig } from "../types"
+import type { MockValueStateConfig, MockValueConfig } from "../types"
 
 export type MockEmbedValueConfig<
 	Model extends prismic.CustomTypeModelEmbedField = prismic.CustomTypeModelEmbedField,

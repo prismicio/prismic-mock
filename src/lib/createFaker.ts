@@ -1,4 +1,4 @@
-import { Seed } from "../types"
+import type { Seed } from "../types"
 import { lorem, loremWords } from "./lorem"
 import { PRNG } from "./PRNG"
 

@@ -3,7 +3,7 @@ import * as prismic from "@prismicio/client"
 import { buildEmbedField } from "../../lib/buildEmbedField"
 import { createFaker } from "../../lib/createFaker"
 import { getMockEmbedData } from "../../lib/getMockEmbedData"
-import { MockRichTextValueConfig } from "../../types"
+import type { MockRichTextValueConfig } from "../../types"
 
 type MockRichTextEmbedValueConfig = MockRichTextValueConfig
 

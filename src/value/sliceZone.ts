@@ -1,9 +1,9 @@
 import * as prismic from "@prismicio/client"
 
 import { createFaker } from "../lib/createFaker"
-import { ValueForModelMapConfigs } from "../lib/valueForModelMap"
+import type { ValueForModelMapConfigs } from "../lib/valueForModelMap"
 import * as modelGen from "../model"
-import { MockValueConfig, MockValueStateConfig, ModelValue } from "../types"
+import type { MockValueConfig, MockValueStateConfig, ModelValue } from "../types"
 import { sharedSlice } from "./sharedSlice"
 import { slice } from "./slice"
 

@@ -3,9 +3,9 @@ import * as prismic from "@prismicio/client"
 import { capitalCase } from "../lib/changeCase"
 import { createFaker } from "../lib/createFaker"
 import { generateFieldId } from "../lib/generateFieldId"
-import { valueForModelMap, ValueForModelMapConfigs } from "../lib/valueForModelMap"
+import { valueForModelMap, type ValueForModelMapConfigs } from "../lib/valueForModelMap"
 import * as modelGen from "../model"
-import { MockValueConfig, ModelValue } from "../types"
+import type { MockValueConfig, ModelValue } from "../types"
 
 export type MockSliceValueConfig<
 	Model extends prismic.CustomTypeModelSlice = prismic.CustomTypeModelSlice,

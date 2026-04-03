@@ -1,5 +1,5 @@
-import { createFaker, Faker } from "../lib/createFaker"
-import { MockEmbedData, Seed } from "../types"
+import { createFaker, type Faker } from "../lib/createFaker"
+import type { MockEmbedData, Seed } from "../types"
 
 const dataSet: MockEmbedData[] = [
 	{

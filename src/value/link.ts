@@ -3,7 +3,7 @@ import * as prismic from "@prismicio/client"
 import { sentenceCase } from "../lib/changeCase"
 import { createFaker } from "../lib/createFaker"
 import * as modelGen from "../model"
-import { MockValueStateConfig, MockValueConfig } from "../types"
+import type { MockValueStateConfig, MockValueConfig } from "../types"
 import { contentRelationship } from "./contentRelationship"
 import { linkToMedia } from "./linkToMedia"
 
@@ -25,7 +25,7 @@ export type MockLinkValueConfig<
 } & MockValueConfig<Model> &
 	MockValueStateConfig<State>
 
-type MockLinkValue<
+export type MockLinkValue<
 	LinkType extends (typeof prismic.LinkType)[keyof typeof prismic.LinkType] =
 		(typeof prismic.LinkType)[keyof typeof prismic.LinkType],
 	State extends prismic.FieldState = "filled",

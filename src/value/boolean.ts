@@ -1,7 +1,7 @@
 import * as prismic from "@prismicio/client"
 
 import { createFaker } from "../lib/createFaker"
-import { MockValueConfig } from "../types"
+import type { MockValueConfig } from "../types"
 
 export type MockBooleanValueConfig<
 	Model extends prismic.CustomTypeModelBooleanField = prismic.CustomTypeModelBooleanField,

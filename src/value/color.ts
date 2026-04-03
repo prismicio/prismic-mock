@@ -1,7 +1,7 @@
 import * as prismic from "@prismicio/client"
 
 import { createFaker } from "../lib/createFaker"
-import { MockValueStateConfig, MockValueConfig } from "../types"
+import type { MockValueStateConfig, MockValueConfig } from "../types"
 
 export type MockColorValueConfig<
 	Model extends prismic.CustomTypeModelColorField = prismic.CustomTypeModelColorField,

@@ -1,6 +1,6 @@
 import * as prismic from "@prismicio/client"
 
-import { MockValueStateConfig, MockValueConfig } from "../types"
+import type { MockValueStateConfig, MockValueConfig } from "../types"
 
 export type MockIntegrationFieldValueConfig<
 	Model extends prismic.CustomTypeModelIntegrationField = prismic.CustomTypeModelIntegrationField,

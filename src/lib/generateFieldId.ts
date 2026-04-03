@@ -1,6 +1,6 @@
 import { snakeCase } from "../lib/changeCase"
-import { createFaker, Faker } from "../lib/createFaker"
-import { Seed } from "../types"
+import { createFaker, type Faker } from "../lib/createFaker"
+import type { Seed } from "../types"
 
 type GenerateFieldIdConfig =
 	| {

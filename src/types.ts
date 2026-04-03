@@ -1,7 +1,7 @@
 import * as prismic from "@prismicio/client"
 
-import { Faker } from "./lib/createFaker"
-import * as value from "./value"
+import type { Faker } from "./lib/createFaker"
+import type * as value from "./value"
 
 export type IterableElement<TargetIterable> =
 	TargetIterable extends Iterable<infer ElementType>

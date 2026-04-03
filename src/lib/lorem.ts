@@ -35,7 +35,7 @@ export const loremWords = wordsString.split(" ")
  * Returns "Lorem ipsum" text of a specified length.
  *
  * @example
- * 	```ts
+ * 	;```ts
  * 	lorem("100w") // 100 words
  * 	lorem("200c") // 200 characters
  * 	```
@@ -44,7 +44,7 @@ export const loremWords = wordsString.split(" ")
  *   means words, `c` means characters.
  * @returns Lorem ipsum text.
  */
-export const lorem = (length: `${number}w` | `${number}c`, wordOffset = 0) => {
+export const lorem = (length: `${number}w` | `${number}c`, wordOffset = 0): string => {
 	const count = parseInt(length.substring(0, length.length - 1))
 	const countType = length.charAt(length.length - 1)
 

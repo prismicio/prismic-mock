@@ -16,7 +16,7 @@ import { richText } from "../model/richText"
 import { select } from "../model/select"
 import { timestamp } from "../model/timestamp"
 import { title } from "../model/title"
-import { MockModelConfig, NestedGroupFieldModelMap, ValueOf } from "../types"
+import type { MockModelConfig, NestedGroupFieldModelMap, ValueOf } from "../types"
 
 const mockModelFns = {
 	boolean,

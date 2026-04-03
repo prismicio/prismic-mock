@@ -3,7 +3,7 @@ import * as prismic from "@prismicio/client"
 import { capitalCase, pascalCase, sentenceCase, snakeCase } from "../lib/changeCase"
 import { createFaker } from "../lib/createFaker"
 import { getMockImageData } from "../lib/getMockImageData"
-import { MockModelConfig, NestedGroupFieldModelMap, SlicePrimaryFieldModelMap } from "../types"
+import type { MockModelConfig, NestedGroupFieldModelMap, SlicePrimaryFieldModelMap } from "../types"
 
 export type MockSharedSliceVariationModelConfig<
 	ID extends string = string,

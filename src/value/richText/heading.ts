@@ -3,7 +3,7 @@ import * as prismic from "@prismicio/client"
 import { capitalCase } from "../../lib/changeCase"
 import { createFaker } from "../../lib/createFaker"
 import * as modelGen from "../../model"
-import { MockRichTextValueConfig } from "../../types"
+import type { MockRichTextValueConfig } from "../../types"
 
 type RichTextNodeTitleType =
 	| typeof prismic.RichTextNodeType.heading1

@@ -1,8 +1,8 @@
 import * as prismic from "@prismicio/client"
 
-import { MockValueConfigForModel, ModelValue, Seed } from "../types"
+import type { MockValueConfigForModel, ModelValue, Seed } from "../types"
 import * as value from "../value"
-import { createFaker, Faker } from "./createFaker"
+import { createFaker, type Faker } from "./createFaker"
 
 type ValueForModelConfig<Model extends prismic.CustomTypeModelField> = {
 	model: Model

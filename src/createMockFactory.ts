@@ -1,8 +1,8 @@
-import { createAPIMockFactory, APIMockFactory } from "./api/createAPIMockFactory"
-import { createFaker, Faker } from "./lib/createFaker"
-import { createModelMockFactory, ModelMockFactory } from "./model/createModelMockFactory"
-import { Seed } from "./types"
-import { createValueMockFactory, ValueMockFactory } from "./value/createValueMockFactory"
+import { createAPIMockFactory, type APIMockFactory } from "./api/createAPIMockFactory"
+import { createFaker, type Faker } from "./lib/createFaker"
+import { createModelMockFactory, type ModelMockFactory } from "./model/createModelMockFactory"
+import type { Seed } from "./types"
+import { createValueMockFactory, type ValueMockFactory } from "./value/createValueMockFactory"
 
 export const createMockFactory = (
 	...args: ConstructorParameters<typeof MockFactory>
@@ -35,7 +35,7 @@ export class MockFactory {
 		this.value = createValueMockFactory({ faker: this.faker })
 	}
 
-	get seed() {
+	get seed(): Seed {
 		return this.faker.seed
 	}
 }

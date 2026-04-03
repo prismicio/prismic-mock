@@ -3,7 +3,7 @@ import * as prismic from "@prismicio/client"
 import { sentenceCase, snakeCase } from "../lib/changeCase"
 import { createFaker } from "../lib/createFaker"
 import * as modelGen from "../model"
-import { MockValueStateConfig, MockValueConfig } from "../types"
+import type { MockValueStateConfig, MockValueConfig } from "../types"
 
 export type MockLinkToMediaValueConfig<
 	Model extends prismic.CustomTypeModelLinkToMediaField = prismic.CustomTypeModelLinkToMediaField,
@@ -13,7 +13,7 @@ export type MockLinkToMediaValueConfig<
 } & MockValueConfig<Model> &
 	MockValueStateConfig<State>
 
-type MockLinkToMediaValue<State extends prismic.FieldState = prismic.FieldState> =
+export type MockLinkToMediaValue<State extends prismic.FieldState = prismic.FieldState> =
 	prismic.LinkToMediaField<State>
 
 export const linkToMedia = <

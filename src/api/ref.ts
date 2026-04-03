@@ -2,7 +2,7 @@ import * as prismic from "@prismicio/client"
 
 import { capitalCase } from "../lib/changeCase"
 import { createFaker } from "../lib/createFaker"
-import { MockRestApiConfig } from "../types"
+import type { MockRestApiConfig } from "../types"
 import { timestamp } from "../value"
 
 export type MockRestApiRefConfig<IsScheduled extends boolean = false> = {

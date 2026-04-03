@@ -4,9 +4,9 @@ import { buildAlternativeLanguage } from "../lib/buildAlternativeLanguage"
 import { snakeCase } from "../lib/changeCase"
 import { createFaker } from "../lib/createFaker"
 import { generateTags } from "../lib/generateTags"
-import { valueForModelMap, ValueForModelMapConfigs } from "../lib/valueForModelMap"
+import { valueForModelMap, type ValueForModelMapConfigs } from "../lib/valueForModelMap"
 import * as modelGen from "../model"
-import { MockValueConfig, ModelValue } from "../types"
+import type { MockValueConfig, ModelValue } from "../types"
 import { timestamp } from "./timestamp"
 
 export type MockCustomTypeValueConfig<

@@ -1,8 +1,8 @@
 import * as prismic from "@prismicio/client"
 
 import { sentenceCase } from "../lib/changeCase"
-import { createFaker, Faker } from "../lib/createFaker"
-import { MockValueStateConfig, MockImageData, Seed } from "../types"
+import { createFaker, type Faker } from "../lib/createFaker"
+import type { MockValueStateConfig, MockImageData, Seed } from "../types"
 
 type BuildImageFieldConfig<State extends prismic.FieldState = prismic.FieldState> = {
 	imageData: MockImageData

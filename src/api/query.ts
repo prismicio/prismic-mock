@@ -1,7 +1,7 @@
 import * as prismic from "@prismicio/client"
 
 import { createFaker } from "../lib/createFaker"
-import { MockRestApiConfig } from "../types"
+import type { MockRestApiConfig } from "../types"
 
 export type MockRestApiQueryConfig<
 	Document extends prismic.PrismicDocument = prismic.PrismicDocument,

@@ -2,7 +2,7 @@ import * as prismic from "@prismicio/client"
 
 import { createFaker } from "../lib/createFaker"
 import * as modelGen from "../model"
-import { MockValueStateConfig, MockValueConfig } from "../types"
+import type { MockValueStateConfig, MockValueConfig } from "../types"
 
 export type MockSelectValueConfig<
 	Model extends prismic.CustomTypeModelSelectField = prismic.CustomTypeModelSelectField,

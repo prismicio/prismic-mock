@@ -4,7 +4,7 @@ import { buildImageFieldImage } from "../lib/buildImageFieldImage"
 import { createFaker } from "../lib/createFaker"
 import { getMockImageData } from "../lib/getMockImageData"
 import * as modelGen from "../model"
-import { MockValueStateConfig, MockValueConfig } from "../types"
+import type { MockValueStateConfig, MockValueConfig } from "../types"
 
 export type MockImageValueConfig<
 	Model extends prismic.CustomTypeModelImageField = prismic.CustomTypeModelImageField,

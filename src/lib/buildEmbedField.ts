@@ -1,7 +1,7 @@
 import * as prismic from "@prismicio/client"
 
-import { createFaker, Faker } from "../lib/createFaker"
-import { Seed } from "../types"
+import { createFaker, type Faker } from "../lib/createFaker"
+import type { Seed } from "../types"
 
 type BuildEmbedFieldConfig<Data extends prismic.AnyOEmbed = prismic.AnyOEmbed> = {
 	url?: string

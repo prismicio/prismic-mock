@@ -3,7 +3,7 @@ import * as prismic from "@prismicio/client"
 import { capitalCase } from "../lib/changeCase"
 import { createFaker } from "../lib/createFaker"
 import { generateTags } from "../lib/generateTags"
-import { MockRestApiConfig } from "../types"
+import type { MockRestApiConfig } from "../types"
 import { ref } from "./ref"
 
 export type MockRestApiRepositoryConfig = {

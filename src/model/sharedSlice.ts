@@ -2,7 +2,7 @@ import * as prismic from "@prismicio/client"
 
 import { capitalCase, pascalCase, sentenceCase, snakeCase } from "../lib/changeCase"
 import { createFaker } from "../lib/createFaker"
-import { MockModelConfig } from "../types"
+import type { MockModelConfig } from "../types"
 
 export type MockSharedSliceModelConfig<Variation extends prismic.SharedSliceModelVariation> = {
 	id?: string

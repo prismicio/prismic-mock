@@ -2,7 +2,7 @@ import * as prismic from "@prismicio/client"
 
 import { capitalCase, sentenceCase } from "../lib/changeCase"
 import { createFaker } from "../lib/createFaker"
-import { MockModelConfig } from "../types"
+import type { MockModelConfig } from "../types"
 
 export type MockEmbedModelConfig = MockModelConfig
 

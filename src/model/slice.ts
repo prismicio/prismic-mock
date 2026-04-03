@@ -2,7 +2,7 @@ import * as prismic from "@prismicio/client"
 
 import { capitalCase, sentenceCase, snakeCase } from "../lib/changeCase"
 import { createFaker } from "../lib/createFaker"
-import { MockModelConfig, NestedGroupFieldModelMap } from "../types"
+import type { MockModelConfig, NestedGroupFieldModelMap } from "../types"
 
 export type MockSliceModelConfig<
 	NonRepeatFields extends NestedGroupFieldModelMap = NestedGroupFieldModelMap,

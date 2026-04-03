@@ -1,8 +1,8 @@
 import * as prismic from "@prismicio/client"
 
 import { createFaker } from "../lib/createFaker"
-import { MockValueStateConfig, MockValueConfig } from "../types"
-import { MockTimestampValueConfig, timestamp } from "./timestamp"
+import type { MockValueStateConfig, MockValueConfig } from "../types"
+import { timestamp, type MockTimestampValueConfig } from "./timestamp"
 
 export type MockDateValueConfig<
 	Model extends prismic.CustomTypeModelDateField = prismic.CustomTypeModelDateField,

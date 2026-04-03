@@ -2,7 +2,7 @@ import * as prismic from "@prismicio/client"
 
 import { sentenceCase } from "../lib/changeCase"
 import { createFaker } from "../lib/createFaker"
-import { MockValueStateConfig, MockValueConfig } from "../types"
+import type { MockValueStateConfig, MockValueConfig } from "../types"
 
 export type MockKeyTextValueConfig<
 	Model extends prismic.CustomTypeModelKeyTextField = prismic.CustomTypeModelKeyTextField,

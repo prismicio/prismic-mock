@@ -2,9 +2,9 @@ import * as prismic from "@prismicio/client"
 
 import { createFaker } from "../lib/createFaker"
 import { generateFieldId } from "../lib/generateFieldId"
-import { valueForModelMap, ValueForModelMapConfigs } from "../lib/valueForModelMap"
+import { valueForModelMap, type ValueForModelMapConfigs } from "../lib/valueForModelMap"
 import * as modelGen from "../model"
-import { MockValueConfig, ModelValue } from "../types"
+import type { MockValueConfig, ModelValue } from "../types"
 
 export type MockSharedSliceVariationValueConfig<
 	Model extends prismic.SharedSliceModelVariation = prismic.SharedSliceModelVariation,

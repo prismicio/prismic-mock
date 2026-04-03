@@ -2,7 +2,7 @@ import * as prismic from "@prismicio/client"
 
 import { createFaker } from "../lib/createFaker"
 import { generateTags } from "../lib/generateTags"
-import { MockRestApiConfig } from "../types"
+import type { MockRestApiConfig } from "../types"
 
 export type MockRestApiTagsConfig = MockRestApiConfig
 
