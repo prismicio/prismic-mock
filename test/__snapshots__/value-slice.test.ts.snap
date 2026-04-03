@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Slice field value 1`] = `
+[
+  {
+    "id": "d53b39b965a",
+    "items": [],
+    "primary": {},
+    "slice_label": "Ac",
+    "slice_type": "ut",
+  },
+  {
+    "id": "d53b39b965a",
+    "items": [],
+    "primary": {},
+    "slice_label": "Ac",
+    "slice_type": "ut",
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "id": "e1d2fe94771",
+    "items": [],
+    "primary": {},
+    "slice_label": "Ut",
+    "slice_type": "purus_massa",
+  },
+  {
+    "id": "e1d2fe94771",
+    "items": [],
+    "primary": {},
+    "slice_label": "Ut",
+    "slice_type": "purus_massa",
+  },
+]
+`;

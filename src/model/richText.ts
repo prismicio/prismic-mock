@@ -1,22 +1,19 @@
-import * as prismic from "@prismicio/client";
+import * as prismic from "@prismicio/client"
 
-import { capitalCase, sentenceCase } from "../lib/changeCase";
-import { createFaker } from "../lib/createFaker";
+import { capitalCase, sentenceCase } from "../lib/changeCase"
+import { createFaker } from "../lib/createFaker"
+import type { MockModelConfig } from "../types"
 
-import { MockModelConfig } from "../types";
-
-export type MockRichTextModelConfig<
-	WithMultipleBlocks extends boolean = boolean,
-> = {
-	withMultipleBlocks?: WithMultipleBlocks;
-} & MockModelConfig;
+export type MockRichTextModelConfig<WithMultipleBlocks extends boolean = boolean> = {
+	withMultipleBlocks?: WithMultipleBlocks
+} & MockModelConfig
 
 export const richText = <WithMultipleBlocks extends boolean = boolean>(
 	config: MockRichTextModelConfig<WithMultipleBlocks>,
 ): WithMultipleBlocks extends true
 	? prismic.CustomTypeModelRichTextMultiField
 	: prismic.CustomTypeModelRichTextSingleField => {
-	const faker = config.faker || createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed)
 
 	const blockTypes = faker
 		.randomElements([
@@ -36,12 +33,10 @@ export const richText = <WithMultipleBlocks extends boolean = boolean>(
 			prismic.RichTextNodeType.embed,
 			prismic.RichTextNodeType.hyperlink,
 		])
-		.join(",");
+		.join(",")
 
 	const blockTypeConfig =
-		config.withMultipleBlocks ?? faker.boolean()
-			? { multi: blockTypes }
-			: { single: blockTypes };
+		(config.withMultipleBlocks ?? faker.boolean()) ? { multi: blockTypes } : { single: blockTypes }
 
 	return {
 		type: prismic.CustomTypeModelFieldType.StructuredText,
@@ -53,5 +48,5 @@ export const richText = <WithMultipleBlocks extends boolean = boolean>(
 		},
 	} as WithMultipleBlocks extends true
 		? prismic.CustomTypeModelRichTextMultiField
-		: prismic.CustomTypeModelRichTextSingleField;
-};
+		: prismic.CustomTypeModelRichTextSingleField
+}

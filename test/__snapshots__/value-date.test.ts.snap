@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Date field value 1`] = `
+[
+  "2022-07-17",
+  "2022-07-17",
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  "2020-08-18",
+  "2020-08-18",
+]
+`;

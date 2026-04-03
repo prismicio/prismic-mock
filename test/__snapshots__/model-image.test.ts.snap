@@ -1,0 +1,55 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Image field model 1`] = `
+[
+  {
+    "config": {
+      "constraint": {
+        "height": null,
+        "width": null,
+      },
+      "label": "Massa",
+      "thumbnails": [],
+    },
+    "type": "Image",
+  },
+  {
+    "config": {
+      "constraint": {
+        "height": null,
+        "width": null,
+      },
+      "label": "Massa",
+      "thumbnails": [],
+    },
+    "type": "Image",
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "config": {
+      "constraint": {
+        "height": null,
+        "width": null,
+      },
+      "label": "Egestas",
+      "thumbnails": [],
+    },
+    "type": "Image",
+  },
+  {
+    "config": {
+      "constraint": {
+        "height": null,
+        "width": null,
+      },
+      "label": "Egestas",
+      "thumbnails": [],
+    },
+    "type": "Image",
+  },
+]
+`;

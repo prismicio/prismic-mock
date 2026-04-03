@@ -1,24 +1,21 @@
-import * as prismic from "@prismicio/client";
+import * as prismic from "@prismicio/client"
 
-import { buildImageFieldImage } from "../../lib/buildImageFieldImage";
-import { createFaker } from "../../lib/createFaker";
-import { getMockImageData } from "../../lib/getMockImageData";
+import { buildImageFieldImage } from "../../lib/buildImageFieldImage"
+import { createFaker } from "../../lib/createFaker"
+import { getMockImageData } from "../../lib/getMockImageData"
+import type { MockRichTextValueConfig } from "../../types"
 
-import { MockRichTextValueConfig } from "../../types";
+type MockRichTextImageValueConfig = MockRichTextValueConfig
 
-type MockRichTextImageValueConfig = MockRichTextValueConfig;
+export const image = (config: MockRichTextImageValueConfig): prismic.RTImageNode | undefined => {
+	const faker = config.faker || createFaker(config.seed)
 
-export const image = (
-	config: MockRichTextImageValueConfig,
-): prismic.RTImageNode | undefined => {
-	const faker = config.faker || createFaker(config.seed);
-
-	const imageData = getMockImageData({ faker });
+	const imageData = getMockImageData({ faker })
 	const imageField = buildImageFieldImage({
 		faker,
 		imageData,
 		state: "filled",
-	});
+	})
 
 	return {
 		id: faker.hash(7),
@@ -28,5 +25,5 @@ export const image = (
 		copyright: imageField.copyright,
 		dimensions: imageField.dimensions,
 		edit: imageField.edit,
-	};
-};
+	}
+}

@@ -1,53 +1,54 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as model from "../src/model";
+it("creates a mock Link field model", ({ task }) => {
+	snapshotTwice((name) => model.link({ seed: name }), task.name)
+})
 
-test("creates a mock Link field model", snapshotTwiceMacro, (t) =>
-	model.link({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => model.link({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () => model.link({ seed: 1 }));
-
-test("can be configured to explicitly support blank target", (t) => {
+it("can be configured to explicitly support blank target", ({ task }) => {
 	const actualTrue = model.link({
-		seed: t.title,
+		seed: task.name,
 		allowTargetBlank: true,
-	});
-	t.is(actualTrue.config.allowTargetBlank, true);
+	})
+	expect(actualTrue.config.allowTargetBlank).toBe(true)
 
 	const actualFalse = model.link({
-		seed: t.title,
+		seed: task.name,
 		allowTargetBlank: false,
-	});
-	t.is(actualFalse.config.allowTargetBlank, undefined);
-});
+	})
+	expect(actualFalse.config.allowTargetBlank).toBe(undefined)
+})
 
-test("can be configured to explicitly support the text property", (t) => {
+it("can be configured to explicitly support the text property", ({ task }) => {
 	const actualTrue = model.link({
-		seed: t.title,
+		seed: task.name,
 		allowText: true,
-	});
-	t.is(actualTrue.config.allowText, true);
+	})
+	expect(actualTrue.config.allowText).toBe(true)
 
 	const actualFalse = model.link({
-		seed: t.title,
+		seed: task.name,
 		allowText: false,
-	});
-	t.is(actualFalse.config.allowText, undefined);
-});
+	})
+	expect(actualFalse.config.allowText).toBe(undefined)
+})
 
-test("can be configured to be repeatable", (t) => {
+it("can be configured to be repeatable", ({ task }) => {
 	const actualTrue = model.link({
-		seed: t.title,
+		seed: task.name,
 		repeat: true,
-	});
-	t.is(actualTrue.config.repeat, true);
+	})
+	expect(actualTrue.config.repeat).toBe(true)
 
 	const actualFalse = model.link({
-		seed: t.title,
+		seed: task.name,
 		repeat: false,
-	});
-	t.is(actualFalse.config.repeat, undefined);
-});
+	})
+	expect(actualFalse.config.repeat).toBe(undefined)
+})

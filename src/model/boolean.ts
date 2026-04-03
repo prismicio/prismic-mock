@@ -1,21 +1,18 @@
-import * as prismic from "@prismicio/client";
+import * as prismic from "@prismicio/client"
 
-import { capitalCase } from "../lib/changeCase";
-import { createFaker } from "../lib/createFaker";
+import { capitalCase } from "../lib/changeCase"
+import { createFaker } from "../lib/createFaker"
+import type { MockModelConfig } from "../types"
 
-import { MockModelConfig } from "../types";
+export type MockBooleanModelConfig = MockModelConfig
 
-export type MockBooleanModelConfig = MockModelConfig;
-
-export function boolean(
-	config: MockBooleanModelConfig,
-): prismic.CustomTypeModelBooleanField {
-	const faker = config.faker || createFaker(config.seed);
+export function boolean(config: MockBooleanModelConfig): prismic.CustomTypeModelBooleanField {
+	const faker = config.faker || createFaker(config.seed)
 
 	return {
 		type: prismic.CustomTypeModelFieldType.Boolean,
 		config: {
 			label: capitalCase(faker.word()),
 		},
-	};
+	}
 }

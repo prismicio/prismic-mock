@@ -1,25 +1,25 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { value, model } from "../src";
-import { buildContentRelationshipField } from "../src/lib/buildContentRelationshipField";
+import { value, model } from "../src"
+import { buildContentRelationshipField } from "../src/lib/buildContentRelationshipField"
 
-test("returns undefined uid if document.uid is null", (t) => {
+it("returns undefined uid if document.uid is null", ({ task }) => {
 	const document = value.document({
-		seed: t.title,
-		model: model.customType({ seed: t.title }),
-	});
+		seed: task.name,
+		model: model.customType({ seed: task.name }),
+	})
 
-	const actual = buildContentRelationshipField({ document });
+	const actual = buildContentRelationshipField({ document })
 
-	t.is(document.uid, null);
-	t.is(actual.uid, undefined);
-});
+	expect(document.uid).toBe(null)
+	expect(actual.uid).toBe(undefined)
+})
 
-test("returns undefined url if document.url is null", (t) => {
-	const document = value.document({ seed: t.title });
-	document.url = null;
+it("returns undefined url if document.url is null", ({ task }) => {
+	const document = value.document({ seed: task.name })
+	document.url = null
 
-	const actual = buildContentRelationshipField({ document });
+	const actual = buildContentRelationshipField({ document })
 
-	t.is(actual.url, undefined);
-});
+	expect(actual.url).toBe(undefined)
+})

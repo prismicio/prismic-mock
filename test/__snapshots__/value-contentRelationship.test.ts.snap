@@ -1,0 +1,55 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Content Relationship field value 1`] = `
+[
+  {
+    "id": "f3c898f",
+    "isBroken": false,
+    "lang": "viverra",
+    "link_type": "Document",
+    "slug": undefined,
+    "tags": [],
+    "type": "malesuada",
+    "uid": undefined,
+    "url": "https://justo.example",
+  },
+  {
+    "id": "f3c898f",
+    "isBroken": false,
+    "lang": "viverra",
+    "link_type": "Document",
+    "slug": undefined,
+    "tags": [],
+    "type": "malesuada",
+    "uid": undefined,
+    "url": "https://justo.example",
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "id": "be1d2fe",
+    "isBroken": false,
+    "lang": "sed",
+    "link_type": "Document",
+    "slug": undefined,
+    "tags": [],
+    "type": "urna",
+    "uid": undefined,
+    "url": "https://ipsum.example",
+  },
+  {
+    "id": "be1d2fe",
+    "isBroken": false,
+    "lang": "sed",
+    "link_type": "Document",
+    "slug": undefined,
+    "tags": [],
+    "type": "urna",
+    "uid": undefined,
+    "url": "https://ipsum.example",
+  },
+]
+`;

@@ -1,13 +1,12 @@
-import test from "ava";
+import { it } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as model from "../src/model";
+it("creates a mock Title field model", ({ task }) => {
+	snapshotTwice((name) => model.title({ seed: name }), task.name)
+})
 
-test("creates a mock Title field model", snapshotTwiceMacro, (t) =>
-	model.title({ seed: t.title }),
-);
-
-test("supports number seed", snapshotTwiceMacro, () =>
-	model.title({ seed: 1 }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => model.title({ seed: 1 }), task.name)
+})

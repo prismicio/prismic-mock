@@ -1,0 +1,35 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock ref value 1`] = `
+[
+  {
+    "id": "f41c712a7ad5da69",
+    "isMasterRef": false,
+    "label": "Nisl",
+    "ref": "34a575aeb79b4bff",
+  },
+  {
+    "id": "f41c712a7ad5da69",
+    "isMasterRef": false,
+    "label": "Nisl",
+    "ref": "34a575aeb79b4bff",
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "id": "2dd98a8a9eba2cb2",
+    "isMasterRef": false,
+    "label": "Non Diam",
+    "ref": "c3ced5a3606bede2",
+  },
+  {
+    "id": "2dd98a8a9eba2cb2",
+    "isMasterRef": false,
+    "label": "Non Diam",
+    "ref": "c3ced5a3606bede2",
+  },
+]
+`;

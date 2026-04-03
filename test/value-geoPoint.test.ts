@@ -1,22 +1,21 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as value from "../src/value"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as value from "../src/value";
+it("creates a mock GeoPoint field value", ({ task }) => {
+	snapshotTwice((name) => value.geoPoint({ seed: name }), task.name)
+})
 
-test("creates a mock GeoPoint field value", snapshotTwiceMacro, (t) =>
-	value.geoPoint({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => value.geoPoint({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	value.geoPoint({ seed: 1 }),
-);
-
-test("can be configured to return an empty value", (t) => {
+it("can be configured to return an empty value", ({ task }) => {
 	const actual = value.geoPoint({
-		seed: t.title,
+		seed: task.name,
 		state: "empty",
-	});
+	})
 
-	t.deepEqual(actual, {});
-});
+	expect(actual).toEqual({})
+})

@@ -1,37 +1,36 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as value from "../src/value"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as value from "../src/value";
+it("creates a mock Timestamp field value", ({ task }) => {
+	snapshotTwice((name) => value.timestamp({ seed: name }), task.name)
+})
 
-test("creates a mock Timestamp field value", snapshotTwiceMacro, (t) =>
-	value.timestamp({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => value.timestamp({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	value.timestamp({ seed: 1 }),
-);
-
-test("can be configured to return an empty value", (t) => {
+it("can be configured to return an empty value", ({ task }) => {
 	const actual = value.timestamp({
-		seed: t.title,
+		seed: task.name,
 		state: "empty",
-	});
+	})
 
-	t.is(actual, null);
-});
+	expect(actual).toBe(null)
+})
 
-test("can be configured to return a timestamp after and before given timestamps", (t) => {
-	const after = new Date(1984, 0, 1);
-	const before = new Date(1984, 0, 3);
+it("can be configured to return a timestamp after and before given timestamps", ({ task }) => {
+	const after = new Date(1984, 0, 1)
+	const before = new Date(1984, 0, 3)
 
 	const actual = value.timestamp({
-		seed: t.title,
+		seed: task.name,
 		after,
 		before,
-	});
-	const actualTime = new Date(actual).getTime();
+	})
+	const actualTime = new Date(actual).getTime()
 
-	t.true(before.getTime() > actualTime);
-	t.true(after.getTime() < actualTime);
-});
+	expect(before.getTime() > actualTime).toBe(true)
+	expect(after.getTime() < actualTime).toBe(true)
+})

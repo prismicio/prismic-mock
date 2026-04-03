@@ -1,11 +1,8 @@
-import test from "ava";
+import { it } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as model from "../src/model";
-
-test(
-	"creates a mock Shared Slice choice field model",
-	snapshotTwiceMacro,
-	model.sharedSliceChoice,
-);
+it("creates a mock Shared Slice choice field model", ({ task }) => {
+	snapshotTwice(() => model.sharedSliceChoice(), task.name)
+})

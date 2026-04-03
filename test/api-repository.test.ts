@@ -1,38 +1,34 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as mock from "../src"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as mock from "../src";
+it("creates a mock repository value", ({ task }) => {
+	snapshotTwice((name) => mock.api.repository({ seed: name }), task.name)
+})
 
-test("creates a mock repository value", snapshotTwiceMacro, (t) =>
-	mock.api.repository({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => mock.api.repository({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	mock.api.repository({ seed: 1 }),
-);
-
-test("can be configured to include releases", (t) => {
+it("can be configured to include releases", ({ task }) => {
 	const actual = mock.api.repository({
-		seed: t.title,
+		seed: task.name,
 		withReleases: true,
-	});
+	})
 
-	t.true(actual.refs.filter((ref) => !ref.isMasterRef).length > 0);
-});
+	expect(actual.refs.filter((ref) => !ref.isMasterRef).length > 0).toBe(true)
+})
 
-test("can be configured to include custom types", (t) => {
-	const seed = t.title;
+it("can be configured to include custom types", ({ task }) => {
+	const seed = task.name
 
-	const customTypeModels = [
-		mock.model.customType({ seed }),
-		mock.model.customType({ seed }),
-	];
+	const customTypeModels = [mock.model.customType({ seed }), mock.model.customType({ seed })]
 
-	const actual = mock.api.repository({ seed, customTypeModels });
+	const actual = mock.api.repository({ seed, customTypeModels })
 
-	t.deepEqual(actual.types, {
+	expect(actual.types).toEqual({
 		[customTypeModels[0].id]: customTypeModels[0].label,
 		[customTypeModels[1].id]: customTypeModels[1].label,
-	});
-});
+	})
+})

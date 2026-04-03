@@ -1,0 +1,47 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Slice field model 1`] = `
+[
+  {
+    "description": "Venenatis tellus metus vulputate eu scelerisque felis imperdiet",
+    "display": "grid",
+    "fieldset": "Porta Nibh",
+    "icon": "turpis",
+    "non-repeat": {},
+    "repeat": {},
+    "type": "Slice",
+  },
+  {
+    "description": "Venenatis tellus metus vulputate eu scelerisque felis imperdiet",
+    "display": "grid",
+    "fieldset": "Porta Nibh",
+    "icon": "turpis",
+    "non-repeat": {},
+    "repeat": {},
+    "type": "Slice",
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "description": "Diam donec adipiscing tristique risus nec feugiat fermentum",
+    "display": "list",
+    "fieldset": "Eget Nunc",
+    "icon": "egestas",
+    "non-repeat": {},
+    "repeat": {},
+    "type": "Slice",
+  },
+  {
+    "description": "Diam donec adipiscing tristique risus nec feugiat fermentum",
+    "display": "list",
+    "fieldset": "Eget Nunc",
+    "icon": "egestas",
+    "non-repeat": {},
+    "repeat": {},
+    "type": "Slice",
+  },
+]
+`;

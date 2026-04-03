@@ -1,35 +1,30 @@
-import * as prismic from "@prismicio/client";
+import type * as prismic from "@prismicio/client"
 
-import { createFaker } from "../lib/createFaker";
-
-import { MockValueConfig, MockValueStateConfig } from "../types";
-
-import { heading, MockRichTextHeadingValueConfig } from "./richText/heading";
+import { createFaker } from "../lib/createFaker"
+import type { MockValueConfig, MockValueStateConfig } from "../types"
+import { heading, type MockRichTextHeadingValueConfig } from "./richText/heading"
 
 export type MockTitleValueConfig<
-	Model extends
-		prismic.CustomTypeModelTitleField = prismic.CustomTypeModelTitleField,
+	Model extends prismic.CustomTypeModelTitleField = prismic.CustomTypeModelTitleField,
 	State extends prismic.FieldState = prismic.FieldState,
 > = {
-	pattern?: MockRichTextHeadingValueConfig["pattern"];
+	pattern?: MockRichTextHeadingValueConfig["pattern"]
 } & MockValueConfig<Model> &
-	MockValueStateConfig<State>;
+	MockValueStateConfig<State>
 
-export type MockTitleValue<
-	State extends prismic.FieldState = prismic.FieldState,
-> = prismic.TitleField<State>;
+export type MockTitleValue<State extends prismic.FieldState = prismic.FieldState> =
+	prismic.TitleField<State>
 
 export const title = <
-	Model extends
-		prismic.CustomTypeModelTitleField = prismic.CustomTypeModelTitleField,
+	Model extends prismic.CustomTypeModelTitleField = prismic.CustomTypeModelTitleField,
 	State extends prismic.FieldState = "filled",
 >(
 	config: MockTitleValueConfig<Model, State>,
 ): MockTitleValue<State> => {
-	const faker = config.faker || createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed)
 
 	if (config.state === "empty") {
-		return [] as MockTitleValue<State>;
+		return [] as MockTitleValue<State>
 	} else {
 		return [
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -38,6 +33,6 @@ export const title = <
 				model: config.model,
 				pattern: config.pattern,
 			})!,
-		] as MockTitleValue<State>;
+		] as MockTitleValue<State>
 	}
-};
+}

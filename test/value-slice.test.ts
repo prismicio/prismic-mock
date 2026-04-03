@@ -1,82 +1,81 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import * as value from "../src/value"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as value from "../src/value";
-import * as model from "../src/model";
+it("creates a mock Slice field value", ({ task }) => {
+	snapshotTwice((name) => value.slice({ seed: name }), task.name)
+})
 
-test("creates a mock Slice field value", snapshotTwiceMacro, (t) =>
-	value.slice({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => value.slice({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	value.slice({ seed: 1 }),
-);
-
-test("supports custom model", (t) => {
+it("supports custom model", ({ task }) => {
 	const customModel = model.slice({
-		seed: t.title,
+		seed: task.name,
 		nonRepeatFields: {
-			boolean: model.boolean({ seed: t.title }),
+			boolean: model.boolean({ seed: task.name }),
 		},
 		repeatFields: {
-			keyText: model.keyText({ seed: t.title }),
+			keyText: model.keyText({ seed: task.name }),
 		},
-	});
+	})
 
 	const actual = value.slice({
-		seed: t.title,
+		seed: task.name,
 		model: customModel,
-	});
+	})
 
-	t.is(typeof actual.primary.boolean, "boolean");
+	expect(typeof actual.primary.boolean).toBe("boolean")
 
 	for (const item of actual.items) {
-		t.is(typeof item.keyText, "string");
+		expect(typeof item.keyText).toBe("string")
 	}
-});
+})
 
-test("returns no items if model does not include repeat model", (t) => {
-	const customModel = model.slice({ seed: t.title });
+it("returns no items if model does not include repeat model", ({ task }) => {
+	const customModel = model.slice({ seed: task.name })
 
 	const actual = value.slice({
-		seed: t.title,
+		seed: task.name,
 		model: customModel,
-	});
+	})
 
-	t.is(actual.items.length, 0);
-});
+	expect(actual.items.length).toBe(0)
+})
 
-test("can be customized with a specific number of items", (t) => {
+it("can be customized with a specific number of items", ({ task }) => {
 	const customModel = model.slice({
-		seed: t.title,
+		seed: task.name,
 		repeatFields: {
-			boolean: model.boolean({ seed: t.title }),
+			boolean: model.boolean({ seed: task.name }),
 		},
-	});
+	})
 
 	const actual = value.slice({
-		seed: t.title,
+		seed: task.name,
 		model: customModel,
 		itemsCount: 5,
-	});
-	t.is(actual.items.length, 5);
-});
+	})
+	expect(actual.items.length).toBe(5)
+})
 
-test("can be customized to return a specific type", (t) => {
+it("can be customized to return a specific type", ({ task }) => {
 	const actual = value.slice({
-		seed: t.title,
+		seed: task.name,
 		type: "type",
-	});
+	})
 
-	t.is(actual.slice_type, "type");
-});
+	expect(actual.slice_type).toBe("type")
+})
 
-test("can be customized to return a specific label", (t) => {
+it("can be customized to return a specific label", ({ task }) => {
 	const actual = value.slice({
-		seed: t.title,
+		seed: task.name,
 		label: "label",
-	});
+	})
 
-	t.is(actual.slice_label, "label");
-});
+	expect(actual.slice_label).toBe("label")
+})

@@ -1,65 +1,56 @@
-import * as prismic from "@prismicio/client";
+import * as prismic from "@prismicio/client"
 
-import { snakeCase } from "../lib/changeCase";
-import { createFaker } from "../lib/createFaker";
-import { generateTags } from "../lib/generateTags";
-import {
-	valueForModelMap,
-	ValueForModelMapConfigs,
-} from "../lib/valueForModelMap";
-
-import { MockValueConfig, ModelValue } from "../types";
-
-import * as modelGen from "../model";
-
-import { timestamp } from "./timestamp";
-import { buildAlternativeLanguage } from "../lib/buildAlternativeLanguage";
+import { buildAlternativeLanguage } from "../lib/buildAlternativeLanguage"
+import { snakeCase } from "../lib/changeCase"
+import { createFaker } from "../lib/createFaker"
+import { generateTags } from "../lib/generateTags"
+import { valueForModelMap, type ValueForModelMapConfigs } from "../lib/valueForModelMap"
+import * as modelGen from "../model"
+import type { MockValueConfig, ModelValue } from "../types"
+import { timestamp } from "./timestamp"
 
 export type MockCustomTypeValueConfig<
 	Model extends prismic.CustomTypeModel = prismic.CustomTypeModel,
 > = {
-	withURL?: boolean;
-	alternateLanguages?: prismic.PrismicDocument[];
-	configs?: ValueForModelMapConfigs;
-} & MockValueConfig<Model>;
+	withURL?: boolean
+	alternateLanguages?: prismic.PrismicDocument[]
+	configs?: ValueForModelMapConfigs
+} & MockValueConfig<Model>
 
-export const customType = <
-	Model extends prismic.CustomTypeModel = prismic.CustomTypeModel,
->(
+export const customType = <Model extends prismic.CustomTypeModel = prismic.CustomTypeModel>(
 	config: MockCustomTypeValueConfig<Model>,
 ): ModelValue<Model> => {
-	const faker = config.faker || createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed)
 
-	const model = config.model || modelGen.customType({ faker });
+	const model = config.model || modelGen.customType({ faker })
 
 	const fieldModelsMap = Object.assign(
 		{},
 		...Object.values(model.json),
-	) as prismic.CustomTypeModelTab;
+	) as prismic.CustomTypeModelTab
 
-	const dataFieldModelsMap: prismic.CustomTypeModelTab = {};
+	const dataFieldModelsMap: prismic.CustomTypeModelTab = {}
 	for (const key in fieldModelsMap) {
-		const fieldModel = fieldModelsMap[key];
+		const fieldModel = fieldModelsMap[key]
 
 		// UID fields must be filtered out since they are not represented in
 		// the document's `data` field.
 		if (fieldModel.type !== prismic.CustomTypeModelFieldType.UID) {
-			dataFieldModelsMap[key] = fieldModel;
+			dataFieldModelsMap[key] = fieldModel
 		}
 	}
 
 	const hasUID = Object.values(fieldModelsMap).some(
 		(fieldModel) => fieldModel.type === prismic.CustomTypeModelFieldType.UID,
-	);
+	)
 
-	const withURL = config.withURL ?? true;
+	const withURL = config.withURL ?? true
 
-	const alternateLanguages = (config.alternateLanguages || []).map(
-		(alternateLanguageDocument) =>
-			buildAlternativeLanguage({
-				document: alternateLanguageDocument,
-			}),
-	);
+	const alternateLanguages = (config.alternateLanguages || []).map((alternateLanguageDocument) =>
+		buildAlternativeLanguage({
+			document: alternateLanguageDocument,
+		}),
+	)
 
 	return {
 		type: model.id,
@@ -79,5 +70,5 @@ export const customType = <
 			map: dataFieldModelsMap,
 			configs: config.configs,
 		}),
-	} as ModelValue<Model>;
-};
+	} as ModelValue<Model>
+}

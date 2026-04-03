@@ -1,30 +1,27 @@
-import * as prismic from "@prismicio/client";
+import type * as prismic from "@prismicio/client"
 
-import { capitalCase } from "../lib/changeCase";
-import { createFaker } from "../lib/createFaker";
-import { generateTags } from "../lib/generateTags";
-
-import { MockRestApiConfig } from "../types";
-import { ref } from "./ref";
+import { capitalCase } from "../lib/changeCase"
+import { createFaker } from "../lib/createFaker"
+import { generateTags } from "../lib/generateTags"
+import type { MockRestApiConfig } from "../types"
+import { ref } from "./ref"
 
 export type MockRestApiRepositoryConfig = {
-	customTypeModels?: prismic.CustomTypeModel[];
-	withReleases?: boolean;
-} & MockRestApiConfig;
+	customTypeModels?: prismic.CustomTypeModel[]
+	withReleases?: boolean
+} & MockRestApiConfig
 
-export const repository = (
-	config: MockRestApiRepositoryConfig,
-): prismic.Repository => {
-	const faker = config.faker || createFaker(config.seed);
+export const repository = (config: MockRestApiRepositoryConfig): prismic.Repository => {
+	const faker = config.faker || createFaker(config.seed)
 
 	const types = (config.customTypeModels || []).reduce(
 		(acc, model) => {
-			acc[model.id] = model.label || model.id;
+			acc[model.id] = model.label || model.id
 
-			return acc;
+			return acc
 		},
 		{} as prismic.Repository["types"],
-	);
+	)
 
 	return {
 		refs: [
@@ -52,5 +49,5 @@ export const repository = (
 		experiments: {},
 		oauth_token: faker.url(),
 		oauth_initiate: faker.url(),
-	};
-};
+	}
+}

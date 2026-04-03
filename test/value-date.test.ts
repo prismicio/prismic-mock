@@ -1,31 +1,32 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as value from "../src/value"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as value from "../src/value";
+it("creates a mock Date field value", ({ task }) => {
+	snapshotTwice((name) => value.date({ seed: name }), task.name)
+})
 
-test("creates a mock Date field value", snapshotTwiceMacro, (t) =>
-	value.date({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => value.date({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () => value.date({ seed: 1 }));
-
-test("can be configured to return an empty value", (t) => {
+it("can be configured to return an empty value", ({ task }) => {
 	const actual = value.date({
-		seed: t.title,
+		seed: task.name,
 		state: "empty",
-	});
+	})
 
-	t.is(actual, null);
-});
+	expect(actual).toBe(null)
+})
 
-test("can be configured to return a date after and before given dates", (t) => {
+it("can be configured to return a date after and before given dates", ({ task }) => {
 	const actual = value.date({
-		seed: t.title,
+		seed: task.name,
 		after: new Date("1984-01-01T00:00:00.000Z"),
 		before: new Date("1984-01-01T00:00:00.000Z"),
-	});
+	})
 
 	// Interval is [before, after]
-	t.is(actual, "1984-01-01");
-});
+	expect(actual).toBe("1984-01-01")
+})

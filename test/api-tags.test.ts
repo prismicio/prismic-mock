@@ -1,13 +1,12 @@
-import test from "ava";
+import { it } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as mock from "../src"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as mock from "../src";
+it("creates a mock tags value", ({ task }) => {
+	snapshotTwice((name) => mock.api.tags({ seed: name }), task.name)
+})
 
-test("creates a mock tags value", snapshotTwiceMacro, (t) =>
-	mock.api.tags({ seed: t.title }),
-);
-
-test("supports number seed", snapshotTwiceMacro, () =>
-	mock.api.tags({ seed: 1 }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => mock.api.tags({ seed: 1 }), task.name)
+})

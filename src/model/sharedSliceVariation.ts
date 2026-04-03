@@ -1,30 +1,20 @@
-import * as prismic from "@prismicio/client";
+import type * as prismic from "@prismicio/client"
 
-import {
-	capitalCase,
-	pascalCase,
-	sentenceCase,
-	snakeCase,
-} from "../lib/changeCase";
-import { createFaker } from "../lib/createFaker";
-import { getMockImageData } from "../lib/getMockImageData";
-
-import {
-	MockModelConfig,
-	NestedGroupFieldModelMap,
-	SlicePrimaryFieldModelMap,
-} from "../types";
+import { capitalCase, pascalCase, sentenceCase, snakeCase } from "../lib/changeCase"
+import { createFaker } from "../lib/createFaker"
+import { getMockImageData } from "../lib/getMockImageData"
+import type { MockModelConfig, NestedGroupFieldModelMap, SlicePrimaryFieldModelMap } from "../types"
 
 export type MockSharedSliceVariationModelConfig<
 	ID extends string = string,
 	PrimaryFields extends SlicePrimaryFieldModelMap = SlicePrimaryFieldModelMap,
 	ItemsFields extends NestedGroupFieldModelMap = NestedGroupFieldModelMap,
 > = {
-	id?: ID;
-	name?: string;
-	primaryFields?: PrimaryFields;
-	itemsFields?: ItemsFields;
-} & MockModelConfig;
+	id?: ID
+	name?: string
+	primaryFields?: PrimaryFields
+	itemsFields?: ItemsFields
+} & MockModelConfig
 
 export const sharedSliceVariation = <
 	ID extends string,
@@ -33,18 +23,18 @@ export const sharedSliceVariation = <
 >(
 	config: MockSharedSliceVariationModelConfig<ID, PrimaryFields, ItemsFields>,
 ): prismic.SharedSliceModelVariation<ID, PrimaryFields, ItemsFields> => {
-	const faker = config.faker || createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed)
 
-	let name: string = config.name || capitalCase(faker.words(faker.range(1, 2)));
-	let id: ID = config.id || (snakeCase(name) as ID);
+	let name: string = config.name || capitalCase(faker.words(faker.range(1, 2)))
+	let id: ID = config.id || (snakeCase(name) as ID)
 
 	if (config.id && !config.name) {
-		name = pascalCase(config.id);
-	} else if (config.name && !config.name) {
-		id = snakeCase(config.name) as ID;
+		name = pascalCase(config.id)
+	} else if (config.name && !config.id) {
+		id = snakeCase(config.name) as ID
 	}
 
-	const imageData = getMockImageData({ faker });
+	const imageData = getMockImageData({ faker })
 
 	return {
 		id,
@@ -55,5 +45,5 @@ export const sharedSliceVariation = <
 		primary: config.primaryFields || ({} as PrimaryFields),
 		items: config.itemsFields || ({} as ItemsFields),
 		imageUrl: imageData.url,
-	};
-};
+	}
+}

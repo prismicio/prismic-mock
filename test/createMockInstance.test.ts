@@ -1,15 +1,15 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { createMockFactory, MockFactory } from "../src";
+import { createMockFactory, MockFactory } from "../src"
 
-test("creates a mock instance", (t) => {
-	const mock = createMockFactory({ seed: t.title });
+it("creates a mock instance", ({ task }) => {
+	const mock = createMockFactory({ seed: task.name })
 
-	t.true(mock instanceof MockFactory);
-});
+	expect(mock instanceof MockFactory).toBe(true)
+})
 
-test("supports number seed", (t) => {
-	const mock = createMockFactory({ seed: 1 });
+it("supports number seed", () => {
+	const mock = createMockFactory({ seed: 1 })
 
-	t.true(mock instanceof MockFactory);
-});
+	expect(mock instanceof MockFactory).toBe(true)
+})

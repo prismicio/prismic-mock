@@ -1,30 +1,24 @@
-import * as prismic from "@prismicio/client";
+import type * as prismic from "@prismicio/client"
 
-import { sentenceCase } from "../lib/changeCase";
-import { createFaker } from "../lib/createFaker";
-
-import { MockValueStateConfig, MockValueConfig } from "../types";
+import { sentenceCase } from "../lib/changeCase"
+import { createFaker } from "../lib/createFaker"
+import type { MockValueStateConfig, MockValueConfig } from "../types"
 
 export type MockKeyTextValueConfig<
-	Model extends
-		prismic.CustomTypeModelKeyTextField = prismic.CustomTypeModelKeyTextField,
+	Model extends prismic.CustomTypeModelKeyTextField = prismic.CustomTypeModelKeyTextField,
 	State extends prismic.FieldState = prismic.FieldState,
-> = MockValueConfig<Model> & MockValueStateConfig<State>;
+> = MockValueConfig<Model> & MockValueStateConfig<State>
 
-export type MockKeyTextValue<
-	State extends prismic.FieldState = prismic.FieldState,
-> = prismic.KeyTextField<State>;
+export type MockKeyTextValue<State extends prismic.FieldState = prismic.FieldState> =
+	prismic.KeyTextField<State>
 
 export const keyText = <
-	Model extends
-		prismic.CustomTypeModelKeyTextField = prismic.CustomTypeModelKeyTextField,
+	Model extends prismic.CustomTypeModelKeyTextField = prismic.CustomTypeModelKeyTextField,
 	State extends prismic.FieldState = "filled",
 >(
 	config: MockKeyTextValueConfig<Model, State>,
 ): MockKeyTextValue<State> => {
-	const faker = config.faker || createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed)
 
-	return (
-		config.state === "empty" ? null : sentenceCase(faker.words(3))
-	) as MockKeyTextValue<State>;
-};
+	return (config.state === "empty" ? null : sentenceCase(faker.words(3))) as MockKeyTextValue<State>
+}

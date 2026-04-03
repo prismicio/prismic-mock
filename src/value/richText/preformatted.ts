@@ -1,9 +1,8 @@
-import * as prismic from "@prismicio/client";
+import * as prismic from "@prismicio/client"
 
-import { sentenceCase } from "../../lib/changeCase";
-import { createFaker } from "../../lib/createFaker";
-
-import { MockRichTextValueConfig } from "../../types";
+import { sentenceCase } from "../../lib/changeCase"
+import { createFaker } from "../../lib/createFaker"
+import type { MockRichTextValueConfig } from "../../types"
 
 const patterns = {
 	short: {
@@ -15,31 +14,30 @@ const patterns = {
 	long: {
 		sentenceCount: 12,
 	},
-} as const;
+} as const
 
 type MockRichTextPreformattedValueConfig = {
-	pattern?: keyof typeof patterns;
-} & MockRichTextValueConfig;
+	pattern?: keyof typeof patterns
+} & MockRichTextValueConfig
 
 export const preformatted = (
 	config: MockRichTextPreformattedValueConfig,
 ): prismic.RTPreformattedNode | undefined => {
-	const faker = config.faker || createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed)
 
 	const patternKey =
-		config.pattern ||
-		faker.randomElement(Object.keys(patterns) as (keyof typeof patterns)[]);
-	const pattern = patterns[patternKey];
+		config.pattern || faker.randomElement(Object.keys(patterns) as (keyof typeof patterns)[])
+	const pattern = patterns[patternKey]
 
 	// TODO: Use code, not lorem ipsum.
 	const text = Array.from(
 		{ length: pattern.sentenceCount },
 		() => sentenceCase(faker.words(faker.range(5, 15))) + ".",
-	).join(" ");
+	).join(" ")
 
 	return {
 		type: prismic.RichTextNodeType.preformatted,
 		text,
 		spans: [],
-	};
-};
+	}
+}

@@ -1,0 +1,75 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Image field value 1`] = `
+[
+  {
+    "alt": "Etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus",
+    "copyright": "Ornare lectus sit amet est placerat egestas erat imperdiet sed euismod",
+    "dimensions": {
+      "height": 4253,
+      "width": 6373,
+    },
+    "edit": {
+      "background": "#f5b2ae",
+      "x": 2071,
+      "y": -2054,
+      "zoom": 1.3291021141524197,
+    },
+    "id": "8052f65df7f",
+    "url": "https://images.unsplash.com/reserve/HgZuGu3gSD6db21T3lxm_San%20Zenone.jpg?w=6373&h=4253&fit=crop",
+  },
+  {
+    "alt": "Etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus",
+    "copyright": "Ornare lectus sit amet est placerat egestas erat imperdiet sed euismod",
+    "dimensions": {
+      "height": 4253,
+      "width": 6373,
+    },
+    "edit": {
+      "background": "#f5b2ae",
+      "x": 2071,
+      "y": -2054,
+      "zoom": 1.3291021141524197,
+    },
+    "id": "8052f65df7f",
+    "url": "https://images.unsplash.com/reserve/HgZuGu3gSD6db21T3lxm_San%20Zenone.jpg?w=6373&h=4253&fit=crop",
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "alt": "Diam maecenas sed enim ut sem viverra aliquet eget",
+    "copyright": "Vitae et leo duis ut diam quam nulla porttitor massa id neque",
+    "dimensions": {
+      "height": 3744,
+      "width": 5616,
+    },
+    "edit": {
+      "background": "#6385eb",
+      "x": 1163,
+      "y": -1271,
+      "zoom": 1.155937177631058,
+    },
+    "id": "dd98a8a9eba",
+    "url": "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=5616&h=3744&fit=crop",
+  },
+  {
+    "alt": "Diam maecenas sed enim ut sem viverra aliquet eget",
+    "copyright": "Vitae et leo duis ut diam quam nulla porttitor massa id neque",
+    "dimensions": {
+      "height": 3744,
+      "width": 5616,
+    },
+    "edit": {
+      "background": "#6385eb",
+      "x": 1163,
+      "y": -1271,
+      "zoom": 1.155937177631058,
+    },
+    "id": "dd98a8a9eba",
+    "url": "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=5616&h=3744&fit=crop",
+  },
+]
+`;

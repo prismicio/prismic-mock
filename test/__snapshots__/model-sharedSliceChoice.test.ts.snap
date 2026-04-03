@@ -1,0 +1,12 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Shared Slice choice field model 1`] = `
+[
+  {
+    "type": "SharedSlice",
+  },
+  {
+    "type": "SharedSlice",
+  },
+]
+`;

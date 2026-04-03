@@ -1,34 +1,29 @@
-import * as prismic from "@prismicio/client";
+import type * as prismic from "@prismicio/client"
 
-import { MockValueStateConfig, MockValueConfig } from "../types";
+import type { MockValueStateConfig, MockValueConfig } from "../types"
 
 export type MockIntegrationFieldValueConfig<
-	Model extends
-		prismic.CustomTypeModelIntegrationField = prismic.CustomTypeModelIntegrationField,
+	Model extends prismic.CustomTypeModelIntegrationField = prismic.CustomTypeModelIntegrationField,
 	Data extends Record<string, unknown> = Record<string, unknown>,
 	State extends prismic.FieldState = prismic.FieldState,
 > = {
-	data?: Data;
+	data?: Data
 } & MockValueConfig<Model> &
-	MockValueStateConfig<State>;
+	MockValueStateConfig<State>
 
 export type MockIntegrationFieldValue<
 	Data extends Record<string, unknown> = Record<string, unknown>,
 	State extends prismic.FieldState = prismic.FieldState,
-> = prismic.IntegrationField<Data, State>;
+> = prismic.IntegrationField<Data, State>
 
 export const integration = <
-	Model extends
-		prismic.CustomTypeModelIntegrationField = prismic.CustomTypeModelIntegrationField,
+	Model extends prismic.CustomTypeModelIntegrationField = prismic.CustomTypeModelIntegrationField,
 	Data extends Record<string, unknown> = Record<string, unknown>,
 	State extends prismic.FieldState = "filled",
 >(
 	config: MockIntegrationFieldValueConfig<Model, Data, State>,
 ): MockIntegrationFieldValue<Data, State> => {
-	const data = config.data ?? {};
+	const data = config.data ?? {}
 
-	return (config.state === "empty" ? null : data) as MockIntegrationFieldValue<
-		Data,
-		State
-	>;
-};
+	return (config.state === "empty" ? null : data) as MockIntegrationFieldValue<Data, State>
+}

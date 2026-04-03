@@ -1,0 +1,51 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Link To Media field value 1`] = `
+[
+  {
+    "height": "1712",
+    "id": "7acecedb94f",
+    "kind": "vestibulum",
+    "link_type": "Media",
+    "name": "sed.example",
+    "size": "1233",
+    "url": "https://eget.example",
+    "width": "1790",
+  },
+  {
+    "height": "1712",
+    "id": "7acecedb94f",
+    "kind": "vestibulum",
+    "link_type": "Media",
+    "name": "sed.example",
+    "size": "1233",
+    "url": "https://eget.example",
+    "width": "1790",
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "height": "2159",
+    "id": "bbe1d2fe947",
+    "kind": "lacus",
+    "link_type": "Media",
+    "name": "urna.example",
+    "size": "1238",
+    "url": "https://nisl.example",
+    "width": "1733",
+  },
+  {
+    "height": "2159",
+    "id": "bbe1d2fe947",
+    "kind": "lacus",
+    "link_type": "Media",
+    "name": "urna.example",
+    "size": "1238",
+    "url": "https://nisl.example",
+    "width": "1733",
+  },
+]
+`;

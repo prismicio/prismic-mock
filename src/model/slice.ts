@@ -1,17 +1,16 @@
-import * as prismic from "@prismicio/client";
+import * as prismic from "@prismicio/client"
 
-import { capitalCase, sentenceCase, snakeCase } from "../lib/changeCase";
-import { createFaker } from "../lib/createFaker";
-
-import { MockModelConfig, NestedGroupFieldModelMap } from "../types";
+import { capitalCase, sentenceCase, snakeCase } from "../lib/changeCase"
+import { createFaker } from "../lib/createFaker"
+import type { MockModelConfig, NestedGroupFieldModelMap } from "../types"
 
 export type MockSliceModelConfig<
 	NonRepeatFields extends NestedGroupFieldModelMap = NestedGroupFieldModelMap,
 	RepeatFields extends NestedGroupFieldModelMap = NestedGroupFieldModelMap,
 > = {
-	nonRepeatFields?: NonRepeatFields;
-	repeatFields?: RepeatFields;
-} & MockModelConfig;
+	nonRepeatFields?: NonRepeatFields
+	repeatFields?: RepeatFields
+} & MockModelConfig
 
 export const slice = <
 	NonRepeatFields extends NestedGroupFieldModelMap,
@@ -19,7 +18,7 @@ export const slice = <
 >(
 	config: MockSliceModelConfig<NonRepeatFields, RepeatFields>,
 ): prismic.CustomTypeModelSlice<NonRepeatFields, RepeatFields> => {
-	const faker = config.faker || createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed)
 
 	return {
 		type: prismic.CustomTypeModelSliceType.Slice,
@@ -31,5 +30,5 @@ export const slice = <
 		description: sentenceCase(faker.words(faker.range(5, 10))),
 		repeat: config.repeatFields || ({} as RepeatFields),
 		"non-repeat": config.nonRepeatFields || ({} as NonRepeatFields),
-	};
-};
+	}
+}

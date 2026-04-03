@@ -1,0 +1,29 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Group field value 1`] = `
+[
+  [
+    {},
+    {},
+    {},
+  ],
+  [
+    {},
+    {},
+    {},
+  ],
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  [
+    {},
+    {},
+  ],
+  [
+    {},
+    {},
+  ],
+]
+`;

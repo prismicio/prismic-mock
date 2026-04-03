@@ -1,32 +1,28 @@
-import test from "ava";
-import * as prismic from "@prismicio/client";
+import * as prismic from "@prismicio/client"
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as prismicM from "../src"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as prismicM from "../src";
+it("creates a mock Slice field model", ({ task }) => {
+	snapshotTwice((name) => prismicM.model.slice({ seed: name }), task.name)
+})
 
-test("creates a mock Slice field model", snapshotTwiceMacro, (t) =>
-	prismicM.model.slice({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => prismicM.model.slice({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	prismicM.model.slice({ seed: 1 }),
-);
-
-test("can be configured for specific non-repeat and repeat fields", (t) => {
+it("can be configured for specific non-repeat and repeat fields", ({ task }) => {
 	const actual = prismicM.model.slice({
-		seed: t.title,
+		seed: task.name,
 		nonRepeatFields: {
-			boolean: prismicM.model.boolean({ seed: t.title }),
+			boolean: prismicM.model.boolean({ seed: task.name }),
 		},
 		repeatFields: {
-			keyText: prismicM.model.keyText({ seed: t.title }),
+			keyText: prismicM.model.keyText({ seed: task.name }),
 		},
-	});
+	})
 
-	t.is(
-		actual["non-repeat"]?.boolean.type,
-		prismic.CustomTypeModelFieldType.Boolean,
-	);
-	t.is(actual.repeat?.keyText.type, prismic.CustomTypeModelFieldType.Text);
-});
+	expect(actual["non-repeat"]?.boolean.type).toBe(prismic.CustomTypeModelFieldType.Boolean)
+	expect(actual.repeat?.keyText.type).toBe(prismic.CustomTypeModelFieldType.Text)
+})

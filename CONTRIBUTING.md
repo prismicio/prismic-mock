@@ -8,7 +8,7 @@ This package is primarily maintained by [Prismic](https://prismic.io)[^1]. Exter
 
 The following setup is required to work on this project:
 
-- Node.js
+- Node.js >= 20
 - npm CLI
 
 ## :memo: Project-specific notes
@@ -29,7 +29,7 @@ The following setup is required to work on this project:
 
 - Any change to this library should be tested. A test can be as simple as ensuring a mock generator outputs the correct value.
 - Tests should be placed in the `test` directory using the existing file name convention.
-- Tests are written using AVA.
+- Tests are written using Vitest.
 
 ## :construction_worker: Develop
 
@@ -57,8 +57,6 @@ npm run build
 
 # Lint your changes before requesting a review. No errors are allowed.
 npm run lint
-# Some errors can be fixed automatically:
-npm run lint -- --fix
 
 # Format your changes before requesting a review. No errors are allowed.
 npm run format
@@ -95,24 +93,14 @@ gh pr create
 > [!CAUTION]
 > Publishing is restricted to the Prismic team.[^4]
 
-```sh
-# Checkout the main branch and pull the latest changes.
-git checkout main
-git pull
+Releases are automated with [Release Please](https://github.com/googleapis/release-please). Merging a Release Please PR to `main` triggers a new npm publish automatically.
 
-# Perform a dry-run and verify the output.
-# If it looks good, release a new version.
-npm run release:dry
-npm run release
-
-# Or release an alpha.
-# Perform a dry-run and verify the output.
-# If it looks good, release a new alpha version.
-npm run release:alpha:dry
-npm run release:alpha
-```
+Canary releases are published on every push to `main`. PR preview releases are published for every pull request.
 
 [^1]: This package is maintained by the DevX team. Prismic employees can ask for help or a review in the [#team-devx](https://prismic-team.slack.com/archives/C014VAACCQL) Slack channel.
+
 [^2]: Prismic employees are highly encouraged to discuss changes with the DevX team in the [#team-devx](https://prismic-team.slack.com/archives/C014VAACCQL) Slack channel before starting.
+
 [^3]: Code should be reviewed by the DevX team before merging. Prismic employees can request a review in the [#team-devx](https://prismic-team.slack.com/archives/CPG31MDL1) Slack channel.
+
 [^4]: Prismic employees can ask the DevX team for [npm](https://www.npmjs.com) publish access.

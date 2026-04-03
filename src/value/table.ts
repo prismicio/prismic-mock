@@ -1,31 +1,27 @@
-import * as prismic from "@prismicio/client";
+import * as prismic from "@prismicio/client"
 
-import { createFaker, Faker } from "../lib/createFaker";
-
-import { MockValueStateConfig, MockValueConfig } from "../types";
-import { richText } from "./richText";
+import { createFaker, type Faker } from "../lib/createFaker"
+import type { MockValueStateConfig, MockValueConfig } from "../types"
+import { richText } from "./richText"
 
 export type MockTableValueConfig<
-	Model extends
-		prismic.CustomTypeModelTableField = prismic.CustomTypeModelTableField,
+	Model extends prismic.CustomTypeModelTableField = prismic.CustomTypeModelTableField,
 	State extends prismic.FieldState = prismic.FieldState,
-> = MockValueConfig<Model> & MockValueStateConfig<State>;
+> = MockValueConfig<Model> & MockValueStateConfig<State>
 
-export type MockTableValue<
-	State extends prismic.FieldState = prismic.FieldState,
-> = prismic.TableField<State>;
+export type MockTableValue<State extends prismic.FieldState = prismic.FieldState> =
+	prismic.TableField<State>
 
 export const table = <
-	Model extends
-		prismic.CustomTypeModelTableField = prismic.CustomTypeModelTableField,
+	Model extends prismic.CustomTypeModelTableField = prismic.CustomTypeModelTableField,
 	State extends prismic.FieldState = "filled",
 >(
 	config: MockTableValueConfig<Model, State>,
 ): MockTableValue<State> => {
-	const faker = config.faker || createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed)
 
-	const cells = faker.range(1, 10);
-	const bodyRows = faker.range(1, 10);
+	const cells = faker.range(1, 10)
+	const bodyRows = faker.range(1, 10)
 
 	return (
 		config.state === "empty"
@@ -54,8 +50,8 @@ export const table = <
 						})),
 					},
 				}
-	) as MockTableValue<State>;
-};
+	) as MockTableValue<State>
+}
 
 // Only exported for testing purposes, to ensure the model used is in sync with the internal one.
 export const TableCell = {
@@ -68,18 +64,12 @@ export const TableCell = {
 			prismic.RichTextNodeType.hyperlink,
 		].join(","),
 	},
-} as const;
+} as const
 
-const mockTableCell = ({
-	type,
-	faker,
-}: {
-	type: "header" | "data";
-	faker: Faker;
-}) => ({
+const mockTableCell = ({ type, faker }: { type: "header" | "data"; faker: Faker }) => ({
 	type,
 	content: richText({
 		faker,
 		model: TableCell,
 	}),
-});
+})

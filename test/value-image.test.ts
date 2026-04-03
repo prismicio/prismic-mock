@@ -1,20 +1,19 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import * as value from "../src/value"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as value from "../src/value";
-import * as model from "../src/model";
+it("creates a mock Image field value", ({ task }) => {
+	snapshotTwice((name) => value.image({ seed: name }), task.name)
+})
 
-test("creates a mock Image field value", snapshotTwiceMacro, (t) =>
-	value.image({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => value.image({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	value.image({ seed: 1 }),
-);
-
-test("can be configured to return an empty value", (t) => {
-	const customModel = model.image({ seed: t.title });
+it("can be configured to return an empty value", ({ task }) => {
+	const customModel = model.image({ seed: task.name })
 	if (customModel.config) {
 		customModel.config.thumbnails = [
 			{
@@ -22,16 +21,16 @@ test("can be configured to return an empty value", (t) => {
 				height: null,
 				width: null,
 			},
-		];
+		]
 	}
 
 	const actual = value.image({
-		seed: t.title,
+		seed: task.name,
 		model: customModel,
 		state: "empty",
-	});
+	})
 
-	t.deepEqual(actual, {
+	expect(actual).toEqual({
 		id: null,
 		url: null,
 		alt: null,
@@ -44,28 +43,22 @@ test("can be configured to return an empty value", (t) => {
 			copyright: null,
 			dimensions: null,
 		},
-	});
-});
+	})
+})
 
-test("supports custom model", (t) => {
+it("supports custom model", ({ task }) => {
 	const customModel = model.image({
-		seed: t.title,
+		seed: task.name,
 		withConstraint: true,
 		thumbnailNames: ["Foo"],
-	});
+	})
 
 	const actual = value.image({
-		seed: t.title,
+		seed: task.name,
 		model: customModel,
-	});
+	})
 
-	t.is(
-		actual.dimensions.width,
-		customModel.config?.constraint?.width as number,
-	);
-	t.is(
-		actual.dimensions.height,
-		customModel.config?.constraint?.height as number,
-	);
-	t.true("Foo" in actual);
-});
+	expect(actual.dimensions.width).toBe(customModel.config?.constraint?.width as number)
+	expect(actual.dimensions.height).toBe(customModel.config?.constraint?.height as number)
+	expect("Foo" in actual).toBe(true)
+})

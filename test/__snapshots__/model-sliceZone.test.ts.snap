@@ -1,0 +1,43 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Slice Zone field model 1`] = `
+[
+  {
+    "config": {
+      "choices": {},
+      "labels": {},
+    },
+    "fieldset": "Slice zone",
+    "type": "Slices",
+  },
+  {
+    "config": {
+      "choices": {},
+      "labels": {},
+    },
+    "fieldset": "Slice zone",
+    "type": "Slices",
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "config": {
+      "choices": {},
+      "labels": {},
+    },
+    "fieldset": "Slice zone",
+    "type": "Slices",
+  },
+  {
+    "config": {
+      "choices": {},
+      "labels": {},
+    },
+    "fieldset": "Slice zone",
+    "type": "Slices",
+  },
+]
+`;

@@ -1,14 +1,12 @@
-import * as prismic from "@prismicio/client";
+import type * as prismic from "@prismicio/client"
 
-import { createFaker } from "../lib/createFaker";
-
-import { MockValueConfig, ModelValue } from "../types";
-
-import * as modelGen from "../model";
+import { createFaker } from "../lib/createFaker"
+import * as modelGen from "../model"
+import type { MockValueConfig, ModelValue } from "../types"
 import {
 	sharedSliceVariation,
-	MockSharedSliceVariationValueConfig,
-} from "./sharedSliceVariation";
+	type MockSharedSliceVariationValueConfig,
+} from "./sharedSliceVariation"
 
 export type MockSharedSliceValueConfig<
 	Model extends prismic.SharedSliceModel = prismic.SharedSliceModel,
@@ -16,17 +14,15 @@ export type MockSharedSliceValueConfig<
 	MockSharedSliceVariationValueConfig,
 	"itemsCount" | "primaryFieldConfigs" | "itemsFieldConfigs"
 > &
-	MockValueConfig<Model>;
+	MockValueConfig<Model>
 
-export const sharedSlice = <
-	Model extends prismic.SharedSliceModel = prismic.SharedSliceModel,
->(
+export const sharedSlice = <Model extends prismic.SharedSliceModel = prismic.SharedSliceModel>(
 	config: MockSharedSliceValueConfig<Model>,
 ): ModelValue<Model> => {
-	const faker = config.faker || createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed)
 
-	const model = config.model || modelGen.sharedSlice({ faker });
-	const variationModel = faker.randomElement(model.variations);
+	const model = config.model || modelGen.sharedSlice({ faker })
+	const variationModel = faker.randomElement(model.variations)
 
 	return sharedSliceVariation({
 		faker,
@@ -35,5 +31,5 @@ export const sharedSlice = <
 		type: model.id,
 		primaryFieldConfigs: config.primaryFieldConfigs,
 		itemsFieldConfigs: config.itemsFieldConfigs,
-	}) as ModelValue<Model>;
-};
+	}) as ModelValue<Model>
+}

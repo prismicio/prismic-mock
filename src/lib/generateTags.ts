@@ -1,27 +1,25 @@
-import { capitalCase } from "../lib/changeCase";
-import { createFaker, Faker } from "../lib/createFaker";
-
-import { Seed } from "../types";
+import { capitalCase } from "../lib/changeCase"
+import { createFaker, type Faker } from "../lib/createFaker"
+import type { Seed } from "../types"
 
 type GenerateTagsConfig = {
-	min?: number;
-	max?: number;
+	min?: number
+	max?: number
 } & (
 	| {
-			seed: Seed;
-			faker?: never;
+			seed: Seed
+			faker?: never
 	  }
 	| {
-			faker: Faker;
-			seed?: never;
+			faker: Faker
+			seed?: never
 	  }
-);
+)
 
 export const generateTags = (config: GenerateTagsConfig): string[] => {
-	const faker = config.faker || createFaker(config.seed);
+	const faker = config.faker || createFaker(config.seed)
 
-	return Array.from(
-		{ length: faker.range(config.min ?? 0, config.max ?? 2) },
-		() => capitalCase(faker.words(faker.range(1, 3))),
-	);
-};
+	return Array.from({ length: faker.range(config.min ?? 0, config.max ?? 2) }, () =>
+		capitalCase(faker.words(faker.range(1, 3))),
+	)
+}

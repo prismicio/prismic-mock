@@ -1,23 +1,22 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as model from "../src/model";
+it("creates a mock Integration Fields field model", ({ task }) => {
+	snapshotTwice((name) => model.integration({ seed: name }), task.name)
+})
 
-test("creates a mock Integration Fields field model", snapshotTwiceMacro, (t) =>
-	model.integration({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => model.integration({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	model.integration({ seed: 1 }),
-);
-
-test("can be configured for a specific catalog", (t) => {
-	const catalog = "foo";
+it("can be configured for a specific catalog", ({ task }) => {
+	const catalog = "foo"
 	const actual = model.integration({
-		seed: t.title,
+		seed: task.name,
 		catalog,
-	});
+	})
 
-	t.is(actual.config?.catalog, catalog);
-});
+	expect(actual.config?.catalog).toBe(catalog)
+})

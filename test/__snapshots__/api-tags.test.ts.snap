@@ -1,0 +1,29 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock tags value 1`] = `
+[
+  [
+    "Nulla",
+    "Diam",
+  ],
+  [
+    "Nulla",
+    "Diam",
+  ],
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  [
+    "Eget",
+    "Diam Donec",
+    "Purus Massa",
+  ],
+  [
+    "Eget",
+    "Diam Donec",
+    "Purus Massa",
+  ],
+]
+`;

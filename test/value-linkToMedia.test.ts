@@ -1,36 +1,35 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as value from "../src/value"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as value from "../src/value";
+it("creates a mock Link To Media field value", ({ task }) => {
+	snapshotTwice((name) => value.linkToMedia({ seed: name }), task.name)
+})
 
-test("creates a mock Link To Media field value", snapshotTwiceMacro, (t) =>
-	value.linkToMedia({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => value.linkToMedia({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	value.linkToMedia({ seed: 1 }),
-);
-
-test("can be configured to return an empty value", (t) => {
+it("can be configured to return an empty value", ({ task }) => {
 	const actual = value.linkToMedia({
-		seed: t.title,
+		seed: task.name,
 		state: "empty",
-	});
+	})
 
-	t.false("url" in actual);
-});
+	expect("url" in actual).toBe(false)
+})
 
-test("can be configured to return a value with display text", (t) => {
+it("can be configured to return a value with display text", ({ task }) => {
 	const actualTrue = value.linkToMedia({
-		seed: t.title,
+		seed: task.name,
 		withText: true,
-	});
-	t.is(typeof actualTrue.text, "string");
+	})
+	expect(typeof actualTrue.text).toBe("string")
 
 	const actualFalse = value.linkToMedia({
-		seed: t.title,
+		seed: task.name,
 		withText: false,
-	});
-	t.is(actualFalse.text, undefined);
-});
+	})
+	expect(actualFalse.text).toBe(undefined)
+})

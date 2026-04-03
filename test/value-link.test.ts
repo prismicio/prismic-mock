@@ -1,19 +1,20 @@
-import test from "ava";
-import * as prismic from "@prismicio/client";
+import * as prismic from "@prismicio/client"
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import * as value from "../src/value"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as value from "../src/value";
-import * as model from "../src/model";
+it("creates a mock Link field value", ({ task }) => {
+	snapshotTwice((name) => value.link({ seed: name }), task.name)
+})
 
-test("creates a mock Link field value", snapshotTwiceMacro, (t) =>
-	value.link({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => value.link({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () => value.link({ seed: 1 }));
-
-test("supports custom model", (t) => {
-	const customModelBase = model.link({ seed: t.title });
+it("supports custom model", ({ task }) => {
+	const customModelBase = model.link({ seed: task.name })
 	const customModel = {
 		...customModelBase,
 		config: {
@@ -21,57 +22,57 @@ test("supports custom model", (t) => {
 			allowTargetBlank: true as const,
 			allowText: true as const,
 		},
-	};
+	}
 
 	const actual = value.link({
 		// This specific seed ensures `target` will be "_blank".
 		seed: 10000,
 		model: customModel,
 		type: prismic.LinkType.Web,
-	});
+	})
 
-	t.is(actual.target, "_blank");
-	t.is(typeof actual.text, "string");
-});
+	expect(actual.target).toBe("_blank")
+	expect(typeof actual.text).toBe("string")
+})
 
-test("can be configured to return an empty link value", (t) => {
+it("can be configured to return an empty link value", ({ task }) => {
 	const actual = value.link({
-		seed: t.title,
+		seed: task.name,
 		type: prismic.LinkType.Web,
 		state: "empty",
-	});
+	})
 
-	t.false("url" in actual);
-});
+	expect("url" in actual).toBe(false)
+})
 
-test("can be configured to return a value with `_blank` target", (t) => {
+it("can be configured to return a value with `_blank` target", ({ task }) => {
 	const actualTrue = value.link({
-		seed: t.title,
+		seed: task.name,
 		type: prismic.LinkType.Web,
 		withTargetBlank: true,
-	});
-	t.is(actualTrue.target, "_blank");
+	})
+	expect(actualTrue.target).toBe("_blank")
 
 	const actualFalse = value.link({
-		seed: t.title,
+		seed: task.name,
 		type: prismic.LinkType.Web,
 		withTargetBlank: false,
-	});
-	t.is(actualFalse.target, undefined);
-});
+	})
+	expect(actualFalse.target).toBe(undefined)
+})
 
-test("can be configured to return a value with display text", (t) => {
+it("can be configured to return a value with display text", ({ task }) => {
 	const actualTrue = value.link({
-		seed: t.title,
+		seed: task.name,
 		type: prismic.LinkType.Web,
 		withText: true,
-	});
-	t.is(typeof actualTrue.text, "string");
+	})
+	expect(typeof actualTrue.text).toBe("string")
 
 	const actualFalse = value.link({
-		seed: t.title,
+		seed: task.name,
 		type: prismic.LinkType.Web,
 		withText: false,
-	});
-	t.is(actualFalse.text, undefined);
-});
+	})
+	expect(actualFalse.text).toBe(undefined)
+})

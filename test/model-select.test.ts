@@ -1,33 +1,32 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as model from "../src/model";
+it("creates a mock Select field model", ({ task }) => {
+	snapshotTwice((name) => model.select({ seed: name }), task.name)
+})
 
-test("creates a mock Select field model", snapshotTwiceMacro, (t) =>
-	model.select({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => model.select({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	model.select({ seed: 1 }),
-);
-
-test("can be configured for a specific options", (t) => {
-	const options = ["foo", "bar"];
+it("can be configured for a specific options", ({ task }) => {
+	const options = ["foo", "bar"]
 	const actual = model.select({
-		seed: t.title,
+		seed: task.name,
 		options,
-	});
+	})
 
-	t.is(actual.config?.options, options);
-});
+	expect(actual.config?.options).toBe(options)
+})
 
-test("can be configured for a specific default value", (t) => {
+it("can be configured for a specific default value", ({ task }) => {
 	const actual = model.select({
-		seed: t.title,
+		seed: task.name,
 		options: ["foo", "bar"],
 		defaultValue: "foo",
-	});
+	})
 
-	t.is(actual.config?.default_value, "foo");
-});
+	expect(actual.config?.default_value).toBe("foo")
+})

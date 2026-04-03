@@ -1,0 +1,41 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Link field value 1`] = `
+[
+  {
+    "height": "2758",
+    "id": "afd68d62e4d",
+    "kind": "donec",
+    "link_type": "Media",
+    "name": "tellus.example",
+    "size": "2137",
+    "url": "https://quis.example",
+    "width": "1399",
+  },
+  {
+    "height": "2758",
+    "id": "afd68d62e4d",
+    "kind": "donec",
+    "link_type": "Media",
+    "name": "tellus.example",
+    "size": "2137",
+    "url": "https://quis.example",
+    "width": "1399",
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "link_type": "Web",
+    "target": "_blank",
+    "url": "https://purus.example",
+  },
+  {
+    "link_type": "Web",
+    "target": "_blank",
+    "url": "https://purus.example",
+  },
+]
+`;

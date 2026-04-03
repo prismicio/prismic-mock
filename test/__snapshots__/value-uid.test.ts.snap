@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock UID field value 1`] = `
+[
+  "sed_viverra",
+  "sed_viverra",
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  "aliquam",
+  "aliquam",
+]
+`;

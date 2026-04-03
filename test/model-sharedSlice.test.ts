@@ -1,58 +1,57 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as prismicM from "../src"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as prismicM from "../src";
+it("creates a mock Shared Slice model", ({ task }) => {
+	snapshotTwice((name) => prismicM.model.sharedSlice({ seed: name }), task.name)
+})
 
-test("creates a mock Shared Slice model", snapshotTwiceMacro, (t) =>
-	prismicM.model.sharedSlice({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => prismicM.model.sharedSlice({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	prismicM.model.sharedSlice({ seed: 1 }),
-);
-
-test("can be configured with a specific id", (t) => {
+it("can be configured with a specific id", ({ task }) => {
 	const actual = prismicM.model.sharedSlice({
-		seed: t.title,
+		seed: task.name,
 		id: "custom_id",
-	});
+	})
 
-	t.is(actual.id, "custom_id");
-	t.is(actual.name, "CustomId");
-});
+	expect(actual.id).toBe("custom_id")
+	expect(actual.name).toBe("CustomId")
+})
 
-test("can be configured with a specific name", (t) => {
+it("can be configured with a specific name", ({ task }) => {
 	const actual = prismicM.model.sharedSlice({
-		seed: t.title,
+		seed: task.name,
 		name: "Custom Name",
-	});
+	})
 
-	t.is(actual.id, "custom_name");
-	t.is(actual.name, "Custom Name");
-});
+	expect(actual.id).toBe("custom_name")
+	expect(actual.name).toBe("Custom Name")
+})
 
-test("can be configured with a specific id and name", (t) => {
+it("can be configured with a specific id and name", ({ task }) => {
 	const actual = prismicM.model.sharedSlice({
-		seed: t.title,
+		seed: task.name,
 		id: "custom_id",
 		name: "Custom Name",
-	});
+	})
 
-	t.is(actual.id, "custom_id");
-	t.is(actual.name, "Custom Name");
-});
+	expect(actual.id).toBe("custom_id")
+	expect(actual.name).toBe("Custom Name")
+})
 
-test("can be configured with specific variations", (t) => {
+it("can be configured with specific variations", ({ task }) => {
 	const variations = [
-		prismicM.model.sharedSliceVariation({ seed: t.title }),
-		prismicM.model.sharedSliceVariation({ seed: t.title }),
-	];
+		prismicM.model.sharedSliceVariation({ seed: task.name }),
+		prismicM.model.sharedSliceVariation({ seed: task.name }),
+	]
 
 	const actual = prismicM.model.sharedSlice({
-		seed: t.title,
+		seed: task.name,
 		variations,
-	});
+	})
 
-	t.is(actual.variations, variations);
-});
+	expect(actual.variations).toBe(variations)
+})

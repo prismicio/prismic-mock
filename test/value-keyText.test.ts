@@ -1,22 +1,21 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as value from "../src/value"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as value from "../src/value";
+it("creates a mock Key Text field value", ({ task }) => {
+	snapshotTwice((name) => value.keyText({ seed: name }), task.name)
+})
 
-test("creates a mock Key Text field value", snapshotTwiceMacro, (t) =>
-	value.keyText({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => value.keyText({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	value.keyText({ seed: 1 }),
-);
-
-test("can be configured to return an empty value", (t) => {
+it("can be configured to return an empty value", ({ task }) => {
 	const actual = value.keyText({
-		seed: t.title,
+		seed: task.name,
 		state: "empty",
-	});
+	})
 
-	t.is(actual, null);
-});
+	expect(actual).toBe(null)
+})

@@ -1,69 +1,69 @@
-import * as prismic from "@prismicio/client";
-import { Faker } from "./lib/createFaker";
+import type * as prismic from "@prismicio/client"
 
-import * as value from "./value";
+import type { Faker } from "./lib/createFaker"
+import type * as value from "./value"
 
 export type IterableElement<TargetIterable> =
 	TargetIterable extends Iterable<infer ElementType>
 		? ElementType
 		: TargetIterable extends AsyncIterable<infer ElementType>
 			? ElementType
-			: never;
+			: never
 
 export type ValueOf<
 	ObjectType,
 	ValueType extends keyof ObjectType = keyof ObjectType,
-> = ObjectType[ValueType];
+> = ObjectType[ValueType]
 
-type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
+type Simplify<T> = { [KeyType in keyof T]: T[KeyType] }
 type Except<ObjectType, KeysType extends keyof ObjectType> = Pick<
 	ObjectType,
 	Exclude<keyof ObjectType, KeysType>
->;
+>
 export type SetRequired<BaseType, Keys extends keyof BaseType> = Simplify<
 	// Pick just the keys that are optional from the base type.
 	Except<BaseType, Keys> &
 		// Pick the keys that should be required from the base type and make them required.
 		Required<Pick<BaseType, Keys>>
->;
+>
 
-export type Seed = string | number;
+export type Seed = string | number
 
 export type WithoutFakerConfig<T> = {
-	[P in keyof T as P extends "seed" | "faker" ? never : P]: T[P];
-};
+	[P in keyof T as P extends "seed" | "faker" ? never : P]: T[P]
+}
 
 export interface MockImageData {
-	url: string;
-	width: number;
-	height: number;
+	url: string
+	width: number
+	height: number
 }
 
 export type MockEmbedData = prismic.AnyOEmbed &
 	prismic.OEmbedExtra & {
-		embed_url: string;
-		html: string;
-	};
+		embed_url: string
+		html: string
+	}
 
 export type MockRestApiConfig =
 	| {
-			seed: Seed;
-			faker?: never;
+			seed: Seed
+			faker?: never
 	  }
 	| {
-			faker: Faker;
-			seed?: never;
-	  };
+			faker: Faker
+			seed?: never
+	  }
 
 export type MockModelConfig =
 	| {
-			seed: Seed;
-			faker?: never;
+			seed: Seed
+			faker?: never
 	  }
 	| {
-			faker: Faker;
-			seed?: never;
-	  };
+			faker: Faker
+			seed?: never
+	  }
 
 // TODO: Add to @prismicio/types
 export type PrismicModel =
@@ -71,41 +71,30 @@ export type PrismicModel =
 	| prismic.CustomTypeModelField
 	| prismic.CustomTypeModelSlice
 	| prismic.SharedSliceModel
-	| prismic.SharedSliceModelVariation;
+	| prismic.SharedSliceModelVariation
 
-export type GroupFieldModelMap = Record<
-	string,
-	prismic.CustomTypeModelFieldForGroup
->;
+export type GroupFieldModelMap = Record<string, prismic.CustomTypeModelFieldForGroup>
 
-export type NestedGroupFieldModelMap = Record<
-	string,
-	prismic.CustomTypeModelFieldForNestedGroup
->;
+export type NestedGroupFieldModelMap = Record<string, prismic.CustomTypeModelFieldForNestedGroup>
 
-export type SlicePrimaryFieldModelMap = Record<
-	string,
-	prismic.CustomTypeModelFieldForSlicePrimary
->;
+export type SlicePrimaryFieldModelMap = Record<string, prismic.CustomTypeModelFieldForSlicePrimary>
 
 export type MockValueConfig<Model extends PrismicModel = PrismicModel> = {
-	model?: Model;
+	model?: Model
 } & (
 	| {
-			seed: Seed;
-			faker?: never;
+			seed: Seed
+			faker?: never
 	  }
 	| {
-			faker: Faker;
-			seed?: never;
+			faker: Faker
+			seed?: never
 	  }
-);
+)
 
-export type MockValueStateConfig<
-	State extends prismic.FieldState = prismic.FieldState,
-> = {
-	state?: State;
-};
+export type MockValueStateConfig<State extends prismic.FieldState = prismic.FieldState> = {
+	state?: State
+}
 
 export type MockValueConfigForModel<
 	Model extends PrismicModel,
@@ -146,33 +135,30 @@ export type MockValueConfigForModel<
 															? value.MockTitleValueConfig<Model, State>
 															: Model extends prismic.CustomTypeModelUIDField
 																? value.MockUIDValueConfig<Model>
-																: never;
+																: never
 
 type CustomTypeModelStructuredTextField =
 	| prismic.CustomTypeModelRichTextField
-	| prismic.CustomTypeModelTitleField;
+	| prismic.CustomTypeModelTitleField
 
 export type MockRichTextValueConfig<
-	Model extends
-		CustomTypeModelStructuredTextField = CustomTypeModelStructuredTextField,
+	Model extends CustomTypeModelStructuredTextField = CustomTypeModelStructuredTextField,
 > = {
-	model?: Model;
+	model?: Model
 } & (
 	| {
-			seed: Seed;
-			faker?: never;
+			seed: Seed
+			faker?: never
 	  }
 	| {
-			faker: Faker;
-			seed?: never;
+			faker: Faker
+			seed?: never
 	  }
-);
+)
 
-export type ModelValueMap<
-	T extends Record<string, prismic.CustomTypeModelField>,
-> = {
-	[P in keyof T]: ModelValue<T[P]>;
-};
+export type ModelValueMap<T extends Record<string, prismic.CustomTypeModelField>> = {
+	[P in keyof T]: ModelValue<T[P]>
+}
 
 export type ModelValue<
 	T extends PrismicModel,
@@ -188,9 +174,9 @@ export type ModelValue<
 				: T extends prismic.CustomTypeModelSliceZoneField
 					? prismic.SliceZone<
 							ValueOf<{
-								[P in keyof NonNullable<
-									NonNullable<T["config"]>["choices"]
-								> as P extends string ? P : never]: NonNullable<
+								[P in keyof NonNullable<NonNullable<T["config"]>["choices"]> as P extends string
+									? P
+									: never]: NonNullable<
 									NonNullable<T["config"]>["choices"]
 								>[P] extends prismic.CustomTypeModelSlice
 									? CustomTypeModelSliceValue<
@@ -201,7 +187,7 @@ export type ModelValue<
 												NonNullable<T["config"]>["choices"]
 										  >[P] extends prismic.CustomTypeModelSharedSlice
 										? prismic.SharedSlice<P extends string ? P : string>
-										: never;
+										: never
 							}>,
 							State
 						>
@@ -214,18 +200,17 @@ export type ModelValue<
 								? SharedSliceModelValue<T>
 								: T extends prismic.SharedSliceModelVariation
 									? SharedSliceModelVariationValue<T>
-									: never;
+									: never
 
-type CustomTypeModelValue<T extends prismic.CustomTypeModel> =
-	prismic.PrismicDocument<
-		ModelValueMap<{
-			[P in keyof ValueOf<T["json"]> as ValueOf<
-				T["json"]
-			>[P]["type"] extends typeof prismic.CustomTypeModelFieldType.UID
-				? never
-				: P]: ValueOf<T["json"]>[P];
-		}>
-	>;
+type CustomTypeModelValue<T extends prismic.CustomTypeModel> = prismic.PrismicDocument<
+	ModelValueMap<{
+		[P in keyof ValueOf<T["json"]> as ValueOf<
+			T["json"]
+		>[P]["type"] extends typeof prismic.CustomTypeModelFieldType.UID
+			? never
+			: P]: ValueOf<T["json"]>[P]
+	}>
+>
 
 type CustomTypeModelFieldForGroupValue<
 	T extends prismic.CustomTypeModelFieldForGroup,
@@ -247,12 +232,7 @@ type CustomTypeModelFieldForGroupValue<
 							: T extends prismic.CustomTypeModelLinkToMediaField
 								? prismic.LinkToMediaField<State>
 								: T extends prismic.CustomTypeModelContentRelationshipField
-									? prismic.ContentRelationshipField<
-											string,
-											string,
-											never,
-											State
-										>
+									? prismic.ContentRelationshipField<string, string, never, State>
 									: T extends prismic.CustomTypeModelDateField
 										? prismic.DateField<State>
 										: T extends prismic.CustomTypeModelTimestampField
@@ -264,34 +244,22 @@ type CustomTypeModelFieldForGroupValue<
 													: T extends prismic.CustomTypeModelSelectField
 														? prismic.SelectField<string, State>
 														: T extends prismic.CustomTypeModelEmbedField
-															? prismic.EmbedField<
-																	prismic.AnyOEmbed & prismic.OEmbedExtra,
-																	State
-																>
+															? prismic.EmbedField<prismic.AnyOEmbed & prismic.OEmbedExtra, State>
 															: T extends prismic.CustomTypeModelGeoPointField
 																? prismic.GeoPointField<State>
 																: T extends prismic.CustomTypeModelIntegrationField
-																	? prismic.IntegrationField<
-																			Record<string, unknown>,
-																			State
-																		>
-																	: never;
+																	? prismic.IntegrationField<Record<string, unknown>, State>
+																	: never
 
 type CustomTypeModelGroupFieldValue<
 	T extends prismic.CustomTypeModelGroupField,
 	State extends prismic.FieldState = prismic.FieldState,
-> = prismic.GroupField<
-	ModelValueMap<NonNullable<NonNullable<T["config"]>["fields"]>>,
-	State
->;
+> = prismic.GroupField<ModelValueMap<NonNullable<NonNullable<T["config"]>["fields"]>>, State>
 
 type CustomTypeModelNestedGroupFieldValue<
 	T extends prismic.CustomTypeModelNestedGroupField,
 	State extends prismic.FieldState = prismic.FieldState,
-> = prismic.NestedGroupField<
-	ModelValueMap<NonNullable<NonNullable<T["config"]>["fields"]>>,
-	State
->;
+> = prismic.NestedGroupField<ModelValueMap<NonNullable<NonNullable<T["config"]>["fields"]>>, State>
 
 type CustomTypeModelSliceValue<
 	T extends prismic.CustomTypeModelSlice,
@@ -300,23 +268,19 @@ type CustomTypeModelSliceValue<
 	SliceType,
 	ModelValueMap<NonNullable<T["non-repeat"]>>,
 	ModelValueMap<NonNullable<T["repeat"]>>
->;
+>
 
-type SharedSliceModelValue<T extends prismic.SharedSliceModel> =
+type SharedSliceModelValue<T extends prismic.SharedSliceModel> = prismic.SharedSlice<
+	T["id"],
+	SharedSliceModelVariationValue<IterableElement<NonNullable<T["variations"]>>>
+>
+
+type SharedSliceModelVariationValue<T extends prismic.SharedSliceModelVariation> =
 	prismic.SharedSlice<
-		T["id"],
-		SharedSliceModelVariationValue<
-			IterableElement<NonNullable<T["variations"]>>
+		string,
+		prismic.SharedSliceVariation<
+			T["id"],
+			ModelValueMap<NonNullable<T["primary"]>>,
+			ModelValueMap<NonNullable<T["items"]>>
 		>
-	>;
-
-type SharedSliceModelVariationValue<
-	T extends prismic.SharedSliceModelVariation,
-> = prismic.SharedSlice<
-	string,
-	prismic.SharedSliceVariation<
-		T["id"],
-		ModelValueMap<NonNullable<T["primary"]>>,
-		ModelValueMap<NonNullable<T["items"]>>
 	>
->;

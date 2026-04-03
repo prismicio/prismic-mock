@@ -1,52 +1,41 @@
-import { createFaker, Faker } from "./lib/createFaker";
-
-import { Seed } from "./types";
-
-import {
-	createModelMockFactory,
-	ModelMockFactory,
-} from "./model/createModelMockFactory";
-import {
-	createValueMockFactory,
-	ValueMockFactory,
-} from "./value/createValueMockFactory";
-import {
-	createAPIMockFactory,
-	APIMockFactory,
-} from "./api/createAPIMockFactory";
+import { createAPIMockFactory, type APIMockFactory } from "./api/createAPIMockFactory"
+import { createFaker, type Faker } from "./lib/createFaker"
+import { createModelMockFactory, type ModelMockFactory } from "./model/createModelMockFactory"
+import type { Seed } from "./types"
+import { createValueMockFactory, type ValueMockFactory } from "./value/createValueMockFactory"
 
 export const createMockFactory = (
 	...args: ConstructorParameters<typeof MockFactory>
 ): MockFactory => {
-	return new MockFactory(...args);
-};
+	return new MockFactory(...args)
+}
 
 type PrismicMockConfig =
 	| {
-			seed: Seed;
-			faker?: never;
+			seed: Seed
+			faker?: never
 	  }
 	| {
-			faker: Faker;
-			seed?: never;
-	  };
+			faker: Faker
+			seed?: never
+	  }
 
 export class MockFactory {
-	private faker: Faker;
+	private faker: Faker
 
-	api: APIMockFactory;
-	model: ModelMockFactory;
-	value: ValueMockFactory;
+	api: APIMockFactory
+	model: ModelMockFactory
+	value: ValueMockFactory
 
 	constructor(config: PrismicMockConfig) {
-		this.faker = config.faker || createFaker(config.seed);
+		this.faker = config.faker || createFaker(config.seed)
 
-		this.api = createAPIMockFactory({ faker: this.faker });
-		this.model = createModelMockFactory({ faker: this.faker });
-		this.value = createValueMockFactory({ faker: this.faker });
+		this.api = createAPIMockFactory({ faker: this.faker })
+		this.model = createModelMockFactory({ faker: this.faker })
+		this.value = createValueMockFactory({ faker: this.faker })
 	}
 
-	get seed() {
-		return this.faker.seed;
+	get seed(): Seed {
+		return this.faker.seed
 	}
 }

@@ -1,58 +1,57 @@
-import test from "ava";
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import * as value from "../src/value"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as value from "../src/value";
-import * as model from "../src/model";
+it("creates a mock Title field value", ({ task }) => {
+	snapshotTwice((name) => value.title({ seed: name }), task.name)
+})
 
-test("creates a mock Title field value", snapshotTwiceMacro, (t) =>
-	value.title({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => value.title({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	value.title({ seed: 1 }),
-);
-
-test("supports custom model", (t) => {
-	const customModelBase = model.title({ seed: t.title });
+it("supports custom model", ({ task }) => {
+	const customModelBase = model.title({ seed: task.name })
 	const customModel = {
 		...customModelBase,
 		config: {
 			...customModelBase.config,
 			single: "heading3" as const,
 		},
-	};
+	}
 
 	const actual = value.title({
-		seed: t.title,
+		seed: task.name,
 		model: customModel,
-	});
+	})
 
-	t.is(actual[0].type, customModel.config.single);
-});
+	expect(actual[0].type).toBe(customModel.config.single)
+})
 
-test("can be customized with a pattern to determine title length", (t) => {
+it("can be customized with a pattern to determine title length", ({ task }) => {
 	const actualShort = value.title({
-		seed: t.title,
+		seed: task.name,
 		pattern: "short",
-	});
-	const actualShortWordCount = actualShort[0].text.split(" ").length;
-	t.true(actualShortWordCount >= 1);
-	t.true(actualShortWordCount <= 3);
+	})
+	const actualShortWordCount = actualShort[0].text.split(" ").length
+	expect(actualShortWordCount >= 1).toBe(true)
+	expect(actualShortWordCount <= 3).toBe(true)
 
 	const actualMedium = value.title({
-		seed: t.title,
+		seed: task.name,
 		pattern: "medium",
-	});
-	const actualMediumWordCount = actualMedium[0].text.split(" ").length;
-	t.true(actualMediumWordCount >= 3);
-	t.true(actualMediumWordCount <= 6);
+	})
+	const actualMediumWordCount = actualMedium[0].text.split(" ").length
+	expect(actualMediumWordCount >= 3).toBe(true)
+	expect(actualMediumWordCount <= 6).toBe(true)
 
 	const actualLong = value.title({
-		seed: t.title,
+		seed: task.name,
 		pattern: "long",
-	});
-	const actualLongWordCount = actualLong[0].text.split(" ").length;
-	t.true(actualLongWordCount >= 6);
-	t.true(actualLongWordCount <= 12);
-});
+	})
+	const actualLongWordCount = actualLong[0].text.split(" ").length
+	expect(actualLongWordCount >= 6).toBe(true)
+	expect(actualLongWordCount <= 12).toBe(true)
+})

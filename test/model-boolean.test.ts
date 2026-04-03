@@ -1,13 +1,12 @@
-import test from "ava";
+import { it } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as model from "../src/model";
+it("creates a mock Boolean field model", ({ task }) => {
+	snapshotTwice((name) => model.boolean({ seed: name }), task.name)
+})
 
-test("creates a mock Boolean field model", snapshotTwiceMacro, (t) =>
-	model.boolean({ seed: t.title }),
-);
-
-test("supports number seed", snapshotTwiceMacro, () =>
-	model.boolean({ seed: 1 }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => model.boolean({ seed: 1 }), task.name)
+})

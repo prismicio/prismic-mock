@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a mock Date field model 1`] = `
+[
+  {
+    "config": {
+      "label": "A",
+      "placeholder": "Cras semper auctor",
+    },
+    "type": "Date",
+  },
+  {
+    "config": {
+      "label": "A",
+      "placeholder": "Cras semper auctor",
+    },
+    "type": "Date",
+  },
+]
+`;
+
+exports[`supports number seed 1`] = `
+[
+  {
+    "config": {
+      "label": "Egestas",
+      "placeholder": "Aliquam ut porttitor",
+    },
+    "type": "Date",
+  },
+  {
+    "config": {
+      "label": "Egestas",
+      "placeholder": "Aliquam ut porttitor",
+    },
+    "type": "Date",
+  },
+]
+`;

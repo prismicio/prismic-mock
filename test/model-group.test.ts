@@ -1,51 +1,43 @@
-import test from "ava";
-import * as prismic from "@prismicio/client";
+import * as prismic from "@prismicio/client"
+import { it, expect } from "vitest"
 
-import { snapshotTwiceMacro } from "./__testutils__/snapshotTwiceMacro";
+import * as model from "../src/model"
+import { snapshotTwice } from "./__testutils__/snapshotTwiceMacro"
 
-import * as model from "../src/model";
+it("creates a mock Group field model", ({ task }) => {
+	snapshotTwice((name) => model.group({ seed: name }), task.name)
+})
 
-test("creates a mock Group field model", snapshotTwiceMacro, (t) =>
-	model.group({ seed: t.title }),
-);
+it("supports number seed", ({ task }) => {
+	snapshotTwice(() => model.group({ seed: 1 }), task.name)
+})
 
-test("supports number seed", snapshotTwiceMacro, () =>
-	model.group({ seed: 1 }),
-);
-
-test("can be configured for specific fields", (t) => {
+it("can be configured for specific fields", ({ task }) => {
 	const actual = model.group({
-		seed: t.title,
+		seed: task.name,
 		fields: {
-			boolean: model.boolean({ seed: t.title }),
+			boolean: model.boolean({ seed: task.name }),
 		},
-	});
+	})
 
-	t.is(
-		actual.config?.fields?.boolean.type,
-		prismic.CustomTypeModelFieldType.Boolean,
-	);
-});
+	expect(actual.config?.fields?.boolean.type).toBe(prismic.CustomTypeModelFieldType.Boolean)
+})
 
-test("supports nested groups", (t) => {
+it("supports nested groups", ({ task }) => {
 	const actual = model.group({
-		seed: t.title,
+		seed: task.name,
 		fields: {
 			group: model.group({
-				seed: t.title,
+				seed: task.name,
 				fields: {
-					boolean: model.boolean({ seed: t.title }),
+					boolean: model.boolean({ seed: task.name }),
 				},
 			}),
 		},
-	});
+	})
 
-	t.is(
-		actual.config?.fields?.group.type,
-		prismic.CustomTypeModelFieldType.Group,
-	);
-	t.is(
-		actual.config?.fields?.group.config?.fields?.boolean.type,
+	expect(actual.config?.fields?.group.type).toBe(prismic.CustomTypeModelFieldType.Group)
+	expect(actual.config?.fields?.group.config?.fields?.boolean.type).toBe(
 		prismic.CustomTypeModelFieldType.Boolean,
-	);
-});
+	)
+})
