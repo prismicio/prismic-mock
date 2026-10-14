@@ -174,9 +174,11 @@ export type ModelValue<
 				: T extends prismic.CustomTypeModelSliceZoneField
 					? prismic.SliceZone<
 							ValueOf<{
-								[P in keyof NonNullable<NonNullable<T["config"]>["choices"]> as P extends string
-									? P
-									: never]: NonNullable<
+								[
+									P in keyof NonNullable<NonNullable<T["config"]>["choices"]> as P extends string
+										? P
+										: never
+								]: NonNullable<
 									NonNullable<T["config"]>["choices"]
 								>[P] extends prismic.CustomTypeModelSlice
 									? CustomTypeModelSliceValue<
@@ -204,11 +206,13 @@ export type ModelValue<
 
 type CustomTypeModelValue<T extends prismic.CustomTypeModel> = prismic.PrismicDocument<
 	ModelValueMap<{
-		[P in keyof ValueOf<T["json"]> as ValueOf<
-			T["json"]
-		>[P]["type"] extends typeof prismic.CustomTypeModelFieldType.UID
-			? never
-			: P]: ValueOf<T["json"]>[P]
+		[
+			P in keyof ValueOf<T["json"]> as ValueOf<
+				T["json"]
+			>[P]["type"] extends typeof prismic.CustomTypeModelFieldType.UID
+				? never
+				: P
+		]: ValueOf<T["json"]>[P]
 	}>
 >
 
